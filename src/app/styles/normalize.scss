@@ -1,8 +1,6 @@
 html {
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
   scroll-behavior: smooth;
 }
 
@@ -20,11 +18,12 @@ h2,
 h3,
 h4,
 h5 {
-  color: var(--text-primary);
+  font-weight: 500;
 }
 
 h1 {
   font-size: 48px;
+  font-weight: 700;
 }
 
 h2 {

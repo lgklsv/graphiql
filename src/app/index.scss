@@ -5,8 +5,23 @@
   padding: 0;
   margin: 0;
   outline: none;
-  font-family: 'Nunito', Roboto, system-ui, Tahoma, sans-serif;
+  font-family: Roboto, system-ui, Tahoma, sans-serif;
   box-sizing: border-box;
+}
+
+html {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: var(--line-height);
+}
+
+a {
+  font-weight: 500;
+  color: var(--text-secondary);
+
+  &:hover {
+    color: var(--text-primary);
+  }
 }
 
 // TODO: REMOVE STYLES DOWN THERE (added just for demo purposes)
@@ -25,8 +40,7 @@
 }
 
 .test-text-secondary {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 15px;
   color: var(--text-secondary);
   margin: 0.5rem 0;
   display: inline-block;
