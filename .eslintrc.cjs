@@ -23,6 +23,8 @@ module.exports = {
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
+    '@typescript-eslint/no-explicit-any': 'error',
+
     'react/react-in-jsx-scope': 0,
     'react/function-component-definition': 0,
 
