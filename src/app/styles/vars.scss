@@ -1,0 +1,27 @@
+:root {
+  // Vars
+  // ...
+
+  --popover-box-shadow: 0px 6px 20px rgba(59, 76, 106, 0.13),
+    0px 1.34018px 4.46726px rgba(59, 76, 106, 0.0774939),
+    0px 0.399006px 1.33002px rgba(59, 76, 106, 0.0525061);
+
+  // General colors
+  // ...
+  --bg-primary: #ffffff; // background and request field
+  --bg-secondary: #f3f4f6; // response field
+  --bg-ternary: 188, 100%, 36%;
+  --text-primary: #3b4b68; // contrast text / active
+  --text-secondary: #6c778c; // light text / icons
+
+  // For handling errors or success messages
+  --green: #3bb33b;
+  --green-intense: #03e952;
+  --red: #ed352c;
+  --red-intense: #fc3f1d;
+  --orange: #f50;
+  --orange-light: #f99540;
+  --orange-intense: #f25900;
+  --blue: #4434ff;
+  --blue-intense: #3d2ae4;
+}

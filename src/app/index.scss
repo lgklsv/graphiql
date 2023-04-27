@@ -1,0 +1,36 @@
+@import './styles/index.scss';
+// @import '/src/shared/styles/mixins.scss';
+
+* {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  font-family: 'Nunito', Roboto, system-ui, Tahoma, sans-serif;
+  box-sizing: border-box;
+}
+
+.test-block {
+  width: 500px;
+  height: 500px;
+  background-color: var(--bg-secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.test-block-second {
+  width: 400px;
+  height: 400px;
+  background-color: var(--bg-primary);
+  box-shadow: var(--popover-box-shadow);
+}
+
+.test-text-secondary {
+  font-size: 14px;
+  color: var(--text-secondary);
+
+  &:hover {
+    cursor: pointer;
+    color: var(--text-primary);
+  }
+}
