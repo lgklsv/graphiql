@@ -1,5 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { Typography } from 'antd';
+
+const { Title } = Typography;
 
 const Signup: React.FC = () => {
   return (
@@ -7,7 +10,7 @@ const Signup: React.FC = () => {
       <Helmet>
         <title>Sign up</title>
       </Helmet>
-      <h1>Sign up to use Graphql sandbox</h1>
+      <Title>Sign up to use Graphql sandbox</Title>
     </>
   );
 };

@@ -1,5 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { Typography } from 'antd';
+
+const { Title } = Typography;
 
 const Login: React.FC = () => {
   return (
@@ -7,7 +10,7 @@ const Login: React.FC = () => {
       <Helmet>
         <title>Login</title>
       </Helmet>
-      <h1>Login to your Graphql sandbox account</h1>
+      <Title>Login to your Graphql sandbox account</Title>
     </>
   );
 };

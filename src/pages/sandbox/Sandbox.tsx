@@ -1,5 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { Typography } from 'antd';
+
+const { Title } = Typography;
 
 const Sandbox: React.FC = () => {
   return (
@@ -7,7 +10,7 @@ const Sandbox: React.FC = () => {
       <Helmet>
         <title>Sandbox</title>
       </Helmet>
-      <h1>Sandbox</h1>
+      <Title>Sandbox</Title>
     </>
   );
 };

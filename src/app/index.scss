@@ -11,17 +11,6 @@
 
 html {
   background-color: var(--bg-primary);
-  color: var(--text-primary);
-  line-height: var(--line-height);
-}
-
-a {
-  font-weight: 500;
-  color: var(--text-secondary);
-
-  &:hover {
-    color: var(--text-primary);
-  }
 }
 
 // TODO: REMOVE STYLES DOWN THERE (added just for demo purposes)
@@ -30,6 +19,7 @@ a {
   height: 500px;
   background-color: var(--bg-secondary);
   @include flex-center;
+  margin: 1rem 0;
 }
 
 .test-block-second {
@@ -37,16 +27,4 @@ a {
   height: 400px;
   background-color: var(--bg-primary);
   box-shadow: var(--popover-box-shadow);
-}
-
-.test-text-secondary {
-  font-size: 15px;
-  color: var(--text-secondary);
-  margin: 0.5rem 0;
-  display: inline-block;
-
-  &:hover {
-    cursor: pointer;
-    color: var(--text-primary);
-  }
 }

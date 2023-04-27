@@ -1,5 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
+import { Typography } from 'antd';
+
+const { Title } = Typography;
 
 const NotFound: React.FC = () => {
   return (
@@ -7,7 +10,7 @@ const NotFound: React.FC = () => {
       <Helmet>
         <title>404</title>
       </Helmet>
-      <h1>404 page goes here</h1>
+      <Title>404 page goes here</Title>
     </>
   );
 };
