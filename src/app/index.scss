@@ -26,7 +26,10 @@
 
 .test-text-secondary {
   font-size: 14px;
+  font-weight: 600;
   color: var(--text-secondary);
+  margin: 0.5rem 0;
+  display: inline-block;
 
   &:hover {
     cursor: pointer;

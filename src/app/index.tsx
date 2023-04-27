@@ -1,16 +1,15 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 
-// import { appTitle } from './config';
+import Routing from 'pages';
+import { appTitle } from './config';
 import './index.scss';
 
 const App: React.FC = () => {
   return (
     <>
-      <h1>Hello world!</h1>
-      <h2 className="test-text-secondary">Text secondary</h2>
-      <div className="test-block">
-        <div className="test-block-second" />
-      </div>
+      <Helmet defaultTitle={appTitle} titleTemplate={`%s | ${appTitle}`} />
+      <Routing />
     </>
   );
 };
