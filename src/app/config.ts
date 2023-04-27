@@ -1,1 +1,1 @@
-export const appTitle = 'Graphiql';
+export const appTitle = 'GraphiQL';
