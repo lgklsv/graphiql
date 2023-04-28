@@ -21,7 +21,7 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react', '@typescript-eslint', 'prettier', 'fsd-import'],
+  plugins: ['react', '@typescript-eslint', 'fsd-import', 'prettier'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'error',
 
