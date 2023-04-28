@@ -1,0 +1,39 @@
+:root {
+  // TODO: We might actually not need most of it cuz we have ant design
+
+  // Vars
+  // ...
+  --popover-box-shadow: 0px 6px 20px rgba(59, 76, 106, 0.13),
+    0px 1.34018px 4.46726px rgba(59, 76, 106, 0.0774939),
+    0px 0.399006px 1.33002px rgba(59, 76, 106, 0.0525061);
+
+  --line-height: 1.5;
+
+  --alpha-secondary: 0.76;
+  --alpha-tertiary: 0.5;
+  --alpha-background-heavy: 0.15;
+  --alpha-background-medium: 0.1;
+  --alpha-background-light: 0.07;
+
+  // General colors
+  --color-neutral: 219, 28%, 32%; // text color to configure other colors
+  --bg-primary: #ffffff; // background and request field
+  --bg-secondary: #f3f4f6; // response field
+  --bg-ternary: 188, 100%, 36%;
+  --text-primary: hsla(var(--color-neutral), 1); // contrast text / active
+  --text-secondary: hsla(
+    var(--color-neutral),
+    var(--alpha-secondary)
+  ); // light text / regular
+
+  // For handling errors or success messages
+  --green: #3bb33b;
+  --green-intense: #03e952;
+  --red: #ed352c;
+  --red-intense: #fc3f1d;
+  --orange: #f50;
+  --orange-light: #f99540;
+  --orange-intense: #f25900;
+  --blue: #4434ff;
+  --blue-intense: #3d2ae4;
+}

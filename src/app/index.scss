@@ -1,0 +1,30 @@
+@import './styles/index.scss';
+@import '/src/shared/styles/mixins.scss';
+
+* {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  font-family: Roboto, system-ui, Tahoma, sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--bg-primary);
+}
+
+// TODO: REMOVE STYLES DOWN THERE (added just for demo purposes)
+.test-block {
+  width: 500px;
+  height: 500px;
+  background-color: var(--bg-secondary);
+  @include flex-center;
+  margin: 1rem 0;
+}
+
+.test-block-second {
+  width: 400px;
+  height: 400px;
+  background-color: var(--bg-primary);
+  box-shadow: var(--popover-box-shadow);
+}
