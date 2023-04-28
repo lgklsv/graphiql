@@ -1,5 +1,8 @@
 import React from 'react';
+import { Button } from 'antd';
+import { ROUTES } from 'pages/config';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import './NotFound.scss';
 
 const NotFound: React.FC = () => {
@@ -12,7 +15,13 @@ const NotFound: React.FC = () => {
       <div className="layout">
         <div className="container">
           <div className="wrapper_404">
-            <h3>Houston, we have a problem…</h3>
+            <h3>Page not found</h3>
+            <h4>the page you are looking for doesn&apos;t exist</h4>
+
+            <Button type="primary" size="large">
+              <Link to={ROUTES.home}>Go home</Link>
+            </Button>
+
             <h1>
               4
               <span className="zero_container">

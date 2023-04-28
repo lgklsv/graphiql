@@ -3,6 +3,8 @@
 
 .layout {
   height: 100vh;
+  min-height: 100%;
+  overflow: hidden;
 }
 
 .container {
@@ -24,13 +26,23 @@
   h3 {
     padding-top: 2rem;
     font-family: 'Source Code Pro', monospace;
-    font-size: 21px;
+    font-size: 2rem;
     line-height: 1.53;
-    color: #ffffff;
+    color: var(--bg-primary);
     font-weight: 400;
     letter-spacing: 4px;
     opacity: 1;
     margin-bottom: 16px;
+    user-select: none;
+    text-transform: uppercase;
+  }
+
+  h4 {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 1rem;
+    line-height: 1;
+    color: var(--bg-primary);
+    margin-bottom: 1.5rem;
     user-select: none;
   }
 
@@ -38,8 +50,8 @@
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 300px;
     font-weight: 600;
-    line-height: 500px;
-    color: #2d1f66;
+    line-height: 350px;
+    color: var(--dark-purple);
     margin-bottom: 0.5rem;
     letter-spacing: normal;
     user-select: none;
@@ -104,7 +116,7 @@
 }
 
 .ground {
-  height: 3500px;
+  height: 1000px;
   border-radius: 200vw;
   position: absolute;
   top: 700px;
