@@ -30,5 +30,6 @@ module.exports = {
 
     'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'prettier/prettier': ['error', { 'endOfLine':'auto' }],
   },
 };
