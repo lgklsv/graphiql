@@ -1,0 +1,30 @@
+.header {
+  width: 100%;
+  padding: 20px;
+  background-color: var(--bg-primary-dark);
+}
+.header-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.buttons {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.button:hover {
+  background-color: #fff;
+}
+.logo {
+  display: inline-flex;
+  width: 120px;
+  height: 40px;
+  background-image: url('./assets/gqlLogoWh.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
