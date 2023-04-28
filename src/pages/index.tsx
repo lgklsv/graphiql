@@ -6,15 +6,16 @@ import { Login } from './login';
 import { Signup } from './signup';
 import { NotFound } from './notfound';
 import { Sandbox } from './sandbox';
+import { ROUTES } from './config';
 
 const Routing: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/sandbox" element={<Sandbox />} />
-      <Route path="*" element={<NotFound />} />
+      <Route path={ROUTES.home} element={<Home />} />
+      <Route path={ROUTES.login} element={<Login />} />
+      <Route path={ROUTES.signup} element={<Signup />} />
+      <Route path={ROUTES.sandbox} element={<Sandbox />} />
+      <Route path={ROUTES.notFound} element={<NotFound />} />
     </Routes>
   );
 };
