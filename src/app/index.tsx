@@ -2,8 +2,8 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { ConfigProvider } from 'antd';
 
-import { appTitle, customTheme } from './config';
 import Routing from 'pages';
+import { appTitle, customTheme } from './config';
 import './index.scss';
 
 const App: React.FC = () => {
