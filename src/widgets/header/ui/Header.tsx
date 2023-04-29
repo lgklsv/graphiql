@@ -1,21 +1,18 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
-import './Header.scss';
 import { ROUTES } from 'pages/config';
-import { Link } from 'react-router-dom';
+import './Header.scss';
 
 const HeaderComponent: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <header className="header">
       <div className="header-container">
-        <div className="logo" />
+        <Link to={ROUTES.home} className="logo" />
         <div className="buttons">
-          <Button>
-            <Link to={ROUTES.signup}>Sign Up</Link>
-          </Button>
-          <Button>
-            <Link to={ROUTES.signup}>Log In</Link>
-          </Button>
+          <Button onClick={() => navigate(ROUTES.signup)}>Sign Up</Button>
+          <Button onClick={() => navigate(ROUTES.login)}>Log In</Button>
         </div>
       </div>
     </header>

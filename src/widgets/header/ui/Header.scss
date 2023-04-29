@@ -3,6 +3,7 @@
   padding: 20px;
   background-color: var(--bg-primary-dark);
 }
+
 .header-container {
   width: 100%;
   display: flex;
@@ -10,6 +11,7 @@
   justify-content: space-between;
   align-items: center;
 }
+
 .buttons {
   display: inline-flex;
   flex-direction: row;
@@ -19,6 +21,7 @@
 .button:hover {
   background-color: #fff;
 }
+
 .logo {
   display: inline-flex;
   width: 120px;
