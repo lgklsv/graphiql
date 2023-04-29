@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'antd';
 import { ROUTES } from 'pages/config';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
@@ -16,11 +15,10 @@ const NotFound: React.FC = () => {
         <div className="container">
           <div className="wrapper_404">
             <h3>Page not found</h3>
-            <h4>the page you are looking for doesn&apos;t exist</h4>
-
-            <Button type="primary" size="large">
-              <Link to={ROUTES.home}>Go home</Link>
-            </Button>
+            <h4>
+              the page you are looking for doesn&apos;t exist{' '}
+              <Link to={ROUTES.home}>go home</Link>
+            </h4>
 
             <h1>
               4
