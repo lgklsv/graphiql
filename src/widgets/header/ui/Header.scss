@@ -1,0 +1,28 @@
+.header {
+  width: 100%;
+  padding: 20px;
+  background-color: var(--bg-primary);
+}
+
+.header-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.buttons {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.logo {
+  width: 230px;
+  height: 50px;
+  background-image: url('./assets/gqlLogo.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}

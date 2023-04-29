@@ -1,6 +1,5 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Link } from 'react-router-dom';
 import { Button, Space, Typography } from 'antd';
 
 const { Title, Text } = Typography;
@@ -30,24 +29,16 @@ const Home: React.FC = () => {
 
       <ul>
         <li>
-          <Link to="/login">
-            <Typography.Link>Login</Typography.Link>
-          </Link>
+          <Typography.Link href="/login">Login</Typography.Link>
         </li>
         <li>
-          <Link to="/signup">
-            <Typography.Link>Signup</Typography.Link>
-          </Link>
+          <Typography.Link href="/signup">Signup</Typography.Link>
         </li>
         <li>
-          <Link to="/sandbox">
-            <Typography.Link>Sandbox</Typography.Link>
-          </Link>
+          <Typography.Link href="/sandbox">Sandbox</Typography.Link>
         </li>
         <li>
-          <Link to="/wiuehrfieohf">
-            <Typography.Link>404</Typography.Link>
-          </Link>
+          <Typography.Link href="/wiuehrfieohf">404</Typography.Link>
         </li>
       </ul>
     </>

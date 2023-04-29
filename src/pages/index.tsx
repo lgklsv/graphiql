@@ -7,15 +7,18 @@ import { Signup } from './signup';
 import { NotFound } from './notfound';
 import { Sandbox } from './sandbox';
 import { ROUTES } from './config';
+import { LayoutPage } from './layout';
 
 const Routing: React.FC = () => {
   return (
     <Routes>
-      <Route path={ROUTES.home} element={<Home />} />
-      <Route path={ROUTES.login} element={<Login />} />
-      <Route path={ROUTES.signup} element={<Signup />} />
-      <Route path={ROUTES.sandbox} element={<Sandbox />} />
-      <Route path={ROUTES.notFound} element={<NotFound />} />
+      <Route path={ROUTES.home} element={<LayoutPage />}>
+        <Route index element={<Home />} />
+        <Route path={ROUTES.login} element={<Login />} />
+        <Route path={ROUTES.signup} element={<Signup />} />
+        <Route path={ROUTES.sandbox} element={<Sandbox />} />
+        <Route path={ROUTES.notFound} element={<NotFound />} />
+      </Route>
     </Routes>
   );
 };

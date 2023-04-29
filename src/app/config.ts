@@ -9,7 +9,7 @@ export const customTheme: ThemeConfig = {
     colorTextHeading: '#3b4b68', // Dark blue
     colorText: '#3b4b68',
     colorInfo: '#D60690', // pink
-    colorPrimary: '#D60690',
-    colorBgBase: '#3b4b68',
+    colorBgBase: '#ffffff',
+    colorPrimary: '#281E5B',
   },
 };
