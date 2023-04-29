@@ -1,7 +1,7 @@
 import React from 'react';
 import { Space, Typography, theme } from 'antd';
-import './Footer.scss';
 import { Footer } from 'antd/es/layout/layout';
+import './Footer.scss';
 
 const { Text } = Typography;
 
@@ -22,11 +22,11 @@ const FooterComponent: React.FC = () => {
   ];
 
   const {
-    token: { colorPrimary },
+    token: { colorFillAlter },
   } = theme.useToken();
 
   return (
-    <Footer style={{ background: colorPrimary }}>
+    <Footer style={{ background: colorFillAlter }}>
       <div className="footer-container">
         <div className="footer-logo">
           <a
