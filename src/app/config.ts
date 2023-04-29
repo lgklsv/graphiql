@@ -10,7 +10,6 @@ export const customTheme: ThemeConfig = {
     colorText: '#3b4b68',
     colorInfo: '#D60690', // pink
     colorBgBase: '#ffffff',
-    colorPrimary: '#D60690',
-    colorFillAlter: '#1b2240',
+    colorPrimary: '#281E5B',
   },
 };

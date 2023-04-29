@@ -11,8 +11,20 @@ const HeaderComponent: React.FC = () => {
       <div className="header-container">
         <Link to={ROUTES.home} className="logo" />
         <div className="buttons">
-          <Button onClick={() => navigate(ROUTES.signup)}>Sign Up</Button>
-          <Button onClick={() => navigate(ROUTES.login)}>Log In</Button>
+          <Button
+            type="primary"
+            size="large"
+            onClick={() => navigate(ROUTES.signup)}
+          >
+            Sign Up
+          </Button>
+          <Button
+            type="primary"
+            size="large"
+            onClick={() => navigate(ROUTES.login)}
+          >
+            Log In
+          </Button>
         </div>
       </div>
     </header>

@@ -22,11 +22,11 @@ const FooterComponent: React.FC = () => {
   ];
 
   const {
-    token: { colorFillAlter },
+    token: { colorPrimary },
   } = theme.useToken();
 
   return (
-    <Footer style={{ background: colorFillAlter }}>
+    <Footer style={{ background: colorPrimary }}>
       <div className="footer-container">
         <div className="footer-logo">
           <a
