@@ -1,10 +1,16 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
-import { Button, Form, Input, Typography } from 'antd';
-import { LockOutlined, MailOutlined } from '@ant-design/icons';
+import { Form, Input, Typography } from 'antd';
+import {
+  LockOutlined,
+  MailOutlined,
+  GithubOutlined,
+  GoogleOutlined,
+} from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'pages/config';
 import './Login.scss';
+import { ButtonForm } from './ui/Button';
 
 const { Title, Text } = Typography;
 
@@ -23,6 +29,25 @@ const Login: React.FC = () => {
           </Text>
         </Title>
 
+        <div className="login-buttons">
+          <ButtonForm
+            text="Sign in with GitHub"
+            icon={<GithubOutlined />}
+            className="git-button"
+          />
+          <ButtonForm
+            text="Sign in with Google"
+            icon={<GoogleOutlined />}
+            className="google-button"
+          />
+        </div>
+
+        <div className="separator">
+          <hr />
+          <span>or</span>
+          <hr />
+        </div>
+
         <div>
           <Form
             name="normal_login"
@@ -36,6 +61,8 @@ const Login: React.FC = () => {
               <Input
                 prefix={<MailOutlined className="site-form-item-icon" />}
                 placeholder="Email Address"
+                size="large"
+                type="email"
               />
             </Form.Item>
             <Form.Item
@@ -44,28 +71,16 @@ const Login: React.FC = () => {
                 { required: true, message: 'Please input your Password!' },
               ]}
             >
-              <Input
+              <Input.Password
                 prefix={<LockOutlined className="site-form-item-icon" />}
                 type="password"
                 placeholder="Password"
-                suffix={
-                  <a className="login-form-forgot" href="/">
-                    {/* TODO: Forgot password */}
-                    Forgot password
-                  </a>
-                }
+                size="large"
               />
             </Form.Item>
 
             <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-                block
-              >
-                Log in
-              </Button>
+              <ButtonForm text="Log in" />
             </Form.Item>
           </Form>
         </div>
