@@ -21,7 +21,7 @@ module.exports = {
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
   },
-  plugins: ['react', '@typescript-eslint', 'fsd-import', 'prettier'],
+  plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'error',
 
@@ -32,9 +32,5 @@ module.exports = {
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
 
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
-
-    'fsd-import/fsd-relative-path': 'error',
-    'fsd-import/public-api-imports': 'error',
-    'fsd-import/layer-imports': 'error',
   },
 };
