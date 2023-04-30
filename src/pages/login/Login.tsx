@@ -16,51 +16,59 @@ const Login: React.FC = () => {
       </Helmet>
 
       <div className="login-container">
-        <Title>Sign in</Title>
-        <Text>
-          New to GraphiQL? <Link to={ROUTES.signup}> Lets get started.</Link>
-        </Text>
+        <Title>
+          Sign in
+          <Text className="signup-link">
+            New to GraphiQL? <Link to={ROUTES.signup}> Lets get started.</Link>
+          </Text>
+        </Title>
 
-        <Form
-          name="normal_login"
-          className="login-form"
-          initialValues={{ remember: true }}
-        >
-          <Form.Item
-            name="username"
-            rules={[{ required: true, message: 'Please input your Username!' }]}
+        <div>
+          <Form
+            name="normal_login"
+            className="login-form"
+            initialValues={{ remember: true }}
           >
-            <Input
-              prefix={<MailOutlined className="site-form-item-icon" />}
-              placeholder="Username"
-            />
-          </Form.Item>
-          <Form.Item
-            name="password"
-            rules={[{ required: true, message: 'Please input your Password!' }]}
-          >
-            <Input
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Password"
-            />
-          </Form.Item>
-          <Form.Item>
-            {/* <a className="login-form-forgot" href="">
-              Forgot password
-            </a> */}
-          </Form.Item>
-
-          <Form.Item shouldUpdate>
-            <Button
-              type="primary"
-              htmlType="submit"
-              className="login-form-button"
+            <Form.Item
+              name="email"
+              rules={[{ required: true, message: 'Please input your Email!' }]}
             >
-              Log in
-            </Button>
-          </Form.Item>
-        </Form>
+              <Input
+                prefix={<MailOutlined className="site-form-item-icon" />}
+                placeholder="Email Address"
+              />
+            </Form.Item>
+            <Form.Item
+              name="password"
+              rules={[
+                { required: true, message: 'Please input your Password!' },
+              ]}
+            >
+              <Input
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="Password"
+                suffix={
+                  <a className="login-form-forgot" href="/">
+                    {/* TODO: Forgot password */}
+                    Forgot password
+                  </a>
+                }
+              />
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login-form-button"
+                block
+              >
+                Log in
+              </Button>
+            </Form.Item>
+          </Form>
+        </div>
       </div>
     </>
   );
