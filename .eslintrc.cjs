@@ -20,6 +20,7 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json',
     tsconfigRootDir: __dirname,
+    extraFileExtension: ['.scss'],
   },
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
