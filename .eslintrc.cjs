@@ -32,5 +32,8 @@ module.exports = {
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
 
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
+
+    'jsx-a11y/anchor-has-content': 0,
+    'jsx-a11y/control-has-associated-label': 0,
   },
 };

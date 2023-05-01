@@ -6,9 +6,9 @@ export const appTitle = 'GraphiQL';
 // Test color config, here we can setup theme config for Ant Design
 export const customTheme: ThemeConfig = {
   token: {
-    colorTextHeading: '#3b4b68', // Dark blue
-    colorText: '#3b4b68',
-    colorInfo: '#D60690', // pink
+    colorTextHeading: '#281E5B', // Dark blue
+    colorText: '#281E5B',
+    colorInfo: '#281E5B',
     colorBgBase: '#ffffff',
     colorPrimary: '#281E5B',
   },
