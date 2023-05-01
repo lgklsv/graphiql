@@ -6,6 +6,7 @@ interface ButtonFormProps {
   icon?: React.ReactNode;
   className?: string;
   onclick?: () => void;
+  isDisabled?: boolean;
 }
 
 export const ButtonForm: React.FC<ButtonFormProps> = ({
@@ -13,6 +14,7 @@ export const ButtonForm: React.FC<ButtonFormProps> = ({
   onclick,
   className,
   icon,
+  isDisabled,
 }) => {
   return (
     <Button
@@ -23,6 +25,7 @@ export const ButtonForm: React.FC<ButtonFormProps> = ({
       size="large"
       icon={icon}
       onClick={() => onclick}
+      disabled={isDisabled}
     >
       {text}
     </Button>
