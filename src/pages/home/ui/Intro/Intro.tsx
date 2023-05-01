@@ -28,7 +28,7 @@ const Intro: React.FC = () => {
         <Button
           size={isMobile ? 'middle' : 'large'}
           ghost
-          onClick={() => navigate(ROUTES.signup)}
+          href="https://github.com/lgklsv/graphiql"
         >
           Read the Docs
         </Button>
