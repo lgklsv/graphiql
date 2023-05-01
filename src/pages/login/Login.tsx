@@ -26,6 +26,7 @@ const Login: React.FC = () => {
         </Title>
 
         <div className={style.login_buttons}>
+          {/* TODO: stay? */}
           <ButtonForm
             text="Sign in with GitHub"
             icon={<GithubOutlined />}
@@ -42,9 +43,7 @@ const Login: React.FC = () => {
           or
         </Divider>
 
-        <div>
-          <Form.Login />
-        </div>
+        <Form.Login />
       </div>
     </>
   );

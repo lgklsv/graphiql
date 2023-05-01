@@ -4,21 +4,28 @@ import { ButtonForm } from 'shared/ui/Button/Button';
 import style from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
+  const onFinish = (values: ILoginData) => {
+    console.log('Received values of form: ', values);
+  };
+
   return (
     <Form
       name="normal_login"
       className={style.login_form}
       initialValues={{ remember: true }}
+      onFinish={onFinish}
     >
       <Form.Item
         name="email"
-        rules={[{ required: true, message: 'Please input your Email!' }]}
+        rules={[
+          { required: true, message: 'Please input your Email!' },
+          { type: 'email', message: 'Please input valid Email!' },
+        ]}
       >
         <Input
           prefix={<MailOutlined className="site-form-item-icon" />}
           placeholder="Email Address"
           size="large"
-          type="email"
         />
       </Form.Item>
       <Form.Item
