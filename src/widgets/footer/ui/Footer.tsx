@@ -19,10 +19,10 @@ const FooterComponent: React.FC = () => {
           <Space size={5}>
             <Text>graphiql engineered by</Text>
             <ul className={styles['footer-list']}>
-              {DEVELOPERS.map(({ name, link }) => (
-                <li key={name}>
+              {DEVELOPERS.map(({ link, github }) => (
+                <li key={link}>
                   <a href={link} target="_blank" rel="noreferrer">
-                    {name}
+                    {github}
                   </a>
                 </li>
               ))}
