@@ -1,0 +1,127 @@
+$maxWidth: 1200;
+@mixin adaptiv-font($pcFnSize, $mobFnSize) {
+  $addSize: $pcFnSize - $mobFnSize;
+  $addMobSize: $addSize + $addSize * 0.7;
+  @media (max-width: 767px) {
+    font-size: calc(
+      #{$mobFnSize + px} + #{$addMobSize} * ((100vw - 320px) / #{$maxWidth})
+    );
+  }
+  @media (min-width: 767px) {
+    font-size: calc(#{$mobFnSize + px} + #{$addSize} * (100vw / #{$maxWidth}));
+  }
+}
+
+@mixin adaptiveContentWidth {
+  max-width: 1200px;
+  @media (max-width: 1199px) {
+    max-width: 800px;
+  }
+  @media (max-width: 767px) {
+    max-width: 80vw;
+  }
+}
+
+.content {
+  @include adaptiveContentWidth();
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: max(3vh, 3vw);
+  font-size: 16px;
+}
+
+.intro {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  &__text {
+    color: var(--bg-primary);
+    text-align: center;
+    @include adaptiv-font(20, 16);
+    z-index: 2;
+  }
+  &__heading {
+    @include adaptiv-font(48, 24);
+    margin-bottom: 0.5em;
+  }
+  &__heading_gradient {
+    background-image: linear-gradient(
+      100deg,
+      rgba(63, 32, 186, 1) 0%,
+      rgba(250, 0, 255, 0.8519782913165266) 100%
+    );
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+  }
+  &__text_full {
+    max-width: 60%;
+    margin: 0 auto;
+    @media all and (max-width: 767px) {
+      max-width: 90%;
+    }
+  }
+  &::before {
+    content: '';
+    background: var(--apollo-gradient-purple);
+    width: 100vw;
+    height: 100%;
+    position: absolute;
+    top: 0;
+  }
+}
+
+.description {
+  width: 100%;
+  overflow: hidden;
+  color: var(--bg-primary-dark);
+  &__title {
+    @include adaptiv-font(30, 22);
+    margin-bottom: 0.5em;
+  }
+  &__text {
+    max-width: 80%;
+    text-align: left;
+    @media all and (max-width: 1199px) {
+      max-width: 100%;
+    }
+  }
+  &__text_full {
+    @include adaptiv-font(20, 16);
+    font-weight: 600;
+    color: var(--bg-primary-dark);
+  }
+  &__backgroundImage {
+    width: 200px;
+    height: 270px;
+    margin-left: auto;
+    background: url('../assets/graphqlList.png') no-repeat center;
+    background-size: contain;
+    border: 1px var(--apollo-purple-light) solid;
+    border-radius: 10px;
+    box-shadow: var(--popover-box-shadow);
+    @media all and (max-width: 1199px) {
+      max-width: 150px;
+      max-height: 200px;
+    }
+    @media all and (max-width: 767px) {
+      margin: 0 auto;
+    }
+  }
+}
+
+.developers {
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--bg-primary-dark);
+  &__title {
+    @include adaptiv-font(30, 22);
+    margin-bottom: 0.5em;
+  }
+}

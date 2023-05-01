@@ -2,7 +2,7 @@ import { describe, it } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import Home from './Home';
+import Home from './ui/Home';
 
 // TODO: It is just a demo test, remove later
 describe('Home', () => {
