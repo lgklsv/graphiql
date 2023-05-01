@@ -1,16 +1,12 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
-import { Form, Input, Typography } from 'antd';
-import {
-  LockOutlined,
-  MailOutlined,
-  GithubOutlined,
-  GoogleOutlined,
-} from '@ant-design/icons';
+import { Helmet } from 'react-helmet-async';
+import { Typography } from 'antd';
+import { GithubOutlined, GoogleOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'pages/config';
 import './Login.scss';
-import { ButtonForm } from './ui/Button';
+import { ButtonForm } from 'shared/ui/Button/Button';
+import { Form } from 'features/login-form';
 
 const { Title, Text } = Typography;
 
@@ -49,40 +45,7 @@ const Login: React.FC = () => {
         </div>
 
         <div>
-          <Form
-            name="normal_login"
-            className="login-form"
-            initialValues={{ remember: true }}
-          >
-            <Form.Item
-              name="email"
-              rules={[{ required: true, message: 'Please input your Email!' }]}
-            >
-              <Input
-                prefix={<MailOutlined className="site-form-item-icon" />}
-                placeholder="Email Address"
-                size="large"
-                type="email"
-              />
-            </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[
-                { required: true, message: 'Please input your Password!' },
-              ]}
-            >
-              <Input.Password
-                prefix={<LockOutlined className="site-form-item-icon" />}
-                type="password"
-                placeholder="Password"
-                size="large"
-              />
-            </Form.Item>
-
-            <Form.Item>
-              <ButtonForm text="Log in" />
-            </Form.Item>
-          </Form>
+          <Form.Login />
         </div>
       </div>
     </>
