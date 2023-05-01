@@ -1,0 +1,29 @@
+.header {
+  width: 100%;
+  max-height: var(--header);
+  padding: 15px 20px;
+  background-color: var(--bg-primary);
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  border-bottom: 1px solid hsla(var(--color-neutral), 0.1);
+}
+
+.header-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  width: 230px;
+  height: 50px;
+  background-image: url('./assets/gqlLogo.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}

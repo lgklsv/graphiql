@@ -17,9 +17,10 @@
   },
   "dependencies": {
     "antd": "^5.4.6",
+    "framer-motion": "^10.12.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-helmet": "^6.1.0",
+    "react-helmet-async": "^1.3.0",
     "react-router-dom": "^6.10.0"
   },
   "devDependencies": {
@@ -36,7 +37,6 @@
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-fsd-import": "^0.0.12",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "^4.2.1",
@@ -54,8 +54,10 @@
     "vitest": "^0.30.1"
   },
   "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "npm rum lint:fix"
+    ],
     "*.{js,ts,tsx,scss,css,md}": [
-      "npm rum lint:fix",
       "npm run format"
     ]
   }

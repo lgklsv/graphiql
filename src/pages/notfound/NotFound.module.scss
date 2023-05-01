@@ -1,83 +1,78 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@200;400;600&display=swap');
+@import '/src/shared/styles/mixins.scss';
 
-.layout {
-  height: 100vh;
-  min-height: 100%;
-  overflow: hidden;
-}
-
-.container {
-  height: 100%;
-  overflow: hidden;
+.not-found {
+  height: calc(100vh - var(--header) - var(--footer));
   position: relative;
+  overflow: hidden;
   padding: 2rem 0 12rem;
   background: var(--apollo-gradient-purple);
-}
 
-.wrapper_404 {
-  position: relative;
-  text-align: center;
-  padding: 0 1rem;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
+  &__wrapper {
+    position: relative;
+    text-align: center;
+    padding: 0 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
 
-  h3 {
-    padding-top: 2rem;
-    font-family: 'Source Code Pro', monospace;
-    font-size: 2rem;
-    line-height: 1.53;
-    color: var(--bg-primary);
-    font-weight: 400;
-    letter-spacing: 4px;
-    opacity: 1;
-    margin-bottom: 16px;
-    user-select: none;
-    text-transform: uppercase;
-  }
+    h3 {
+      padding-top: 2rem;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 2rem;
+      line-height: 1.53;
+      color: var(--bg-primary);
+      font-weight: 400;
+      letter-spacing: 4px;
+      opacity: 1;
+      margin-bottom: 16px;
+      user-select: none;
+      text-transform: uppercase;
+    }
 
-  h4,
-  a {
-    font-family: 'Source Code Pro', monospace;
-    font-size: 1rem;
-    line-height: 1;
-    color: var(--bg-primary);
-    margin-bottom: 1.5rem;
-    user-select: none;
-
+    h4,
     a {
-      color: var(--apollo-purple-light);
-      text-decoration: underline;
+      font-family: 'Source Code Pro', monospace;
+      font-size: 1rem;
+      line-height: 1;
+      color: var(--bg-primary);
+      margin-bottom: 1.5rem;
+      user-select: none;
+
+      a {
+        color: var(--apollo-purple-light);
+        text-decoration: underline;
+      }
     }
-  }
-
-  h1 {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: 300px;
-    font-weight: 600;
-    line-height: 350px;
-    color: var(--dark-purple);
-    margin-bottom: 0.5rem;
-    letter-spacing: normal;
-    user-select: none;
-  }
-
-  @media (max-width: 1200px) {
-    max-width: 1140px;
-  }
-
-  @media (max-width: 700px) {
-    padding-bottom: 3rem;
-    max-width: 540px;
 
     h1 {
-      font-size: 150px;
+      font-family: 'Source Sans Pro', sans-serif;
+      font-size: 300px;
+      font-weight: 600;
+      line-height: 350px;
+      color: var(--dark-purple);
+      margin-bottom: 0.5rem;
+      letter-spacing: normal;
+      user-select: none;
     }
-  }
 
-  @media (max-width: 400px) {
-    h1 {
-      font-size: 100px;
+    @media (max-width: 1200px) {
+      max-width: 1140px;
+    }
+
+    @media (max-width: 700px) {
+      padding-bottom: 3rem;
+      max-width: 540px;
+
+      h1 {
+        font-size: 150px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      h1 {
+        font-size: 100px;
+      }
     }
   }
 }
@@ -105,7 +100,7 @@
 .zero_wrapper {
   animation-delay: 1.5ms;
   animation: floating 3s infinite ease-in-out;
-  img {
+  svg {
     margin-top: 35px;
     max-width: 100%;
     width: 70%;

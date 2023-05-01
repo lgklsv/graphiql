@@ -1,33 +1,35 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { Button } from 'antd';
+import { Link } from 'react-router-dom';
+import { motion, useScroll } from 'framer-motion';
+
 import { ROUTES } from 'pages/config';
-import './Header.scss';
+import { HamburgerNav } from './HamburgerNav';
+import { Nav } from './Nav';
+import styles from './Header.module.scss';
 
 const HeaderComponent: React.FC = () => {
-  const navigate = useNavigate();
+  const { scrollY } = useScroll();
+  const [isScroll, setIsScroll] = React.useState(false);
+
+  React.useEffect(() => {
+    return scrollY.on('change', (latest) =>
+      latest > 80 ? setIsScroll(true) : setIsScroll(false)
+    );
+  }, [scrollY]);
+
   return (
-    <header className="header">
-      <div className="header-container">
-        <Link to={ROUTES.home} className="logo" />
-        <div className="buttons">
-          <Button
-            type="primary"
-            size="large"
-            onClick={() => navigate(ROUTES.signup)}
-          >
-            Sign Up
-          </Button>
-          <Button
-            type="primary"
-            size="large"
-            onClick={() => navigate(ROUTES.login)}
-          >
-            Log In
-          </Button>
-        </div>
+    <motion.header
+      style={{
+        backgroundColor: isScroll ? 'rgba(250 250 250 / 0.5)' : 'white',
+      }}
+      className={styles.header}
+    >
+      <div className={styles['header-container']}>
+        <Link to={ROUTES.home} className={styles.logo} />
+        <Nav mobile={false} />
+        <HamburgerNav />
       </div>
-    </header>
+    </motion.header>
   );
 };
 
