@@ -1,6 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet';
 import { Button, Space, Typography } from 'antd';
+import { Link } from 'react-router-dom';
+import { ROUTES } from 'pages/config';
 
 const { Title, Text } = Typography;
 
@@ -26,19 +28,33 @@ const Home: React.FC = () => {
       <div className="test-block">
         <div className="test-block-second" />
       </div>
+      <div className="test-block">
+        <div className="test-block-second" />
+      </div>
+      <div className="test-block">
+        <div className="test-block-second" />
+      </div>
 
       <ul>
         <li>
-          <Typography.Link href="/login">Login</Typography.Link>
+          <Link to={ROUTES.login}>
+            <Typography.Link>Login</Typography.Link>
+          </Link>
         </li>
         <li>
-          <Typography.Link href="/signup">Signup</Typography.Link>
+          <Link to={ROUTES.signup}>
+            <Typography.Link>Signup</Typography.Link>
+          </Link>
         </li>
         <li>
-          <Typography.Link href="/sandbox">Sandbox</Typography.Link>
+          <Link to={ROUTES.sandbox}>
+            <Typography.Link>Sandbox</Typography.Link>
+          </Link>
         </li>
         <li>
-          <Typography.Link href="/wiuehrfieohf">404</Typography.Link>
+          <Link to={ROUTES.notFound}>
+            <Typography.Link>404</Typography.Link>
+          </Link>
         </li>
       </ul>
     </>

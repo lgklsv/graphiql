@@ -1,13 +1,29 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
+import { motion, useScroll } from 'framer-motion';
+
 import { ROUTES } from 'pages/config';
 import './Header.scss';
 
 const HeaderComponent: React.FC = () => {
   const navigate = useNavigate();
+  const { scrollY } = useScroll();
+  const [isActive, setIsActive] = React.useState(false);
+
+  React.useEffect(() => {
+    return scrollY.on('change', (latest) =>
+      latest > 80 ? setIsActive(true) : setIsActive(false)
+    );
+  }, [scrollY]);
+
   return (
-    <header className="header">
+    <motion.header
+      style={{
+        backgroundColor: isActive ? 'rgba(250 250 250 / 0.5)' : 'white',
+      }}
+      className="header"
+    >
       <div className="header-container">
         <Link to={ROUTES.home} className="logo" />
         <div className="buttons">
@@ -27,7 +43,7 @@ const HeaderComponent: React.FC = () => {
           </Button>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 };
 
