@@ -1,0 +1,40 @@
+@import '../Mixin';
+
+.description {
+  width: 100%;
+  overflow: hidden;
+  color: var(--bg-primary-dark);
+  &__title {
+    @include adaptiv-font(30, 22);
+    margin-bottom: 0.5em;
+  }
+  &__text {
+    max-width: 80%;
+    text-align: left;
+    @media all and (max-width: 1199px) {
+      max-width: 100%;
+    }
+  }
+  &__text_full {
+    @include adaptiv-font(20, 16);
+    font-weight: 600;
+    color: var(--bg-primary-dark);
+  }
+  &__backgroundImage {
+    width: 200px;
+    height: 270px;
+    margin-left: auto;
+    background: url('./assets/graphqlList.png') no-repeat center;
+    background-size: contain;
+    border: 1px var(--apollo-purple-light) solid;
+    border-radius: 10px;
+    box-shadow: var(--popover-box-shadow);
+    @media all and (max-width: 1199px) {
+      max-width: 150px;
+      max-height: 200px;
+    }
+    @media all and (max-width: 767px) {
+      margin: 0 auto;
+    }
+  }
+}

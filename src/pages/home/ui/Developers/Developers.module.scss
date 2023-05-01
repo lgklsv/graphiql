@@ -1,0 +1,12 @@
+@import '../Mixin';
+
+.developers {
+  width: 100%;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: var(--bg-primary-dark);
+  &__title {
+    @include adaptiv-font(30, 22);
+    margin-bottom: 0.5em;
+  }
+}

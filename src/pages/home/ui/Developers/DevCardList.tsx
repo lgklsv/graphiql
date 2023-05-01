@@ -6,7 +6,7 @@ import DevCard from './DevCard';
 const DevCardList = ({ devCardList }: IDevCardList) => {
   const { isMobile } = useMatchMedia();
   return (
-    <Space size="large" direction={isMobile ? 'vertical' : 'horizontal'}>
+    <Space size="small" direction={isMobile ? 'vertical' : 'horizontal'}>
       {devCardList.map(({ name, img, github, link }) => (
         <div key={link}>
           <DevCard name={name} img={img} github={github} link={link} />
