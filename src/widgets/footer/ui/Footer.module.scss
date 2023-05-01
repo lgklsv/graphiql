@@ -1,15 +1,15 @@
+@import '/src/shared/styles/mixins.scss';
+
 .footer-container {
   & * {
     color: var(--text-ternary);
+    font-size: 0.75rem;
     font-weight: 400;
+    line-height: 130%;
   }
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-end;
-  align-content: center;
-  gap: 1em;
-  min-height: 60px;
+  @include flex-center;
+  text-transform: uppercase;
+  min-height: var(--footer);
   @media all and (max-width: 530px) {
     flex-direction: column;
     align-items: center;
@@ -17,8 +17,8 @@
 }
 
 .footer-logo {
-  width: 80px;
-  height: 40px;
+  width: 50px;
+  height: 20px;
   background-image: url('./assets/rslogo.svg');
   background-position: center;
   background-repeat: no-repeat;
@@ -29,6 +29,10 @@
     display: block;
     width: 100%;
     height: 100%;
+  }
+  &:hover {
+    filter: invert(99%) sepia(1%) saturate(3629%) hue-rotate(253deg)
+      brightness(75%) contrast(91%);
   }
 }
 

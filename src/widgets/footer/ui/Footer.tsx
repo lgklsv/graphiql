@@ -27,33 +27,39 @@ const FooterComponent: React.FC = () => {
   } = theme.useToken();
 
   return (
-    <Footer style={{ background: colorPrimary }}>
+    <Footer style={{ background: colorPrimary, padding: '0' }}>
       <div className={styles['footer-container']}>
-        <div className={styles['footer-logo']}>
-          <a
-            href="https://rs.school/react/"
-            target="_blank"
-            rel="noreferrer"
-            className={styles['footer-logo__link']}
-          >
-            <span className={styles['sr-only']}>
-              Explore the info about school
-            </span>
-          </a>
-        </div>
-        <Space direction="vertical" align="center">
-          <Text>graphiql engineered by:</Text>
-          <ul className={styles['footer-list']}>
-            {DEVELOPERS.map(({ name, link }) => (
-              <li key={name}>
-                <a href={link} target="_blank" rel="noreferrer">
-                  {name}
+        <Space direction="vertical" align="center" size={0}>
+          <Space size={5}>
+            <Text>graphiql engineered by</Text>
+            <ul className={styles['footer-list']}>
+              {DEVELOPERS.map(({ name, link }) => (
+                <li key={name}>
+                  <a href={link} target="_blank" rel="noreferrer">
+                    {name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </Space>
+          <Text>
+            <Space>
+              <div className={styles['footer-logo']}>
+                <a
+                  href="https://rs.school/react/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles['footer-logo__link']}
+                >
+                  <span className={styles['sr-only']}>
+                    Explore the info about school
+                  </span>
                 </a>
-              </li>
-            ))}
-          </ul>
+              </div>
+              © 2023 graphiql. All rights reserved.
+            </Space>
+          </Text>
         </Space>
-        <Text>© 2023 graphiql. All rights reserved.</Text>
       </div>
     </Footer>
   );

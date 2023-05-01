@@ -2,7 +2,7 @@
 @import '/src/shared/styles/mixins.scss';
 
 .not-found {
-  height: calc(100vh - var(--header) - 108px);
+  height: calc(100vh - var(--header) - var(--footer));
   position: relative;
   overflow: hidden;
   padding: 2rem 0 12rem;
