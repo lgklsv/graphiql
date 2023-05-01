@@ -1,5 +1,5 @@
 import { Button } from 'antd';
-import './Button.scss';
+import style from './Button.module.scss';
 
 interface ButtonFormProps {
   text: string;
@@ -18,7 +18,7 @@ export const ButtonForm: React.FC<ButtonFormProps> = ({
     <Button
       type="primary"
       htmlType="submit"
-      className={`${className} form-button`}
+      className={`${className} ${style.form_button}`}
       block
       size="large"
       icon={icon}

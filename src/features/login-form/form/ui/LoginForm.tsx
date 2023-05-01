@@ -1,6 +1,7 @@
 import { Form, Input } from 'antd';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
-import { ButtonForm } from 'shared/ui/Button/Button';
+import { ButtonForm } from 'shared/ui';
+
 import style from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
