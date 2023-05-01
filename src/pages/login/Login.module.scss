@@ -1,4 +1,4 @@
-.login-container {
+.login_container {
   max-width: 28rem;
   margin-top: 2rem;
   margin-left: auto;
@@ -14,43 +14,26 @@
   }
 }
 
-// .login-form {
-//   width: 100%;
-// }
-
-.login-buttons {
+.login_buttons {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 1rem;
 
-  .git-button {
+  .git_btn {
     background-color: var(--black);
   }
 
-  .google-button {
+  .google_btn {
     background-color: var(--bg-primary);
     color: var(--bg-primary-dark);
   }
 }
 
 .separator {
-  padding-bottom: 1.5rem;
-  padding-top: 1.5rem;
-  display: flex;
-  align-items: center;
-
-  hr {
-    border-top: 0;
-    border-left: 0;
-    border-top-width: 1px;
-    color: inherit;
-    height: 0;
-    border-color: rgb(222 226 231/1);
-    flex: 1 1 0%;
-    margin: 0;
-  }
+  padding-bottom: 0.8rem;
+  padding-top: 0.8rem;
 
   span {
     font-size: 0.75rem;
@@ -61,7 +44,7 @@
   }
 }
 
-.signup-link {
+.signup_link {
   text-align: right;
   display: block;
   position: absolute;
