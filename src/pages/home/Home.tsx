@@ -38,22 +38,22 @@ const Home: React.FC = () => {
       <ul>
         <li>
           <Link to={ROUTES.login}>
-            <Typography.Link>Login</Typography.Link>
+            <Button type="link">Login</Button>
           </Link>
         </li>
         <li>
           <Link to={ROUTES.signup}>
-            <Typography.Link>Signup</Typography.Link>
+            <Button type="link">Signup</Button>
           </Link>
         </li>
         <li>
           <Link to={ROUTES.sandbox}>
-            <Typography.Link>Sandbox</Typography.Link>
+            <Button type="link">Sandbox</Button>
           </Link>
         </li>
         <li>
           <Link to={ROUTES.notFound}>
-            <Typography.Link>404</Typography.Link>
+            <Button type="link">404</Button>
           </Link>
         </li>
       </ul>

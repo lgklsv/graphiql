@@ -1,5 +1,6 @@
 .header {
   width: 100%;
+  max-height: var(--header);
   padding: 15px 20px;
   background-color: var(--bg-primary);
   position: fixed;

@@ -1,0 +1,4 @@
+.main {
+  margin-top: var(--header);
+  min-height: calc(100vh - var(--header) - 108px);
+}

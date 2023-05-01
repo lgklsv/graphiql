@@ -4,13 +4,15 @@ import { Layout } from 'antd';
 import { Header } from 'widgets/header';
 import { Footer } from 'widgets/footer';
 
+import styles from './Layout.module.scss';
+
 const { Content } = Layout;
 
 const LayoutPage: React.FC = () => {
   return (
-    <Layout style={{ minHeight: '100vh' }}>
+    <Layout>
       <Header />
-      <Content>
+      <Content className={styles.main}>
         <Outlet />
       </Content>
       <Footer />
