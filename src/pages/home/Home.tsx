@@ -25,7 +25,7 @@ const Home: React.FC = () => {
         </Space>
       </Space>
 
-      <div className="test-block">
+      {/* <div className="test-block">
         <div className="test-block-second" />
       </div>
       <div className="test-block">
@@ -33,7 +33,7 @@ const Home: React.FC = () => {
       </div>
       <div className="test-block">
         <div className="test-block-second" />
-      </div>
+      </div> */}
 
       <ul>
         <li>

@@ -6,14 +6,18 @@
     font-size: 0.75rem;
     font-weight: 400;
     line-height: 130%;
+
+    @media (max-width: 450px) {
+      font-size: 0.65rem;
+    }
+
+    @media (max-width: 350px) {
+      font-size: 0.55rem;
+    }
   }
   @include flex-center;
   text-transform: uppercase;
   min-height: var(--footer);
-  @media all and (max-width: 530px) {
-    flex-direction: column;
-    align-items: center;
-  }
 }
 
 .footer-logo {
