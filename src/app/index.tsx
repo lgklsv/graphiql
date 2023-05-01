@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { ConfigProvider } from 'antd';
 
 import Routing from 'pages';
@@ -8,10 +8,12 @@ import './index.scss';
 
 const App: React.FC = () => {
   return (
-    <ConfigProvider theme={customTheme}>
-      <Helmet defaultTitle={appTitle} titleTemplate={`%s | ${appTitle}`} />
-      <Routing />
-    </ConfigProvider>
+    <HelmetProvider>
+      <ConfigProvider theme={customTheme}>
+        <Helmet defaultTitle={appTitle} titleTemplate={`%s | ${appTitle}`} />
+        <Routing />
+      </ConfigProvider>
+    </HelmetProvider>
   );
 };
 

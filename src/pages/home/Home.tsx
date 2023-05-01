@@ -1,5 +1,5 @@
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { Button, Space, Typography } from 'antd';
 import { Link } from 'react-router-dom';
 import { ROUTES } from 'pages/config';
@@ -25,15 +25,15 @@ const Home: React.FC = () => {
         </Space>
       </Space>
 
-      {/* <div className="test-block">
-        <div className="test-block-second" />
-      </div>
       <div className="test-block">
         <div className="test-block-second" />
       </div>
       <div className="test-block">
         <div className="test-block-second" />
-      </div> */}
+      </div>
+      <div className="test-block">
+        <div className="test-block-second" />
+      </div>
 
       <ul>
         <li>
