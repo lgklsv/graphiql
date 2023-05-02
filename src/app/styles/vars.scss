@@ -6,6 +6,7 @@
 
   // IDE
   --sidebar-width: 60px;
+  --toolbar-width: 40px;
   --tabs-height: 50px;
 
   --popover-box-shadow: 0px 6px 20px rgba(59, 76, 106, 0.13),
@@ -22,7 +23,9 @@
   // General colors
   --color-neutral: 219, 28%, 32%; // text color to configure other colors
   --bg-primary: #ffffff; // background and request field
-  --bg-secondary: #f3f4f6; // response field
+  // --bg-secondary: #f3f4f6; // response field
+  --bg-secondary: #f1f2f4; // response field
+
   --bg-ternary: 188, 100%, 36%;
   --bg-primary-dark: #1b2240; // dark-bg header/footer etc.
   --text-primary: hsla(var(--color-neutral), 1); // contrast text / active

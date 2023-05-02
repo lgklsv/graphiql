@@ -1,6 +1,26 @@
 .field {
-  width: 100%;
+  width: calc(100% - 1rem);
   flex-grow: 1;
   height: 100%;
   background-color: var(--bg-secondary);
+  border-radius: 20px;
+  margin: 0 1rem 1rem 0rem;
+
+  &__request {
+    width: 50%;
+    height: calc(100% - 1rem);
+    margin: 0.5rem;
+    background-color: var(--bg-primary);
+    box-shadow: var(--popover-box-shadow);
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+
+    &_top {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
