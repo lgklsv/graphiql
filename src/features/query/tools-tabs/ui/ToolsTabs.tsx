@@ -28,7 +28,7 @@ const ToolsTabs: React.FC = () => {
         ))}
       </Space>
       <Tooltip placement="bottomLeft" title="Hide editor tools">
-        <Button size="large" icon={<DownOutlined />} />
+        <Button type="text" size="large" icon={<DownOutlined />} />
       </Tooltip>
     </div>
   );

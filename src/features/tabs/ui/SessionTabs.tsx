@@ -18,7 +18,8 @@ const SessionTabs: React.FC = () => {
   const newTabIndex = React.useRef(0);
 
   // We need to store the active tab and all the tabs in redux slice
-  console.log(items.find((item) => item.key === activeKey));
+  // How to get active tab object
+  // console.log(items.find((item) => item.key === activeKey));
 
   const onChange = (newActiveKey: string) => {
     setActiveKey(newActiveKey);

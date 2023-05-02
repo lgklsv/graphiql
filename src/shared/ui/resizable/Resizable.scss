@@ -1,0 +1,34 @@
+@import '/src/shared/styles/mixins.scss';
+
+.react-resizable {
+  position: relative;
+}
+
+.react-resizable-handle {
+  display: block;
+}
+
+// Vertical resize bar
+.react-resizable-handle-e {
+  position: absolute;
+  top: 0;
+  right: -13px;
+  height: 100%;
+  width: 12px;
+  @include flex-center;
+  cursor: col-resize;
+  opacity: 0;
+  transition: all 0.3s ease;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &::after {
+    content: '';
+    background-color: var(--border-active);
+    height: 30%;
+    border-radius: 2px;
+    width: 4px;
+  }
+}
