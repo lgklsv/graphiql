@@ -17,6 +17,14 @@ button.ant-btn-primary {
   box-shadow: 0 1px 0px rgba(8, 2, 25, 0.43);
 }
 
+.ant-tabs-content-holder {
+  display: none;
+}
+
+.ant-tabs-nav {
+  min-height: calc(var(--tabs-height) - 8px);
+}
+
 // TODO: REMOVE STYLES DOWN THERE (added just for demo purposes)
 .test-block {
   width: 500px;

@@ -1,5 +1,5 @@
 .tabs {
   background-color: transparent;
-  width: 100%;
+  width: calc(100vw - var(--sidebar-width));
   height: var(--tabs-height);
 }
