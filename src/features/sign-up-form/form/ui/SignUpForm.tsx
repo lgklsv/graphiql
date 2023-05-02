@@ -63,7 +63,7 @@ const SignUpForm: React.FC = () => {
               /* eslint-disable-next-line */
               /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\[\]"\';:_\-<>\., =\+\/\\]).{8,}$/,
             message:
-              'Password must contain at least one letter, one digit, one special character',
+              'Password must contain at least 8 characters including at least one digit, one uppercase letter, one lowercase letter and one special character.',
           },
         ]}
         hasFeedback
