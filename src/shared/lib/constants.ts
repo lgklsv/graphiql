@@ -1,5 +1,3 @@
-import { IDevCard } from './types';
-
 const DEVELOPERS: IDevCard[] = [
   {
     name: 'Alesia Abaeva',

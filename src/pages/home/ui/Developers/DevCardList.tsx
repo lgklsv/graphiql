@@ -1,5 +1,4 @@
 import { Space } from 'antd';
-import { IDevCardList } from 'shared/lib/types';
 import DevCard from './DevCard';
 import styles from './Developers.module.scss';
 

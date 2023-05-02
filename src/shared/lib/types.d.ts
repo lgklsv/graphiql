@@ -14,5 +14,3 @@ interface IMatchMedia {
   isTablet: boolean;
   isDesktop: boolean;
 }
-
-export { IDevCard, IDevCardList, IMatchMedia };
