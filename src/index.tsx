@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import { setupStore } from 'store';
 import App from 'app';
 import { Spinner } from 'shared/ui';
+import './firebase';
 
 const store = setupStore();
 
