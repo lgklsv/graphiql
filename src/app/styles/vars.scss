@@ -2,12 +2,17 @@
   // Vars
   --header: 80px;
   --footer: 65px;
+  --screen-height: calc(100vh - var(--header) - var(--footer));
+
+  // IDE
+  --sidebar-width: 60px;
+  --tabs-height: 50px;
+
   --popover-box-shadow: 0px 6px 20px rgba(59, 76, 106, 0.13),
     0px 1.34018px 4.46726px rgba(59, 76, 106, 0.0774939),
     0px 0.399006px 1.33002px rgba(59, 76, 106, 0.0525061);
 
   --line-height: 1.5;
-
   --alpha-secondary: 0.76;
   --alpha-ternary: 0.5;
   --alpha-background-heavy: 0.15;
@@ -27,7 +32,7 @@
   ); // light text / regular
   --text-ternary: rgba(255, 255, 255, 0.4); // light text for dark bg
 
-  // For handling errors or success messages
+  // For handling errors or success messages (kinda useless,  we already have a UI lib)
   --green: #3bb33b;
   --green-intense: #03e952;
   --red: #ed352c;
