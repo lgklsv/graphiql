@@ -9,13 +9,14 @@ i18n
   .use(initReactI18next)
   .init({
     fallbackLng: 'en',
+    supportedLngs: ['en', 'ru'], // to prevent errors if the user's detected lang is not available
+    load: 'languageOnly', // to look up for only language (for 'en' and not for 'en-US')
     detection: {
+      order: ['localStorage', 'navigator', 'htmlTag'],
       lookupLocalStorage: 'gqlLng',
-      caches: ['localStorage'],
     },
-    load: 'languageOnly',
     backend: {
-      loadPath: 'assets/locales/{{lng}}/translation.json',
+      loadPath: '/locales/{{lng}}/translation.json',
     },
     debug: true, // disable for production
   });
