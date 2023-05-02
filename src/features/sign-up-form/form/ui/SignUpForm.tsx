@@ -37,6 +37,7 @@ const SignUpForm: React.FC = () => {
             message: 'Please input your E-mail!',
           },
         ]}
+        hasFeedback
       >
         <Input size="large" />
       </Form.Item>
@@ -47,6 +48,13 @@ const SignUpForm: React.FC = () => {
           {
             required: true,
             message: 'Please input your password!',
+          },
+          {
+            pattern:
+              /* eslint-disable-next-line */
+              /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\[\]"\';:_\-<>\., =\+\/\\]).{8,}$/,
+            message:
+              'Password must contain at least one letter, one digit, one special character',
           },
         ]}
         hasFeedback
