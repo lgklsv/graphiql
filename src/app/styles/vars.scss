@@ -33,6 +33,7 @@
   ); // light text / regular
   --text-ternary: rgba(255, 255, 255, 0.4); // light text for dark bg
   --border-primary: 1px solid hsla(var(--color-neutral), 0.1);
+  --border-active: hsla(var(--color-neutral), 0.15);
 
   // For handling errors or success messages (kinda useless,  we already have a UI lib)
   --green: #3bb33b;

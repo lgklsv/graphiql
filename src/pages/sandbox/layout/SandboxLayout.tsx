@@ -2,8 +2,9 @@ import React from 'react';
 
 import { SessionTabs } from 'features/tabs';
 import { Sidebar } from 'widgets/sidebar';
-import { MainField } from '../main';
 import styles from './SandboxLayout.module.scss';
+import { QueryField } from '../query';
+import { ResponseField } from '../response';
 
 const SandboxLayout: React.FC = () => {
   return (
@@ -11,7 +12,13 @@ const SandboxLayout: React.FC = () => {
       <Sidebar />
       <div className={styles.layout__main}>
         <SessionTabs />
-        <MainField />
+        <div className={styles.layout__field}>
+          <QueryField />
+          <div className={styles.resizer}>
+            <div className={styles.resizer__bar} />
+          </div>
+          <ResponseField />
+        </div>
       </div>
     </section>
   );
