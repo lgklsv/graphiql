@@ -7,6 +7,15 @@ const SignUpForm: React.FC = () => {
   const [form] = Form.useForm();
   const [, forceUpdate] = React.useState({});
 
+  const isConfirm = (value: string, password: string) => {
+    if (!value || password === value) {
+      return Promise.resolve();
+    }
+    return Promise.reject(
+      new Error('The two passwords that you entered do not match!')
+    );
+  };
+
   // To disable submit button at the beginning.
   React.useEffect(() => {
     forceUpdate({});
@@ -72,14 +81,8 @@ const SignUpForm: React.FC = () => {
             message: 'Please confirm your password!',
           },
           ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(
-                new Error('The two passwords that you entered do not match!')
-              );
-            },
+            validator: (_, value) =>
+              isConfirm(value, getFieldValue('password')),
           }),
         ]}
       >
