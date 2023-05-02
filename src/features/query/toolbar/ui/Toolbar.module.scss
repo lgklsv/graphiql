@@ -1,5 +1,7 @@
 .toolbar {
   width: var(--toolbar-width);
   height: 100%;
-  // background-color: red;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }

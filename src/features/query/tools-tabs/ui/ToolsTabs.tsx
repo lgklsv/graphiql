@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Space } from 'antd';
+import { Button, Space, Tooltip } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
 import styles from './ToolsTabs.module.scss';
@@ -27,7 +27,9 @@ const ToolsTabs: React.FC = () => {
           </Button>
         ))}
       </Space>
-      <Button size="large" icon={<DownOutlined />} />
+      <Tooltip placement="bottomLeft" title="Hide editor tools">
+        <Button size="large" icon={<DownOutlined />} />
+      </Tooltip>
     </div>
   );
 };
