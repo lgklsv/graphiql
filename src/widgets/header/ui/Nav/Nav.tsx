@@ -3,6 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ROUTES } from 'pages/config';
+import LangSwitcher from 'features/langSwitcher/LangSwitcher';
 import styles from './Nav.module.scss';
 
 type NavProps = {
@@ -28,6 +29,7 @@ const Nav: React.FC<NavProps> = ({ mobile }) => {
       >
         Log In
       </Button>
+      <LangSwitcher />
     </Space>
   );
 };
