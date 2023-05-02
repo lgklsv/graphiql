@@ -7,9 +7,12 @@ const MainField: React.FC = () => {
   return (
     <div className={styles.field}>
       <div className={styles.field__request}>
-        <div className={styles.field__request_top}>
+        <div className={styles.field__request_editor}>
           <Query.Editor />
           <Query.Toolbar />
+        </div>
+        <div className={styles.field__request_vars}>
+          <Query.ToolsTabs />
         </div>
       </div>
     </div>

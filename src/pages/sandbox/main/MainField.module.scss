@@ -17,10 +17,19 @@
     display: flex;
     flex-direction: column;
 
-    &_top {
+    &_editor {
       display: flex;
       width: 100%;
-      height: 100%;
+      height: 75%;
+    }
+
+    &_vars {
+      border-top: var(--border-primary);
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 25%;
+      // background-color: yellow;
     }
   }
 }

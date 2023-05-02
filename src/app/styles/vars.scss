@@ -23,9 +23,7 @@
   // General colors
   --color-neutral: 219, 28%, 32%; // text color to configure other colors
   --bg-primary: #ffffff; // background and request field
-  // --bg-secondary: #f3f4f6; // response field
   --bg-secondary: #f1f2f4; // response field
-
   --bg-ternary: 188, 100%, 36%;
   --bg-primary-dark: #1b2240; // dark-bg header/footer etc.
   --text-primary: hsla(var(--color-neutral), 1); // contrast text / active
@@ -34,6 +32,7 @@
     var(--alpha-secondary)
   ); // light text / regular
   --text-ternary: rgba(255, 255, 255, 0.4); // light text for dark bg
+  --border-primary: 1px solid hsla(var(--color-neutral), 0.1);
 
   // For handling errors or success messages (kinda useless,  we already have a UI lib)
   --green: #3bb33b;
