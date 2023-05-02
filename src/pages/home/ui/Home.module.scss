@@ -1,0 +1,20 @@
+@import './Mixin';
+
+@mixin adaptiveContentWidth {
+  max-width: 1200px;
+  @media (max-width: 1199px) {
+    max-width: 800px;
+  }
+  @media (max-width: 767px) {
+    max-width: 90vw;
+  }
+}
+
+.content {
+  @include adaptiveContentWidth();
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: max(3vh, 3vw);
+  font-size: 16px;
+}
