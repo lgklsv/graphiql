@@ -13,6 +13,7 @@ const MainField: React.FC = () => {
         </div>
         <div className={styles.field__request_vars}>
           <Query.ToolsTabs />
+          <Query.EditorTools />
         </div>
       </div>
     </div>
