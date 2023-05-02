@@ -11,18 +11,22 @@ const DevCard = ({ name, img, link, github }: IDevCard) => {
   } = theme.useToken();
 
   return (
-    <Card className={styles.developers__cardItem} hoverable>
-      <Space direction="vertical">
-        <Avatar src={img} className={styles.developers__cardAvatar} />
-        <Meta title={name} />
-        <Space>
-          <GithubOutlined style={{ color: colorPrimary }} />
-          <a href={link} target="_blank" rel="noreferrer">
-            {github}
-          </a>
+    <a href={link} target="_blank" rel="noreferrer">
+      <Card className={styles.developers__cardItem} hoverable>
+        <Space direction="vertical">
+          <Avatar
+            src={img}
+            className={styles.developers__cardAvatar}
+            alt="github user picture"
+          />
+          <Meta title={name} />
+          <Space>
+            <GithubOutlined style={{ color: colorPrimary }} />
+            <span> {github} </span>
+          </Space>
         </Space>
-      </Space>
-    </Card>
+      </Card>
+    </a>
   );
 };
 
