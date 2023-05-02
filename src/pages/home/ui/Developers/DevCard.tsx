@@ -1,24 +1,19 @@
 import { Avatar, Card, Space, theme } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 import { IDevCard } from 'shared/lib/types';
-import { useMatchMedia } from 'shared/hooks';
+import styles from './Developers.module.scss';
 
 const { Meta } = Card;
 
 const DevCard = ({ name, img, link, github }: IDevCard) => {
-  const { isMobile } = useMatchMedia();
   const {
     token: { colorPrimary },
   } = theme.useToken();
 
   return (
-    <Card style={isMobile ? { width: 280 } : { maxWidth: 300 }} hoverable>
+    <Card className={styles.developers__cardItem} hoverable>
       <Space direction="vertical">
-        <Avatar
-          src={img}
-          size={isMobile ? 125 : 200}
-          style={{ border: '1px solid #7156d9b8' }}
-        />
+        <Avatar src={img} className={styles.developers__cardAvatar} />
         <Meta title={name} />
         <Space>
           <GithubOutlined style={{ color: colorPrimary }} />

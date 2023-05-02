@@ -1,16 +1,18 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, Space } from 'antd';
+import { Button, Space, Grid } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
 import { ROUTES } from 'pages/config';
-import { useMatchMedia } from 'shared/hooks';
 import styles from './Intro.module.scss';
 
 // TODO: add isAuthorized check and adjust redirect buttons: If authorized redirect to sandbox, of not => SignUP
 
+const { useBreakpoint } = Grid;
+
 const Intro: React.FC = () => {
   const navigate = useNavigate();
-  const { isMobile } = useMatchMedia();
+  const screens = useBreakpoint();
+
   return (
     <section className={styles.intro}>
       <div className={styles.intro__text}>
@@ -24,16 +26,16 @@ const Intro: React.FC = () => {
           safely.
         </p>
       </div>
-      <Space size={isMobile ? 'middle' : 'large'}>
+      <Space size={screens.xs ? 'middle' : 'large'}>
         <Button
-          size={isMobile ? 'middle' : 'large'}
+          size={screens.xs ? 'middle' : 'large'}
           ghost
           href="https://github.com/lgklsv/graphiql"
         >
           Read the Docs
         </Button>
         <Button
-          size={isMobile ? 'middle' : 'large'}
+          size={screens.xs ? 'middle' : 'large'}
           type="primary"
           onClick={() => navigate(ROUTES.sandbox)}
         >
