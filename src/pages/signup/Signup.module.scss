@@ -1,0 +1,13 @@
+@import '../../shared/styles/extends';
+
+.signup_container {
+  @extend %form_container;
+  max-width: 30rem;
+
+  h1 {
+    span {
+      bottom: 0;
+      top: auto;
+    }
+  }
+}

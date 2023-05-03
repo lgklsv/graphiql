@@ -2,24 +2,10 @@ import React from 'react';
 import { Space, Typography, theme } from 'antd';
 import { Footer } from 'antd/es/layout/layout';
 
+import { DEVELOPERS } from 'shared/lib/constants';
 import styles from './Footer.module.scss';
 
 const { Text } = Typography;
-
-const DEVELOPERS = [
-  {
-    name: 'alesia-abaeva',
-    link: 'https://github.com/alesia-abaeva',
-  },
-  {
-    name: 'lgklsv',
-    link: 'https://github.com/lgklsv/',
-  },
-  {
-    name: 'marerma',
-    link: 'https://github.com/marerma',
-  },
-];
 
 const FooterComponent: React.FC = () => {
   const {
@@ -33,10 +19,10 @@ const FooterComponent: React.FC = () => {
           <Space size={5}>
             <Text>graphiql engineered by</Text>
             <ul className={styles['footer-list']}>
-              {DEVELOPERS.map(({ name, link }) => (
-                <li key={name}>
+              {DEVELOPERS.map(({ link, github }) => (
+                <li key={link}>
                   <a href={link} target="_blank" rel="noreferrer">
-                    {name}
+                    {github}
                   </a>
                 </li>
               ))}

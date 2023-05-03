@@ -8,7 +8,7 @@ export const customTheme: ThemeConfig = {
   token: {
     colorTextHeading: '#281E5B', // Dark blue
     colorText: '#281E5B',
-    colorInfo: '#281E5B',
+    colorInfo: '#7156d9b8',
     colorBgBase: '#ffffff',
     colorPrimary: '#281E5B',
   },

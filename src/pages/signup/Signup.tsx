@@ -1,9 +1,9 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-
-import { Typography } from 'antd';
-
-const { Title } = Typography;
+import { TitleForm } from 'shared/ui';
+import { ROUTES } from 'pages/config';
+import { Form } from 'features/sign-up-form';
+import style from './Signup.module.scss';
 
 const Signup: React.FC = () => {
   return (
@@ -11,7 +11,16 @@ const Signup: React.FC = () => {
       <Helmet>
         <title>Sign up</title>
       </Helmet>
-      <Title>Sign up to use Graphql sandbox</Title>
+      <div className={style.signup_container}>
+        <TitleForm
+          title="Let's get started"
+          link={ROUTES.login}
+          text="Have an account? "
+          textLink=" Sign in"
+        />
+
+        <Form.SignUp />
+      </div>
     </>
   );
 };

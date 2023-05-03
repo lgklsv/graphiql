@@ -11,6 +11,7 @@
 
 html {
   background-color: var(--bg-primary);
+  overflow-x: hidden;
 }
 
 button.ant-btn-primary {
@@ -23,20 +24,4 @@ button.ant-btn-primary {
 
 .ant-tabs-nav {
   min-height: calc(var(--tabs-height) - 8px);
-}
-
-// TODO: REMOVE STYLES DOWN THERE (added just for demo purposes)
-.test-block {
-  width: 500px;
-  height: 500px;
-  background-color: var(--bg-secondary);
-  @include flex-center;
-  margin: 1rem 0;
-}
-
-.test-block-second {
-  width: 400px;
-  height: 400px;
-  background-color: var(--bg-primary);
-  box-shadow: var(--popover-box-shadow);
 }
