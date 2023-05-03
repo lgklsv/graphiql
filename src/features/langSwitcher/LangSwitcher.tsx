@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
 import { DownOutlined, GlobalOutlined } from '@ant-design/icons';
 import { Button, Dropdown, Space } from 'antd';
 import type { MenuProps } from 'antd';
-
-import i18n from '../../shared/lib/i18n/i18n';
+import { useTranslation } from 'react-i18next';
 
 const LANGUAGES: MenuProps['items'] = [
   {
@@ -16,29 +14,21 @@ const LANGUAGES: MenuProps['items'] = [
   },
 ];
 
-const handleLanguageChange: MenuProps['onClick'] = (e) => {
-  i18n.changeLanguage(e.key);
-};
-
-const menuProps = {
-  items: LANGUAGES,
-  onClick: handleLanguageChange,
-  selectable: true,
-};
-
 const LangSwitcher = () => {
-  const [selectedLang, setSelectedLang] = useState('');
+  const { i18n } = useTranslation();
+  const handleLanguageChange: MenuProps['onClick'] = (e) => {
+    i18n.changeLanguage(e.key);
+  };
 
-  useEffect(() => {
-    const detectedLang = i18n.language;
-    setSelectedLang(detectedLang);
-  }, []);
+  const menuProps = {
+    items: LANGUAGES,
+    onClick: handleLanguageChange,
+    selectable: true,
+    defaultSelectedKeys: [i18n.resolvedLanguage],
+  };
 
   return (
-    <Dropdown
-      trigger={['click']}
-      menu={{ ...menuProps, defaultSelectedKeys: [selectedLang] }}
-    >
+    <Dropdown trigger={['click']} menu={menuProps}>
       <Button size="large">
         <Space>
           <GlobalOutlined />
