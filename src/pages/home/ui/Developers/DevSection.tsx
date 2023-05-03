@@ -1,11 +1,13 @@
+import { useTranslation } from 'react-i18next';
 import { DEVELOPERS } from 'shared/lib/constants';
-import styles from './Developers.module.scss';
 import DevCardList from './DevCardList';
+import styles from './Developers.module.scss';
 
 const DevSection: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <section className={styles.developers}>
-      <h2 className={styles.developers__title}>Developers</h2>
+      <h2 className={styles.developers__title}>{t('home.developerTitle')}</h2>
       <DevCardList devCardList={DEVELOPERS} />
     </section>
   );
