@@ -35,7 +35,10 @@ const ToolsTabs: React.FC<ToolTabsProps> = ({ isOpen, toggle }) => {
           </Button>
         ))}
       </Space>
-      <Tooltip placement="bottomLeft" title="Hide editor tools">
+      <Tooltip
+        placement="bottomLeft"
+        title={`${isOpen ? 'Hide' : 'Open'} editor tools`}
+      >
         <Button
           type="text"
           size="large"
