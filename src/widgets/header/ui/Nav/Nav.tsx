@@ -45,6 +45,15 @@ const Nav: React.FC<NavProps> = ({ mobile, toggle }) => {
         {t('button.login')}
       </Button>
       <LangSwitcher />
+
+      <Button
+        type="primary"
+        size="large"
+        color="red"
+        // onClick={() => navigate(ROUTES.login)}
+      >
+        Log Out
+      </Button>
     </Space>
   );
 };

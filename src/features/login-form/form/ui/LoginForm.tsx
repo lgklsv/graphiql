@@ -2,13 +2,33 @@ import { Form, Input } from 'antd';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { ButtonForm } from 'shared/ui';
+import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/redux';
+import { userSelector } from 'store/selectors/user';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 import style from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation();
+  const userState = useAppSelector(userSelector);
+  const dispatch = useAppDispatch();
+
   const onFinish = (values: ILoginData) => {
-    console.log('Received values of form: ', values);
+    const { email, password } = values;
+
+    const auth = getAuth();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = { userCredential };
+        // ...
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+
+    // console.log('Received values of form: ', values);
   };
 
   return (
