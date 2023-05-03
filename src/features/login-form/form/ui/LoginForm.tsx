@@ -1,34 +1,35 @@
 import { Form, Input } from 'antd';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import { ButtonForm } from 'shared/ui';
 import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/redux';
 import { userSelector } from 'store/selectors/user';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-
+import { useNavigate } from 'react-router-dom';
+import { ButtonForm } from 'shared/ui';
+import { setUser } from 'store/reducers/UserSlice';
+import { ROUTES } from 'pages/config';
 import style from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation();
   const userState = useAppSelector(userSelector);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const onFinish = (values: ILoginData) => {
-    const { email, password } = values;
+    const { email: emailValues, password } = values;
 
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = { userCredential };
-        // ...
+    signInWithEmailAndPassword(auth, emailValues, password)
+      .then(({ user }) => {
+        const { email, uid, accessToken } = user as unknown as UserFirebase;
+        dispatch(setUser({ email, token: accessToken, id: uid }));
+        navigate(ROUTES.sandbox, { replace: true });
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-
-    // console.log('Received values of form: ', values);
   };
 
   return (

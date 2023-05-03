@@ -3,18 +3,20 @@ import { Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { ButtonForm } from 'shared/ui';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/redux';
-import { userSelector } from 'store/selectors/user';
+import { useAppDispatch } from 'shared/lib/hooks/redux';
 import { setUser } from 'store/reducers/UserSlice';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from 'pages/config';
 import style from './SignUpForm.module.scss';
 
 const SignUpForm: React.FC = () => {
   const { t } = useTranslation();
   const userState = useAppSelector(userSelector);
   const dispatch = useAppDispatch();
-
   const [form] = Form.useForm();
   const [, forceUpdate] = React.useState({});
+
+  const navigate = useNavigate();
 
   const isConfirm = (value: string, password: string) => {
     if (!value || password === value) {
@@ -34,9 +36,10 @@ const SignUpForm: React.FC = () => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, emailValues, password)
       .then(({ user }) => {
-        console.log(user);
         const { email, uid, accessToken } = user as unknown as UserFirebase;
         dispatch(setUser({ email, token: accessToken, id: uid }));
+        navigate(ROUTES.sandbox, { replace: true });
+        // redirect on sandbox
       })
       .catch((error) => {
         const errorCode = error.code;
