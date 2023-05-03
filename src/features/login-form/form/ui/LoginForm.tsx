@@ -1,4 +1,4 @@
-import { Form, Input } from 'antd';
+import { Form, Input, message } from 'antd';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/redux';
@@ -15,8 +15,15 @@ const LoginForm: React.FC = () => {
   const userState = useAppSelector(userSelector);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [messageApi, contextHolder] = message.useMessage();
 
   const onFinish = (values: ILoginData) => {
+    messageApi.open({
+      key: 'updatable',
+      type: 'loading',
+      content: 'Loading...',
+    });
+
     const { email: emailValues, password } = values;
 
     const auth = getAuth();
@@ -27,8 +34,11 @@ const LoginForm: React.FC = () => {
         navigate(ROUTES.sandbox, { replace: true });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        messageApi.open({
+          key: 'updatable',
+          type: 'error',
+          content: error.message,
+        });
       });
   };
 

@@ -1,11 +1,16 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Divider } from 'antd';
+<<<<<<< HEAD
 import { GithubOutlined, GoogleOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
+=======
+import { GithubOutlined } from '@ant-design/icons';
+>>>>>>> f577065 (feat: add message loading & error for auth)
 import { ROUTES } from 'pages/config';
 import { Form } from 'features/login-form';
 import { ButtonForm, TitleForm } from 'shared/ui';
+import { ButtonAuth } from 'features/login-google';
 
 import style from './Login.module.scss';
 
@@ -26,17 +31,13 @@ const Login: React.FC = () => {
         />
 
         <div className={style.login_buttons}>
-          {/* TODO: stay? */}
           <ButtonForm
             text={t('button.signGithub')}
             icon={<GithubOutlined />}
             className={style.git_btn}
           />
-          <ButtonForm
-            text={t('button.signGoogle')}
-            icon={<GoogleOutlined />}
-            className={style.google_btn}
-          />
+
+          <ButtonAuth.Google />
         </div>
 
         <Divider plain className={style.separator}>
