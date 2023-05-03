@@ -2,10 +2,17 @@ import React from 'react';
 import { Form, Input } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { ButtonForm } from 'shared/ui';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/redux';
+import { userSelector } from 'store/selectors/user';
+import { setUser } from 'store/reducers/UserSlice';
 import style from './SignUpForm.module.scss';
 
 const SignUpForm: React.FC = () => {
   const { t } = useTranslation();
+  const userState = useAppSelector(userSelector);
+  const dispatch = useAppDispatch();
+
   const [form] = Form.useForm();
   const [, forceUpdate] = React.useState({});
 
@@ -22,7 +29,19 @@ const SignUpForm: React.FC = () => {
   }, []);
 
   const onFinish = (values: ILoginData) => {
-    console.log('Received values of form: ', values);
+    const { email: emailValues, password } = values;
+
+    const auth = getAuth();
+    createUserWithEmailAndPassword(auth, emailValues, password)
+      .then(({ user }) => {
+        console.log(user);
+        const { email, uid, accessToken } = user as unknown as UserFirebase;
+        dispatch(setUser({ email, token: accessToken, id: uid }));
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
 
   return (
