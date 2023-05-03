@@ -1,16 +1,24 @@
 import React from 'react';
 import { Button, Space, Tooltip } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { DownOutlined, UpOutlined } from '@ant-design/icons';
 
 import styles from './ToolsTabs.module.scss';
 
 const TABS = ['Variables', 'Headers'];
 
-const ToolsTabs: React.FC = () => {
+interface ToolTabsProps {
+  isOpen: boolean;
+  toggle: () => void;
+}
+
+const ToolsTabs: React.FC<ToolTabsProps> = ({ isOpen, toggle }) => {
   const [activeTab, setActiveTab] = React.useState(0);
 
   const changeTabHandler = (id: number) => {
     setActiveTab(id);
+    if (!isOpen) {
+      toggle();
+    }
   };
 
   return (
@@ -28,7 +36,12 @@ const ToolsTabs: React.FC = () => {
         ))}
       </Space>
       <Tooltip placement="bottomLeft" title="Hide editor tools">
-        <Button type="text" size="large" icon={<DownOutlined />} />
+        <Button
+          type="text"
+          size="large"
+          icon={isOpen ? <DownOutlined /> : <UpOutlined />}
+          onClick={toggle}
+        />
       </Tooltip>
     </div>
   );

@@ -1,35 +1,55 @@
-import React from 'react';
-import { ResizableBox } from 'react-resizable';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { SyntheticEvent } from 'react';
+import {
+  ResizableBox,
+  ResizableBoxProps,
+  ResizeCallbackData,
+} from 'react-resizable';
 
+import {
+  DEFAULT_VARIABLES_EDITOR_HEIGHT_CLOSED,
+  QUERY_FIELD_MIN_WIDTH,
+} from 'app/config';
 import './Resizable.scss';
 
 interface ResizableProps {
   direction: 'horizontal' | 'vertical';
   children: React.ReactNode;
+  resize: (e: SyntheticEvent, data: ResizeCallbackData) => void;
+  height: number;
 }
 
-const Resizable: React.FC<ResizableProps> = ({ direction, children }) => {
-  return (
-    <ResizableBox
-      minConstraints={
-        direction === 'horizontal' ? [300, Infinity] : [Infinity, 150]
-      }
-      maxConstraints={
-        direction === 'horizontal'
-          ? [window.innerWidth * 0.8, Infinity]
-          : [Infinity, window.innerHeight * 0.5]
-      }
-      height={
-        direction === 'horizontal'
-          ? Infinity
-          : (window.innerHeight - 250) * 0.75
-      }
-      width={direction === 'horizontal' ? window.innerWidth * 0.33 : Infinity}
-      resizeHandles={direction === 'horizontal' ? ['e'] : ['s']}
-    >
-      {children}
-    </ResizableBox>
-  );
+const Resizable: React.FC<ResizableProps> = ({
+  direction,
+  children,
+  resize,
+  height,
+}) => {
+  let resizableProps: ResizableBoxProps;
+
+  if (direction === 'horizontal') {
+    resizableProps = {
+      minConstraints: [QUERY_FIELD_MIN_WIDTH, Infinity],
+      maxConstraints: [window.innerWidth * 0.8, Infinity],
+      height,
+      width: window.innerWidth * 0.33,
+      resizeHandles: ['e'],
+    };
+  } else {
+    resizableProps = {
+      onResize: resize,
+      minConstraints: [Infinity, DEFAULT_VARIABLES_EDITOR_HEIGHT_CLOSED],
+      maxConstraints: [
+        Infinity,
+        window.innerHeight - 250 - window.innerHeight * 0.2,
+      ],
+      height,
+      width: Infinity,
+      resizeHandles: ['n'],
+    };
+  }
+
+  return <ResizableBox {...resizableProps}>{children}</ResizableBox>;
 };
 
 export default Resizable;

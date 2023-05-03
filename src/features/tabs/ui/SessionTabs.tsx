@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { Tabs } from 'antd';
+
 import styles from './SessionTabs.module.scss';
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;

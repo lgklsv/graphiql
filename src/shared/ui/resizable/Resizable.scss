@@ -34,9 +34,9 @@
 }
 
 // Horizontal resize bar
-.react-resizable-handle-s {
+.react-resizable-handle-n {
   position: absolute;
-  bottom: 0;
+  top: -12px;
   right: 0;
   height: 12px;
   width: 100%;

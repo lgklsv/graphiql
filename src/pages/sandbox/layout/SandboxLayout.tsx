@@ -2,8 +2,8 @@ import React from 'react';
 
 import { SessionTabs } from 'features/tabs';
 import { Sidebar } from 'widgets/sidebar';
-import { QueryField } from '../query';
-import { ResponseField } from '../response';
+import { QueryField } from 'entities/query';
+import { ResponseField } from 'entities/response';
 
 import styles from './SandboxLayout.module.scss';
 

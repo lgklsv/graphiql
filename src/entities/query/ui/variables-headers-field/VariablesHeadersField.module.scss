@@ -1,0 +1,9 @@
+.field {
+  border-top: var(--border-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  height: fit-content;
+  flex: 1;
+}
