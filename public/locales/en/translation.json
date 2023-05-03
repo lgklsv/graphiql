@@ -1,3 +1,58 @@
 {
-  "key": "Graphiql EN"
+  "button": {
+    "signup": "Sign Up",
+    "login": "Log In",
+    "access": "Get access",
+    "docs": "Read the Docs",
+    "start": "Get Started",
+    "signGithub": "Sign in with GitHub",
+    "signGoogle": "Sign in with Google"
+  },
+  "home": {
+    "introTitle": "The <0>GraphQL</0> developer platform.",
+    "introText": "GraphiQL is the all-purpose IDE for your GraphQL API, empowering developers across your stack to ship early, ship often, and ship safely.",
+    "descriptionTitle": "Your graph`s command center",
+    "descriptionText": "GraphiQL is end-to-end cloud platform for building, observing, and evolving your graph. Validate schema changes, monitor field usage, and route queries across any number of your backend services.",
+    "developerTitle": "Developers"
+  },
+  "footer": {
+    "copyright": "All rights reserved",
+    "madeBy": "Engineered by",
+    "screenReader": "Explore the info about the RS School"
+  },
+  "form": {
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "confirmPsw": "Confirm Password"
+    },
+    "placeholder": {
+      "email": "Email Address",
+      "password": "Password"
+    },
+    "error": {
+      "emptyMail": "Please input your Email",
+      "unvalidMail": "Please input a valid Email",
+      "emptyPsw": "Please input your Password",
+      "unvalidPsw": "Password must contain at least 8 characters including at least one digit, one uppercase letter, one lowercase letter and one special character.",
+      "notMatchingPsw": "The two passwords that you entered do not match",
+      "confirmPsw": "Please confirm your password"
+    }
+  },
+  "signUp": {
+    "title": "Let's get started",
+    "loginRedirect": "Have an account?",
+    "redirectLink": "Sign in"
+  },
+  "logIn": {
+    "title": "Sign in",
+    "signUpRedirect": "New to GraphiQL?",
+    "redirectLink": "Lets get started",
+    "or": "or"
+  },
+  "developersList": {
+    "alesiaAbaeva": "Alesia Abaeva",
+    "olegKolosov": "Oleg Kolosov",
+    "mariaErmolaeva": "Maria Ermolaeva"
   }
+}
