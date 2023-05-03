@@ -7,9 +7,9 @@ type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
 // Demo tabs, but we can prepare only one for the user
 const initialItems = [
-  { label: 'Tab 1', children: 'Content of Tab 1', key: '1' },
-  { label: 'Tab 2', children: 'Content of Tab 2', key: '2' },
-  { label: 'Tab 3', children: 'Content of Tab 3', key: '3' },
+  { label: 'Tab 1', children: 'Content of Tab 1', key: '1', closable: true },
+  { label: 'Tab 2', children: 'Content of Tab 2', key: '2', closable: true },
+  { label: 'Tab 3', children: 'Content of Tab 3', key: '3', closable: true },
 ];
 
 const SessionTabs: React.FC = () => {
@@ -27,11 +27,15 @@ const SessionTabs: React.FC = () => {
 
   const add = () => {
     const newActiveKey = `newTab${(newTabIndex.current += 1)}`;
-    const newPanes = [...items];
+    const newPanes = items.map((pane) => {
+      pane.closable = true;
+      return pane;
+    });
     newPanes.push({
       label: 'New Tab',
       children: 'Content of new Tab',
       key: newActiveKey,
+      closable: true,
     });
     setItems(newPanes);
     setActiveKey(newActiveKey);
@@ -52,6 +56,9 @@ const SessionTabs: React.FC = () => {
       } else {
         newActiveKey = newPanes[0].key;
       }
+    }
+    if (newPanes.length === 1) {
+      newPanes[0].closable = false;
     }
     setItems(newPanes);
     setActiveKey(newActiveKey);
