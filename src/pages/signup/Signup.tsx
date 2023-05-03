@@ -1,11 +1,13 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 import { TitleForm } from 'shared/ui';
 import { ROUTES } from 'pages/config';
 import { Form } from 'features/sign-up-form';
 import style from './Signup.module.scss';
 
 const Signup: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <>
       <Helmet>
@@ -13,10 +15,10 @@ const Signup: React.FC = () => {
       </Helmet>
       <div className={style.signup_container}>
         <TitleForm
-          title="Let's get started"
+          title={t('signUp.title')}
           link={ROUTES.login}
-          text="Have an account? "
-          textLink=" Sign in"
+          text={t('signUp.loginRedirect')}
+          textLink={t('signUp.redirectLink')}
         />
 
         <Form.SignUp />
