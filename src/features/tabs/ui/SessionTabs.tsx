@@ -64,10 +64,7 @@ const SessionTabs: React.FC = () => {
     setActiveKey(newActiveKey);
   };
 
-  const onEdit = (
-    targetKey: React.MouseEvent | React.KeyboardEvent | string,
-    action: 'add' | 'remove'
-  ) => {
+  const onEdit = (targetKey: TargetKey, action: 'add' | 'remove') => {
     if (action === 'add') {
       add();
     } else {
