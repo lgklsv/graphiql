@@ -9,16 +9,19 @@
   align-items: center;
   position: relative;
   z-index: 2;
+
   &__text {
     color: var(--bg-primary);
     text-align: center;
     @include adaptiv-font(20, 16);
     z-index: 2;
   }
+
   &__heading {
     @include adaptiv-font(48, 24);
-    margin-bottom: 0.5em;
+    margin-bottom: 0.3em;
   }
+
   &__heading_gradient {
     background-image: linear-gradient(
       100deg,
@@ -30,13 +33,17 @@
     -webkit-background-clip: text;
     background-clip: text;
   }
+
   &__text_full {
     max-width: 65%;
     margin: 0 auto;
+    line-height: 130%;
+
     @media all and (max-width: 767px) {
       max-width: 90%;
     }
   }
+
   &::before {
     content: '';
     background: var(--apollo-gradient-purple);

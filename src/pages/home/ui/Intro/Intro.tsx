@@ -27,15 +27,16 @@ const Intro: React.FC = () => {
       </div>
       <Space size={screens.xs ? 'middle' : 'large'}>
         <Button
+          style={{ borderColor: 'white', color: 'white' }}
           size={screens.xs ? 'middle' : 'large'}
-          ghost
+          type="primary"
           href="https://github.com/lgklsv/graphiql"
         >
           {t('button.docs')}
         </Button>
         <Button
+          style={{ borderColor: 'white' }}
           size={screens.xs ? 'middle' : 'large'}
-          type="primary"
           onClick={() => navigate(ROUTES.sandbox)}
         >
           {t('button.start')}
