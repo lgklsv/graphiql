@@ -25,12 +25,13 @@ module.exports = {
   plugins: ['react', '@typescript-eslint', 'prettier'],
   rules: {
     '@typescript-eslint/no-explicit-any': 'error',
-    'react/react-in-jsx-scope': 0,
-    'react/function-component-definition': 0,
+
     'import/prefer-default-export': 0,
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
 
+    'no-param-reassign': 0,
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
+    'comma-dangle': ['error', 'only-multiline'],
 
     'jsx-a11y/anchor-has-content': 0,
     'jsx-a11y/control-has-associated-label': 0,
@@ -38,13 +39,14 @@ module.exports = {
     'jsx-a11y/no-noninteractive-element-interactions': 0,
     'jsx-a11y/click-events-have-key-events': 0,
 
-    'no-param-reassign': 0,
     'react/prop-types': 0,
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
-    'comma-dangle': ['error', 'only-multiline'],
+    'react/react-in-jsx-scope': 0,
+    'react/function-component-definition': 0,
+    'react/jsx-props-no-spreading': 0,
     'react/display-name': 'off',
     'react/jsx-uses-react': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
 
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/interface-name-prefix': 'off',
