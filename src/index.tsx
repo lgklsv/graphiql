@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import './shared/lib/i18n/i18n';
 
 import App from 'app';
-import Spinner from 'shared/ui/Spinner/Spinner';
+import { Spinner } from 'shared/ui';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
