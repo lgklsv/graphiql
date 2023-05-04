@@ -9,7 +9,7 @@ interface ButtonFormProps {
   isDisabled?: boolean;
 }
 
-export const ButtonForm: React.FC<ButtonFormProps> = ({
+const ButtonForm: React.FC<ButtonFormProps> = ({
   text,
   onclick,
   className,
@@ -31,3 +31,5 @@ export const ButtonForm: React.FC<ButtonFormProps> = ({
     </Button>
   );
 };
+
+export default ButtonForm;

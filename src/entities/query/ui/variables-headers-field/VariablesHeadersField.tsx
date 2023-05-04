@@ -1,12 +1,13 @@
 import React, { SyntheticEvent } from 'react';
+import { ResizeCallbackData } from 'react-resizable';
 
 import { Query } from 'features/query';
-import { Resizable } from 'shared/ui';
 import {
   DEFAULT_VARIABLES_EDITOR_HEIGHT_CLOSED,
   DEFAULT_VARIABLES_EDITOR_HEIGHT_OPEN,
 } from 'app/config';
-import { ResizeCallbackData } from 'react-resizable';
+import { Resizable } from 'shared/ui';
+
 import styles from './VariablesHeadersField.module.scss';
 
 const VariablesHeadersField: React.FC = () => {
