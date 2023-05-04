@@ -1,10 +1,12 @@
 import { Avatar, Card, Space, theme } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import styles from './Developers.module.scss';
 
 const { Meta } = Card;
 
-const DevCard = ({ name, img, link, github }: IDevCard) => {
+const DevCard = ({ translationKey, img, link, github }: IDevCard) => {
+  const { t } = useTranslation();
   const {
     token: { colorPrimary },
   } = theme.useToken();
@@ -18,7 +20,7 @@ const DevCard = ({ name, img, link, github }: IDevCard) => {
             className={styles.developers__cardAvatar}
             alt="github user picture"
           />
-          <Meta title={name} />
+          <Meta title={`${t(`developersList.${translationKey}`)}`} />
           <Space>
             <GithubOutlined style={{ color: colorPrimary }} />
             <span> {github} </span>

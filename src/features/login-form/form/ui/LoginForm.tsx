@@ -1,10 +1,12 @@
 import { Form, Input } from 'antd';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import { ButtonForm } from 'shared/ui';
 
 import style from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
+  const { t } = useTranslation();
   const onFinish = (values: ILoginData) => {
     console.log('Received values of form: ', values);
   };
@@ -19,30 +21,30 @@ const LoginForm: React.FC = () => {
       <Form.Item
         name="email"
         rules={[
-          { required: true, message: 'Please input your Email!' },
-          { type: 'email', message: 'Please input valid Email!' },
+          { required: true, message: `${t('form.error.emptyMail')}` },
+          { type: 'email', message: `${t('form.error.unvalidMail')}` },
         ]}
       >
         <Input
           prefix={<MailOutlined className="site-form-item-icon" />}
-          placeholder="Email Address"
+          placeholder={`${t('form.placeholder.email')}`}
           size="large"
         />
       </Form.Item>
       <Form.Item
         name="password"
-        rules={[{ required: true, message: 'Please input your Password!' }]}
+        rules={[{ required: true, message: `${t('form.error.emptyPsw')}` }]}
       >
         <Input.Password
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
-          placeholder="Password"
+          placeholder={`${t('form.placeholder.password')}`}
           size="large"
         />
       </Form.Item>
 
       <Form.Item>
-        <ButtonForm text="Log in" />
+        <ButtonForm text={t('button.login')} />
       </Form.Item>
     </Form>
   );

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Form, Input } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { ButtonForm } from 'shared/ui';
 import style from './SignUpForm.module.scss';
 
 const SignUpForm: React.FC = () => {
+  const { t } = useTranslation();
   const [form] = Form.useForm();
   const [, forceUpdate] = React.useState({});
 
@@ -11,9 +13,7 @@ const SignUpForm: React.FC = () => {
     if (!value || password === value) {
       return Promise.resolve();
     }
-    return Promise.reject(
-      new Error('The two passwords that you entered do not match!')
-    );
+    return Promise.reject(new Error(`${t('form.error.notMatchingPsw')}`));
   };
 
   // To disable submit button at the beginning.
@@ -35,15 +35,15 @@ const SignUpForm: React.FC = () => {
     >
       <Form.Item
         name="email"
-        label="E-mail"
+        label={t('form.fields.email')}
         rules={[
           {
             type: 'email',
-            message: 'The input is not valid E-mail!',
+            message: `${t('form.error.unvalidMail')}`,
           },
           {
             required: true,
-            message: 'Please input your E-mail!',
+            message: `${t('form.error.emptyMail')}`,
           },
         ]}
         hasFeedback
@@ -52,18 +52,17 @@ const SignUpForm: React.FC = () => {
       </Form.Item>
       <Form.Item
         name="password"
-        label="Password"
+        label={t('form.fields.password')}
         rules={[
           {
             required: true,
-            message: 'Please input your password!',
+            message: `${t('form.error.emptyPsw')}`,
           },
           {
             pattern:
               /* eslint-disable-next-line */
               /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\[\]"\';:_\-<>\., =\+\/\\]).{8,}$/,
-            message:
-              'Password must contain at least 8 characters including at least one digit, one uppercase letter, one lowercase letter and one special character.',
+            message: `${t('form.error.unvalidPsw')}`,
           },
         ]}
         hasFeedback
@@ -72,13 +71,13 @@ const SignUpForm: React.FC = () => {
       </Form.Item>
       <Form.Item
         name="confirm"
-        label="Confirm Password"
+        label={t('form.fields.confirmPsw')}
         dependencies={['password']}
         hasFeedback
         rules={[
           {
             required: true,
-            message: 'Please confirm your password!',
+            message: `${t('form.error.confirmPsw')}`,
           },
           ({ getFieldValue }) => ({
             validator: (_, value) =>
@@ -91,7 +90,7 @@ const SignUpForm: React.FC = () => {
       <Form.Item shouldUpdate>
         {() => (
           <ButtonForm
-            text="Get access"
+            text={t('button.access')}
             className={style.button}
             isDisabled={
               !form.isFieldsTouched(true) ||
