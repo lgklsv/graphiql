@@ -1,10 +1,9 @@
 import React from 'react';
 import { Button, Space, Tooltip } from 'antd';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 import styles from './ToolsTabs.module.scss';
-
-const TABS = ['Variables', 'Headers'];
 
 interface ToolTabsProps {
   isOpen: boolean;
@@ -12,7 +11,10 @@ interface ToolTabsProps {
 }
 
 const ToolsTabs: React.FC<ToolTabsProps> = ({ isOpen, toggle }) => {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = React.useState(0);
+
+  const TABS = [t('sandbox.buttons.variables'), t('sandbox.buttons.headers')];
 
   const changeTabHandler = (id: number) => {
     setActiveTab(id);
@@ -37,7 +39,11 @@ const ToolsTabs: React.FC<ToolTabsProps> = ({ isOpen, toggle }) => {
       </Space>
       <Tooltip
         placement="bottomLeft"
-        title={`${isOpen ? 'Hide' : 'Open'} editor tools`}
+        title={
+          isOpen
+            ? t('sandbox.tooltips.editorToolsClose')
+            : t('sandbox.tooltips.editorToolsOpen')
+        }
       >
         <Button
           type="text"

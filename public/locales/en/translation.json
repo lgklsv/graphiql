@@ -9,7 +9,7 @@
     "signGoogle": "Sign in with Google"
   },
   "home": {
-    "introTitle": "The <0>GraphQL</0> developer platform.",
+    "introTitle": "The <0>GraphQL</0> developer platform",
     "introText": "GraphiQL is the all-purpose IDE for your GraphQL API, empowering developers across your stack to ship early, ship often, and ship safely.",
     "descriptionTitle": "Your graph`s command center",
     "descriptionText": "GraphiQL is end-to-end cloud platform for building, observing, and evolving your graph. Validate schema changes, monitor field usage, and route queries across any number of your backend services.",
@@ -49,6 +49,25 @@
     "signUpRedirect": "New to GraphiQL?",
     "redirectLink": "Lets get started",
     "or": "or"
+  },
+  "sandbox": {
+    "newTab": "Untitled",
+    "buttons": {
+      "variables": "Variables",
+      "headers": "Headers"
+    },
+    "tooltips": {
+      "docsOpen": "Show documentation",
+      "docsClose": "Hide documentation",
+      "refetch": "Re-fetch GraphQL schema",
+      "shortcuts": "Explore all shortcuts",
+      "settings": "Open settings",
+      "editorToolsOpen": "Open editor tools",
+      "editorToolsClose": "Hide editor tools",
+      "execute": "Execute query (ctrl + enter)",
+      "prettify": "Prettify (shift + ctrl + p)",
+      "copy": "Copy query (shift + ctrl + c)"
+    }
   },
   "developersList": {
     "alesiaAbaeva": "Alesia Abaeva",
