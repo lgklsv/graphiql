@@ -1,8 +1,10 @@
 import { Button, Space } from 'antd';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { ROUTES } from 'pages/config';
+import LangSwitcher from 'features/langSwitcher/LangSwitcher';
 import styles from './Nav.module.scss';
 
 type NavProps = {
@@ -10,6 +12,7 @@ type NavProps = {
 };
 
 const Nav: React.FC<NavProps> = ({ mobile }) => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -19,15 +22,16 @@ const Nav: React.FC<NavProps> = ({ mobile }) => {
       className={mobile ? '' : styles.nav}
     >
       <Button size="large" onClick={() => navigate(ROUTES.signup)}>
-        Sign Up
+        {t('button.signup')}
       </Button>
       <Button
         type="primary"
         size="large"
         onClick={() => navigate(ROUTES.login)}
       >
-        Log In
+        {t('button.login')}
       </Button>
+      <LangSwitcher />
     </Space>
   );
 };

@@ -3,6 +3,7 @@ interface IDevCard {
   github: string;
   img: string;
   link: string;
+  translationKey?: string;
 }
 
 interface IDevCardList {
