@@ -32,9 +32,9 @@
     },
     "error": {
       "emptyMail": "Please input your Email",
-      "unvalidMail": "Please input a valid Email",
+      "invalidMail": "Please input a valid Email",
       "emptyPsw": "Please input your Password",
-      "unvalidPsw": "Password must contain at least 8 characters including at least one digit, one uppercase letter, one lowercase letter and one special character.",
+      "invalidPsw": "Password must contain at least 8 characters including at least one digit, one uppercase letter, one lowercase letter and one special character.",
       "notMatchingPsw": "The two passwords that you entered do not match",
       "confirmPsw": "Please confirm your password"
     }
