@@ -29,10 +29,15 @@ const Nav: React.FC<NavProps> = ({ mobile, toggle }) => {
       direction={mobile ? 'vertical' : 'horizontal'}
       className={mobile ? '' : styles.nav}
     >
-      <Button size="large" onClick={() => buttonClickHandler(ROUTES.signup)}>
+      <Button
+        className={styles.nav__btn}
+        size="large"
+        onClick={() => buttonClickHandler(ROUTES.signup)}
+      >
         {t('button.signup')}
       </Button>
       <Button
+        className={styles.nav__btn}
         type="primary"
         size="large"
         onClick={() => buttonClickHandler(ROUTES.login)}

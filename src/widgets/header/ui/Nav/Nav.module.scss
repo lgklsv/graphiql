@@ -1,5 +1,9 @@
 @media (max-width: 768px) {
   .nav {
     display: none;
+
+    &__btn {
+      width: 10rem;
+    }
   }
 }
