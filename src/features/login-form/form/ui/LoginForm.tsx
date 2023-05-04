@@ -31,6 +31,7 @@ const LoginForm: React.FC = () => {
       .then(({ user }) => {
         const { email, uid, accessToken } = user as unknown as UserFirebase;
         dispatch(setUser({ email, token: accessToken, id: uid }));
+        // TODO: добавить messageApi
         navigate(ROUTES.sandbox, { replace: true });
       })
       .catch((error) => {
