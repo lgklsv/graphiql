@@ -1,18 +1,28 @@
-import { GoogleOutlined } from '@ant-design/icons';
 import { Button, message } from 'antd';
-import { googleProvider } from 'firebase';
+import { GoogleAuthProvider } from 'firebase/auth';
 import { useUser } from 'shared/hooks/use-user';
 import { authProvider } from '../const/handle-auth';
-import style from './Buttons.module.scss';
 
-const GoogleButton: React.FC = () => {
+interface IProviderButton {
+  provider: GoogleAuthProvider;
+  icon: React.ReactNode;
+  text: string;
+  className: string;
+}
+
+const FirebaseAuthButton: React.FC<IProviderButton> = ({
+  provider,
+  icon,
+  text,
+  className,
+}) => {
   const dispatchUser = useUser();
 
   const [messageApi, contextHolder] = message.useMessage();
 
   const handleAuth = () => {
     authProvider({
-      provider: googleProvider,
+      provider,
       dispatchFn: dispatchUser,
       messageApi,
     });
@@ -24,16 +34,16 @@ const GoogleButton: React.FC = () => {
       <Button
         type="primary"
         htmlType="submit"
-        className={`${style.google_btn} ${style.form_button}`}
+        className={`${className}`}
         block
         size="large"
-        icon={<GoogleOutlined />}
+        icon={icon}
         onClick={handleAuth}
       >
-        Sign in with Google
+        {text}
       </Button>
     </>
   );
 };
 
-export default GoogleButton;
+export default FirebaseAuthButton;

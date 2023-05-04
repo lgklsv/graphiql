@@ -9,7 +9,7 @@ export const useUser = () => {
 
   const dispatchUser = ({ email, token, id }: IDispatchUser) => {
     dispatch(setUser({ email, token, id }));
-    navigate(ROUTES.sandbox, { replace: true });
+    navigate(ROUTES.home, { replace: true });
   };
 
   return dispatchUser;

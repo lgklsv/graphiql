@@ -9,6 +9,15 @@
   @include flex-center;
   flex-direction: column;
   gap: 1rem;
+
+  .git_btn {
+    background-color: var(--black);
+  }
+
+  .google_btn {
+    background-color: var(--bg-primary);
+    color: var(--bg-primary-dark);
+  }
 }
 
 .separator {
