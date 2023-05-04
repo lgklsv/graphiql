@@ -2,12 +2,18 @@
   // Vars
   --header: 80px;
   --footer: 65px;
+  --screen-height: calc(100vh - var(--header) - var(--footer));
+
+  // IDE
+  --sidebar-width: 60px;
+  --toolbar-width: 40px;
+  --tabs-height: 50px;
+
   --popover-box-shadow: 0px 6px 20px rgba(59, 76, 106, 0.13),
     0px 1.34018px 4.46726px rgba(59, 76, 106, 0.0774939),
     0px 0.399006px 1.33002px rgba(59, 76, 106, 0.0525061);
 
   --line-height: 1.5;
-
   --alpha-secondary: 0.76;
   --alpha-ternary: 0.5;
   --alpha-background-heavy: 0.15;
@@ -17,7 +23,7 @@
   // General colors
   --color-neutral: 219, 28%, 32%; // text color to configure other colors
   --bg-primary: #ffffff; // background and request field
-  --bg-secondary: #f3f4f6; // response field
+  --bg-secondary: #f1f2f4; // response field
   --bg-ternary: 188, 100%, 36%;
   --bg-primary-dark: #281e5b; // dark-bg header/footer etc.
   --text-primary: hsla(var(--color-neutral), 1); // contrast text / active
@@ -26,8 +32,10 @@
     var(--alpha-secondary)
   ); // light text / regular
   --text-ternary: rgba(255, 255, 255, 0.4); // light text for dark bg
+  --border-primary: 1px solid hsla(var(--color-neutral), 0.1);
+  --border-active: hsla(var(--color-neutral), 0.15);
 
-  // For handling errors or success messages
+  // For handling errors or success messages (kinda useless,  we already have a UI lib)
   --green: #3bb33b;
   --green-intense: #03e952;
   --red: #ed352c;

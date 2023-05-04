@@ -1,0 +1,10 @@
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100%;
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--tabs-height) 0 1rem 0;
+}
