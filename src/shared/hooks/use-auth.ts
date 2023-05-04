@@ -1,14 +1,9 @@
-import { userSelector } from 'store/selectors/user';
-import { useAppSelector } from './redux';
+import { LOCAL_STORAGE_KEYS } from 'shared/lib/localStorage/constants';
+import { getLocalStorage } from 'shared/lib/localStorage/local-storage';
 
 export const useAuthState = () => {
-  const { email, token, id } = useAppSelector(userSelector);
-  // TODO: нужен ли отдельных хук или использовать контекст?
-
+  const tokenStorage = getLocalStorage(LOCAL_STORAGE_KEYS.TOKEN);
   return {
-    isAuth: !!email,
-    email,
-    token,
-    id,
+    isAuth: !!tokenStorage,
   };
 };

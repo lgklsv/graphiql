@@ -5,7 +5,7 @@ import { useUser } from 'shared/hooks/use-user';
 import { authProvider } from '../const/handle-auth';
 import style from './Buttons.module.scss';
 
-const GoogleButton = () => {
+const GoogleButton: React.FC = () => {
   const dispatchUser = useUser();
 
   const [messageApi, contextHolder] = message.useMessage();

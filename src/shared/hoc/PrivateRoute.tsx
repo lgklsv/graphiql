@@ -16,14 +16,3 @@ export const PrivateRoute = ({ children }: IRequireAuth) => {
     children
   );
 };
-
-export const PrivateRouteAuth = ({ children }: IRequireAuth) => {
-  const location = useLocation();
-  const { isAuth } = useAuthState();
-
-  return isAuth ? (
-    <Navigate to={ROUTES.home} state={{ from: location }} />
-  ) : (
-    children
-  );
-};

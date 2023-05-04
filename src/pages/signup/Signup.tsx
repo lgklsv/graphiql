@@ -6,10 +6,20 @@ import { ROUTES } from 'pages/config';
 import { Form } from 'features/sign-up-form';
 import { TitleForm } from 'shared/ui';
 
+import { useAuthState } from 'shared/hooks/use-auth';
+import { Navigate, useLocation } from 'react-router-dom';
 import style from './Signup.module.scss';
 
 const Signup: React.FC = () => {
   const { t } = useTranslation();
+
+  const { isAuth } = useAuthState();
+  const location = useLocation();
+
+  if (isAuth) {
+    return <Navigate to={ROUTES.home} state={{ from: location }} />;
+  }
+
   return (
     <>
       <Helmet>

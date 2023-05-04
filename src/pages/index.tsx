@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { PrivateRoute, PrivateRouteAuth } from 'shared/hoc/RequireAuth';
+import { PrivateRoute } from 'shared/hoc/PrivateRoute';
 
 import { Home } from './home';
 import { Login } from './login';
@@ -15,22 +15,8 @@ const Routing: React.FC = () => {
     <Routes>
       <Route path={ROUTES.home} element={<LayoutPage />}>
         <Route index element={<Home />} />
-        <Route
-          path={ROUTES.login}
-          element={
-            <PrivateRouteAuth>
-              <Login />
-            </PrivateRouteAuth>
-          }
-        />
-        <Route
-          path={ROUTES.signup}
-          element={
-            <PrivateRouteAuth>
-              <Signup />
-            </PrivateRouteAuth>
-          }
-        />
+        <Route path={ROUTES.login} element={<Login />} />
+        <Route path={ROUTES.signup} element={<Signup />} />
         <Route
           path={ROUTES.sandbox}
           element={
