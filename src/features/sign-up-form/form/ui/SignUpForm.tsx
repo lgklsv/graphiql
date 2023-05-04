@@ -4,22 +4,17 @@ import { Form, Input, message } from 'antd';
 import { ButtonForm } from 'shared/ui';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from 'firebase';
-import { useAppDispatch } from 'shared/lib/hooks/redux';
-import { setUser } from 'store/reducers/UserSlice';
-import { useNavigate } from 'react-router-dom';
-import { ROUTES } from 'pages/config';
+import { useUser } from 'shared/hooks/use-user';
 import style from './SignUpForm.module.scss';
 
 const SignUpForm: React.FC = () => {
   const { t } = useTranslation();
-  const userState = useAppSelector(userSelector);
-  const dispatch = useAppDispatch();
+  const dispatchUser = useUser();
+
+  const [messageApi, contextHolder] = message.useMessage();
 
   const [form] = Form.useForm();
   const [, forceUpdate] = React.useState({});
-
-  const navigate = useNavigate();
-  const [messageApi, contextHolder] = message.useMessage();
 
   const isConfirm = (value: string, password: string) => {
     if (!value || password === value) {
@@ -44,8 +39,7 @@ const SignUpForm: React.FC = () => {
     createUserWithEmailAndPassword(auth, emailValues, password)
       .then(({ user }) => {
         const { email, uid, accessToken } = user as unknown as UserFirebase;
-        dispatch(setUser({ email, token: accessToken, id: uid }));
-        navigate(ROUTES.sandbox, { replace: true });
+        dispatchUser({ email, id: uid, token: accessToken });
       })
       .catch((error) => {
         messageApi.open({

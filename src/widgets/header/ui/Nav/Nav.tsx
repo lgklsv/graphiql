@@ -3,10 +3,10 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LangSwitcher } from 'features/langSwitcher';
-import { useAuth } from 'shared/lib/hooks/use-auth';
+import { useAuth } from 'shared/hooks/use-auth';
 import { ROUTES } from 'pages/config';
 import { removeUser } from 'store/reducers/UserSlice';
-import { useAppDispatch } from 'shared/lib/hooks/redux';
+import { useAppDispatch } from 'shared/hooks/redux';
 import styles from './Nav.module.scss';
 
 interface NavProps {
