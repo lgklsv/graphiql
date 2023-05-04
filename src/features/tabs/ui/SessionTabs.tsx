@@ -13,7 +13,11 @@ const initialItems = [
   { label: 'Tab 3', children: 'Content of Tab 3', key: '3', closable: true },
 ];
 
-const SessionTabs: React.FC = () => {
+interface SessionTabsProps {
+  isDocs: boolean;
+}
+
+const SessionTabs: React.FC<SessionTabsProps> = ({ isDocs }) => {
   const { t } = useTranslation();
   const [activeKey, setActiveKey] = React.useState(initialItems[0].key);
   const [items, setItems] = React.useState(initialItems);
@@ -75,7 +79,7 @@ const SessionTabs: React.FC = () => {
   };
 
   return (
-    <div className={styles.tabs}>
+    <div className={`${styles.tabs} ${isDocs ? styles.tabs_docs : ''}`}>
       <Tabs
         type="editable-card"
         onChange={onChange}
