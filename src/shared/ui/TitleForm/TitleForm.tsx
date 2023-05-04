@@ -12,7 +12,7 @@ interface TitleFormProps {
   link: ROUTES;
 }
 
-export const TitleForm: React.FC<TitleFormProps> = ({
+const TitleForm: React.FC<TitleFormProps> = ({
   title,
   text,
   textLink,
@@ -27,3 +27,5 @@ export const TitleForm: React.FC<TitleFormProps> = ({
     </Title>
   );
 };
+
+export default TitleForm;

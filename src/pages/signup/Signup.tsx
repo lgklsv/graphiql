@@ -1,9 +1,11 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { TitleForm } from 'shared/ui';
+
 import { ROUTES } from 'pages/config';
 import { Form } from 'features/sign-up-form';
+import { TitleForm } from 'shared/ui';
+
 import style from './Signup.module.scss';
 
 const Signup: React.FC = () => {
@@ -20,7 +22,6 @@ const Signup: React.FC = () => {
           text={t('signUp.loginRedirect')}
           textLink={t('signUp.redirectLink')}
         />
-
         <Form.SignUp />
       </div>
     </>

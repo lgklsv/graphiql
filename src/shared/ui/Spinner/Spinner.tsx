@@ -12,7 +12,7 @@ const iconSize = {
   large: 30,
 };
 
-const Spinner = ({ size }: SpinnerProps) => {
+const Spinner: React.FC<SpinnerProps> = ({ size }) => {
   return (
     <div className={styles.spinner}>
       <Spin

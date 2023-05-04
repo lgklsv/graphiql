@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tabs } from 'antd';
 
+import { useTranslation } from 'react-i18next';
 import styles from './SessionTabs.module.scss';
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
@@ -13,6 +14,7 @@ const initialItems = [
 ];
 
 const SessionTabs: React.FC = () => {
+  const { t } = useTranslation();
   const [activeKey, setActiveKey] = React.useState(initialItems[0].key);
   const [items, setItems] = React.useState(initialItems);
   const newTabIndex = React.useRef(0);
@@ -32,8 +34,8 @@ const SessionTabs: React.FC = () => {
       return pane;
     });
     newPanes.push({
-      label: 'New Tab',
-      children: 'Content of new Tab',
+      label: t('sandbox.newTab'),
+      children: '',
       key: newActiveKey,
       closable: true,
     });

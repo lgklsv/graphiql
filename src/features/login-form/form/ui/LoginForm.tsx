@@ -22,7 +22,7 @@ const LoginForm: React.FC = () => {
         name="email"
         rules={[
           { required: true, message: `${t('form.error.emptyMail')}` },
-          { type: 'email', message: `${t('form.error.unvalidMail')}` },
+          { type: 'email', message: `${t('form.error.invalidMail')}` },
         ]}
       >
         <Input

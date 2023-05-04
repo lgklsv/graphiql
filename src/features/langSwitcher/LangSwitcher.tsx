@@ -14,7 +14,7 @@ const LANGUAGES: MenuProps['items'] = [
   },
 ];
 
-const LangSwitcher = () => {
+const LangSwitcher: React.FC = () => {
   const { i18n } = useTranslation();
   const handleLanguageChange: MenuProps['onClick'] = (e) => {
     i18n.changeLanguage(e.key);

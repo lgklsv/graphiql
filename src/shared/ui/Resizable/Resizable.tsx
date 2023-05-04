@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { SyntheticEvent } from 'react';
 import {
   ResizableBox,
@@ -10,6 +9,7 @@ import {
   DEFAULT_VARIABLES_EDITOR_HEIGHT_CLOSED,
   QUERY_FIELD_MIN_WIDTH,
 } from 'app/config';
+
 import './Resizable.scss';
 
 interface ResizableProps {

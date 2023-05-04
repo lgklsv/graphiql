@@ -39,7 +39,7 @@ const SignUpForm: React.FC = () => {
         rules={[
           {
             type: 'email',
-            message: `${t('form.error.unvalidMail')}`,
+            message: `${t('form.error.invalidMail')}`,
           },
           {
             required: true,
@@ -62,7 +62,7 @@ const SignUpForm: React.FC = () => {
             pattern:
               /* eslint-disable-next-line */
               /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\[\]"\';:_\-<>\., =\+\/\\]).{8,}$/,
-            message: `${t('form.error.unvalidPsw')}`,
+            message: `${t('form.error.invalidPsw')}`,
           },
         ]}
         hasFeedback
