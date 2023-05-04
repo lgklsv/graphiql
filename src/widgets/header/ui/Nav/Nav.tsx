@@ -3,7 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { LangSwitcher } from 'features/langSwitcher';
-import { useAuth } from 'shared/hooks/use-auth';
+import { useAuthState } from 'shared/hooks/use-auth';
 import { ROUTES } from 'pages/config';
 import { removeUser } from 'store/reducers/UserSlice';
 import { useAppDispatch } from 'shared/hooks/redux';
@@ -17,7 +17,7 @@ interface NavProps {
 const Nav: React.FC<NavProps> = ({ mobile, toggle }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { isAuth } = useAuth();
+  const { isAuth } = useAuthState();
   const dispatch = useAppDispatch();
 
   const handleLogOut = () => {

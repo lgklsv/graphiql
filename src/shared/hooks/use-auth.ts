@@ -1,7 +1,7 @@
 import { userSelector } from 'store/selectors/user';
 import { useAppSelector } from './redux';
 
-export const useAuth = () => {
+export const useAuthState = () => {
   const { email, token, id } = useAppSelector(userSelector);
   // TODO: нужен ли отдельных хук или использовать контекст?
 
