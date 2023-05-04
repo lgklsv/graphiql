@@ -15,12 +15,11 @@ const HamburgerNav: React.FC = () => {
     <>
       <nav className={styles.navbar_hamburger}>
         <div
-          onClick={toggleHamburgerNav}
           className={`${styles.navbar__list_hamburger} ${
             isOpen ? `${styles.active}` : `${styles.inactive}`
           }`}
         >
-          <Nav mobile />
+          <Nav toggle={toggleHamburgerNav} mobile />
         </div>
         <div
           className={
