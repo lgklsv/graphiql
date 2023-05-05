@@ -13,9 +13,7 @@ import { googleProvider, gitProvider } from 'firebase';
 import style from './Login.module.scss';
 
 const Login: React.FC = () => {
-<<<<<<< HEAD
   const { t } = useTranslation();
-=======
   const { isAuth } = useAuthState();
   const location = useLocation();
 
@@ -23,7 +21,6 @@ const Login: React.FC = () => {
     return <Navigate to={ROUTES.sandbox} state={{ from: location }} />;
   }
 
->>>>>>> 51261a3 (refactor: change name folders & refactor code)
   return (
     <>
       <Helmet>
@@ -39,14 +36,14 @@ const Login: React.FC = () => {
         />
         <div className={style.login_buttons}>
           <FirebaseAuth.Button
-            text="Sign in with GitHub"
+            text={t('button.signGoogle')}
             provider={gitProvider}
             icon={<GithubOutlined />}
             className={style.git_btn}
           />
 
           <FirebaseAuth.Button
-            text="Sign in with Google"
+            text={t('button.signGithub')}
             provider={googleProvider}
             icon={<GoogleOutlined />}
             className={style.google_btn}

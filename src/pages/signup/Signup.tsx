@@ -12,7 +12,6 @@ import style from './Signup.module.scss';
 
 const Signup: React.FC = () => {
   const { t } = useTranslation();
-
   const { isAuth } = useAuthState();
   const location = useLocation();
 

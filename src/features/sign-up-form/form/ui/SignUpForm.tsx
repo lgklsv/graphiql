@@ -33,7 +33,7 @@ const SignUpForm: React.FC = () => {
     messageApi.open({
       key: 'updatable',
       type: 'loading',
-      content: 'Loading...',
+      content: `${t('loader')}`,
     });
 
     createUserWithEmailAndPassword(auth, emailValues, password)

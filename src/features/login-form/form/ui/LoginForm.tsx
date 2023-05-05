@@ -3,7 +3,6 @@ import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { ButtonForm } from 'shared/ui';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { ButtonForm } from 'shared/ui';
 import { useUser } from 'shared/hooks/use-user';
 import { auth } from 'firebase';
 import style from './LoginForm.module.scss';
@@ -19,7 +18,7 @@ const LoginForm: React.FC = () => {
     messageApi.open({
       key: 'updatable',
       type: 'loading',
-      content: 'Loading...',
+      content: `${t('loader')}`,
     });
 
     const { email: emailValues, password } = values;
