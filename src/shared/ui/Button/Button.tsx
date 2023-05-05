@@ -5,13 +5,11 @@ interface ButtonFormProps {
   text: string;
   icon?: React.ReactNode;
   className?: string;
-  onclick?: () => void;
   isDisabled?: boolean;
 }
 
 const ButtonForm: React.FC<ButtonFormProps> = ({
   text,
-  onclick,
   className,
   icon,
   isDisabled,
@@ -24,7 +22,6 @@ const ButtonForm: React.FC<ButtonFormProps> = ({
       block
       size="large"
       icon={icon}
-      onClick={() => onclick}
       disabled={isDisabled}
     >
       {text}
