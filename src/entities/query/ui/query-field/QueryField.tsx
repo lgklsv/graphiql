@@ -1,17 +1,17 @@
 import React, { SyntheticEvent } from 'react';
-import { useSelector } from 'react-redux';
 import { ResizeCallbackData } from 'react-resizable';
 
 import { docsSelector } from 'store/selectors/DocsSelectors';
 import { DEFAULT_QUERY_FIELD_WIDTH, DOCS_WIDTH } from 'app/config';
 import { Query } from 'features/query';
 import { Resizable } from 'shared/ui';
+import { useAppSelector } from 'shared/hooks/redux';
 import VariablesHeadersField from '../variables-headers-field/VariablesHeadersField';
 
 import styles from './QueryField.module.scss';
 
 const QueryField: React.FC = () => {
-  const { isDocs } = useSelector(docsSelector);
+  const { isDocs } = useAppSelector(docsSelector);
 
   const [queryFieldWidth, setQueryFieldWidth] = React.useState(
     DEFAULT_QUERY_FIELD_WIDTH

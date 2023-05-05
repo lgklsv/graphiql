@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
 import { Button, Space, Tooltip } from 'antd';
 import {
   BookOutlined,
@@ -12,11 +11,12 @@ import {
 import { docsSelector } from 'store/selectors/DocsSelectors';
 import { toggleDocs } from 'store/reducers/DocsSlice';
 import { DocsExplorer } from 'entities/docs';
+import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import styles from './Sidebar.module.scss';
 
 const Sidebar: React.FC = () => {
-  const dispatch = useDispatch();
-  const { isDocs } = useSelector(docsSelector);
+  const dispatch = useAppDispatch();
+  const { isDocs } = useAppSelector(docsSelector);
   const { t } = useTranslation();
 
   return (
