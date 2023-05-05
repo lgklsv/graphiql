@@ -11,6 +11,7 @@ import {
 
 import { docsSelector } from 'store/selectors/DocsSelectors';
 import { toggleDocs } from 'store/reducers/DocsSlice';
+import { DocsExplorer } from 'entities/docs';
 import styles from './Sidebar.module.scss';
 
 const Sidebar: React.FC = () => {
@@ -50,11 +51,7 @@ const Sidebar: React.FC = () => {
           </Tooltip>
         </Space>
       </div>
-      {isDocs && (
-        <div className={styles.sidebar__docs}>
-          <h1>DOCS</h1>
-        </div>
-      )}
+      {isDocs && <DocsExplorer />}
     </>
   );
 };

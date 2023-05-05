@@ -69,6 +69,11 @@
       "copy": "Copy query (shift + ctrl + c)"
     }
   },
+  "docs": {
+    "header": {
+      "title": "Docs"
+    }
+  },
   "developersList": {
     "alesiaAbaeva": "Alesia Abaeva",
     "olegKolosov": "Oleg Kolosov",

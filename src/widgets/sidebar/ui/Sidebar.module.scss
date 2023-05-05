@@ -8,10 +8,4 @@
   justify-content: space-between;
   align-items: center;
   padding: var(--tabs-height) 0 1rem 0;
-
-  &__docs {
-    left: var(--sidebar-width);
-    min-width: var(--docs-width);
-    height: var(--screen-height);
-  }
 }
