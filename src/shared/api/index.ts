@@ -1,1 +1,1 @@
-export * as schema from './schema';
+export * as graphql from './graphql';

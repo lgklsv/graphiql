@@ -3,14 +3,14 @@ import {
   configureStore,
   PreloadedState,
 } from '@reduxjs/toolkit';
-import { schema } from 'shared/api';
+import { graphql } from 'shared/api';
 import userReducer from './reducers/UserSlice';
 import docsReducer from './reducers/DocsSlice';
 
 const rootReducer = combineReducers({
   userReducer,
   docsReducer,
-  [schema.schema.reducerPath]: schema.schema.reducer,
+  [graphql.schema.reducerPath]: graphql.schema.reducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
@@ -18,7 +18,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
     reducer: rootReducer,
     preloadedState,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(schema.schema.middleware),
+      getDefaultMiddleware().concat(graphql.schema.middleware),
   });
 };
 

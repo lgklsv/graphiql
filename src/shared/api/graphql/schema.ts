@@ -6,7 +6,7 @@ export const schema = createApi({
   reducerPath: 'schema',
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
-    getSchema: builder.query<unknown, string>({
+    getSchema: builder.query<{ data: unknown }, string>({
       query: (variables) => ({
         url: '/',
         method: 'POST',

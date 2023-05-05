@@ -1,13 +1,18 @@
 import React from 'react';
 
-import { schema } from 'shared/api';
+import { graphql } from 'shared/api';
+import { IntrospectionQuery, buildClientSchema } from 'graphql';
 import DocsHeader from '../docs-header/DocsHeader';
 
 import styles from './DocsExplorer.module.scss';
 
 const DocsExplorer: React.FC = () => {
-  const { data } = schema.useGetSchemaQuery('{}');
-  console.log(JSON.stringify(data));
+  const { data } = graphql.useGetSchemaQuery('{}');
+  console.log(data);
+  const schemaData = data?.data as IntrospectionQuery;
+  if (schemaData) {
+    console.log(buildClientSchema(schemaData));
+  }
   return (
     <div className={styles.docs}>
       <DocsHeader />
