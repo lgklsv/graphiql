@@ -1,7 +1,9 @@
 import React from 'react';
 import { Tabs } from 'antd';
-
+import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+
+import { docsSelector } from 'store/selectors/DocsSelectors';
 import styles from './SessionTabs.module.scss';
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
@@ -13,12 +15,9 @@ const initialItems = [
   { label: 'Tab 3', children: 'Content of Tab 3', key: '3', closable: true },
 ];
 
-interface SessionTabsProps {
-  isDocs: boolean;
-}
-
-const SessionTabs: React.FC<SessionTabsProps> = ({ isDocs }) => {
+const SessionTabs: React.FC = () => {
   const { t } = useTranslation();
+  const { isDocs } = useSelector(docsSelector);
   const [activeKey, setActiveKey] = React.useState(initialItems[0].key);
   const [items, setItems] = React.useState(initialItems);
   const newTabIndex = React.useRef(0);

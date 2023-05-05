@@ -4,9 +4,11 @@ import {
   PreloadedState,
 } from '@reduxjs/toolkit';
 import userReducer from './reducers/UserSlice';
+import docsReducer from './reducers/DocsSlice';
 
 const rootReducer = combineReducers({
   userReducer,
+  docsReducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {

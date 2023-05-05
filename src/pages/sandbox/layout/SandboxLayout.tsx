@@ -8,19 +8,13 @@ import { ResponseField } from 'entities/response';
 import styles from './SandboxLayout.module.scss';
 
 const SandboxLayout: React.FC = () => {
-  const [isDocs, setIsDocs] = React.useState(false);
-
-  const toggleDocsHandler = () => {
-    setIsDocs((prev) => !prev);
-  };
-
   return (
     <section className={styles.layout}>
-      <Sidebar isDocs={isDocs} toggleDocs={toggleDocsHandler} />
+      <Sidebar />
       <div className={styles.layout__main}>
-        <SessionTabs isDocs={isDocs} />
+        <SessionTabs />
         <div className={styles.layout__field}>
-          <QueryField isDocs={isDocs} />
+          <QueryField />
           <ResponseField />
         </div>
       </div>

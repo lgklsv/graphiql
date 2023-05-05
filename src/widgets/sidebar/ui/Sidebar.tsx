@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Space, Tooltip } from 'antd';
 import {
   BookOutlined,
@@ -8,15 +9,15 @@ import {
   SettingOutlined,
 } from '@ant-design/icons';
 
+import { docsSelector } from 'store/selectors/DocsSelectors';
+import { toggleDocs } from 'store/reducers/DocsSlice';
 import styles from './Sidebar.module.scss';
 
-interface SideBarProps {
-  isDocs: boolean;
-  toggleDocs: () => void;
-}
-
-const Sidebar: React.FC<SideBarProps> = ({ isDocs, toggleDocs }) => {
+const Sidebar: React.FC = () => {
+  const dispatch = useDispatch();
+  const { isDocs } = useSelector(docsSelector);
   const { t } = useTranslation();
+
   return (
     <>
       <div className={styles.sidebar}>
@@ -25,7 +26,7 @@ const Sidebar: React.FC<SideBarProps> = ({ isDocs, toggleDocs }) => {
           title={t(`sandbox.tooltips.${isDocs ? 'docsOpen' : 'docsClose'}`)}
         >
           <Button
-            onClick={toggleDocs}
+            onClick={() => dispatch(toggleDocs())}
             type="text"
             size="large"
             icon={<BookOutlined />}
