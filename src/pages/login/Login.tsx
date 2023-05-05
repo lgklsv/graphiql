@@ -20,7 +20,7 @@ const Login: React.FC = () => {
   const location = useLocation();
 
   if (isAuth) {
-    return <Navigate to={ROUTES.home} state={{ from: location }} />;
+    return <Navigate to={ROUTES.sandbox} state={{ from: location }} />;
   }
 
 >>>>>>> 51261a3 (refactor: change name folders & refactor code)

@@ -41,7 +41,7 @@ const Nav: React.FC<NavProps> = ({ mobile, toggle }) => {
       <LangSwitcher />
 
       {isAuth ? (
-        <Button type="primary" size="large" onClick={() => handleLogOut()}>
+        <Button type="primary" size="large" onClick={handleLogOut}>
           Log Out
         </Button>
       ) : (
