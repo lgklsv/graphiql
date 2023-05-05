@@ -9,7 +9,7 @@ import styles from './DocsExplorer.module.scss';
 const DocsExplorer: React.FC = () => {
   const { data } = graphql.useGetSchemaQuery('{}');
   console.log(data);
-  const schemaData = data?.data as IntrospectionQuery;
+  const schemaData = data?.data;
   if (schemaData) {
     console.log(buildClientSchema(schemaData));
   }
