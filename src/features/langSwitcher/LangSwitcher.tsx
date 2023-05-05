@@ -3,6 +3,8 @@ import { Button, Dropdown, Space } from 'antd';
 import type { MenuProps } from 'antd';
 import { useTranslation } from 'react-i18next';
 
+import styles from './LangSwitcher.module.scss';
+
 const LANGUAGES: MenuProps['items'] = [
   {
     label: 'English',
@@ -29,7 +31,7 @@ const LangSwitcher: React.FC = () => {
 
   return (
     <Dropdown trigger={['click']} menu={menuProps}>
-      <Button size="large">
+      <Button size="large" className={styles.btn}>
         <Space>
           <GlobalOutlined />
           <DownOutlined style={{ fontSize: 12 }} />

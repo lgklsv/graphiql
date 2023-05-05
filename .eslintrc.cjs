@@ -45,6 +45,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 0,
     'react/display-name': 'off',
     'react/jsx-uses-react': 'off',
+    'react/require-default-props': 0,
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
 
