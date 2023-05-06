@@ -12,12 +12,18 @@ import { docsSelector } from 'store/selectors/DocsSelectors';
 import { toggleDocs } from 'store/reducers/DocsSlice';
 import { DocsExplorer } from 'entities/docs';
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
+import { ShortcutsModal } from 'entities/modals';
 import styles from './Sidebar.module.scss';
 
 const Sidebar: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { isDocs } = useAppSelector(docsSelector);
   const { t } = useTranslation();
+  const { isDocs } = useAppSelector(docsSelector);
+  const [isShortcutsModal, setIsShortcutsModal] = React.useState(false);
+
+  const toggleShortcutsModal = () => {
+    setIsShortcutsModal((prev) => !prev);
+  };
 
   return (
     <>
@@ -33,6 +39,7 @@ const Sidebar: React.FC = () => {
             icon={<BookOutlined />}
           />
         </Tooltip>
+
         <Space direction="vertical">
           <Tooltip placement="bottomLeft" title={t('sandbox.tooltips.refetch')}>
             <Button type="text" size="large" icon={<ReloadOutlined />} />
@@ -41,7 +48,12 @@ const Sidebar: React.FC = () => {
             placement="bottomLeft"
             title={t('sandbox.tooltips.shortcuts')}
           >
-            <Button type="text" size="large" icon={<MacCommandOutlined />} />
+            <Button
+              onClick={toggleShortcutsModal}
+              type="text"
+              size="large"
+              icon={<MacCommandOutlined />}
+            />
           </Tooltip>
           <Tooltip
             placement="bottomLeft"
@@ -52,6 +64,7 @@ const Sidebar: React.FC = () => {
         </Space>
       </div>
       {isDocs && <DocsExplorer />}
+      <ShortcutsModal isOpen={isShortcutsModal} toggle={toggleShortcutsModal} />
     </>
   );
 };

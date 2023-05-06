@@ -42,7 +42,7 @@ const Nav: React.FC<NavProps> = ({ mobile, toggle }) => {
 
       {isAuth ? (
         <Button type="primary" size="large" onClick={handleLogOut}>
-          Log Out
+          {t('button.logout')}
         </Button>
       ) : (
         <>
