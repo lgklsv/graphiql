@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Modal, Space, Tooltip, Typography } from 'antd';
+import { Button, Space, Tooltip } from 'antd';
 import {
   BookOutlined,
   MacCommandOutlined,
@@ -14,8 +14,6 @@ import { DocsExplorer } from 'entities/docs';
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { ShortcutsModal } from 'entities/modals';
 import styles from './Sidebar.module.scss';
-
-const { Title } = Typography;
 
 const Sidebar: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -66,20 +64,7 @@ const Sidebar: React.FC = () => {
         </Space>
       </div>
       {isDocs && <DocsExplorer />}
-      <Modal
-        title={
-          <Title level={2} style={{ margin: 0 }}>
-            Shortcuts
-          </Title>
-        }
-        open={isShortcutsModal}
-        onCancel={toggleShortcutsModal}
-        centered
-        footer={null}
-        width={800}
-      >
-        <ShortcutsModal />
-      </Modal>
+      <ShortcutsModal isOpen={isShortcutsModal} toggle={toggleShortcutsModal} />
     </>
   );
 };

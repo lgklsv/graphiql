@@ -86,6 +86,23 @@
       "title": "Docs"
     }
   },
+  "modals": {
+    "shortcuts": {
+      "title": "Shortcuts",
+      "columns": {
+        "keys": "Shortcut",
+        "functions": "Function"
+      },
+      "function": {
+        "search": "Search in documentation",
+        "query": "Execute query",
+        "prettify": "Prettify editors",
+        "copy": "Copy query",
+        "refetch": "Re-fetch schema using introspection"
+      },
+      "message": "The editors use CodeMirror Key Maps that add more short keys."
+    }
+  },
   "developersList": {
     "alesiaAbaeva": "Alesia Abaeva",
     "olegKolosov": "Oleg Kolosov",

@@ -86,6 +86,23 @@
       "title": "Дока"
     }
   },
+  "modals": {
+    "shortcuts": {
+      "title": "Горячие клавиши",
+      "columns": {
+        "keys": "Горячая клавиша",
+        "functions": "Функция"
+      },
+      "function": {
+        "search": "Поиск по документации",
+        "query": "Выполнить запрос",
+        "prettify": "Форматировать редактор",
+        "copy": "Скопировать запрос",
+        "refetch": "Запросить GraphQL схему"
+      },
+      "message": "Редактор кода также поддерживает горячие клавиши CodeMirror."
+    }
+  },
   "developersList": {
     "alesiaAbaeva": "Алеся Абаева",
     "olegKolosov": "Олег Колосов",
