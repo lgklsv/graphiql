@@ -1,0 +1,23 @@
+.editor {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+}
+
+// To disable code editor on field resizing
+.react-draggable-transparent-selection .editor {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.react-draggable-transparent-selection .cm-editor:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  background-color: transparent;
+}

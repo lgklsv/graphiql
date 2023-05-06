@@ -9,7 +9,7 @@ import { useAppDispatch } from 'shared/hooks/redux';
 import { updateTabContent } from 'store/reducers/TabSlice';
 
 import { APP_THEME, BASIC_SETUP_OPTIONS } from '../config';
-import styles from './Editor.module.scss';
+import './Editor.scss';
 
 const Editor: React.FC = () => {
   const { data } = graphql.useGetSchemaQuery('{}');
@@ -23,9 +23,10 @@ const Editor: React.FC = () => {
   };
 
   return (
-    <div className={styles.editor}>
+    <div className="editor">
       {data && (
         <CodeMirror
+          className="editor__code"
           value={tabContent.query}
           height="100%"
           placeholder="Enter your query"
