@@ -1,5 +1,4 @@
 import { EditorView } from 'codemirror';
-import { buildClientSchema, getIntrospectionQuery } from 'graphql';
 import { customTheme } from 'app/config';
 
 const BASIC_SETUP_OPTIONS = {
@@ -17,7 +16,6 @@ const BASIC_SETUP_OPTIONS = {
   highlightActiveLine: false,
   highlightSelectionMatches: true,
   closeBracketsKeymap: true,
-  searchKeymap: true,
   foldKeymap: true,
   completionKeymap: true,
   lintKeymap: true,
@@ -59,23 +57,4 @@ const APP_THEME = EditorView.theme({
   },
 });
 
-// TO DELETE WHEN SCHEMA IS FETCHED ON TOP-LEVEL, PASS THE SCHEME TO EDITOR FROM STORE
-
-const getSchema = async () => {
-  const resonse = await fetch('https://countries.trevorblades.com/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query: `
-      ${getIntrospectionQuery()}`,
-      variables: {},
-    }),
-  });
-  const schemaResponse = await resonse.json();
-  const schemaInstance = buildClientSchema(schemaResponse.data);
-  return schemaInstance;
-};
-
-export { BASIC_SETUP_OPTIONS, APP_THEME, getSchema };
+export { BASIC_SETUP_OPTIONS, APP_THEME };

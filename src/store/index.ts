@@ -11,8 +11,8 @@ import tabsReducer from './reducers/TabSlice';
 const rootReducer = combineReducers({
   userReducer,
   docsReducer,
-  [graphql.schema.reducerPath]: graphql.schema.reducer,
   tabsReducer,
+  [graphql.schema.reducerPath]: graphql.schema.reducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
