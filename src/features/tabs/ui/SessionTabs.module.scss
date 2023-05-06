@@ -2,4 +2,8 @@
   background-color: transparent;
   width: calc(100vw - var(--sidebar-width));
   height: var(--tabs-height);
+
+  &_docs {
+    width: calc(100vw - var(--sidebar-width) - var(--docs-width));
+  }
 }

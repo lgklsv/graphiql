@@ -41,7 +41,7 @@ const VariablesHeadersField: React.FC = () => {
   return (
     <Resizable
       direction="vertical"
-      height={toolsEditorHeight}
+      controlledSide={toolsEditorHeight}
       resize={onResize}
     >
       <div className={styles.field}>
