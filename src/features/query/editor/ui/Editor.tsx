@@ -2,13 +2,12 @@ import React from 'react';
 
 import CodeMirror from '@uiw/react-codemirror';
 import { graphql as graphqlCodeMirror } from 'cm6-graphql';
-
 import { graphql } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';
 import { updateTabContent } from 'store/reducers/TabSlice';
 
-import { APP_THEME, BASIC_SETUP_OPTIONS } from '../config';
+import { APP_THEME, BASIC_SETUP_OPTIONS } from '../../config';
 import styles from './Editor.module.scss';
 
 const Editor: React.FC = () => {
