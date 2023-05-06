@@ -1,13 +1,13 @@
 import React from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 
 import { ROUTES } from 'pages/config';
 import { Form } from 'features/sign-up-form';
 import { TitleForm } from 'shared/ui';
-
 import { useAuthState } from 'shared/hooks/use-auth';
-import { Navigate, useLocation } from 'react-router-dom';
+
 import style from './Signup.module.scss';
 
 const Signup: React.FC = () => {
@@ -22,7 +22,7 @@ const Signup: React.FC = () => {
   return (
     <>
       <Helmet>
-        <title>Sign up</title>
+        <title>{t('pageTitle.signup')}</title>
       </Helmet>
       <div className={style.signup_container}>
         <TitleForm

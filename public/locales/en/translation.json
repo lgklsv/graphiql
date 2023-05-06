@@ -1,12 +1,19 @@
 {
+  "pageTitle": {
+    "home": "Home",
+    "signup": "Sign Up",
+    "login": "Log In",
+    "sandbox": "Sandbox"
+  },
   "button": {
     "signup": "Sign Up",
     "login": "Log In",
+    "logout": "Log Out",
     "access": "Get access",
     "docs": "Read the Docs",
     "start": "Get Started",
-    "signGithub": "Sign in with GitHub",
-    "signGoogle": "Sign in with Google"
+    "signGithub": "Log in with GitHub",
+    "signGoogle": "Log in with Google"
   },
   "home": {
     "introTitle": "The <0>GraphQL</0> developer platform",
@@ -42,10 +49,10 @@
   "signUp": {
     "title": "Let's get started",
     "loginRedirect": "Have an account?",
-    "redirectLink": "Sign in"
+    "redirectLink": "Log in"
   },
   "logIn": {
-    "title": "Sign in",
+    "title": "Log in",
     "signUpRedirect": "New to GraphiQL?",
     "redirectLink": "Lets get started",
     "or": "or"
@@ -68,6 +75,11 @@
       "prettify": "Prettify (shift + ctrl + p)",
       "copy": "Copy query (shift + ctrl + c)"
     }
+  },
+  "notFound": {
+    "title": "PAGE NOT FOUND",
+    "subtitle": "the page you are looking for doesn`t exist",
+    "homeLink": "go home"
   },
   "docs": {
     "header": {

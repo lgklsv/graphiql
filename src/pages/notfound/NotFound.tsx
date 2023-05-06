@@ -1,12 +1,15 @@
 import React from 'react';
-import { ROUTES } from 'pages/config';
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+
+import { ROUTES } from 'pages/config';
 
 import styles from './NotFound.module.scss';
 import Astronaut from './assets/Astronaut.asset';
 
 const NotFound: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <>
       <Helmet>
@@ -15,10 +18,10 @@ const NotFound: React.FC = () => {
 
       <div className={styles['not-found']}>
         <div className={styles['not-found__wrapper']}>
-          <h3>Page not found</h3>
+          <h3>{t('notFound.title')}</h3>
           <h4>
-            the page you are looking for doesn`t exist{' '}
-            <Link to={ROUTES.home}>go home</Link>
+            {t('notFound.subtitle')}{' '}
+            <Link to={ROUTES.home}>{t('notFound.homeLink')}</Link>
           </h4>
           <h1>
             4
