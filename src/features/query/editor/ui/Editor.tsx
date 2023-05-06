@@ -17,14 +17,16 @@ const Editor: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const onChange = (queryString: string) => {
-    dispatch(updateTabContent({ activeTabKey, content: queryString }));
+    dispatch(
+      updateTabContent({ activeTabKey, content: { query: queryString } })
+    );
   };
 
   return (
     <div className={styles.editor}>
       {data && (
         <CodeMirror
-          value={tabContent}
+          value={tabContent.query}
           height="100%"
           placeholder="Enter your query"
           extensions={[APP_THEME, graphqlCodeMirror(data)]}

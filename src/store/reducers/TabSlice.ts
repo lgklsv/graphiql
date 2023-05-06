@@ -7,7 +7,14 @@ export type TabsState = {
 
 const initialState: TabsState = {
   activeKey: '1',
-  tabs: [{ label: 'Tab 1', content: '', key: '1', closable: true }],
+  tabs: [
+    {
+      label: 'Tab 1',
+      content: { query: '', variables: '', headers: '' },
+      key: '1',
+      closable: true,
+    },
+  ],
 };
 
 const tabsSlice = createSlice({
@@ -22,13 +29,13 @@ const tabsSlice = createSlice({
     },
     updateTabContent(
       state,
-      action: PayloadAction<{ activeTabKey: string; content: string }>
+      action: PayloadAction<{ activeTabKey: string; content: TabQueryContent }>
     ) {
       const activeTab = state.tabs.find(
         ({ key }) => key === action.payload.activeTabKey
       );
       if (activeTab) {
-        activeTab.content = action.payload.content;
+        activeTab.content = { ...activeTab.content, ...action.payload.content };
       }
     },
   },

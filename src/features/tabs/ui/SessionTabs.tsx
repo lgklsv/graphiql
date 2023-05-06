@@ -34,7 +34,7 @@ const SessionTabs: React.FC = () => {
     });
     newPanes.push({
       label: t('sandbox.newTab'),
-      content: '',
+      content: { query: '', variables: '', headers: '' },
       key: newActiveKey,
       closable: true,
     });
