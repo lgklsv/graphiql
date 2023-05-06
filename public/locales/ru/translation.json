@@ -73,7 +73,8 @@
       "editorToolsClose": "Скрыть инструменты запроса",
       "execute": "Выполнить запрос (ctrl + enter)",
       "prettify": "Форматировать (shift + ctrl + p)",
-      "copy": "Скопировать (shift + ctrl + c)"
+      "copy": "Скопировать (shift + ctrl + c)",
+      "copied": "Скопировано!"
     }
   },
   "notFound": {

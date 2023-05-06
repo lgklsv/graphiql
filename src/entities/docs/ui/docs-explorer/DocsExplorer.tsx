@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { graphql } from 'shared/api';
-import { IntrospectionQuery, buildClientSchema } from 'graphql';
 import DocsHeader from '../docs-header/DocsHeader';
 
 import styles from './DocsExplorer.module.scss';

@@ -73,7 +73,8 @@
       "editorToolsClose": "Hide editor tools",
       "execute": "Execute query (ctrl + enter)",
       "prettify": "Prettify (shift + ctrl + p)",
-      "copy": "Copy query (shift + ctrl + c)"
+      "copy": "Copy query (shift + ctrl + c)",
+      "copied": "Copied!"
     }
   },
   "notFound": {
