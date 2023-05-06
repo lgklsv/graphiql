@@ -69,6 +69,11 @@
       "copy": "Скопировать (shift + ctrl + c)"
     }
   },
+  "docs": {
+    "header": {
+      "title": "Дока"
+    }
+  },
   "developersList": {
     "alesiaAbaeva": "Алеся Абаева",
     "olegKolosov": "Олег Колосов",

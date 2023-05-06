@@ -1,0 +1,7 @@
+.docs {
+  left: var(--sidebar-width);
+  min-width: var(--docs-width);
+  height: var(--screen-height);
+  display: flex;
+  flex-direction: column;
+}
