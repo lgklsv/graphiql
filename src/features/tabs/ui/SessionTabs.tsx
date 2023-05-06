@@ -3,47 +3,42 @@ import { Tabs } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { docsSelector } from 'store/selectors/DocsSelectors';
-import { useAppSelector } from 'shared/hooks/redux';
+import { useAppSelector, useAppDispatch } from 'shared/hooks/redux';
+import { useTabs } from 'shared/hooks/use-tab';
+import { setActiveTabKey, updateTabs } from 'store/reducers/TabSlice';
+
 import styles from './SessionTabs.module.scss';
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
-// Demo tabs, but we can prepare only one for the user
-const initialItems = [
-  { label: 'Tab 1', children: 'Content of Tab 1', key: '1', closable: true },
-  { label: 'Tab 2', children: 'Content of Tab 2', key: '2', closable: true },
-  { label: 'Tab 3', children: 'Content of Tab 3', key: '3', closable: true },
-];
-
 const SessionTabs: React.FC = () => {
   const { t } = useTranslation();
   const { isDocs } = useAppSelector(docsSelector);
-  const [activeKey, setActiveKey] = React.useState(initialItems[0].key);
-  const [items, setItems] = React.useState(initialItems);
+  const dispatch = useAppDispatch();
+  const { tabs: items, activeTabKey: activeKey } = useTabs();
   const newTabIndex = React.useRef(0);
 
-  // We need to store the active tab and all the tabs in redux slice
-  // How to get active tab object
-  // console.log(items.find((item) => item.key === activeKey));
-
   const onChange = (newActiveKey: string) => {
-    setActiveKey(newActiveKey);
+    dispatch(setActiveTabKey(newActiveKey));
+  };
+
+  const updateTabsStore = (newActiveKey: string, tabs: Tab[]) => {
+    dispatch(setActiveTabKey(newActiveKey));
+    dispatch(updateTabs(tabs));
   };
 
   const add = () => {
     const newActiveKey = `newTab${(newTabIndex.current += 1)}`;
-    const newPanes = items.map((pane) => {
-      pane.closable = true;
-      return pane;
+    const newPanes = [...items].map((pane) => {
+      return { ...pane, closable: true }; // I changed it here to assure immutability to prevent error while changing the item prop.
     });
     newPanes.push({
       label: t('sandbox.newTab'),
-      children: '',
+      content: { query: '', variables: '', headers: '' },
       key: newActiveKey,
       closable: true,
     });
-    setItems(newPanes);
-    setActiveKey(newActiveKey);
+    updateTabsStore(newActiveKey, newPanes);
   };
 
   const remove = (targetKey: TargetKey) => {
@@ -63,10 +58,9 @@ const SessionTabs: React.FC = () => {
       }
     }
     if (newPanes.length === 1) {
-      newPanes[0].closable = false;
+      newPanes[0] = { ...newPanes[0], closable: false }; // I changed it here to assure immutability to prevent error while changing the item prop.
     }
-    setItems(newPanes);
-    setActiveKey(newActiveKey);
+    updateTabsStore(newActiveKey, newPanes);
   };
 
   const onEdit = (targetKey: TargetKey, action: 'add' | 'remove') => {

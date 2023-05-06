@@ -17,8 +17,12 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
+    "@uiw/codemirror-extensions-basic-setup": "^4.19.16",
+    "@uiw/react-codemirror": "^4.19.16",
     "@reduxjs/toolkit": "^1.9.5",
     "antd": "^5.4.6",
+    "cm6-graphql": "^0.0.5",
+    "codemirror": "^6.0.1",
     "emulators": "^0.73.8",
     "firebase": "^9.21.0",
     "framer-motion": "^10.12.4",
