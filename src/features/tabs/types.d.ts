@@ -1,6 +1,6 @@
 type Tab = {
   label: string;
-  children: string;
+  content: string;
   key: string;
   closable: boolean;
 };

@@ -7,7 +7,7 @@ export type TabsState = {
 
 const initialState: TabsState = {
   activeKey: '1',
-  tabs: [{ label: 'Tab 1', children: '', key: '1', closable: true }],
+  tabs: [{ label: 'Tab 1', content: '', key: '1', closable: true }],
 };
 
 const tabsSlice = createSlice({
@@ -28,7 +28,7 @@ const tabsSlice = createSlice({
         ({ key }) => key === action.payload.activeTabKey
       );
       if (activeTab) {
-        activeTab.children = action.payload.content;
+        activeTab.content = action.payload.content;
       }
     },
   },
