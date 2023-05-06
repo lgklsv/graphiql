@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
+    "@codemirror/lang-json": "^6.0.1",
+    "@codemirror/lint": "^6.2.1",
     "@uiw/codemirror-extensions-basic-setup": "^4.19.16",
     "@uiw/react-codemirror": "^4.19.16",
     "@reduxjs/toolkit": "^1.9.5",
