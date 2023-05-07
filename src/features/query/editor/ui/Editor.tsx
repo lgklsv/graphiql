@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import CodeMirror from '@uiw/react-codemirror';
 import { graphql as graphqlCodeMirror } from 'cm6-graphql';
 import { graphql } from 'shared/api';
@@ -10,6 +11,7 @@ import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import styles from './Editor.module.scss';
 
 const Editor: React.FC = () => {
+  const { t } = useTranslation();
   const { data } = graphql.useGetSchemaQuery('{}');
   const { activeTabKey, tabContent } = useTabs();
   const dispatch = useAppDispatch();
@@ -26,7 +28,7 @@ const Editor: React.FC = () => {
         <CodeMirror
           value={tabContent.query}
           height="100%"
-          placeholder="Enter your query"
+          placeholder={`${t('sandbox.placeholder')}`}
           extensions={[...BASIC_EXTENSIONS, graphqlCodeMirror(data)]}
           basicSetup={BASIC_SETUP_OPTIONS}
           onChange={onChange}

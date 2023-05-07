@@ -58,6 +58,9 @@ const APP_THEME = EditorView.theme({
   '.cm-line .ͼe': {
     color: colorPrimary,
   },
+  '.cm-placeholder': {
+    fontWeight: 400,
+  },
 });
 
 const BASIC_EXTENSIONS = [APP_THEME, EditorView.lineWrapping];
