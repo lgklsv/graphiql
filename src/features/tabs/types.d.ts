@@ -1,12 +1,19 @@
 type Tab = {
   label: string;
-  content: TabQueryContent;
+  query: TabQueryContent;
+  response: TabResponseContent;
   key: string;
   closable: boolean;
 };
 
 type TabQueryContent = {
-  query: string;
+  data: string;
   variables?: string;
   headers?: string;
+};
+
+type TabResponseContent = {
+  data: string;
+  isLoading: boolean;
+  error: string;
 };

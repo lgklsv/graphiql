@@ -10,14 +10,16 @@ const initialState: TabsState = {
   activeKey: '1',
   activeTab: {
     label: 'Tab 1',
-    content: { query: '', variables: '', headers: '' },
+    query: { data: '', variables: '', headers: '' },
+    response: { data: '', isLoading: false, error: '' },
     key: '1',
     closable: true,
   },
   tabs: [
     {
       label: 'Tab 1',
-      content: { query: '', variables: '', headers: '' },
+      query: { data: '', variables: '', headers: '' },
+      response: { data: '', isLoading: false, error: '' },
       key: '1',
       closable: true,
     },
@@ -40,13 +42,13 @@ const tabsSlice = createSlice({
     },
     updateTabContent(
       state,
-      action: PayloadAction<{ activeTabKey: string; content: TabQueryContent }>
+      action: PayloadAction<{ activeTabKey: string; query: TabQueryContent }>
     ) {
       const activeTab = state.tabs.find(
         ({ key }) => key === action.payload.activeTabKey
       );
       if (activeTab) {
-        activeTab.content = { ...activeTab.content, ...action.payload.content };
+        activeTab.query = { ...activeTab.query, ...action.payload.query };
         state.activeTab = activeTab;
       }
     },

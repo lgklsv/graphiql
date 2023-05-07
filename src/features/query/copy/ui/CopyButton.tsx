@@ -25,7 +25,7 @@ const CopyButton: React.FC = () => {
   }, [copiedQuery]);
 
   const copyQueryHandler = () => {
-    setCopiedQuery(tab.content.query);
+    setCopiedQuery(tab.query.data);
   };
 
   return (

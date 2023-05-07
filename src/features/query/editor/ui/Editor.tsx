@@ -14,12 +14,11 @@ import './Editor.scss';
 const Editor: React.FC = () => {
   const { data } = graphql.useGetSchemaQuery('{}');
   const { activeTabKey, tabContent } = useTabs();
+
   const dispatch = useAppDispatch();
 
   const onChange = (queryString: string) => {
-    dispatch(
-      updateTabContent({ activeTabKey, content: { query: queryString } })
-    );
+    dispatch(updateTabContent({ activeTabKey, query: { data: queryString } }));
   };
 
   return (
@@ -27,7 +26,7 @@ const Editor: React.FC = () => {
       {data && (
         <CodeMirror
           className="editor__code"
-          value={tabContent.query}
+          value={tabContent.data}
           height="100%"
           placeholder="Enter your query"
           extensions={[APP_THEME, graphqlCodeMirror(data)]}
