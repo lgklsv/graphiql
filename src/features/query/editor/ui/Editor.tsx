@@ -1,5 +1,4 @@
 import React from 'react';
-
 import CodeMirror from '@uiw/react-codemirror';
 import { graphql as graphqlCodeMirror } from 'cm6-graphql';
 
@@ -13,8 +12,7 @@ import './Editor.scss';
 
 const Editor: React.FC = () => {
   const { data } = graphql.useGetSchemaQuery('{}');
-  const { activeTabKey, tabContent } = useTabs();
-
+  const { activeTabKey, tabQuery } = useTabs();
   const dispatch = useAppDispatch();
 
   const onChange = (queryString: string) => {
@@ -26,7 +24,7 @@ const Editor: React.FC = () => {
       {data && (
         <CodeMirror
           className="editor__code"
-          value={tabContent.data}
+          value={tabQuery.data}
           height="100%"
           placeholder="Enter your query"
           extensions={[APP_THEME, graphqlCodeMirror(data)]}

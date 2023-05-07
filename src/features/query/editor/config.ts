@@ -19,6 +19,7 @@ const BASIC_SETUP_OPTIONS = {
   foldKeymap: true,
   completionKeymap: true,
   lintKeymap: true,
+  electricChars: true,
 };
 
 const colorPrimary = customTheme.token?.colorPrimary || '#281E5B';

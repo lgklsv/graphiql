@@ -8,10 +8,15 @@ export const useTabs = () => {
   const activeTabKey = useAppSelector(activeTabKeySelector);
   const tabs = useAppSelector(tabsSelector);
   const activeTab = tabs.find(({ key }) => key === activeTabKey);
-  const tabContent = activeTab?.query || {
+  const tabQuery = activeTab?.query || {
     data: '',
     variables: '',
     headers: '',
   };
-  return { activeTabKey, tabs, tabContent };
+  const tabResponse = activeTab?.response || {
+    data: '',
+    isLoading: false,
+    error: undefined,
+  };
+  return { activeTabKey, tabs, tabQuery, tabResponse };
 };

@@ -4,22 +4,20 @@ import CodeMirror from '@uiw/react-codemirror';
 import { linter } from '@codemirror/lint';
 import { jsonParseLinter, json } from '@codemirror/lang-json';
 
-import { useAppSelector } from 'shared/hooks/redux';
-import { activeTabSelector } from 'store/selectors/tabSelector';
 import {
   BASIC_EXTENSIONS,
   BASIC_SETUP_OPTIONS,
 } from 'features/query/editor/config';
-
 import { Spinner } from 'shared/ui';
+import { useTabs } from 'shared/hooks/use-tab';
 
 import styles from './ResponseField.module.scss';
 
 const { Text } = Typography;
 
 const ResponseField: React.FC = () => {
-  const tab = useAppSelector(activeTabSelector)!;
-  const { data, isLoading, error } = tab.response;
+  const { tabResponse } = useTabs();
+  const { data, isLoading, error } = tabResponse;
 
   if (isLoading) {
     return (
