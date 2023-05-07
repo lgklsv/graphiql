@@ -29,7 +29,10 @@ const tabsSlice = createSlice({
     },
     updateTabContent(
       state,
-      action: PayloadAction<{ activeTabKey: string; content: TabQueryContent }>
+      action: PayloadAction<{
+        activeTabKey: string;
+        content: TabQueryContent;
+      }>
     ) {
       const activeTab = state.tabs.find(
         ({ key }) => key === action.payload.activeTabKey
@@ -38,11 +41,23 @@ const tabsSlice = createSlice({
         activeTab.content = { ...activeTab.content, ...action.payload.content };
       }
     },
+    updateTabLabel(
+      state,
+      action: PayloadAction<{ activeTabKey: string; label: string }>
+    ) {
+      const activeTab = state.tabs.find(
+        ({ key }) => key === action.payload.activeTabKey
+      );
+      if (activeTab) {
+        activeTab.label = action.payload.label;
+      }
+    },
   },
 });
 
 const { actions, reducer } = tabsSlice;
 
-export const { setActiveTabKey, updateTabs, updateTabContent } = actions;
+export const { setActiveTabKey, updateTabs, updateTabContent, updateTabLabel } =
+  actions;
 
 export default reducer;

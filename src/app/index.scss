@@ -25,3 +25,13 @@ button.ant-btn-primary {
 .ant-tabs-nav {
   min-height: calc(var(--tabs-height) - 8px);
 }
+
+.ant-tabs-tab-btn {
+  white-space: nowrap;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media all and (max-width: 767px) {
+    max-width: 50px;
+  }
+}

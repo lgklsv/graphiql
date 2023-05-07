@@ -5,7 +5,7 @@ import { graphql as graphqlCodeMirror } from 'cm6-graphql';
 import { graphql } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';
-import { updateTabContent } from 'store/reducers/TabSlice';
+import { updateTabContent, updateTabLabel } from 'store/reducers/TabSlice';
 
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import styles from './Editor.module.scss';
@@ -20,6 +20,15 @@ const Editor: React.FC = () => {
     dispatch(
       updateTabContent({ activeTabKey, content: { query: queryString } })
     );
+
+    const regex = /(?<=query |mutation )\w+/;
+    if (regex.exec(queryString)) {
+      const newTitle = regex.exec(queryString)![0];
+      dispatch(updateTabLabel({ activeTabKey, label: newTitle }));
+    } else
+      dispatch(
+        updateTabLabel({ activeTabKey, label: `${t('sandbox.newTab')}` })
+      );
   };
 
   return (
