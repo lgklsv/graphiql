@@ -6,7 +6,7 @@ import { jsonParseLinter, json } from '@codemirror/lang-json';
 import { useAppDispatch } from 'shared/hooks/redux';
 import { updateTabContent } from 'store/reducers/TabSlice';
 import { useTabs } from 'shared/hooks/use-tab';
-import { APP_THEME, BASIC_SETUP_OPTIONS } from '../../config';
+import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import styles from './EditorTools.module.scss';
 
 interface EditorToolsProps {
@@ -43,7 +43,11 @@ const EditorTools: React.FC<EditorToolsProps> = ({
         >
           <CodeMirror
             value={tabContent[tabName as keyof TabQueryContent]}
-            extensions={[APP_THEME, json(), linter(jsonParseLinter())]}
+            extensions={[
+              ...BASIC_EXTENSIONS,
+              json(),
+              linter(jsonParseLinter()),
+            ]}
             basicSetup={BASIC_SETUP_OPTIONS}
             onChange={(value) => handleChange(value, tabName)}
           />
