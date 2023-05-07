@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  CaretRightOutlined,
-  LoadingOutlined,
-  PauseOutlined,
-} from '@ant-design/icons';
+import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 
