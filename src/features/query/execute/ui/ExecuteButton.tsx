@@ -12,16 +12,29 @@ const ExecuteButton: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const tab = useAppSelector(activeTabSelector);
+  const [isTriggered, setIsTriggered] = React.useState(false);
 
-  const [trigger, { data, isLoading, error }] = useLazyGetEnteredQuery();
+  const [trigger, { data, isFetching, error }] = useLazyGetEnteredQuery();
 
   React.useEffect(() => {
-    dispatch(updateResponse({ data: JSON.stringify(data), isLoading, error }));
-  }, [data, isLoading, error, dispatch]);
+    if (isTriggered) {
+      dispatch(
+        updateResponse({
+          data: JSON.stringify(data, null, '\t'),
+          isLoading: isFetching,
+          error,
+        })
+      );
+    }
+    if (isTriggered && !isFetching) {
+      setIsTriggered(false);
+    }
+  }, [isTriggered, data, isFetching, error, dispatch]);
 
   const executeQueryHandler = () => {
     if (tab) {
       trigger(tab.query);
+      setIsTriggered(true);
     }
   };
 

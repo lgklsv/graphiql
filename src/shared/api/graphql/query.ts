@@ -4,6 +4,8 @@ import {
   buildClientSchema,
   getIntrospectionQuery,
 } from 'graphql';
+
+import { TabQueryContent } from 'features/tabs/types';
 import { BASE_URL } from 'app/config';
 
 export const sandboxQueries = createApi({
@@ -41,5 +43,4 @@ export const sandboxQueries = createApi({
   }),
 });
 
-export const { useGetSchemaQuery, useGetEnteredQuery, useLazyGetEnteredQuery } =
-  sandboxQueries;
+export const { useGetSchemaQuery, useLazyGetEnteredQuery } = sandboxQueries;

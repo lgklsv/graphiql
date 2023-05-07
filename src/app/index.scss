@@ -25,3 +25,8 @@ button.ant-btn-primary {
 .ant-tabs-nav {
   min-height: calc(var(--tabs-height) - 8px);
 }
+
+.ant-layout-footer {
+  position: relative;
+  z-index: 2;
+}

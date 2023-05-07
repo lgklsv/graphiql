@@ -30,6 +30,7 @@ const APP_THEME = EditorView.theme({
     color: colorPrimary,
     fontSize: '16px',
     fontWeight: 500,
+    backgroundColor: 'transparent !important',
   },
   '.cm-content': {
     caretColor: colorPrimary,
@@ -46,10 +47,10 @@ const APP_THEME = EditorView.theme({
     minWidth: '1.8rem',
   },
   '.cm-selectionLayer .cm-selectionBackground': {
-    background: 'transparent',
+    backgroundColor: 'transparent',
   },
   '.cm-tooltip': {
-    backgroundColor: '#fff',
+    backgroundColor: colorBgBase,
     color: colorPrimary,
     border: 'none',
     padding: '5px',
@@ -65,7 +66,7 @@ const APP_THEME = EditorView.theme({
   },
   '.cm-tooltip-autocomplete ul li[role="option"]': {
     borderRadius: '4px',
-    backgroundColor: '#fff',
+    backgroundColor: colorBgBase,
     color: colorPrimary,
     padding: '5px',
   },
@@ -81,4 +82,5 @@ const APP_THEME = EditorView.theme({
   },
 });
 
-export { BASIC_SETUP_OPTIONS, APP_THEME };
+const BASIC_EXTENSIONS = [APP_THEME, EditorView.lineWrapping];
+export { BASIC_SETUP_OPTIONS, APP_THEME, BASIC_EXTENSIONS };

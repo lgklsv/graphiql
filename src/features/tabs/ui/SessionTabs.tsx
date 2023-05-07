@@ -6,6 +6,7 @@ import { docsSelector } from 'store/selectors/DocsSelectors';
 import { useAppSelector, useAppDispatch } from 'shared/hooks/redux';
 import { useTabs } from 'shared/hooks/use-tab';
 import { setActiveTabKey, updateTabs } from 'store/reducers/TabSlice';
+import { Tab } from '../types';
 
 import styles from './SessionTabs.module.scss';
 
@@ -35,7 +36,7 @@ const SessionTabs: React.FC = () => {
     newPanes.push({
       label: t('sandbox.newTab'),
       query: { data: '', variables: '', headers: '' },
-      response: { data: '', isLoading: false, error: '' },
+      response: { data: '', isLoading: false, error: undefined },
       key: newActiveKey,
       closable: true,
     });

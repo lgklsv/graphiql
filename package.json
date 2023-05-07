@@ -17,9 +17,11 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
+    "@codemirror/lang-json": "^6.0.1",
+    "@codemirror/lint": "^6.2.1",
+    "@reduxjs/toolkit": "^1.9.5",
     "@uiw/codemirror-extensions-basic-setup": "^4.19.16",
     "@uiw/react-codemirror": "^4.19.16",
-    "@reduxjs/toolkit": "^1.9.5",
     "antd": "^5.4.6",
     "cm6-graphql": "^0.0.5",
     "codemirror": "^6.0.1",

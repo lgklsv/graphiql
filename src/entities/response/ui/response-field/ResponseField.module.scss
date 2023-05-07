@@ -1,7 +1,10 @@
 .response {
-  width: auto;
-  flex-grow: 1;
-  height: 100%;
+  position: relative;
+  width: 100%;
+  flex-shrink: 9999;
+  height: var(--ide-height);
   border-radius: 12px;
   padding: 1rem;
+  z-index: 0;
+  overflow: scroll;
 }

@@ -42,9 +42,9 @@ const tabsSlice = createSlice({
     },
     updateResponse(state, action: PayloadAction<TabResponseContent>) {
       const activeTab = state.tabs.find(({ key }) => key === state.activeKey);
-
       if (activeTab) {
         activeTab.response = { ...activeTab.response, ...action.payload };
+        console.log('update', activeTab.response);
       }
     },
   },

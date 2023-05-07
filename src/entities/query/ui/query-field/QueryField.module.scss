@@ -1,6 +1,6 @@
 .query {
   width: 100%;
-  height: calc(var(--screen-height) - var(--tabs-height) - 1rem);
+  height: var(--ide-height);
   background-color: var(--bg-primary);
   box-shadow: var(--popover-box-shadow);
   border-radius: 12px;
