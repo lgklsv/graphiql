@@ -1,5 +1,9 @@
 import React from 'react';
-import { CaretRightOutlined } from '@ant-design/icons';
+import {
+  CaretRightOutlined,
+  LoadingOutlined,
+  PauseOutlined,
+} from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
 import { useTranslation } from 'react-i18next';
 
@@ -44,7 +48,13 @@ const ExecuteButton: React.FC = () => {
         onClick={executeQueryHandler}
         type="primary"
         size="large"
-        icon={<CaretRightOutlined style={{ transform: 'scale(1.7)' }} />}
+        icon={
+          isFetching ? (
+            <PauseOutlined style={{ transform: 'scale(1.5)' }} />
+          ) : (
+            <CaretRightOutlined style={{ transform: 'scale(1.7)' }} />
+          )
+        }
       />
     </Tooltip>
   );
