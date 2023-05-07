@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Tab, TabQueryContent, TabResponseContent } from 'features/tabs/types';
 
 export type TabsState = {
   activeKey: string;
@@ -11,7 +12,7 @@ const initialState: TabsState = {
     {
       label: 'Tab 1',
       query: { data: '', variables: '', headers: '' },
-      response: { data: '', isLoading: false, error: '' },
+      response: { data: '', isLoading: false, error: undefined },
       key: '1',
       closable: true,
     },
@@ -51,6 +52,7 @@ const tabsSlice = createSlice({
 
 const { actions, reducer } = tabsSlice;
 
-export const { setActiveTabKey, updateTabs, updateTabContent } = actions;
+export const { setActiveTabKey, updateTabs, updateTabContent, updateResponse } =
+  actions;
 
 export default reducer;
