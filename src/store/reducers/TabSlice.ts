@@ -2,19 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type TabsState = {
   activeKey: string;
-  activeTab: Tab;
   tabs: Tab[];
 };
 
 const initialState: TabsState = {
   activeKey: '1',
-  activeTab: {
-    label: 'Tab 1',
-    query: { data: '', variables: '', headers: '' },
-    response: { data: '', isLoading: false, error: '' },
-    key: '1',
-    closable: true,
-  },
   tabs: [
     {
       label: 'Tab 1',
@@ -32,10 +24,6 @@ const tabsSlice = createSlice({
   reducers: {
     setActiveTabKey(state, action: PayloadAction<string>) {
       state.activeKey = action.payload;
-      const activeTab = state.tabs.find(({ key }) => key === action.payload);
-      if (activeTab) {
-        state.activeTab = activeTab;
-      }
     },
     updateTabs(state, action: PayloadAction<Tab[]>) {
       state.tabs = action.payload;
@@ -49,7 +37,13 @@ const tabsSlice = createSlice({
       );
       if (activeTab) {
         activeTab.query = { ...activeTab.query, ...action.payload.query };
-        state.activeTab = activeTab;
+      }
+    },
+    updateResponse(state, action: PayloadAction<TabResponseContent>) {
+      const activeTab = state.tabs.find(({ key }) => key === state.activeKey);
+
+      if (activeTab) {
+        activeTab.response = { ...activeTab.response, ...action.payload };
       }
     },
   },

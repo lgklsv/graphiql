@@ -11,10 +11,10 @@ const ExecuteButton: React.FC = () => {
   const { t } = useTranslation();
   const tab = useAppSelector(activeTabSelector);
 
-  const [trigger] = useLazyGetEnteredQuery();
+  const [trigger, { data, isLoading, error }] = useLazyGetEnteredQuery();
 
   const executeQueryHandler = () => {
-    trigger(tab.query);
+    if (tab) trigger(tab.query);
   };
 
   return (

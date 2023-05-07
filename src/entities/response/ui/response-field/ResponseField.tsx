@@ -12,15 +12,16 @@ const { Text } = Typography;
 const ResponseField: React.FC = () => {
   const tab = useAppSelector(activeTabSelector);
 
-  const data = useAppSelector(
-    (state: RootState) =>
-      sandboxQueries.endpoints.getEntered.select(tab.query)(state).data
-  );
-  console.log('final result', data);
+  // const data = useAppSelector(
+  //   (state: RootState) =>
+  //     sandboxQueries.endpoints.getEntered.select(tab.query)(state).data
+  // );
+  // console.log('final result', data);
 
   return (
     <div className={styles.response}>
-      {data && <Text>{JSON.stringify(data)}</Text>}
+      {/* {data && <Text>{JSON.stringify(data)}</Text>} */}
+      <Text>Hi</Text>
     </div>
   );
 };
