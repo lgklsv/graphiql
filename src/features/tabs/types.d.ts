@@ -10,7 +10,7 @@ type Tab = {
 };
 
 type TabQueryContent = {
-  data: string;
+  data?: string;
   variables?: string;
   headers?: string;
 };

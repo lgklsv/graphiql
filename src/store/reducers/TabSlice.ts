@@ -14,7 +14,7 @@ const initialState: TabsState = {
       query: { data: '', variables: '', headers: '' },
       response: { data: '', isLoading: false, error: undefined },
       key: '1',
-      closable: true,
+      closable: false,
     },
   ],
 };
@@ -46,12 +46,28 @@ const tabsSlice = createSlice({
         activeTab.response = { ...activeTab.response, ...action.payload };
       }
     },
+    updateTabLabel(
+      state,
+      action: PayloadAction<{ activeTabKey: string; label: string }>
+    ) {
+      const activeTab = state.tabs.find(
+        ({ key }) => key === action.payload.activeTabKey
+      );
+      if (activeTab) {
+        activeTab.label = action.payload.label;
+      }
+    },
   },
 });
 
 const { actions, reducer } = tabsSlice;
 
-export const { setActiveTabKey, updateTabs, updateTabContent, updateResponse } =
-  actions;
+export const {
+  setActiveTabKey,
+  updateTabs,
+  updateTabContent,
+  updateResponse,
+  updateTabLabel,
+} = actions;
 
 export default reducer;

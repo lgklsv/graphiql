@@ -12,6 +12,7 @@ import styles from './VariablesHeadersField.module.scss';
 
 const VariablesHeadersField: React.FC = () => {
   const [isToolsEditor, setIsToolsEditor] = React.useState(false);
+  const [activeToolTab, setActiveToolTab] = React.useState(0);
   const [toolsEditorHeight, setToolsEditorHeight] = React.useState(
     DEFAULT_VARIABLES_EDITOR_HEIGHT_CLOSED
   );
@@ -48,8 +49,9 @@ const VariablesHeadersField: React.FC = () => {
         <Query.ToolsTabs
           isOpen={isToolsEditor}
           toggle={toggleToolsEditorHandler}
+          setActiveToolTab={setActiveToolTab}
         />
-        {isToolsEditor && <Query.EditorTools />}
+        {isToolsEditor && <Query.EditorTools activeToolTab={activeToolTab} />}
       </div>
     </Resizable>
   );

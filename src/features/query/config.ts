@@ -25,6 +25,7 @@ const BASIC_SETUP_OPTIONS = {
 const colorPrimary = customTheme.token?.colorPrimary || '#281E5B';
 const colorBgBase = customTheme.token?.colorBgBase || '#ffffff';
 const colorBgSecondary = '#f1f2f4';
+const colorTextAccent = '#770088';
 
 const APP_THEME = EditorView.theme({
   '&': {
@@ -73,13 +74,19 @@ const APP_THEME = EditorView.theme({
   },
   '.cm-tooltip-autocomplete ul li[aria-selected]': {
     backgroundColor: `hsla(293, 100%, 27%, 0.1);`,
-    color: '#770088',
+    color: colorTextAccent,
     padding: '5px',
   },
   '.cm-tooltip-autocomplete ul': {
     display: 'flex',
     flexDirection: 'column',
     gap: '0.2rem',
+  },
+  '.cm-line .ͼe': {
+    color: colorTextAccent,
+  },
+  '.cm-placeholder': {
+    fontWeight: 400,
   },
 });
 

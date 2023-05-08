@@ -63,6 +63,7 @@
       "variables": "Variables",
       "headers": "Headers"
     },
+    "placeholder": "Enter your query",
     "tooltips": {
       "docsOpen": "Hide documentation",
       "docsClose": "Show documentation",

@@ -30,3 +30,13 @@ button.ant-btn-primary {
   position: relative;
   z-index: 2;
 }
+
+.ant-tabs-tab-btn {
+  white-space: nowrap;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media all and (max-width: 767px) {
+    max-width: 50px;
+  }
+}

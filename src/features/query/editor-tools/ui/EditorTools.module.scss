@@ -2,3 +2,14 @@
   width: 100%;
   padding: 0 1rem;
 }
+
+.editor__tab {
+  visibility: visible;
+  position: relative;
+  &_hidden {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    transform: translate(-100000px, -100000px);
+  }
+}

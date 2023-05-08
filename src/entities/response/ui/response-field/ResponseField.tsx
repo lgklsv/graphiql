@@ -4,13 +4,10 @@ import CodeMirror from '@uiw/react-codemirror';
 import { linter } from '@codemirror/lint';
 import { jsonParseLinter, json } from '@codemirror/lang-json';
 
-import {
-  BASIC_EXTENSIONS,
-  BASIC_SETUP_OPTIONS,
-} from 'features/query/editor/config';
 import { Spinner } from 'shared/ui';
 import { useTabs } from 'shared/hooks/use-tab';
 
+import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from 'features/query/config';
 import styles from './ResponseField.module.scss';
 
 const { Text } = Typography;
