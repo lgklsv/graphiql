@@ -55,6 +55,13 @@ const APP_THEME = EditorView.theme({
   '.cm-tooltip.cm-tooltip-cursor': {
     backgroundColor: colorBgBase,
   },
+  '.cm-line .ͼe': {
+    color: colorPrimary,
+  },
+  '.cm-placeholder': {
+    fontWeight: 400,
+  },
 });
 
-export { BASIC_SETUP_OPTIONS, APP_THEME };
+const BASIC_EXTENSIONS = [APP_THEME, EditorView.lineWrapping];
+export { BASIC_SETUP_OPTIONS, APP_THEME, BASIC_EXTENSIONS };

@@ -8,9 +8,14 @@ import styles from './ToolsTabs.module.scss';
 interface ToolTabsProps {
   isOpen: boolean;
   toggle: () => void;
+  setActiveToolTab: (id: number) => void;
 }
 
-const ToolsTabs: React.FC<ToolTabsProps> = ({ isOpen, toggle }) => {
+const ToolsTabs: React.FC<ToolTabsProps> = ({
+  isOpen,
+  toggle,
+  setActiveToolTab,
+}) => {
   const { t } = useTranslation();
   const [activeTab, setActiveTab] = React.useState(0);
 
@@ -18,6 +23,7 @@ const ToolsTabs: React.FC<ToolTabsProps> = ({ isOpen, toggle }) => {
 
   const changeTabHandler = (id: number) => {
     setActiveTab(id);
+    setActiveToolTab(id);
     if (!isOpen) {
       toggle();
     }
