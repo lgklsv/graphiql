@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Tab, TabQueryContent, TabResponseContent } from 'features/tabs/types';
 
 export type TabsState = {
   activeKey: string;
@@ -10,9 +11,10 @@ const initialState: TabsState = {
   tabs: [
     {
       label: 'Tab 1',
-      content: { query: '', variables: '', headers: '' },
+      query: { data: '', variables: '', headers: '' },
+      response: { data: '', isLoading: false, error: undefined },
       key: '1',
-      closable: true,
+      closable: false,
     },
   ],
 };
@@ -29,16 +31,19 @@ const tabsSlice = createSlice({
     },
     updateTabContent(
       state,
-      action: PayloadAction<{
-        activeTabKey: string;
-        content: TabQueryContent;
-      }>
+      action: PayloadAction<{ activeTabKey: string; query: TabQueryContent }>
     ) {
       const activeTab = state.tabs.find(
         ({ key }) => key === action.payload.activeTabKey
       );
       if (activeTab) {
-        activeTab.content = { ...activeTab.content, ...action.payload.content };
+        activeTab.query = { ...activeTab.query, ...action.payload.query };
+      }
+    },
+    updateResponse(state, action: PayloadAction<TabResponseContent>) {
+      const activeTab = state.tabs.find(({ key }) => key === state.activeKey);
+      if (activeTab) {
+        activeTab.response = { ...activeTab.response, ...action.payload };
       }
     },
     updateTabLabel(
@@ -57,7 +62,12 @@ const tabsSlice = createSlice({
 
 const { actions, reducer } = tabsSlice;
 
-export const { setActiveTabKey, updateTabs, updateTabContent, updateTabLabel } =
-  actions;
+export const {
+  setActiveTabKey,
+  updateTabs,
+  updateTabContent,
+  updateResponse,
+  updateTabLabel,
+} = actions;
 
 export default reducer;

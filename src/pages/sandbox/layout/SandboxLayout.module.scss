@@ -19,5 +19,10 @@
     margin: 0 1rem 1rem 0rem;
     display: flex;
     gap: 0.25rem;
+    width: calc(100vw - var(--sidebar-width) - 1rem);
+  }
+
+  &__field_docs {
+    width: calc(100vw - var(--sidebar-width) - 1rem - var(--docs-width));
   }
 }

@@ -8,18 +8,16 @@ import { useAppDispatch } from 'shared/hooks/redux';
 import { updateTabContent, updateTabLabel } from 'store/reducers/TabSlice';
 
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
-import styles from './Editor.module.scss';
+import './Editor.scss';
 
 const Editor: React.FC = () => {
   const { t } = useTranslation();
   const { data } = graphql.useGetSchemaQuery('{}');
-  const { activeTabKey, tabContent } = useTabs();
+  const { activeTabKey, tabQuery } = useTabs();
   const dispatch = useAppDispatch();
 
   const onChange = (queryString: string) => {
-    dispatch(
-      updateTabContent({ activeTabKey, content: { query: queryString } })
-    );
+    dispatch(updateTabContent({ activeTabKey, query: { data: queryString } }));
 
     const regex = /(?<=query |mutation )\w+/;
     if (regex.exec(queryString)) {
@@ -32,10 +30,11 @@ const Editor: React.FC = () => {
   };
 
   return (
-    <div className={styles.editor}>
+    <div className="editor">
       {data && (
         <CodeMirror
-          value={tabContent.query}
+          className="editor__code"
+          value={tabQuery.data}
           height="100%"
           placeholder={`${t('sandbox.placeholder')}`}
           extensions={[...BASIC_EXTENSIONS, graphqlCodeMirror(data)]}

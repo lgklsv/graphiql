@@ -7,6 +7,7 @@ import { Query } from 'features/query';
 import { Resizable } from 'shared/ui';
 import { useAppSelector } from 'shared/hooks/redux';
 import VariablesHeadersField from '../variables-headers-field/VariablesHeadersField';
+import Toolbar from '../toolbar/Toolbar';
 
 import styles from './QueryField.module.scss';
 
@@ -39,7 +40,7 @@ const QueryField: React.FC = () => {
       <div className={styles.query}>
         <div className={styles.query__editor}>
           <Query.Editor />
-          <Query.Toolbar />
+          <Toolbar />
         </div>
         <VariablesHeadersField />
       </div>

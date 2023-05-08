@@ -65,8 +65,8 @@
     },
     "placeholder": "Введите ваш запрос",
     "tooltips": {
-      "docsOpen": "Показать документацию",
-      "docsClose": "Скрыть документацию",
+      "docsOpen": "Скрыть документацию",
+      "docsClose": "Показать документацию",
       "refetch": "Запросить GraphQL схему",
       "shortcuts": "Все горячие клавиши",
       "settings": "Открыть настройки",
@@ -74,7 +74,8 @@
       "editorToolsClose": "Скрыть инструменты запроса",
       "execute": "Выполнить запрос (ctrl + enter)",
       "prettify": "Форматировать (shift + ctrl + p)",
-      "copy": "Скопировать (shift + ctrl + c)"
+      "copy": "Скопировать (shift + ctrl + c)",
+      "copied": "Скопировано!"
     }
   },
   "notFound": {

@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
   userReducer,
   docsReducer,
   tabsReducer,
-  [graphql.schema.reducerPath]: graphql.schema.reducer,
+  [graphql.sandboxQueries.reducerPath]: graphql.sandboxQueries.reducer,
 });
 
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
@@ -22,7 +22,7 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false,
-      }).concat(graphql.schema.middleware),
+      }).concat(graphql.sandboxQueries.middleware),
   });
 };
 

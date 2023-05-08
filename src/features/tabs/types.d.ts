@@ -1,12 +1,22 @@
+import { SerializedError } from '@reduxjs/toolkit';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query';
+
 type Tab = {
   label: string;
-  content: TabQueryContent;
+  query: TabQueryContent;
+  response: TabResponseContent;
   key: string;
   closable: boolean;
 };
 
 type TabQueryContent = {
-  query?: string;
+  data?: string;
   variables?: string;
   headers?: string;
+};
+
+type TabResponseContent = {
+  data: string;
+  isLoading: boolean;
+  error: FetchBaseQueryError | SerializedError | undefined;
 };

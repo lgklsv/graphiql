@@ -3,6 +3,9 @@
   --header: 80px;
   --footer: 65px;
   --screen-height: calc(100vh - var(--header) - var(--footer));
+  --ide-height: calc(
+    100vh - var(--header) - var(--footer) - var(--tabs-height) - 1rem
+  );
 
   // IDE
   --sidebar-width: 60px;
