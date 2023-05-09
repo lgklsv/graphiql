@@ -1,6 +1,6 @@
-import { isRequired } from './is-required';
-import { sliceData } from './slice-data';
 import { getArguments } from './get-arguments';
+import { FIELD } from '../const/field';
+import { getReturn } from './get-return';
 
 // interface TypesProps {
 //   info: string[];
@@ -35,6 +35,8 @@ export const getType = (
   jsonGraphQL: IJson,
   clickedData?: string
 ): ReturnData[] => {
+  // TODO: проверять на входе, объект ли это
+
   const arrayTypes: ReturnData[] = [];
 
   let returnData: ReturnData = {
@@ -53,8 +55,6 @@ export const getType = (
     return arrayTypes;
   }
 
-  console.log(jsonGraphQL);
-
   // 2 УРОВЕНЬ - эндпоинты Query.properties
 
   if ('properties' in jsonGraphQL) {
@@ -69,87 +69,43 @@ export const getType = (
           type: null,
         };
 
-        if (key === 'arguments' || key === 'return') {
-          returnData.name = clickedData ? { title: clickedData } : null;
+        if (key === FIELD.ARGUMENTS || key === FIELD.RETURN) {
           const arrayArguments = getArguments(value as Arguments);
+          const returnDataAnyOf = getReturn(value as Return);
 
-          console.log(arrayArguments);
+          returnData.name = clickedData ? { title: clickedData } : null;
+          returnData.arguments = arrayArguments.length ? arrayArguments : null;
+          returnData.return = returnDataAnyOf && null;
+
+          arrayTypes.push(returnData);
 
           // TODO: нужно передавать объект клика!
-
           return;
         }
 
-        // проверка третьего уровня.
-
         returnData.name = { title: key }; // название полей в Query
-        // на этом этапе нет Arguments
-        // countries: {props, req, type}
-        // Arguments внутри value.props
 
-        // 3 УРОВЕНЬ
-        Object.entries(value.properties).forEach(([keyArgs, valueArgs]) => {
-          if (keyArgs === 'arguments') {
-            const arrayArguments = getArguments(valueArgs as Arguments);
+        Object.entries(value?.properties as Properties).forEach(
+          ([keyArgs, valueArgs]) => {
+            if (keyArgs === FIELD.ARGUMENTS) {
+              const arrayArguments = getArguments(valueArgs as Arguments);
 
-            returnData = {
-              ...returnData,
-              ...{ arguments: [...arrayArguments] },
-            };
-          }
+              returnData = {
+                ...returnData,
+                ...{ arguments: [...arrayArguments] },
+              };
+            }
 
-          if (keyArgs === 'return') {
-            // проверка типа возвращаемого занчения
-            //  проверка items , в нем могут быть сразу ref ar anyOf
+            if (keyArgs === FIELD.RETURN) {
+              const returnDataAnyOf = getReturn(valueArgs as Return);
 
-            if (Object.keys(valueArgs as Return).includes('type')) {
-              if ((valueArgs as Return).type === 'array') {
-                if (
-                  Object.keys(
-                    (valueArgs as Return).items as ItemsReturn
-                  ).includes('anyOf')
-                ) {
-                  const array = ((valueArgs as Return).items as ItemsReturn)
-                    .anyOf;
-
-                  let returnDataAnyOf = '';
-
-                  array.forEach((prop) => {
-                    if (prop.$ref) {
-                      returnDataAnyOf = `[${sliceData(prop.$ref as string)}]`;
-
-                      returnData = {
-                        ...returnData,
-                        ...{ return: returnDataAnyOf },
-                      };
-                    }
-                  });
-
-                  return;
-                }
-
-                const returnDataItemsref = `[${sliceData(
-                  valueArgs.items.$ref as string
-                )}!]!`;
-                // TODO: проверить последний ! на больших значениях
-                returnData = {
-                  ...returnData,
-                  ...{ return: returnDataItemsref },
-                };
-              }
+              returnData = {
+                ...returnData,
+                ...{ return: returnDataAnyOf },
+              };
             }
           }
-
-          // ОБРАБОТКА ЧИСТОГО ТИПА!
-          if (Object.keys(valueArgs as object).includes('$ref')) {
-            const typesTheBest = sliceData(valueArgs.$ref as string);
-
-            returnData = {
-              ...returnData,
-              ...{ return: typesTheBest },
-            };
-          }
-        });
+        );
 
         arrayTypes.push(returnData);
       }
@@ -157,10 +113,9 @@ export const getType = (
   }
 
   // TODO: проверить если нет пропертиз
+  // TODO: и если это вообще не объект
 
-  // console.log(arrayTypes);
+  console.log(arrayTypes);
 
   return arrayTypes;
 };
-
-export const getTypesSchema = () => {};

@@ -29,6 +29,8 @@ const DocsExplorer = () => {
     jsonSchema.properties!
   );
 
+  console.log(jsonSchema);
+
   const snapshot = getSnapshot();
 
   const handlePropertyClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -72,7 +74,7 @@ const DocsExplorer = () => {
             addSnapshot(snapshot.properties[value]);
           }}
         >
-          continent
+          users_by_pk
         </button>
         <button type="button" onClick={handleBack}>
           back
