@@ -7,6 +7,7 @@ import { fromIntrospectionQuery } from 'graphql-2-json-schema';
 import DocsHeader from '../docs-header/DocsHeader';
 import styles from './DocsExplorer.module.scss';
 import { useRedoSnapshot } from './hook/use-redo-snapshot';
+import { getType } from './utils/get-type';
 
 const DocsExplorer = () => {
   const { data } = graphql.useGetSchemaQuery('{}');
@@ -41,7 +42,8 @@ const DocsExplorer = () => {
   };
 
   React.useEffect(() => {
-    // console.log(getType(snapshot) ?? snapshot);
+    console.log(snapshot);
+    console.log(getType(snapshot) ?? snapshot);
   }, [snapshot]);
 
   return (
