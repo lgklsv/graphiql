@@ -1,8 +1,9 @@
 import React from 'react';
-import { Button, Space, Tooltip } from 'antd';
+import { Button, Space } from 'antd';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
+import { AppTooltip } from 'shared/ui';
 import styles from './ToolsTabs.module.scss';
 
 interface ToolTabsProps {
@@ -43,8 +44,7 @@ const ToolsTabs: React.FC<ToolTabsProps> = ({
           </Button>
         ))}
       </Space>
-      <Tooltip
-        placement="bottomLeft"
+      <AppTooltip
         title={
           isOpen
             ? t('sandbox.tooltips.editorToolsClose')
@@ -57,7 +57,7 @@ const ToolsTabs: React.FC<ToolTabsProps> = ({
           icon={isOpen ? <DownOutlined /> : <UpOutlined />}
           onClick={toggle}
         />
-      </Tooltip>
+      </AppTooltip>
     </div>
   );
 };

@@ -1,8 +1,5 @@
 import { ThemeConfig } from 'antd';
 
-// App title
-export const appTitle = 'GraphiQL';
-
 // Test color config, here we can setup theme config for Ant Design
 export const customTheme: ThemeConfig = {
   token: {
@@ -14,6 +11,7 @@ export const customTheme: ThemeConfig = {
   },
 };
 
+export const appTitle = 'GraphiQL';
 export const DEFAULT_VARIABLES_EDITOR_HEIGHT_CLOSED = 56;
 export const DEFAULT_VARIABLES_EDITOR_HEIGHT_OPEN = 300;
 export const QUERY_FIELD_MIN_WIDTH = 350;

@@ -23,7 +23,7 @@ const QueryField: React.FC = () => {
     setQueryFieldWidth(data.size.width);
   };
 
-  if ((screens.sm && !screens.md) || (screens.xs && !screens.md)) {
+  if ((screens.sm || screens.xs) && !screens.md) {
     return (
       <div className={styles.query}>
         <div className={styles.query__editor}>
