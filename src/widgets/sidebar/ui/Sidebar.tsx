@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Drawer, Grid, Space, Tooltip } from 'antd';
+import { Button, Drawer, Grid, Space, Tooltip, Typography } from 'antd';
 import {
   BookOutlined,
   MacCommandOutlined,
@@ -12,6 +12,7 @@ import { DocsExplorer } from 'entities/docs';
 import { ShortcutsModal } from 'entities/modals';
 import styles from './Sidebar.module.scss';
 
+const { Title } = Typography;
 const { useBreakpoint } = Grid;
 
 const Sidebar: React.FC = () => {
@@ -33,7 +34,7 @@ const Sidebar: React.FC = () => {
       <div className={styles.sidebar}>
         <Tooltip
           placement="bottomLeft"
-          title={t(`sandbox.tooltips.${isDocs ? 'docsOpen' : 'docsClose'}`)}
+          title={t(`sandbox.tooltips.docsClose}`)}
         >
           <Button
             onClick={toggleDocs}
@@ -72,11 +73,14 @@ const Sidebar: React.FC = () => {
         </Space>
       </div>
       <Drawer
-        title="Docs"
+        title={<Title style={{ margin: 0 }}>{t('docs.header.title')}</Title>}
         placement="left"
         open={isDocs}
         onClose={toggleDocs}
-      />
+        zIndex={1071}
+      >
+        <DocsExplorer />
+      </Drawer>
       <ShortcutsModal isOpen={isShortcutsModal} toggle={toggleShortcutsModal} />
     </>
   );

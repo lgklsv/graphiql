@@ -40,3 +40,9 @@ button.ant-btn-primary {
     max-width: 50px;
   }
 }
+
+@media (max-width: 767px) {
+  .ant-tooltip {
+    display: none;
+  }
+}
