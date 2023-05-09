@@ -4,7 +4,7 @@
   --footer: 65px;
   --screen-height: calc(100vh - var(--header) - var(--footer));
   --ide-height: calc(
-    100vh - var(--header) - var(--footer) - var(--tabs-height) - 1rem
+    100vh - var(--header) - var(--footer) - var(--tabs-height) - 0.5rem
   );
 
   // IDE

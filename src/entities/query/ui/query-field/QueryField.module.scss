@@ -1,6 +1,6 @@
 .query {
   width: 100%;
-  height: var(--ide-height);
+  height: calc(var(--ide-height) - 1rem);
   background-color: var(--bg-primary);
   box-shadow: var(--popover-box-shadow);
   border-radius: 12px;
@@ -9,6 +9,10 @@
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
+
+  @media (max-width: 767px) {
+    height: calc(100vh / 2.5);
+  }
 
   &__editor {
     display: flex;

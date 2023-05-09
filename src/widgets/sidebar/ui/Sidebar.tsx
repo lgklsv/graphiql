@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Space, Tooltip } from 'antd';
+import { Button, Grid, Space, Tooltip } from 'antd';
 import {
   BookOutlined,
   MacCommandOutlined,
@@ -15,11 +15,14 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { ShortcutsModal } from 'entities/modals';
 import styles from './Sidebar.module.scss';
 
+const { useBreakpoint } = Grid;
+
 const Sidebar: React.FC = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const { isDocs } = useAppSelector(docsSelector);
   const [isShortcutsModal, setIsShortcutsModal] = React.useState(false);
+  const screens = useBreakpoint();
 
   const toggleShortcutsModal = () => {
     setIsShortcutsModal((prev) => !prev);
@@ -40,7 +43,13 @@ const Sidebar: React.FC = () => {
           />
         </Tooltip>
 
-        <Space direction="vertical">
+        <Space
+          direction={
+            (screens.sm && !screens.md) || (screens.xs && !screens.md)
+              ? 'horizontal'
+              : 'vertical'
+          }
+        >
           <Tooltip placement="bottomLeft" title={t('sandbox.tooltips.refetch')}>
             <Button type="text" size="large" icon={<ReloadOutlined />} />
           </Tooltip>
