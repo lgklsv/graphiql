@@ -2,8 +2,7 @@ import React from 'react';
 import { Tabs } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import { docsSelector } from 'store/selectors/DocsSelectors';
-import { useAppSelector, useAppDispatch } from 'shared/hooks/redux';
+import { useAppDispatch } from 'shared/hooks/redux';
 import { useTabs } from 'shared/hooks/use-tab';
 import { setActiveTabKey, updateTabs } from 'store/reducers/TabSlice';
 import { Tab } from '../types';
