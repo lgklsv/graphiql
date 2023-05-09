@@ -13,6 +13,7 @@ import { toggleDocs } from 'store/reducers/DocsSlice';
 import { DocsExplorer } from 'entities/docs';
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { ShortcutsModal } from 'entities/modals';
+import { AnimatePresence } from 'framer-motion';
 import styles from './Sidebar.module.scss';
 
 const { useBreakpoint } = Grid;
@@ -72,7 +73,7 @@ const Sidebar: React.FC = () => {
           </Tooltip>
         </Space>
       </div>
-      {isDocs && <DocsExplorer />}
+      <AnimatePresence>{isDocs && <DocsExplorer />}</AnimatePresence>
       <ShortcutsModal isOpen={isShortcutsModal} toggle={toggleShortcutsModal} />
     </>
   );
