@@ -2,42 +2,11 @@
 
 import React from 'react';
 import { graphql } from 'shared/api';
-import { introspectionFromSchema } from 'graphql';
+import { GraphQLSchema, introspectionFromSchema } from 'graphql';
 import { fromIntrospectionQuery } from 'graphql-2-json-schema';
 import DocsHeader from '../docs-header/DocsHeader';
 import styles from './DocsExplorer.module.scss';
-
-const useRedoSnapshot = <T extends { [key: string]: unknown }>(object: T) => {
-  const cursorRef = React.useRef(0);
-  const [snapshots, setSnapshots] = React.useState([{ ...object }]);
-
-  return {
-    addSnapshot: (value: T) => {
-      setSnapshots((prevSnapshots) => [...prevSnapshots, value]);
-
-      cursorRef.current += 1;
-    },
-    getSnapshot: () => {
-      return snapshots[cursorRef.current];
-    },
-    undoSnapshot: () => {
-      if (cursorRef.current - 1 < 0) {
-        return null;
-      }
-
-      setSnapshots((prevSnapshots) => {
-        const undoSnapshots = [...prevSnapshots];
-        undoSnapshots.pop();
-
-        return undoSnapshots;
-      });
-
-      cursorRef.current -= 1;
-
-      return null;
-    },
-  };
-};
+import { useRedoSnapshot } from './hook/use-redo-snapshot';
 
 const DocsExplorer = () => {
   const { data } = graphql.useGetSchemaQuery('{}');
@@ -45,7 +14,9 @@ const DocsExplorer = () => {
   // if (!data) {
   //   return null;
   // }
-  const introspection = introspectionFromSchema(data);
+  // TODO: check is data?
+
+  const introspection = introspectionFromSchema(data as GraphQLSchema);
 
   const jsonSchema = fromIntrospectionQuery(introspection, {
     ignoreInternals: true,
@@ -60,7 +31,7 @@ const DocsExplorer = () => {
   const snapshot = getSnapshot();
 
   const handlePropertyClick = (event: React.MouseEvent<HTMLElement>) => {
-    const value = (event.target as HTMLElement).innerText;
+    const value: string = (event.target as HTMLElement).innerText;
 
     addSnapshot(snapshot[value]);
   };
