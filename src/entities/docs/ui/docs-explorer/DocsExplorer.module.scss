@@ -1,3 +1,22 @@
 .docs {
   padding: 1rem;
 }
+
+.docs__section_content {
+  margin-left: 0.6rem;
+  margin-top: 1rem;
+
+  div {
+    display: flex;
+    gap: 0.1rem;
+
+    span {
+      color: rgb(0, 125, 235);
+    }
+
+    p {
+      color: rgb(209, 125, 0);
+      cursor: pointer;
+    }
+  }
+}
