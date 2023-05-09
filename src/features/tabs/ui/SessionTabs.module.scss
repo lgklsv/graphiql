@@ -6,8 +6,4 @@
   @media (max-width: 767px) {
     width: 100%;
   }
-
-  &_docs {
-    width: calc(100vw - var(--sidebar-width) - var(--docs-width));
-  }
 }

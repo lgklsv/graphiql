@@ -5,12 +5,10 @@ import {
 } from '@reduxjs/toolkit';
 import { graphql } from 'shared/api';
 import userReducer from './reducers/UserSlice';
-import docsReducer from './reducers/DocsSlice';
 import tabsReducer from './reducers/TabSlice';
 
 const rootReducer = combineReducers({
   userReducer,
-  docsReducer,
   tabsReducer,
   [graphql.sandboxQueries.reducerPath]: graphql.sandboxQueries.reducer,
 });
