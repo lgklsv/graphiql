@@ -35,7 +35,7 @@ const Sidebar: React.FC = () => {
   return (
     <>
       <div className={styles.sidebar}>
-        <AppTooltip title={t(`sandbox.tooltips.docsClose}`)}>
+        <AppTooltip title={t('sandbox.tooltips.docsClose')}>
           <Button
             onClick={toggleDocs}
             type="text"
