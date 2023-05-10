@@ -7,7 +7,6 @@ import {
 
 import {
   DEFAULT_VARIABLES_EDITOR_HEIGHT_CLOSED,
-  DOCS_WIDTH,
   QUERY_FIELD_MIN_WIDTH,
 } from 'app/config';
 
@@ -18,7 +17,6 @@ interface ResizableProps {
   children: React.ReactNode;
   resize?: (e: SyntheticEvent, data: ResizeCallbackData) => void;
   controlledSide: number;
-  isDocs?: boolean;
 }
 
 const Resizable: React.FC<ResizableProps> = ({
@@ -26,19 +24,14 @@ const Resizable: React.FC<ResizableProps> = ({
   children,
   resize,
   controlledSide,
-  isDocs,
 }) => {
   let resizableProps: ResizableBoxProps;
 
   if (direction === 'horizontal') {
-    const maxWidth = isDocs
-      ? window.innerWidth * 0.8 - DOCS_WIDTH
-      : window.innerWidth * 0.8;
-
     resizableProps = {
       onResize: resize,
       minConstraints: [QUERY_FIELD_MIN_WIDTH, Infinity],
-      maxConstraints: [maxWidth, Infinity],
+      maxConstraints: [window.innerWidth * 0.8, Infinity],
       height: Infinity,
       width: controlledSide,
       resizeHandles: ['e'],

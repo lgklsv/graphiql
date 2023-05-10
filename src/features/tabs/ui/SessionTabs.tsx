@@ -2,8 +2,7 @@ import React from 'react';
 import { Tabs } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import { docsSelector } from 'store/selectors/DocsSelectors';
-import { useAppSelector, useAppDispatch } from 'shared/hooks/redux';
+import { useAppDispatch } from 'shared/hooks/redux';
 import { useTabs } from 'shared/hooks/use-tab';
 import { setActiveTabKey, updateTabs } from 'store/reducers/TabSlice';
 import { Tab } from '../types';
@@ -13,9 +12,8 @@ import styles from './SessionTabs.module.scss';
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
 const SessionTabs: React.FC = () => {
-  const { t } = useTranslation();
-  const { isDocs } = useAppSelector(docsSelector);
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
   const { tabs: items, activeTabKey: activeKey } = useTabs();
   const newTabIndex = React.useRef(0);
 
@@ -74,7 +72,7 @@ const SessionTabs: React.FC = () => {
   };
 
   return (
-    <div className={`${styles.tabs} ${isDocs ? styles.tabs_docs : ''}`}>
+    <div className={styles.tabs}>
       <Tabs
         type="editable-card"
         onChange={onChange}

@@ -1,9 +1,10 @@
 import React from 'react';
 import { CheckOutlined, CopyOutlined } from '@ant-design/icons';
-import { Button, Tooltip } from 'antd';
+import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import { useTabs } from 'shared/hooks/use-tab';
+import { AppTooltip } from 'shared/ui';
 
 const CopyButton: React.FC = () => {
   const { t } = useTranslation();
@@ -28,8 +29,7 @@ const CopyButton: React.FC = () => {
   };
 
   return (
-    <Tooltip
-      placement="bottomLeft"
+    <AppTooltip
       title={
         copiedQuery ? t('sandbox.tooltips.copied') : t('sandbox.tooltips.copy')
       }
@@ -40,7 +40,7 @@ const CopyButton: React.FC = () => {
         size="large"
         icon={copiedQuery ? <CheckOutlined /> : <CopyOutlined />}
       />
-    </Tooltip>
+    </AppTooltip>
   );
 };
 

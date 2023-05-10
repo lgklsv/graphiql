@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Space, Tooltip } from 'antd';
+import { Button, Drawer, Grid, Space, Typography } from 'antd';
 import {
   BookOutlined,
   MacCommandOutlined,
@@ -8,62 +8,71 @@ import {
   SettingOutlined,
 } from '@ant-design/icons';
 
-import { docsSelector } from 'store/selectors/DocsSelectors';
-import { toggleDocs } from 'store/reducers/DocsSlice';
 import { DocsExplorer } from 'entities/docs';
-import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { ShortcutsModal } from 'entities/modals';
+import { AppTooltip } from 'shared/ui';
 import styles from './Sidebar.module.scss';
 
+const { Title } = Typography;
+const { useBreakpoint } = Grid;
+
 const Sidebar: React.FC = () => {
-  const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const { isDocs } = useAppSelector(docsSelector);
+  const [isDocs, setIsDocs] = React.useState(false);
   const [isShortcutsModal, setIsShortcutsModal] = React.useState(false);
+  const screens = useBreakpoint();
+
+  const isMobile = (screens.sm || screens.xs) && !screens.md;
 
   const toggleShortcutsModal = () => {
     setIsShortcutsModal((prev) => !prev);
   };
 
+  const toggleDocs = () => {
+    setIsDocs((prev) => !prev);
+  };
+
   return (
     <>
       <div className={styles.sidebar}>
-        <Tooltip
-          placement="bottomLeft"
-          title={t(`sandbox.tooltips.${isDocs ? 'docsOpen' : 'docsClose'}`)}
-        >
+        <AppTooltip title={t('sandbox.tooltips.docsClose')}>
           <Button
-            onClick={() => dispatch(toggleDocs())}
+            onClick={toggleDocs}
             type="text"
             size="large"
             icon={<BookOutlined />}
           />
-        </Tooltip>
-
-        <Space direction="vertical">
-          <Tooltip placement="bottomLeft" title={t('sandbox.tooltips.refetch')}>
+        </AppTooltip>
+        <Space direction={isMobile ? 'horizontal' : 'vertical'}>
+          <AppTooltip title={t('sandbox.tooltips.refetch')}>
             <Button type="text" size="large" icon={<ReloadOutlined />} />
-          </Tooltip>
-          <Tooltip
-            placement="bottomLeft"
-            title={t('sandbox.tooltips.shortcuts')}
-          >
-            <Button
-              onClick={toggleShortcutsModal}
-              type="text"
-              size="large"
-              icon={<MacCommandOutlined />}
-            />
-          </Tooltip>
-          <Tooltip
-            placement="bottomLeft"
-            title={t('sandbox.tooltips.settings')}
-          >
+          </AppTooltip>
+          {!isMobile && (
+            <AppTooltip title={t('sandbox.tooltips.shortcuts')}>
+              <Button
+                onClick={toggleShortcutsModal}
+                type="text"
+                size="large"
+                icon={<MacCommandOutlined />}
+              />
+            </AppTooltip>
+          )}
+          <AppTooltip title={t('sandbox.tooltips.settings')}>
             <Button type="text" size="large" icon={<SettingOutlined />} />
-          </Tooltip>
+          </AppTooltip>
         </Space>
       </div>
-      {isDocs && <DocsExplorer />}
+      <Drawer
+        title={<Title style={{ margin: 0 }}>{t('docs.header.title')}</Title>}
+        placement="left"
+        open={isDocs}
+        onClose={toggleDocs}
+        zIndex={1071}
+        width={isMobile ? '90vw' : '550px'}
+        style={{ borderRadius: '0 12px 12px 0' }}
+      >
+        <DocsExplorer />
+      </Drawer>
       <ShortcutsModal isOpen={isShortcutsModal} toggle={toggleShortcutsModal} />
     </>
   );
