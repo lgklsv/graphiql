@@ -7,7 +7,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { graphql } from 'shared/api';
-import userReducer, { removeUser } from './reducers/UserSlice';
+import userReducer from './reducers/UserSlice';
 import tabsReducer from './reducers/TabSlice';
 
 const persistConfig = {
@@ -33,7 +33,7 @@ const rootReducer = (
   state: ReturnType<typeof appReducer> | undefined,
   action: AnyAction
 ) => {
-  if (action.type === removeUser) {
+  if (action.type === 'user/removeUser') {
     storage.removeItem('persist:graphiql');
     return appReducer(undefined, action);
   }

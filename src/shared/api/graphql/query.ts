@@ -13,12 +13,11 @@ export const sandboxQueries = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
   endpoints: (builder) => ({
     getSchema: builder.query({
-      query: (variables) => ({
+      query: () => ({
         url: '/',
         method: 'POST',
         body: JSON.stringify({
           query: `${getIntrospectionQuery()}`,
-          variables: JSON.parse(variables),
         }),
         headers: {
           'Content-type': 'application/json',
