@@ -37,6 +37,7 @@ export const sandboxQueries = createApi({
         }),
         headers: {
           'Content-type': 'application/json',
+          ...JSON.parse(queryData.headers || '{}'),
         },
       }),
     }),
