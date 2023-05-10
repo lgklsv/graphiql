@@ -7,6 +7,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { graphql } from 'shared/api';
+import { tabsResponseTransform } from 'shared/lib/localStorage/local-storage';
 import userReducer from './reducers/UserSlice';
 import tabsReducer from './reducers/TabSlice';
 
@@ -14,6 +15,7 @@ const persistConfig = {
   key: 'graphiql',
   storage,
   throttle: 400,
+  transforms: [tabsResponseTransform],
   blacklist: [graphql.sandboxQueries.reducerPath], // we exclude api-slices from saving in localStorage
 };
 
