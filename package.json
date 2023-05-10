@@ -10,6 +10,7 @@
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint src --ext ts,tsx --fix",
     "format": "prettier --write .",
+    "ts:check": "tsc-files --noEmit",
     "test": "vitest run --silent",
     "coverage": "vitest run --coverage --silent",
     "coverage:dev": "vitest run --coverage",
@@ -80,6 +81,9 @@
     ],
     "*.{js,ts,tsx,scss,css,md}": [
       "npm run format"
+    ],
+    "**/*.ts": [
+      "npm run ts:check"
     ]
   }
 }
