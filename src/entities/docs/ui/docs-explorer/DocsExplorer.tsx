@@ -1,8 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-
 import React from 'react';
-import { JSONSchema6, JSONSchema6Definition } from 'json-schema';
-
+import { JSONSchema6 } from 'json-schema';
 import { graphql } from 'shared/api';
 import { GraphQLSchema, introspectionFromSchema } from 'graphql';
 import { fromIntrospectionQuery } from 'graphql-2-json-schema';
@@ -13,16 +11,12 @@ import { Types } from './ui/Types';
 import { handlingSchema } from './utils/handling-schema';
 import { removeForbiddenCharacters } from './utils/remove-char';
 
-const DocsExplorer = () => {
-  const { data } = graphql.useGetSchemaQuery('{}');
-  const [titleData, setTitleData] = React.useState('');
+const getJsonSchema = (data?: GraphQLSchema) => {
+  if (!data) {
+    return null;
+  }
 
-  // if (!data) {
-  //   return null;
-  // }
-  // TODO: check is data?
-
-  const introspection = introspectionFromSchema(data as GraphQLSchema);
+  const introspection = introspectionFromSchema(data);
 
   const jsonSchema = fromIntrospectionQuery(introspection, {
     ignoreInternals: true,
@@ -30,17 +24,35 @@ const DocsExplorer = () => {
     idTypeMapping: 'string',
   });
 
-  const definitions = jsonSchema.definitions!;
+  return jsonSchema;
+};
+
+const DocsExplorer = () => {
+  const { data } = graphql.useGetSchemaQuery('{}');
+  const [titleData, setTitleData] = React.useState('');
+
+  const jsonSchema = getJsonSchema(data);
 
   const { addSnapshot, getSnapshot, undoSnapshot } =
     useRedoSnapshot(jsonSchema);
 
   const snapshot = getSnapshot();
 
+  if (!jsonSchema) {
+    return null;
+  }
+
+  const { definitions } = jsonSchema;
+
   const snapshotDefinitions = (value: string) => {
+    if (!definitions) {
+      return null;
+    }
+
     if (value in definitions) {
       return definitions[value];
     }
+
     return null;
   };
 
@@ -50,7 +62,7 @@ const DocsExplorer = () => {
     );
     setTitleData(value);
 
-    return snapshot?.properties[value]
+    return snapshot?.properties?.[value]
       ? addSnapshot(snapshot.properties[value] as JSONSchema6)
       : addSnapshot(snapshotDefinitions(value) as JSONSchema6);
   };
@@ -59,10 +71,6 @@ const DocsExplorer = () => {
     undoSnapshot();
     // TODO: сетать предыдущий заголовок
   };
-
-  React.useEffect(() => {
-    console.log(snapshot);
-  }, [snapshot]);
 
   return (
     <div className={styles.docs}>

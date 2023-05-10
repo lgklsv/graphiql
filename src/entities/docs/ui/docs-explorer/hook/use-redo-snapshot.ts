@@ -1,19 +1,22 @@
 import React from 'react';
-import { JSONSchema6 } from 'json-schema';
 
-export const useRedoSnapshot = <
-  T extends { [key: string]: unknown } | JSONSchema6
->(
-  object: T
-) => {
+export const useRedoSnapshot = <T>(object: T | null) => {
   const cursorRef = React.useRef(0);
-  const [snapshots, setSnapshots] = React.useState([{ ...object }]);
+  const [snapshots, setSnapshots] = React.useState<T[]>(
+    object ? [{ ...object }] : []
+  );
 
   return {
-    addSnapshot: (value: T) => {
+    addSnapshot: (value?: T | null) => {
+      if (!value) {
+        return null;
+      }
+
       setSnapshots((prevSnapshots) => [...prevSnapshots, value]);
 
       cursorRef.current += 1;
+
+      return null;
     },
     getSnapshot: () => {
       return snapshots[cursorRef.current];
