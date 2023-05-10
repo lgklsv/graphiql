@@ -75,6 +75,9 @@
       "prettify": "Prettify (shift + ctrl + p)",
       "copy": "Copy query (shift + ctrl + c)",
       "copied": "Copied!"
+    },
+    "response": {
+      "error": "{{fieldName}} has an invalid JSON format. Please fix the errors and try once again."
     }
   },
   "notFound": {
