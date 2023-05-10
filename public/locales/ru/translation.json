@@ -65,7 +65,6 @@
     },
     "placeholder": "Введите ваш запрос",
     "tooltips": {
-      "docsOpen": "Скрыть документацию",
       "docsClose": "Показать документацию",
       "refetch": "Запросить GraphQL схему",
       "shortcuts": "Все горячие клавиши",

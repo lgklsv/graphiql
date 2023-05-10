@@ -8,7 +8,6 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { graphql } from 'shared/api';
 import userReducer, { removeUser } from './reducers/UserSlice';
-import docsReducer from './reducers/DocsSlice';
 import tabsReducer from './reducers/TabSlice';
 
 const persistConfig = {
@@ -20,7 +19,6 @@ const persistConfig = {
 
 const appReducer = combineReducers({
   userReducer,
-  docsReducer,
   tabsReducer,
   [graphql.sandboxQueries.reducerPath]: graphql.sandboxQueries.reducer,
 });

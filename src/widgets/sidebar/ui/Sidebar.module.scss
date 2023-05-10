@@ -2,10 +2,18 @@
   position: relative;
   width: var(--sidebar-width);
   height: 100%;
-  background-color: transparent;
+  background-color: var(--bg-primary);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
   padding: var(--tabs-height) 0 1rem 0;
+  z-index: 2;
+
+  @media (max-width: 767px) {
+    width: 100%;
+    padding: 0 1rem;
+    height: var(--sidebar-width);
+    flex-direction: row;
+  }
 }

@@ -65,7 +65,6 @@
     },
     "placeholder": "Enter your query",
     "tooltips": {
-      "docsOpen": "Hide documentation",
       "docsClose": "Show documentation",
       "refetch": "Re-fetch GraphQL schema",
       "shortcuts": "Explore all shortcuts",

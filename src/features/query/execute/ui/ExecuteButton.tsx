@@ -1,12 +1,13 @@
 import React from 'react';
 import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
-import { Button, Tooltip } from 'antd';
+import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { activeTabSelector } from 'store/selectors/tabSelector';
-import { useLazyGetEnteredQuery } from 'shared/api/graphql';
 import { updateResponse } from 'store/reducers/TabSlice';
+import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
+import { useLazyGetEnteredQuery } from 'shared/api/graphql';
+import { AppTooltip } from 'shared/ui';
 
 const ExecuteButton: React.FC = () => {
   const { t } = useTranslation();
@@ -39,7 +40,7 @@ const ExecuteButton: React.FC = () => {
   };
 
   return (
-    <Tooltip placement="bottomLeft" title={t('sandbox.tooltips.execute')}>
+    <AppTooltip title={t('sandbox.tooltips.execute')}>
       <Button
         onClick={executeQueryHandler}
         type="primary"
@@ -52,7 +53,7 @@ const ExecuteButton: React.FC = () => {
           )
         }
       />
-    </Tooltip>
+    </AppTooltip>
   );
 };
 

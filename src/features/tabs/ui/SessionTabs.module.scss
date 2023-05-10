@@ -3,7 +3,7 @@
   width: calc(100vw - var(--sidebar-width));
   height: var(--tabs-height);
 
-  &_docs {
-    width: calc(100vw - var(--sidebar-width) - var(--docs-width));
+  @media (max-width: 767px) {
+    width: 100%;
   }
 }
