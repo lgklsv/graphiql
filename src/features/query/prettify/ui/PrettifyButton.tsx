@@ -25,8 +25,42 @@ const PrettifyButton: React.FC = () => {
       } catch (err) {
         // Parsing error, skip formatting
       }
-      // TODO: Prettify variables
-      // TODO: Prettify headers
+    }
+    // Prettify variables
+    if (tabQuery.variables) {
+      try {
+        const prettifiedVariables = JSON.stringify(
+          JSON.parse(tabQuery.variables),
+          null,
+          2
+        );
+        dispatch(
+          updateTabContent({
+            activeTabKey,
+            query: { variables: prettifiedVariables },
+          })
+        );
+      } catch (err) {
+        // Parsing error, skip formatting
+      }
+    }
+    // Prettify headers
+    if (tabQuery.headers) {
+      try {
+        const prettifiedHeaders = JSON.stringify(
+          JSON.parse(tabQuery.headers),
+          null,
+          2
+        );
+        dispatch(
+          updateTabContent({
+            activeTabKey,
+            query: { headers: prettifiedHeaders },
+          })
+        );
+      } catch (err) {
+        // Parsing error, skip formatting
+      }
     }
   };
 
