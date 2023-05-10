@@ -1,13 +1,14 @@
+import { FIELD } from '../const/field';
 import { isRequired } from './is-required';
 import { sliceData } from './slice-data';
 
-export const getArguments = (argument: Arguments): RetutnDataArguments[] => {
-  const arrayArguments: RetutnDataArguments[] = [];
+export const getArguments = (argument: Arguments): ReturnDataArguments[] => {
+  const arrayArguments: ReturnDataArguments[] = [];
 
   if (argument.properties) {
-    // проверка на пропертиз
+    // проверка на properties
     Object.entries(argument.properties).forEach(([key, value]) => {
-      const argumentItem: RetutnDataArguments = {
+      const argumentItem: ReturnDataArguments = {
         type: null,
         name: key,
         description: value.description ? value.description : null,
@@ -15,10 +16,10 @@ export const getArguments = (argument: Arguments): RetutnDataArguments[] => {
       };
 
       // проверка типа - если массив, добавляем кавычки
-      if (Object.keys(value).includes('type') && value.type === 'array') {
+      if (Object.keys(value).includes(FIELD.TYPE) && value.type === 'array') {
         if (value.items) {
           // проверка на null значения
-          if ('anyOf' in value.items) {
+          if (FIELD.ANY in value.items) {
             const array = ((value as Return).items as ItemsReturn).anyOf;
 
             array.forEach((prop) => {

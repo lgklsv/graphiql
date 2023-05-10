@@ -1,42 +1,13 @@
 import { getArguments } from './get-arguments';
 import { FIELD } from '../const/field';
 import { getReturn } from './get-return';
-
-// interface TypesProps {
-//   info: string[];
-//   onClick: (e: React.MouseEvent<HTMLElement>) => void;
-// }
-
-// export const Types: React.FC<TypesProps> = ({ info, onClick }) => {
-//   const [name, type] = info;
-
-//   return (
-//     <div>
-//       <span className="doc__root_type">{name}</span> :
-//       <p onClick={onClick} className="doc__type_name">
-//         {type}
-//       </p>
-//     </div>
-//   );
-// };
-
-// ========= объект на выходе
-interface ReturnData {
-  name: {
-    title: null | string;
-    description?: string | null;
-  } | null;
-  arguments?: RetutnDataArguments[] | null;
-  return?: null | string;
-  type?: null | string;
-}
+import { isAlreadyRequired, isRequired } from './is-required';
 
 export const getType = (
-  jsonGraphQL: IJson,
+  jsonGraphQL: Properties,
+  required?: string[],
   clickedData?: string
 ): ReturnData[] => {
-  // TODO: проверять на входе, объект ли это
-
   const arrayTypes: ReturnData[] = [];
 
   let returnData: ReturnData = {
@@ -46,76 +17,68 @@ export const getType = (
     type: null,
   };
 
-  // первый рендеринг - Query
-  if (Object.keys(jsonGraphQL).includes('Query')) {
-    Object.entries(jsonGraphQL).forEach(([key]) => {
-      arrayTypes.push({ name: { title: key.toLowerCase() }, return: key });
-    });
+  // last type render
+  if (FIELD.TITLE in jsonGraphQL) {
+    returnData.name = {
+      title: jsonGraphQL.title as string,
+      description: jsonGraphQL.description as string,
+    };
+    arrayTypes.push(returnData);
 
     return arrayTypes;
   }
 
-  // 2 УРОВЕНЬ - эндпоинты Query.properties
+  Object.entries(jsonGraphQL).forEach(([key, value]) => {
+    returnData = {
+      name: null,
+      arguments: null,
+      return: null,
+      type: null,
+    };
 
-  if ('properties' in jsonGraphQL) {
-    console.log('has properties');
+    const Required = isRequired(key, required);
 
-    Object.entries(jsonGraphQL.properties as Properties).forEach(
-      ([key, value]) => {
-        returnData = {
-          name: null,
-          arguments: null,
-          return: null,
-          type: null,
-        };
+    if (key === FIELD.ARGUMENTS || key === FIELD.RETURN) {
+      const arrayArguments = getArguments(value as Arguments);
+      const returnDataAnyOf = getReturn(value as Return);
 
-        if (key === FIELD.ARGUMENTS || key === FIELD.RETURN) {
-          const arrayArguments = getArguments(value as Arguments);
-          const returnDataAnyOf = getReturn(value as Return);
+      returnData.name = clickedData ? { title: clickedData } : null;
+      returnData.arguments = arrayArguments.length ? arrayArguments : null;
+      returnData.return = returnDataAnyOf && null;
 
-          returnData.name = clickedData ? { title: clickedData } : null;
-          returnData.arguments = arrayArguments.length ? arrayArguments : null;
-          returnData.return = returnDataAnyOf && null;
+      arrayTypes.push(returnData);
 
-          arrayTypes.push(returnData);
+      return arrayTypes;
+    }
 
-          // TODO: нужно передавать объект клика!
-          return;
+    returnData.name = { title: key }; // name of fields in Query
+
+    Object.entries(value?.properties as Properties).forEach(
+      ([keyArgs, valueArgs]) => {
+        if (keyArgs === FIELD.ARGUMENTS) {
+          const arrayArguments = getArguments(valueArgs as Arguments);
+
+          returnData = {
+            ...returnData,
+            ...{ arguments: [...arrayArguments] },
+          };
         }
 
-        returnData.name = { title: key }; // название полей в Query
+        if (keyArgs === FIELD.RETURN) {
+          const returnDataAnyOf = getReturn(valueArgs as Return);
+          const typeReturnData = isAlreadyRequired(returnDataAnyOf, Required);
 
-        Object.entries(value?.properties as Properties).forEach(
-          ([keyArgs, valueArgs]) => {
-            if (keyArgs === FIELD.ARGUMENTS) {
-              const arrayArguments = getArguments(valueArgs as Arguments);
-
-              returnData = {
-                ...returnData,
-                ...{ arguments: [...arrayArguments] },
-              };
-            }
-
-            if (keyArgs === FIELD.RETURN) {
-              const returnDataAnyOf = getReturn(valueArgs as Return);
-
-              returnData = {
-                ...returnData,
-                ...{ return: returnDataAnyOf },
-              };
-            }
-          }
-        );
-
-        arrayTypes.push(returnData);
+          returnData = {
+            ...returnData,
+            ...{ return: typeReturnData },
+          };
+        }
       }
     );
-  }
 
-  // TODO: проверить если нет пропертиз
-  // TODO: и если это вообще не объект
-
-  console.log(arrayTypes);
+    arrayTypes.push(returnData);
+    return arrayTypes;
+  });
 
   return arrayTypes;
 };

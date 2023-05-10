@@ -33,6 +33,7 @@ interface Arguments {
 
 interface Properties {
   [key: string]: {
+    title?: string;
     description?: string;
     type?: 'array' | 'object';
     properties?: {
@@ -44,9 +45,19 @@ interface Properties {
   } | null;
 }
 
-interface RetutnDataArguments {
+interface ReturnDataArguments {
   type?: null | string;
   description?: string | null;
   name: null | string;
   default?: null | string | boolean;
+}
+// TODO: rename
+interface ReturnData {
+  name: {
+    title: null | string;
+    description?: string | null;
+  } | null;
+  arguments?: ReturnDataArguments[] | null;
+  return?: null | string;
+  type?: null | string;
 }

@@ -1,11 +1,12 @@
+import { FIELD } from '../const/field';
 import { sliceData } from './slice-data';
 
 export const getReturn = (object: Return): string => {
   let returnData = '';
 
-  if (Object.keys(object).includes('type')) {
+  if (Object.keys(object).includes(FIELD.TYPE)) {
     if (object.type === 'array') {
-      if (Object.keys(object.items as ItemsReturn).includes('anyOf')) {
+      if (Object.keys(object.items as ItemsReturn).includes(FIELD.ANY)) {
         const array = (object.items as ItemsReturn).anyOf;
 
         array.forEach((prop) => {
@@ -24,7 +25,6 @@ export const getReturn = (object: Return): string => {
 
   if (Object.keys(object).includes('$ref')) {
     returnData = sliceData(object.$ref as string);
-    // TODO: логика не null возвращаемых значений
   }
 
   return returnData;

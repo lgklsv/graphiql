@@ -1,6 +1,9 @@
 import React from 'react';
+import { JSONSchema6 } from 'json-schema';
 
-export const useRedoSnapshot = <T extends { [key: string]: unknown }>(
+export const useRedoSnapshot = <
+  T extends { [key: string]: unknown } | JSONSchema6
+>(
   object: T
 ) => {
   const cursorRef = React.useRef(0);
