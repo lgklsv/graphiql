@@ -1,6 +1,9 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { JSONSchema6 } from 'json-schema';
+import { Button } from 'antd';
+
+import { LeftOutlined, MinusCircleOutlined } from '@ant-design/icons';
 import { graphql } from 'shared/api';
 import { GraphQLSchema, introspectionFromSchema } from 'graphql';
 import { fromIntrospectionQuery } from 'graphql-2-json-schema';
@@ -31,14 +34,19 @@ const DocsExplorer = () => {
 
   const jsonSchema = getJsonSchema(data);
 
-  const { addSnapshot, getSnapshot, undoSnapshot } = useRedoSnapshot({
-    title: 'Root Types',
-    snapshot: jsonSchema,
-  });
+  const { addSnapshot, getSnapshot, undoSnapshot, getPrevSnapshot } =
+    useRedoSnapshot({
+      title: '',
+      snapshot: jsonSchema,
+    });
 
   const { snapshot, title } = getSnapshot();
 
-  if (!jsonSchema) {
+  console.log(jsonSchema);
+
+  const prevTitle = getPrevSnapshot()?.title;
+
+  if (!jsonSchema || !snapshot) {
     return null;
   }
 
@@ -78,8 +86,33 @@ const DocsExplorer = () => {
 
   return (
     <div className={styles.docs}>
-      <DocsHeader />
-      <h2>A GraphQL schema provides a root type for each kind of operation.</h2>
+      {title && (
+        <Button
+          type="link"
+          htmlType="submit"
+          size="large"
+          icon={<LeftOutlined />}
+          onClick={handleBack}
+        >
+          {!prevTitle ? 'Doc' : prevTitle}
+        </Button>
+        // TODO: edit button
+      )}
+
+      {!title && <DocsHeader />}
+
+      {!title && (
+        <h3>
+          A GraphQL schema provides a root type for each kind of operation.
+        </h3>
+      )}
+
+      <div>
+        <MinusCircleOutlined /> {!title ? 'Root type' : 'Field type'}
+      </div>
+      {/*  - root */}
+      {/* <MinusSquareOutlined /> */}
+
       <h3>{title}</h3>
 
       <div className={styles.docs__section_content}>
@@ -92,10 +125,6 @@ const DocsExplorer = () => {
             }}
           />
         ))}
-
-        <button type="button" onClick={handleBack}>
-          back
-        </button>
       </div>
     </div>
   );

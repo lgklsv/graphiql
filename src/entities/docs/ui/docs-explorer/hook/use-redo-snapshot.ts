@@ -21,6 +21,14 @@ export const useRedoSnapshot = <T>(object: T | null) => {
     getSnapshot: () => {
       return snapshots[cursorRef.current];
     },
+
+    getPrevSnapshot: () => {
+      if (cursorRef.current - 1 < 0) {
+        return null;
+      }
+      return snapshots[cursorRef.current - 1];
+    },
+
     undoSnapshot: () => {
       if (cursorRef.current - 1 < 0) {
         return null;

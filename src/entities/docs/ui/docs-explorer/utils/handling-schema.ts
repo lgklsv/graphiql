@@ -4,10 +4,14 @@ import { FIELD } from '../const/field';
 import { getType } from './get-type';
 
 export const handlingSchema = (
-  jsonGraphQL: IJson | JSONSchema6
+  jsonGraphQL: IJson | JSONSchema6,
+  target?: string
 ): ReturnData[] => {
-  let arrayTypes: ReturnData[] = [];
+  // TODO: обработь ENUMS
+  // обработать конечные типы, не передаются ключи users_aggregate
 
+  let arrayTypes: ReturnData[] = [];
+  console.log(jsonGraphQL);
   // TODO: check data on DESCRIPTIONS in fields
   // query.properties
   if (FIELD.PROPERTIES in jsonGraphQL) {

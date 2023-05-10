@@ -20,12 +20,29 @@ export const getType = (
   // last type render
   if (FIELD.TITLE in jsonGraphQL) {
     returnData.name = {
-      title: jsonGraphQL.title as string,
+      title: 'scalar' as string,
       description: jsonGraphQL.description as string,
     };
+    returnData.return = jsonGraphQL.title as string;
+
     arrayTypes.push(returnData);
 
     return arrayTypes;
+  }
+
+  if (FIELD.ANY in jsonGraphQL) {
+    console.log(jsonGraphQL);
+    console.log('ENUUUUUUUMMMMMMM');
+
+    // returnData.name = {
+    //   title: 'scalar' as string,
+    //   description: jsonGraphQL.description as string,
+    // };
+    // returnData.return = jsonGraphQL.title as string;
+
+    // arrayTypes.push(returnData);
+
+    // return arrayTypes;
   }
 
   Object.entries(jsonGraphQL).forEach(([key, value]) => {
