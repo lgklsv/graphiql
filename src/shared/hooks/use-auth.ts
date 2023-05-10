@@ -1,8 +1,7 @@
-import { LOCAL_STORAGE_KEYS } from 'shared/lib/localStorage/constants';
-import { getLocalStorage } from 'shared/lib/localStorage/local-storage';
+import { useAppSelector } from './redux';
 
 export const useAuthState = () => {
-  const tokenStorage = getLocalStorage(LOCAL_STORAGE_KEYS.TOKEN);
+  const tokenStorage = useAppSelector((state) => state.userReducer.token);
   return {
     isAuth: !!tokenStorage,
   };
