@@ -46,3 +46,23 @@ button.ant-btn-primary {
     display: none;
   }
 }
+
+/* Works on Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-secondary) transparent;
+}
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 20px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: var(--bg-secondary);
+  border-radius: 20px;
+  border: 7px solid transparent;
+  background-clip: content-box;
+  transition: all 0.15s ease-in-out;
+}
