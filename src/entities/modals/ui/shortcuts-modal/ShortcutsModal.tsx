@@ -64,17 +64,17 @@ const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ isOpen, toggle }) => {
     },
     {
       key: '3',
-      shortcut: ['Ctrl', 'Shift', 'P'],
+      shortcut: ['Shift', 'Ctrl', 'P'],
       function: t('modals.shortcuts.function.prettify'),
     },
     {
       key: '4',
-      shortcut: ['Ctrl', 'Shift', 'C'],
+      shortcut: ['Shift', 'Ctrl', 'C'],
       function: t('modals.shortcuts.function.copy'),
     },
     {
       key: '5',
-      shortcut: ['Ctrl', 'Shift', 'R'],
+      shortcut: ['Shift', 'Ctrl', 'R'],
       function: t('modals.shortcuts.function.refetch'),
     },
   ];

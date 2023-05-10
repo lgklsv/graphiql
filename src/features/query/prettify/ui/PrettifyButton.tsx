@@ -3,7 +3,9 @@ import { parse, print } from 'graphql';
 import { ClearOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useHotkeys } from 'react-hotkeys-hook';
 
+import { SHORTCUTS } from 'app/config';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';
 import { updateTabContent } from 'store/reducers/TabSlice';
@@ -29,6 +31,8 @@ const PrettifyButton: React.FC = () => {
       // TODO: Prettify headers
     }
   };
+
+  useHotkeys(SHORTCUTS.prettify, prettifyQueryHandler);
 
   return (
     <AppTooltip title={t('sandbox.tooltips.prettify')}>
