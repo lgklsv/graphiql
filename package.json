@@ -79,11 +79,11 @@
     "*.{js,ts,tsx}": [
       "npm rum lint:fix"
     ],
+    "*.{ts,tsx}": [
+      "npm run ts:check"
+    ],
     "*.{js,ts,tsx,scss,css,md}": [
       "npm run format"
-    ],
-    "**/*.ts": [
-      "npm run ts:check"
     ]
   }
 }
