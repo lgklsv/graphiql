@@ -1,6 +1,7 @@
 interface TypesProps {
   info: ReturnData;
   onClick: (e: React.MouseEvent<HTMLElement>) => void;
+  // this function must be broadcast to types, separately from extra characters, so that the function works further
 }
 
 export const Types: React.FC<TypesProps> = ({ info, onClick }) => {
@@ -15,7 +16,7 @@ export const Types: React.FC<TypesProps> = ({ info, onClick }) => {
       {aTypes &&
         aTypes.map((item) => (
           <p key={item.name}>
-            {item.name}:{item.type},
+            {item.name}:{item.type}
           </p>
         ))}
       {aTypes && `)`}

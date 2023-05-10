@@ -8,6 +8,7 @@ export const handlingSchema = (
 ): ReturnData[] => {
   let arrayTypes: ReturnData[] = [];
 
+  // TODO: check data on DESCRIPTIONS in fields
   // query.properties
   if (FIELD.PROPERTIES in jsonGraphQL) {
     if (Object.keys((jsonGraphQL as IJson).properties).includes('Query')) {
