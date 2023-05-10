@@ -30,7 +30,6 @@ const CopyButton: React.FC = () => {
     };
   }, [copiedQuery]);
 
-  console.log('hi') as Node;
   useHotkeys(SHORTCUTS.copy, copyQueryHandler);
 
   return (

@@ -83,7 +83,7 @@
     "*.{js,ts,tsx,scss,css,md}": [
       "npm run format"
     ],
-    "**/*.ts": [
+    "**/*.ts?(x)": [
       "npm run ts:check"
     ]
   }
