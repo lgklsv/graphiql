@@ -1,8 +1,11 @@
-import { Modal, Space, Typography } from 'antd';
 import React from 'react';
+import { Modal, Space, Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-const { Text, Title } = Typography;
+import { Settings } from 'features/settings';
+import SettingContainer from './SettingContainer';
+
+const { Title } = Typography;
 
 const SettingsModal: React.FC<ModalProps> = ({ isOpen, toggle }) => {
   const { t } = useTranslation();
@@ -20,8 +23,25 @@ const SettingsModal: React.FC<ModalProps> = ({ isOpen, toggle }) => {
       footer={null}
       width={800}
     >
-      <Space size={20} direction="vertical" style={{ width: '100%' }}>
-        <Text>test</Text>
+      <Space size={0} direction="vertical" style={{ width: '100%' }}>
+        <SettingContainer
+          title="Clear storage"
+          subtitle="Remove all locally stored data and start fresh"
+        >
+          <Settings.Clear />
+        </SettingContainer>
+        <SettingContainer
+          title="Clear storage"
+          subtitle="Remove all locally stored data and start fresh"
+        >
+          <Settings.Clear />
+        </SettingContainer>
+        <SettingContainer
+          title="Clear storage"
+          subtitle="Remove all locally stored data and start fresh"
+        >
+          <Settings.Clear />
+        </SettingContainer>
       </Space>
     </Modal>
   );
