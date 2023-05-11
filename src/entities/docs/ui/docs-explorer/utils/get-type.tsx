@@ -19,6 +19,7 @@ export const getType = (props: GetTypeProps): ReturnData[] => {
     arguments: null,
     return: null,
     type: null,
+    isLastType: false,
   };
 
   // last type render
@@ -29,6 +30,7 @@ export const getType = (props: GetTypeProps): ReturnData[] => {
     };
 
     returnData.return = jsonGraphQL.title as string;
+    returnData.isLastType = true;
 
     arrayTypes.push(returnData);
     return arrayTypes;
@@ -43,7 +45,7 @@ export const getType = (props: GetTypeProps): ReturnData[] => {
         title: 'enum',
         description: (jsonGraphQL.description as string) || null,
       };
-
+      returnData.isLastType = true;
       returnData.return = clickedData || null;
     }
 
@@ -70,6 +72,7 @@ export const getType = (props: GetTypeProps): ReturnData[] => {
       arguments: null,
       return: null,
       type: null,
+      isLastType: false,
     };
 
     const Required = isRequired(key, required);

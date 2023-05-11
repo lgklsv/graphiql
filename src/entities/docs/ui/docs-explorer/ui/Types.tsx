@@ -1,6 +1,6 @@
 interface TypesProps {
   info: ReturnData;
-  onClick: (e: React.MouseEvent<HTMLElement>) => void;
+  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   // this function must be broadcast to types, separately from extra characters, so that the function works further
 }
 
@@ -17,7 +17,6 @@ export const Types: React.FC<TypesProps> = ({ info, onClick }) => {
               {item.type}
             </p>
           ))}
-        {/* {aTypes && `)`} */}
         <p onClick={onClick} className="doc__type_name">
           {rTypes}
         </p>

@@ -17,7 +17,11 @@ export const handlingSchema = (
   if (FIELD.PROPERTIES in jsonGraphQL) {
     if (Object.keys((jsonGraphQL as IJson).properties).includes('Query')) {
       Object.entries((jsonGraphQL as IJson).properties).forEach(([key]) => {
-        arrayTypes.push({ name: { title: key.toLowerCase() }, return: key });
+        arrayTypes.push({
+          name: { title: key.toLowerCase() },
+          return: key,
+          isLastType: false,
+        });
       });
       return arrayTypes;
     }

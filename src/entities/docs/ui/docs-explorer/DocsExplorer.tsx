@@ -2,8 +2,7 @@
 import React from 'react';
 import { JSONSchema6 } from 'json-schema';
 import { Button } from 'antd';
-
-import { LeftOutlined, MinusCircleOutlined } from '@ant-design/icons';
+import { LeftOutlined } from '@ant-design/icons';
 import { graphql } from 'shared/api';
 import { GraphQLSchema, introspectionFromSchema } from 'graphql';
 import { fromIntrospectionQuery } from 'graphql-2-json-schema';
@@ -12,6 +11,7 @@ import styles from './DocsExplorer.module.scss';
 import { useRedoSnapshot } from './hook/use-redo-snapshot';
 import { Types } from './ui/Types';
 import { handlingSchema, removeForbiddenCharacters } from './utils';
+import { SectionTitle } from './ui/SectionTitle';
 
 const getJsonSchema = (data?: GraphQLSchema) => {
   if (!data) {
@@ -41,9 +41,6 @@ const DocsExplorer = () => {
     });
 
   const { snapshot, title } = getSnapshot();
-
-  console.log(jsonSchema);
-
   const prevTitle = getPrevSnapshot()?.title;
 
   if (!jsonSchema || !snapshot) {
@@ -107,22 +104,22 @@ const DocsExplorer = () => {
         </h3>
       )}
 
-      <div>
-        <MinusCircleOutlined /> {!title ? 'Root type' : 'Field type'}
-      </div>
-      {/*  - root */}
-      {/* <MinusSquareOutlined /> */}
-
       <h3>{title}</h3>
+      <div>{!snapshot.title && <SectionTitle title={title} />}</div>
 
       <div className={styles.docs__section_content}>
         {handlingSchema(snapshot, title).map((dataTypes) => (
           <Types
             info={dataTypes}
             key={dataTypes.name?.title}
-            onClick={(event) => {
-              handlePropertyClick(event);
-            }}
+            onClick={
+              // check the last field or not, so as not to call the function!
+              !dataTypes.isLastType
+                ? (event) => {
+                    handlePropertyClick(event);
+                  }
+                : undefined
+            }
           />
         ))}
       </div>

@@ -68,6 +68,7 @@ interface ReturnData {
   arguments?: ReturnDataArguments[] | null;
   return?: null | string;
   type?: TypeReturnData | null;
+  isLastType: boolean = false;
 }
 
 interface TypeReturnData {
