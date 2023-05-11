@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Drawer, Grid, Space, Typography } from 'antd';
 import {
@@ -8,10 +8,11 @@ import {
   SettingOutlined,
 } from '@ant-design/icons';
 
-import { DocsExplorer } from 'entities/docs';
 import { ShortcutsModal } from 'entities/modals';
-import { AppTooltip } from 'shared/ui';
+import { AppTooltip, Spinner } from 'shared/ui';
 import styles from './Sidebar.module.scss';
+
+const DocsExplorer = lazy(() => import('entities/docs'));
 
 const { Title } = Typography;
 const { useBreakpoint } = Grid;
@@ -71,7 +72,9 @@ const Sidebar: React.FC = () => {
         width={isMobile ? '90vw' : '550px'}
         style={{ borderRadius: '0 12px 12px 0' }}
       >
-        <DocsExplorer />
+        <Suspense fallback={<Spinner size="medium" />}>
+          <DocsExplorer />
+        </Suspense>
       </Drawer>
       <ShortcutsModal isOpen={isShortcutsModal} toggle={toggleShortcutsModal} />
     </>
