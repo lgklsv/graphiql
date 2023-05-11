@@ -5,20 +5,27 @@ interface TypesProps {
 }
 
 export const Types: React.FC<TypesProps> = ({ info, onClick }) => {
-  const { name, arguments: aTypes, return: rTypes } = info;
+  const { name, arguments: argumentTypes, return: returnTypes } = info;
 
   return (
     <>
       <div>
-        <span className="doc__root_type">{name?.title}</span> :{aTypes && `(`}
-        {aTypes &&
-          aTypes.map((item) => (
-            <p key={item.name} onClick={onClick}>
-              {item.type}
-            </p>
+        <span className="doc__root_type">{name?.title}</span> :{/* argument */}
+        {argumentTypes && `(`}
+        {argumentTypes &&
+          argumentTypes.map((item) => (
+            <>
+              <p className="doc__arg_name" key={item.name}>
+                {item.name}:
+              </p>
+              <p className="doc__arg_type" key={item.type} onClick={onClick}>
+                {item.type}
+              </p>
+            </>
           ))}
+        {argumentTypes && `)`}
         <p onClick={onClick} className="doc__type_name">
-          {rTypes}
+          {returnTypes}
         </p>
       </div>
       <h4>
