@@ -105,6 +105,9 @@
         "refetch": "Re-fetch schema using introspection"
       },
       "message": "The editors use CodeMirror Key Maps that add more short keys."
+    },
+    "settings": {
+      "title": "Settings"
     }
   },
   "developersList": {

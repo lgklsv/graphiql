@@ -94,7 +94,7 @@
     "shortcuts": {
       "title": "Горячие клавиши",
       "columns": {
-        "keys": "Горячая клавиша",
+        "keys": "Комбинация",
         "functions": "Функция"
       },
       "function": {
@@ -105,6 +105,9 @@
         "refetch": "Запросить GraphQL схему"
       },
       "message": "Редактор кода также поддерживает горячие клавиши CodeMirror."
+    },
+    "settings": {
+      "title": "Настройки"
     }
   },
   "developersList": {
