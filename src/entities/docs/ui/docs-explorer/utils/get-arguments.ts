@@ -2,12 +2,12 @@ import { FIELD } from '../const/field';
 import { isRequired } from './is-required';
 import { sliceData } from './slice-data';
 
-export const getArguments = (argument: Arguments): ReturnDataArguments[] => {
-  const arrayArguments: ReturnDataArguments[] = [];
+export const getArguments = (argument: Arguments): ParseSchemaArguments[] => {
+  const arrayArguments: ParseSchemaArguments[] = [];
 
   if (argument.properties) {
     Object.entries(argument.properties).forEach(([key, value]) => {
-      const argumentItem: ReturnDataArguments = {
+      const argumentItem: ParseSchemaArguments = {
         type: null,
         name: key,
         description: value.description ? value.description : null,
