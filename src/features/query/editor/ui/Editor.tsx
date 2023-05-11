@@ -7,6 +7,7 @@ import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';
 import { updateTabContent, updateTabLabel } from 'store/reducers/TabSlice';
 
+import { utils } from 'shared/lib';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import './Editor.scss';
 
@@ -16,7 +17,7 @@ const Editor: React.FC = () => {
   const { activeTabKey, tabQuery } = useTabs();
   const dispatch = useAppDispatch();
 
-  const onChange = (queryString: string) => {
+  const onChange = utils.debounce((queryString: string) => {
     dispatch(updateTabContent({ activeTabKey, query: { data: queryString } }));
 
     const regex = /(?<=query |mutation )\w+/;
@@ -27,7 +28,7 @@ const Editor: React.FC = () => {
       dispatch(
         updateTabLabel({ activeTabKey, label: `${t('sandbox.newTab')}` })
       );
-  };
+  });
 
   return (
     <div className="editor">

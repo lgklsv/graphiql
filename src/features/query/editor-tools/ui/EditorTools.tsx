@@ -7,6 +7,7 @@ import { TabQueryContent } from 'features/tabs/types';
 import { updateTabContent } from 'store/reducers/TabSlice';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';
+import { utils } from 'shared/lib';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import styles from './EditorTools.module.scss';
 
@@ -22,14 +23,14 @@ const EditorTools: React.FC<EditorToolsProps> = ({
 
   const EDITOR_TABS = ['variables', 'headers'];
 
-  const handleChange = (text: string, tabName: string) => {
+  const handleChange = utils.debounce((text: string, tabName: string) => {
     dispatch(
       updateTabContent({
         activeTabKey,
         query: { [tabName]: text },
       })
     );
-  };
+  });
 
   return (
     <div className={styles['editor-tools']}>
