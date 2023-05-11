@@ -2,7 +2,9 @@ import React from 'react';
 import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useHotkeys } from 'react-hotkeys-hook';
 
+import { SHORTCUTS } from 'app/config';
 import { activeTabSelector } from 'store/selectors/tabSelector';
 import { updateResponse } from 'store/reducers/TabSlice';
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
@@ -66,6 +68,8 @@ const ExecuteButton: React.FC = () => {
       }
     }
   };
+
+  useHotkeys(SHORTCUTS.execute, executeQueryHandler);
 
   return (
     <AppTooltip title={t('sandbox.tooltips.execute')}>

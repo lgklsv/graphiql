@@ -21,3 +21,11 @@ export const DEFAULT_QUERY_FIELD_WIDTH =
     : QUERY_FIELD_MIN_WIDTH;
 
 export const BASE_URL = 'https://countries.trevorblades.com/';
+
+export const SHORTCUTS = {
+  search: 'ctrl+k',
+  execute: 'ctrl+enter',
+  prettify: 'shift+ctrl+p',
+  copy: 'shift+ctrl+c',
+  refetch: 'shift+ctrl+r',
+};
