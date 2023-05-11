@@ -1,4 +1,0 @@
-{
-  "**/*.(js|ts|tsx)": ["npm rum lint:fix"],
-  "**/*.(js|ts|tsx|scss|css|md)": ["npm run format"]
-}
