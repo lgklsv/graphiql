@@ -22,13 +22,17 @@ export const handlingSchema = (
       return arrayTypes;
     }
 
-    arrayTypes = getType(
-      jsonGraphQL.properties as Properties,
-      jsonGraphQL.required as string[]
-    );
+    arrayTypes = getType({
+      jsonGraphQL: jsonGraphQL.properties as Properties,
+      required: jsonGraphQL.required as string[],
+      clickedData: target,
+    });
     return arrayTypes;
   }
 
-  arrayTypes = getType(jsonGraphQL as Properties);
+  arrayTypes = getType({
+    jsonGraphQL: jsonGraphQL as Properties,
+    clickedData: target,
+  });
   return arrayTypes;
 };

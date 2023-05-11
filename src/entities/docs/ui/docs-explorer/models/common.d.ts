@@ -6,6 +6,14 @@ interface ItemsReturn {
   anyOf: [{ type?: string; $ref?: string }];
 }
 
+interface IAnyOf {
+  type?: string;
+  $ref?: string;
+  title?: string;
+  description?: string;
+  enum?: string[];
+}
+
 interface Ref {
   $ref?: string;
 }
@@ -59,5 +67,15 @@ interface ReturnData {
   } | null;
   arguments?: ReturnDataArguments[] | null;
   return?: null | string;
-  type?: null | string;
+  type?: TypeReturnData | null;
+}
+
+interface TypeReturnData {
+  title?: string | null;
+  enum?: EnumReturnData[] | null;
+}
+
+interface EnumReturnData {
+  key?: string | null;
+  value?: string | null;
 }

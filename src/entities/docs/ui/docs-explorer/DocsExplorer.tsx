@@ -116,7 +116,7 @@ const DocsExplorer = () => {
       <h3>{title}</h3>
 
       <div className={styles.docs__section_content}>
-        {handlingSchema(snapshot).map((dataTypes) => (
+        {handlingSchema(snapshot, title).map((dataTypes) => (
           <Types
             info={dataTypes}
             key={dataTypes.name?.title}

@@ -3,11 +3,15 @@ import { FIELD } from '../const/field';
 import { getReturn } from './get-return';
 import { isAlreadyRequired, isRequired } from './is-required';
 
-export const getType = (
-  jsonGraphQL: Properties,
-  required?: string[],
-  clickedData?: string
-): ReturnData[] => {
+interface GetTypeProps {
+  jsonGraphQL: Properties;
+  required?: string[];
+  clickedData?: string;
+}
+
+export const getType = (props: GetTypeProps): ReturnData[] => {
+  const { jsonGraphQL, required, clickedData } = props;
+
   const arrayTypes: ReturnData[] = [];
 
   let returnData: ReturnData = {
@@ -20,29 +24,44 @@ export const getType = (
   // last type render
   if (FIELD.TITLE in jsonGraphQL) {
     returnData.name = {
-      title: 'scalar' as string,
+      title: 'scalar',
       description: jsonGraphQL.description as string,
     };
+
     returnData.return = jsonGraphQL.title as string;
 
     arrayTypes.push(returnData);
-
     return arrayTypes;
   }
 
+  // enum render
   if (FIELD.ANY in jsonGraphQL) {
-    console.log(jsonGraphQL);
-    console.log('ENUUUUUUUMMMMMMM');
+    const arrayEnum = jsonGraphQL[FIELD.ANY] as IAnyOf[];
 
-    // returnData.name = {
-    //   title: 'scalar' as string,
-    //   description: jsonGraphQL.description as string,
-    // };
-    // returnData.return = jsonGraphQL.title as string;
+    if ('enum' in arrayEnum[0]) {
+      returnData.name = {
+        title: 'enum',
+        description: (jsonGraphQL.description as string) || null,
+      };
 
-    // arrayTypes.push(returnData);
+      returnData.return = clickedData || null;
+    }
 
-    // return arrayTypes;
+    const enumData = { enum: [] };
+
+    arrayEnum.forEach((item) => {
+      const value =
+        item.enum?.length && item.enum[0] === item.title
+          ? null
+          : item.enum?.[0];
+
+      (enumData.enum as EnumReturnData[]).push({ key: item.title, value });
+    });
+
+    returnData.type = enumData;
+
+    arrayTypes.push(returnData);
+    return arrayTypes;
   }
 
   Object.entries(jsonGraphQL).forEach(([key, value]) => {
@@ -96,6 +115,5 @@ export const getType = (
     arrayTypes.push(returnData);
     return arrayTypes;
   });
-
   return arrayTypes;
 };
