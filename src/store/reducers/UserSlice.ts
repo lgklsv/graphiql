@@ -1,6 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { LOCAL_STORAGE_KEYS } from 'shared/lib/localStorage/constants';
-import { setLocalStorage } from 'shared/lib/localStorage/local-storage';
 
 export type InitialState = {
   email: null | string;
@@ -22,15 +20,11 @@ const userSlice = createSlice({
       state.email = action.payload.email;
       state.token = action.payload.token;
       state.id = action.payload.id;
-
-      setLocalStorage(action.payload.token as string, LOCAL_STORAGE_KEYS.TOKEN);
     },
     removeUser(state) {
       state.email = null;
       state.token = null;
       state.id = null;
-
-      localStorage.removeItem(LOCAL_STORAGE_KEYS.TOKEN);
     },
   },
 });

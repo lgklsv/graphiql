@@ -34,8 +34,36 @@ const ExecuteButton: React.FC = () => {
 
   const executeQueryHandler = () => {
     if (tab) {
-      trigger(tab.query);
-      setIsTriggered(true);
+      const { variables, headers } = tab.query;
+      const checkValues = (value: string | undefined, type: string) => {
+        if (value === '') return true;
+        if (value) {
+          try {
+            JSON.parse(value);
+            return true;
+          } catch (err) {
+            const errorMessage = `${t('sandbox.response.error', {
+              fieldName: type,
+            })}`;
+            dispatch(
+              updateResponse({
+                data: errorMessage,
+                isLoading: false,
+                error,
+              })
+            );
+            return false;
+          }
+        }
+        return false;
+      };
+      if (
+        checkValues(variables, t('sandbox.buttons.variables')) &&
+        checkValues(headers, t('sandbox.buttons.headers'))
+      ) {
+        trigger(tab.query);
+        setIsTriggered(true);
+      }
     }
   };
 

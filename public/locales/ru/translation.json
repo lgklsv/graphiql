@@ -75,6 +75,9 @@
       "prettify": "Форматировать (shift + ctrl + p)",
       "copy": "Скопировать (shift + ctrl + c)",
       "copied": "Скопировано!"
+    },
+    "response": {
+      "error": "{{fieldName}} имеют невалидный JSON формат. Пожалуйста, исправьте ошибки и повторите запрос."
     }
   },
   "notFound": {
