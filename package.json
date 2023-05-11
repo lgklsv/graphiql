@@ -75,13 +75,5 @@
     "vite": "^4.3.2",
     "vite-tsconfig-paths": "^4.2.0",
     "vitest": "^0.30.1"
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "npm rum lint:fix"
-    ],
-    "*.{js,ts,tsx,scss,css,md}": [
-      "npm run format"
-    ]
   }
 }
