@@ -1,5 +1,5 @@
 interface TypesProps {
-  info: ReturnData;
+  info: ParseSchemaData;
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   // this function must be broadcast to types, separately from extra characters, so that the function works further
 }

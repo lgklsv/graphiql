@@ -1,6 +1,6 @@
-import { FIELD } from '../const/field';
+import { FIELD } from '../../const/field';
+import { sliceData } from '../helpers/slice-data';
 import { isRequired } from './is-required';
-import { sliceData } from './slice-data';
 
 export const getArguments = (argument: Arguments): ParseSchemaArguments[] => {
   const arrayArguments: ParseSchemaArguments[] = [];

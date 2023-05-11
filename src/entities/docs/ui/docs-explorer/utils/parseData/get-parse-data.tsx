@@ -1,6 +1,6 @@
-import { getArguments } from './get-arguments';
-import { FIELD } from '../const/field';
-import { getReturn } from './get-return';
+import { FIELD } from '../../const/field';
+import { getArguments } from './get-arguments-types';
+import { getReturn } from './get-return-types';
 import { isAlreadyRequired, isRequired } from './is-required';
 
 interface GetTypeProps {

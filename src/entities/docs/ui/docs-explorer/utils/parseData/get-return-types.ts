@@ -1,5 +1,5 @@
-import { FIELD } from '../const/field';
-import { sliceData } from './slice-data';
+import { FIELD } from '../../const/field';
+import { sliceData } from '../helpers/slice-data';
 
 export const getReturn = (object: Return): string => {
   let returnData = '';

@@ -4,30 +4,12 @@ import { JSONSchema6 } from 'json-schema';
 import { Button } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
 import { graphql } from 'shared/api';
-import { GraphQLSchema, introspectionFromSchema } from 'graphql';
-import { fromIntrospectionQuery } from 'graphql-2-json-schema';
 import DocsHeader from '../docs-header/DocsHeader';
 import styles from './DocsExplorer.module.scss';
 import { useRedoSnapshot } from './hook/use-redo-snapshot';
 import { Types } from './ui/Types';
-import { handlingSchema, removeForbiddenCharacters } from './utils';
+import { getJsonSchema, handlingSchema, removeCharacters } from './utils';
 import { SectionTitle } from './ui/SectionTitle';
-
-const getJsonSchema = (data?: GraphQLSchema) => {
-  if (!data) {
-    return null;
-  }
-
-  const introspection = introspectionFromSchema(data);
-
-  const jsonSchema = fromIntrospectionQuery(introspection, {
-    ignoreInternals: true,
-    nullableArrayItems: true,
-    idTypeMapping: 'string',
-  });
-
-  return jsonSchema;
-};
 
 const DocsExplorer = () => {
   const { data } = graphql.useGetSchemaQuery('{}');
@@ -62,7 +44,7 @@ const DocsExplorer = () => {
   };
 
   const handlePropertyClick = (event: React.MouseEvent<HTMLElement>) => {
-    const value: string = removeForbiddenCharacters(
+    const value: string = removeCharacters(
       (event.target as HTMLElement).innerText
     );
 

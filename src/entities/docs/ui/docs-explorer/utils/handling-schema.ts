@@ -1,7 +1,7 @@
 import { JSONSchema6 } from 'json-schema';
 
 import { FIELD } from '../const/field';
-import { getParseData } from './get-parse-data';
+import { getParseData } from './parseData/get-parse-data';
 
 export const handlingSchema = (
   jsonGraphQL: IJson | JSONSchema6,
@@ -9,9 +9,6 @@ export const handlingSchema = (
 ): ParseSchemaData[] => {
   let arrayParseTypes: ParseSchemaData[] = [];
 
-  // TODO: check data on DESCRIPTIONS in fields
-
-  // query.properties
   if (FIELD.PROPERTIES in jsonGraphQL) {
     if (Object.keys((jsonGraphQL as IJson).properties).includes('Query')) {
       Object.entries((jsonGraphQL as IJson).properties).forEach(([key]) => {
