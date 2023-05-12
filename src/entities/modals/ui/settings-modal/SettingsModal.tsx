@@ -21,20 +21,20 @@ const SettingsModal: React.FC<ModalProps> = ({ isOpen, toggle }) => {
     >
       <Space size={0} direction="vertical" style={{ width: '100%' }}>
         <SettingContainer
-          title="Enable cache"
-          subtitle="All GraphQL requests will be cached. The same requests will not execute twice."
+          title={t('modals.settings.cache.title')}
+          subtitle={t('modals.settings.cache.subtitle')}
         >
           <Settings.Cache />
         </SettingContainer>
         <SettingContainer
-          title="Show statistics"
-          subtitle="Enables request time indicator"
+          title={t('modals.settings.stats.title')}
+          subtitle={t('modals.settings.stats.subtitle')}
         >
           <Settings.Stats />
         </SettingContainer>
         <SettingContainer
-          title="Clear storage"
-          subtitle="Remove all locally stored data and start fresh"
+          title={t('modals.settings.clear.title')}
+          subtitle={t('modals.settings.clear.subtitle')}
         >
           <Settings.Clear />
         </SettingContainer>

@@ -69,8 +69,6 @@
       "refetch": "Re-fetch GraphQL schema",
       "shortcuts": "Explore all shortcuts",
       "settings": "Open settings",
-      "editorToolsOpen": "Open editor tools",
-      "editorToolsClose": "Hide editor tools",
       "execute": "Execute query (ctrl + enter)",
       "prettify": "Prettify (shift + ctrl + p)",
       "copy": "Copy query (shift + ctrl + c)",
@@ -107,7 +105,36 @@
       "message": "The editors use CodeMirror Key Maps that add more short keys."
     },
     "settings": {
-      "title": "Settings"
+      "title": "Settings",
+      "cache": {
+        "title": "Enable cache",
+        "subtitle": "All GraphQL requests will be cached. The same requests will not execute twice.",
+        "toggler": {
+          "on": "On",
+          "off": "Off"
+        }
+      },
+      "stats": {
+        "title": "Show statistics",
+        "subtitle": "Enables response indicator to show some useful data (cache, timing).",
+        "toggler": {
+          "on": "On",
+          "off": "Off"
+        }
+      },
+      "clear": {
+        "title": "Clear storage",
+        "subtitle": "Remove all locally stored data and start fresh.",
+        "button": {
+          "text": "Clear data",
+          "popup": {
+            "title": "Clear locally stored data?",
+            "subtitle": "Are you sure to remove the data? Action cannot be undone.",
+            "confirm": "Yes",
+            "cancel": "No"
+          }
+        }
+      }
     }
   },
   "developersList": {

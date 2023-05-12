@@ -1,12 +1,14 @@
 import React from 'react';
 import { Segmented } from 'antd';
+import { SegmentedValue } from 'antd/es/segmented';
+import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { settingsSelector } from 'store/selectors/settingsSelector';
-import { SegmentedValue } from 'antd/es/segmented';
 import { NumBoolean, setStatsSetting } from 'store/reducers/SettingsSlice';
 
 const Stats: React.FC = () => {
+  const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isStats } = useAppSelector(settingsSelector);
 
@@ -21,11 +23,11 @@ const Stats: React.FC = () => {
       value={isStats}
       options={[
         {
-          label: 'On',
+          label: t('modals.settings.stats.toggler.on'),
           value: 1,
         },
         {
-          label: 'Off',
+          label: t('modals.settings.stats.toggler.off'),
           value: 0,
         },
       ]}
