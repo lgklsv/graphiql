@@ -7,13 +7,21 @@ import { activeTabSelector } from 'store/selectors/tabSelector';
 import { updateResponse } from 'store/reducers/TabSlice';
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { useLazyGetEnteredQuery } from 'shared/api/graphql';
-import { AppTooltip } from 'shared/ui';
+import { AppTooltip, ErrorNotification } from 'shared/ui';
+
+type ToolsErrors = {
+  [key: string]: string;
+};
 
 const ExecuteButton: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const tab = useAppSelector(activeTabSelector);
   const [isTriggered, setIsTriggered] = React.useState(false);
+  const [toolsErrors, setToolsErrors] = React.useState<ToolsErrors>({
+    variables: '',
+    headers: '',
+  });
 
   const [trigger, { data, isFetching, error }] = useLazyGetEnteredQuery();
 
@@ -35,32 +43,37 @@ const ExecuteButton: React.FC = () => {
   const executeQueryHandler = () => {
     if (tab) {
       const { variables, headers } = tab.query;
-      const checkValues = (value: string | undefined, type: string) => {
-        if (value === '') return true;
-        if (value) {
+      let hasErrors = false;
+      const fields = [
+        {
+          value: variables,
+          name: 'variables',
+          type: t('sandbox.buttons.variables'),
+        },
+        { value: headers, name: 'headers', type: t('sandbox.buttons.headers') },
+      ];
+      const errors = fields.reduce((acc, field) => {
+        const { value, name, type } = field;
+        if (value === '') {
+          acc[name] = '';
+        } else if (value) {
           try {
             JSON.parse(value);
-            return true;
+            acc[name] = '';
           } catch (err) {
             const errorMessage = `${t('sandbox.response.error', {
               fieldName: type,
             })}`;
-            dispatch(
-              updateResponse({
-                data: errorMessage,
-                isLoading: false,
-                error,
-              })
-            );
-            return false;
+            acc[name] = errorMessage;
+            hasErrors = true;
           }
         }
-        return false;
-      };
-      if (
-        checkValues(variables, t('sandbox.buttons.variables')) &&
-        checkValues(headers, t('sandbox.buttons.headers'))
-      ) {
+        return acc;
+      }, {} as ToolsErrors);
+
+      setToolsErrors(errors);
+
+      if (!hasErrors) {
         trigger(tab.query);
         setIsTriggered(true);
       }
@@ -81,6 +94,11 @@ const ExecuteButton: React.FC = () => {
           )
         }
       />
+      {(toolsErrors.variables || toolsErrors.headers) && (
+        <ErrorNotification
+          errorMsg={toolsErrors.variables || toolsErrors.headers}
+        />
+      )}
     </AppTooltip>
   );
 };
