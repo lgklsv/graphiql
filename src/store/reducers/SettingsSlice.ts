@@ -22,11 +22,12 @@ const settingsSlice = createSlice({
     setStatsSetting(state, action: PayloadAction<NumBoolean>) {
       state.isStats = action.payload;
     },
+    resetSettings: () => initialState,
   },
 });
 
 const { actions, reducer } = settingsSlice;
 
-export const { setCacheSetting, setStatsSetting } = actions;
+export const { setCacheSetting, setStatsSetting, resetSettings } = actions;
 
 export default reducer;

@@ -2,9 +2,16 @@ import React from 'react';
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { Button, Popconfirm } from 'antd';
 
+import { useAppDispatch } from 'shared/hooks/redux';
+import { resetSettings } from 'store/reducers/SettingsSlice';
+import { resetTabsData } from 'store/reducers/TabSlice';
+
 const Clear: React.FC = () => {
-  const clearDataHandler = () => {
-    console.log('cleared');
+  const dispatch = useAppDispatch();
+
+  const clearDataHandler = async () => {
+    dispatch(resetTabsData());
+    dispatch(resetSettings());
   };
 
   return (

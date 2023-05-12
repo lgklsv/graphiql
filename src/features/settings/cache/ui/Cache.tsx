@@ -9,18 +9,16 @@ import { settingsSelector } from 'store/selectors/settingsSelector';
 const Cache: React.FC = () => {
   const dispatch = useAppDispatch();
   const { isCache } = useAppSelector(settingsSelector);
-  const [cacheValue, setCacheValue] = React.useState<string | number>(isCache);
 
   const selectCacheHandler = (value: SegmentedValue) => {
     const enteredValue = value as NumBoolean;
-    setCacheValue(enteredValue);
     dispatch(setCacheSetting(enteredValue));
   };
 
   return (
     <Segmented
       onChange={selectCacheHandler}
-      value={cacheValue}
+      value={isCache}
       options={[
         {
           label: 'On',
