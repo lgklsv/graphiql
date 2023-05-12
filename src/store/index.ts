@@ -16,7 +16,7 @@ const persistConfig = {
   storage,
   throttle: 400,
   transforms: [tabsResponseTransform],
-  blacklist: [graphql.sandboxQueries.reducerPath], // we exclude api-slices from saving in localStorage
+  blacklist: [graphql.sandboxQueries.reducerPath],
 };
 
 const appReducer = combineReducers({
@@ -24,12 +24,6 @@ const appReducer = combineReducers({
   tabsReducer,
   [graphql.sandboxQueries.reducerPath]: graphql.sandboxQueries.reducer,
 });
-
-// When user logs out, the state is reset to the initial "fresh" state.
-// If the action 'user/removeUser' is fired (clicking logout-button and deleting user data), we return undefined as state.
-// That means for redux - load the fresh initial state/reset state.
-// In this case we can reset state without reloading the page.
-// It assures that if the user logs in on the welcome page with other login and without reloading, he/she will get a fresh sandbox.
 
 const rootReducer = (
   state: ReturnType<typeof appReducer> | undefined,

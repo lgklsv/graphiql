@@ -29,7 +29,7 @@ const SessionTabs: React.FC = () => {
   const add = () => {
     const newActiveKey = `newTab${(newTabIndex.current += 1)}`;
     const newPanes = [...items].map((pane) => {
-      return { ...pane, closable: true }; // I changed it here to assure immutability to prevent error while changing the item prop.
+      return { ...pane, closable: true };
     });
     newPanes.push({
       label: t('sandbox.newTab'),
@@ -58,7 +58,7 @@ const SessionTabs: React.FC = () => {
       }
     }
     if (newPanes.length === 1) {
-      newPanes[0] = { ...newPanes[0], closable: false }; // I changed it here to assure immutability to prevent error while changing the item prop.
+      newPanes[0] = { ...newPanes[0], closable: false };
     }
     updateTabsStore(newActiveKey, newPanes);
   };

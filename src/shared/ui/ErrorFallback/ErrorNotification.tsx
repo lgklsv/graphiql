@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect } from 'react';
 import { Button, Space, notification } from 'antd';
 import { useTranslation } from 'react-i18next';
