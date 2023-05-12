@@ -18,12 +18,13 @@ const ExecuteButton: React.FC = () => {
   const dispatch = useAppDispatch();
   const tab = useAppSelector(activeTabSelector);
   const [isTriggered, setIsTriggered] = React.useState(false);
+  const [trigger, { data, isFetching, error }] = useLazyGetEnteredQuery();
+
   const [toolsErrors, setToolsErrors] = React.useState<ToolsErrors>({
     variables: '',
     headers: '',
   });
-
-  const [trigger, { data, isFetching, error }] = useLazyGetEnteredQuery();
+  const [count, setCount] = React.useState(0);
 
   React.useEffect(() => {
     if (isTriggered) {
@@ -70,36 +71,42 @@ const ExecuteButton: React.FC = () => {
         }
         return acc;
       }, {} as ToolsErrors);
-
-      setToolsErrors(errors);
-
+      setToolsErrors({ ...toolsErrors, ...errors });
       if (!hasErrors) {
         trigger(tab.query);
         setIsTriggered(true);
       }
     }
+    setCount(count + 1);
   };
 
   return (
-    <AppTooltip title={t('sandbox.tooltips.execute')}>
-      <Button
-        onClick={executeQueryHandler}
-        type="primary"
-        size="large"
-        icon={
-          isFetching ? (
-            <PauseOutlined style={{ transform: 'scale(1.5)' }} />
-          ) : (
-            <CaretRightOutlined style={{ transform: 'scale(1.7)' }} />
-          )
-        }
-      />
-      {(toolsErrors.variables || toolsErrors.headers) && (
-        <ErrorNotification
-          errorMsg={toolsErrors.variables || toolsErrors.headers}
+    <>
+      <AppTooltip title={t('sandbox.tooltips.execute')}>
+        <Button
+          onClick={executeQueryHandler}
+          type="primary"
+          size="large"
+          icon={
+            isFetching ? (
+              <PauseOutlined style={{ transform: 'scale(1.5)' }} />
+            ) : (
+              <CaretRightOutlined style={{ transform: 'scale(1.7)' }} />
+            )
+          }
         />
+      </AppTooltip>
+      {toolsErrors.variables && (
+        <div key={`variables${count}`}>
+          <ErrorNotification errorMsg={toolsErrors.variables} />
+        </div>
       )}
-    </AppTooltip>
+      {toolsErrors.headers && (
+        <div key={`headers${count}`}>
+          <ErrorNotification errorMsg={toolsErrors.headers} />
+        </div>
+      )}
+    </>
   );
 };
 
