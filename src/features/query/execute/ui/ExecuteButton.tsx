@@ -6,11 +6,11 @@ import { useHotkeys } from 'react-hotkeys-hook';
 
 import { SHORTCUTS } from 'app/config';
 import { activeTabSelector } from 'store/selectors/tabSelector';
+import { settingsSelector } from 'store/selectors/settingsSelector';
 import { updateResponse } from 'store/reducers/TabSlice';
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { useLazyGetEnteredQuery } from 'shared/api/graphql';
 import { AppTooltip } from 'shared/ui';
-import { settingsSelector } from 'store/selectors/settingsSelector';
 
 const ExecuteButton: React.FC = () => {
   const { t } = useTranslation();
@@ -36,7 +36,7 @@ const ExecuteButton: React.FC = () => {
     }
   }, [isTriggered, data, isFetching, error, dispatch]);
 
-  const executeQueryHandler = () => {
+  const executeQueryHandler = async () => {
     if (tab) {
       const { variables, headers } = tab.query;
       const checkValues = (value: string | undefined, type: string) => {
@@ -66,8 +66,15 @@ const ExecuteButton: React.FC = () => {
         checkValues(headers, t('sandbox.buttons.headers'))
       ) {
         const cacheSetting = isCache === 1;
-        trigger(tab.query, cacheSetting);
         setIsTriggered(true);
+        const { fulfilledTimeStamp, startedTimeStamp } = await trigger(
+          tab.query,
+          cacheSetting
+        );
+        if (fulfilledTimeStamp) {
+          const timing = fulfilledTimeStamp - startedTimeStamp;
+          dispatch(updateResponse({ timing }));
+        }
       }
     }
   };

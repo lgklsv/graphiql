@@ -16,7 +16,8 @@ type TabQueryContent = {
 };
 
 type TabResponseContent = {
-  data: string;
-  isLoading: boolean;
-  error: FetchBaseQueryError | SerializedError | undefined;
+  data?: string;
+  isLoading?: boolean;
+  error?: FetchBaseQueryError | SerializedError | undefined;
+  timing?: number;
 };
