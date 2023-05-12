@@ -10,11 +10,13 @@ import { updateResponse } from 'store/reducers/TabSlice';
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { useLazyGetEnteredQuery } from 'shared/api/graphql';
 import { AppTooltip } from 'shared/ui';
+import { settingsSelector } from 'store/selectors/settingsSelector';
 
 const ExecuteButton: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const tab = useAppSelector(activeTabSelector);
+  const { isDisabledCache } = useAppSelector(settingsSelector);
   const [isTriggered, setIsTriggered] = React.useState(false);
 
   const [trigger, { data, isFetching, error }] = useLazyGetEnteredQuery();
@@ -63,7 +65,8 @@ const ExecuteButton: React.FC = () => {
         checkValues(variables, t('sandbox.buttons.variables')) &&
         checkValues(headers, t('sandbox.buttons.headers'))
       ) {
-        trigger(tab.query);
+        const cacheSetting = isDisabledCache !== 1;
+        trigger(tab.query, cacheSetting);
         setIsTriggered(true);
       }
     }
