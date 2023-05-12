@@ -2,6 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 
+import { ErrorBoundary } from 'shared/hoc';
 import { SandboxLayout } from './layout';
 
 const Sandbox: React.FC = () => {
@@ -11,7 +12,9 @@ const Sandbox: React.FC = () => {
       <Helmet>
         <title>{t('pageTitle.sandbox')}</title>
       </Helmet>
-      <SandboxLayout />
+      <ErrorBoundary type="page">
+        <SandboxLayout />
+      </ErrorBoundary>
     </>
   );
 };

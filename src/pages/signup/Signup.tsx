@@ -8,6 +8,7 @@ import { Form } from 'features/sign-up-form';
 import { TitleForm } from 'shared/ui';
 import { useAuthState } from 'shared/hooks/use-auth';
 
+import { ErrorBoundary } from 'shared/hoc';
 import style from './Signup.module.scss';
 
 const Signup: React.FC = () => {
@@ -24,15 +25,17 @@ const Signup: React.FC = () => {
       <Helmet>
         <title>{t('pageTitle.signup')}</title>
       </Helmet>
-      <div className={style.signup_container}>
-        <TitleForm
-          title={t('signUp.title')}
-          link={ROUTES.login}
-          text={t('signUp.loginRedirect')}
-          textLink={t('signUp.redirectLink')}
-        />
-        <Form.SignUp />
-      </div>
+      <ErrorBoundary type="page">
+        <div className={style.signup_container}>
+          <TitleForm
+            title={t('signUp.title')}
+            link={ROUTES.login}
+            text={t('signUp.loginRedirect')}
+            textLink={t('signUp.redirectLink')}
+          />
+          <Form.SignUp />
+        </div>
+      </ErrorBoundary>
     </>
   );
 };
