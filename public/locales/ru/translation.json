@@ -70,9 +70,15 @@
       "shortcuts": "Все горячие клавиши",
       "settings": "Открыть настройки",
       "execute": "Выполнить запрос (ctrl + enter)",
-      "prettify": "Форматировать (shift + ctrl + p)",
-      "copy": "Скопировать (shift + ctrl + c)",
-      "copied": "Скопировано!"
+      "prettify": {
+        "default": "Форматировать (shift + ctrl + p)",
+        "done": "Готово!",
+        "error": "Возможно невалидный GraphQL, не получилось форматировать"
+      },
+      "copy": {
+        "default": "Скопировать (shift + ctrl + c)",
+        "done": "Скопировано!"
+      }
     },
     "response": {
       "error": "{{fieldName}} имеют невалидный JSON формат. Пожалуйста, исправьте ошибки и повторите запрос."

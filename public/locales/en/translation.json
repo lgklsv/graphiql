@@ -70,9 +70,15 @@
       "shortcuts": "Explore all shortcuts",
       "settings": "Open settings",
       "execute": "Execute query (ctrl + enter)",
-      "prettify": "Prettify (shift + ctrl + p)",
-      "copy": "Copy query (shift + ctrl + c)",
-      "copied": "Copied!"
+      "prettify": {
+        "default": "Prettify (shift + ctrl + p)",
+        "done": "Done!",
+        "error": "Not valid GraphQL, can't prettify"
+      },
+      "copy": {
+        "default": "Copy query (shift + ctrl + c)",
+        "done": "Copied!"
+      }
     },
     "response": {
       "error": "{{fieldName}} has an invalid JSON format. Please fix the errors and try once again."
