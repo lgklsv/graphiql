@@ -3,13 +3,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export type NumBoolean = 1 | 0;
 
 export type SettingsState = {
-  nocache: NumBoolean;
-  stats: NumBoolean;
+  isDisabledCache: NumBoolean;
+  isStats: NumBoolean;
 };
 
 const initialState: SettingsState = {
-  nocache: 0,
-  stats: 1,
+  isDisabledCache: 0,
+  isStats: 1,
 };
 
 const settingsSlice = createSlice({
@@ -17,11 +17,10 @@ const settingsSlice = createSlice({
   initialState,
   reducers: {
     setCacheSetting(state, action: PayloadAction<NumBoolean>) {
-      console.log(action.payload);
-      state.nocache = action.payload;
+      state.isDisabledCache = action.payload;
     },
     setStatsSetting(state, action: PayloadAction<NumBoolean>) {
-      state.nocache = action.payload;
+      state.isStats = action.payload;
     },
   },
 });
