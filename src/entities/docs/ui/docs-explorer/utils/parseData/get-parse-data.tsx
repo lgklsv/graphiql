@@ -102,20 +102,14 @@ export const getParseData = (props: GetTypeProps): ParseSchemaData[] => {
           if (keyArgs === FIELD.ARGUMENTS) {
             const arrayArguments = getArguments(valueArgs as Arguments);
 
-            parseData = {
-              ...parseData,
-              ...{ arguments: [...arrayArguments] },
-            };
+            parseData.arguments = arrayArguments.length ? arrayArguments : null;
           }
 
           if (keyArgs === FIELD.RETURN) {
             const returnDataAnyOf = getReturn(valueArgs as Return);
             const typeReturnData = isAlreadyRequired(returnDataAnyOf, Required);
 
-            parseData = {
-              ...parseData,
-              ...{ return: typeReturnData },
-            };
+            parseData.return = typeReturnData;
           }
         }
       );

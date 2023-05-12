@@ -5,12 +5,10 @@ import { Button } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
 import { graphql } from 'shared/api';
 import DocsHeader from '../docs-header/DocsHeader';
-import styles from './DocsExplorer.module.scss';
 import { useRedoSnapshot } from './hook/use-redo-snapshot';
-import { ParseSchemaData } from './ui/ParseSchemaData';
 import { getJsonSchema, handlingSchema, removeCharacters } from './utils';
-import { SectionTitle } from './ui/SectionTitle';
-import { AllSchemaTypes } from './ui/AllSchemaTypes';
+import { AllSchemaTypes, ParseSchemaData, SectionTitle } from './ui';
+import styles from './DocsExplorer.module.scss';
 
 const DocsExplorer = () => {
   const { data } = graphql.useGetSchemaQuery('{}');

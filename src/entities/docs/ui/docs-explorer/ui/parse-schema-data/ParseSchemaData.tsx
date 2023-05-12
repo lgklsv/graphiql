@@ -1,3 +1,6 @@
+import React from 'react';
+import styles from './ParseSchemaData.module.scss';
+
 interface ParseSchemaDataProps {
   info: ParseSchemaData;
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
@@ -13,27 +16,26 @@ export const ParseSchemaData: React.FC<ParseSchemaDataProps> = ({
   return (
     <>
       <div>
-        <span className="doc__root_type">{name?.title}</span> :{/* argument */}
+        <span className={styles.doc__root_type}>{name?.title}</span> :
+        {/* argument */}
         {argumentTypes && `(`}
         {argumentTypes &&
           argumentTypes.map((item) => (
-            <>
-              <p className="doc__arg_name" key={item.name}>
-                {item.name}:
-              </p>
-              <p className="doc__arg_type" key={item.type} onClick={onClick}>
+            <React.Fragment key={item.name}>
+              <p className={styles.doc__arg_name}>{item.name}:</p>
+              <p className={styles.doc__arg_type} onClick={onClick}>
                 {item.type}
               </p>
-            </>
+            </React.Fragment>
           ))}
         {argumentTypes && `)`}
-        <p onClick={onClick} className="doc__type_name">
+        <p onClick={onClick} className={styles.doc__type_name}>
           {returnTypes}
         </p>
       </div>
       <h4>
         {name?.description && (
-          <span className="doc__root_type">{name?.description}</span>
+          <span className={styles.doc__root_type}>{name?.description}</span>
         )}
       </h4>
     </>

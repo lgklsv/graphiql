@@ -1,4 +1,5 @@
 import { FolderOutlined, FolderOpenOutlined } from '@ant-design/icons';
+import styles from './SectionTitle.module.scss';
 
 interface SectionTitleProps {
   isTitle?: boolean;
@@ -10,17 +11,17 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({
   isTitle,
 }) => {
   return (
-    <div>
+    <div className={styles.doc_section_title}>
       {isTitle ? (
-        <div>
+        <>
           <FolderOutlined />
           <span>Root type</span>
-        </div>
+        </>
       ) : (
-        <div>
+        <>
           <FolderOpenOutlined />
           <span> {title || 'Field type'}</span>
-        </div>
+        </>
       )}
     </div>
   );

@@ -1,5 +1,4 @@
 import { JSONSchema6 } from 'json-schema';
-
 import { FIELD } from '../const/field';
 import { getParseData } from './parseData/get-parse-data';
 
@@ -26,6 +25,7 @@ export const handlingSchema = (
       required: jsonGraphQL.required as string[],
       clickedData: target,
     });
+
     return arrayParseTypes;
   }
 
