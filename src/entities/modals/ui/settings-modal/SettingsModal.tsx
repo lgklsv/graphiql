@@ -12,11 +12,7 @@ const SettingsModal: React.FC<ModalProps> = ({ isOpen, toggle }) => {
 
   return (
     <Modal
-      title={
-        <Title level={2} style={{ margin: 0 }}>
-          {t('modals.settings.title')}
-        </Title>
-      }
+      title={<Title level={2}>{t('modals.settings.title')}</Title>}
       open={isOpen}
       onCancel={toggle}
       centered
@@ -25,16 +21,16 @@ const SettingsModal: React.FC<ModalProps> = ({ isOpen, toggle }) => {
     >
       <Space size={0} direction="vertical" style={{ width: '100%' }}>
         <SettingContainer
-          title="Clear storage"
-          subtitle="Remove all locally stored data and start fresh"
+          title="Disable cache"
+          subtitle="All GraphQL requests will run without cache"
         >
-          <Settings.Clear />
+          <Settings.Cache />
         </SettingContainer>
         <SettingContainer
-          title="Clear storage"
-          subtitle="Remove all locally stored data and start fresh"
+          title="Show statistics"
+          subtitle="Enables request time indicator"
         >
-          <Settings.Clear />
+          <Settings.Stats />
         </SettingContainer>
         <SettingContainer
           title="Clear storage"
