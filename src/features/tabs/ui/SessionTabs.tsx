@@ -1,6 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { Tabs } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { v4 as uuid } from 'uuid';
 
 import { useAppDispatch } from 'shared/hooks/redux';
 import { useTabs } from 'shared/hooks/use-tab';
@@ -15,7 +17,6 @@ const SessionTabs: React.FC = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const { tabs: items, activeTabKey: activeKey } = useTabs();
-  const newTabIndex = React.useRef(0);
 
   const onChange = (newActiveKey: string) => {
     dispatch(setActiveTabKey(newActiveKey));
@@ -27,7 +28,7 @@ const SessionTabs: React.FC = () => {
   };
 
   const add = () => {
-    const newActiveKey = `newTab${(newTabIndex.current += 1)}`;
+    const newActiveKey = uuid();
     const newPanes = [...items].map((pane) => {
       return { ...pane, closable: true }; // I changed it here to assure immutability to prevent error while changing the item prop.
     });
