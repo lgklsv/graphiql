@@ -3,8 +3,8 @@ import ErrorNotification from 'shared/ui/ErrorFallback/ErrorNotification';
 import ErrorPageNotification from 'shared/ui/ErrorFallback/ErrorPageNotification';
 
 interface ErrorBoundaryProps {
-  children?: React.ReactNode;
-  type: 'page' | 'notification';
+  children: React.ReactNode;
+  type: 'page' | 'notification' | 'app';
 }
 
 interface ErrorBoundaryState {
@@ -34,11 +34,24 @@ class ErrorBoundary extends React.Component<
     const { children, type } = this.props;
 
     if (hasError) {
-      return type === 'page' ? (
-        <ErrorPageNotification errorMsg={errorMsg} />
-      ) : (
-        <ErrorNotification errorMsg={errorMsg} />
-      );
+      if (type === 'page') return <ErrorPageNotification errorMsg={errorMsg} />;
+      if (type === 'notification')
+        return <ErrorNotification errorMsg={errorMsg} />;
+      if (type === 'app')
+        return (
+          <h2
+            style={{
+              color: '#281E5B',
+              textAlign: 'center',
+              width: '60%',
+              fontSize: 24,
+              margin: '1em auto',
+            }}
+          >
+            Oops, an unexpected error occured and the app does not work. Please,
+            try later once again.
+          </h2>
+        );
     }
     return children;
   }
