@@ -19,63 +19,66 @@ const ExecuteButton: React.FC = () => {
   const { isCache } = useAppSelector(settingsSelector);
   const [isTriggered, setIsTriggered] = React.useState(false);
 
-  const [trigger, { data, isFetching, error }] = useLazyGetEnteredQuery();
+  const [
+    trigger,
+    { data, isFetching, error, startedTimeStamp, fulfilledTimeStamp },
+  ] = useLazyGetEnteredQuery();
 
   React.useEffect(() => {
-    if (isTriggered) {
+    if (isTriggered && fulfilledTimeStamp && startedTimeStamp) {
+      const timing = fulfilledTimeStamp - startedTimeStamp;
       dispatch(
         updateResponse({
           data: JSON.stringify(data, null, '\t'),
           isLoading: isFetching,
           error,
+          timing,
         })
       );
     }
     if (isTriggered && !isFetching) {
       setIsTriggered(false);
     }
-  }, [isTriggered, data, isFetching, error, dispatch]);
+  }, [
+    isTriggered,
+    data,
+    isFetching,
+    error,
+    dispatch,
+    fulfilledTimeStamp,
+    startedTimeStamp,
+  ]);
 
-  const executeQueryHandler = async () => {
-    if (tab) {
-      const { variables, headers } = tab.query;
-      const checkValues = (value: string | undefined, type: string) => {
-        if (value === '') return true;
-        if (value) {
-          try {
-            JSON.parse(value);
-            return true;
-          } catch (err) {
-            const errorMessage = `${t('sandbox.response.error', {
-              fieldName: type,
-            })}`;
-            dispatch(
-              updateResponse({
-                data: errorMessage,
-                isLoading: false,
-                error,
-              })
-            );
-            return false;
-          }
-        }
-        return false;
-      };
-      if (
-        checkValues(variables, t('sandbox.buttons.variables')) &&
-        checkValues(headers, t('sandbox.buttons.headers'))
-      ) {
-        const cacheSetting = isCache === 1;
-        setIsTriggered(true);
-        const { fulfilledTimeStamp, startedTimeStamp } = await trigger(
-          tab.query,
-          cacheSetting
+  const executeQueryHandler = () => {
+    if (!tab) return;
+    const { variables, headers } = tab.query;
+    const checkValues = (value: string | undefined, type: string) => {
+      if (value === '') return true;
+      if (!value) return false;
+      try {
+        JSON.parse(value);
+        return true;
+      } catch (err) {
+        const errorMessage = `${t('sandbox.response.error', {
+          fieldName: type,
+        })}`;
+        dispatch(
+          updateResponse({
+            data: errorMessage,
+            isLoading: false,
+            error,
+          })
         );
-        if (fulfilledTimeStamp) {
-          const timing = fulfilledTimeStamp - startedTimeStamp;
-          dispatch(updateResponse({ timing }));
-        }
+        return false;
       }
+    };
+    if (
+      checkValues(variables, t('sandbox.buttons.variables')) &&
+      checkValues(headers, t('sandbox.buttons.headers'))
+    ) {
+      const cacheSetting = isCache === 1;
+      trigger(tab.query, cacheSetting);
+      setIsTriggered(true);
     }
   };
 
