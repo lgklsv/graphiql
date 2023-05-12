@@ -97,6 +97,12 @@
   "docs": {
     "header": {
       "title": "Дока"
+    },
+    "explorer": {
+      "title": "Схема GraphQL предоставляет корневой тип для каждого вида операций.",
+      "sectionTitleField": "Тип поля",
+      "sectionTitleRoot": "Корневые типы",
+      "sectionTitleAll": "Все типы схем"
     }
   },
   "modals": {

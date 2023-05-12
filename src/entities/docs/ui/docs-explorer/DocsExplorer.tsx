@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { JSONSchema6 } from 'json-schema';
+import { useTranslation } from 'react-i18next';
 import { Button } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
 import { graphql } from 'shared/api';
@@ -11,6 +12,7 @@ import { AllSchemaTypes, ParseSchemaData, SectionTitle } from './ui';
 import styles from './DocsExplorer.module.scss';
 
 const DocsExplorer = () => {
+  const { t } = useTranslation();
   const { data } = graphql.useGetSchemaQuery('{}');
 
   const jsonSchema = getJsonSchema(data);
@@ -79,11 +81,7 @@ const DocsExplorer = () => {
 
       {!title && <DocsHeader />}
 
-      {!title && (
-        <h3>
-          A GraphQL schema provides a root type for each kind of operation.
-        </h3>
-      )}
+      {!title && <h3>{t('docs.explorer.title')}</h3>}
 
       <h3>{title}</h3>
       <div>{!snapshot.title && <SectionTitle isTitle={!title} />}</div>

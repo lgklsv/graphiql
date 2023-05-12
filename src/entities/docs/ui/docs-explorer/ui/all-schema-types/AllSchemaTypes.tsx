@@ -1,4 +1,5 @@
 import { Button } from 'antd';
+import { useTranslation } from 'react-i18next';
 import { SectionTitle } from '../section-title/SectionTitle';
 import styles from './AllSchemaTypes.module.scss';
 
@@ -10,6 +11,8 @@ export const AllSchemaTypes: React.FC<AllSchemaTypesProps> = ({
   definitions,
   onClick,
 }) => {
+  const { t } = useTranslation();
+
   if (!definitions) {
     return null;
   }
@@ -18,7 +21,7 @@ export const AllSchemaTypes: React.FC<AllSchemaTypesProps> = ({
 
   return (
     <div className={styles.doc_schema__types}>
-      <SectionTitle title="All Schema Types" />
+      <SectionTitle title={t('docs.explorer.sectionTitleAll')} />
 
       {arrayNameTypes.map((name) => (
         <Button
