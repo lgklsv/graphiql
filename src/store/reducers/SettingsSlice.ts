@@ -1,23 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export type NumBoolean = 1 | 0;
+
 export type SettingsState = {
-  nocache: boolean;
-  stats: boolean;
+  nocache: NumBoolean;
+  stats: NumBoolean;
 };
 
 const initialState: SettingsState = {
-  nocache: false,
-  stats: true,
+  nocache: 0,
+  stats: 1,
 };
 
 const settingsSlice = createSlice({
   name: 'settings',
   initialState,
   reducers: {
-    setCacheSetting(state, action: PayloadAction<boolean>) {
+    setCacheSetting(state, action: PayloadAction<NumBoolean>) {
+      console.log(action.payload);
       state.nocache = action.payload;
     },
-    setStatsSetting(state, action: PayloadAction<boolean>) {
+    setStatsSetting(state, action: PayloadAction<NumBoolean>) {
       state.nocache = action.payload;
     },
   },
