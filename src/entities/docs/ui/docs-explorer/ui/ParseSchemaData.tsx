@@ -1,10 +1,13 @@
-interface TypesProps {
+interface ParseSchemaDataProps {
   info: ParseSchemaData;
   onClick?: (e: React.MouseEvent<HTMLElement>) => void;
   // this function must be broadcast to types, separately from extra characters, so that the function works further
 }
 
-export const Types: React.FC<TypesProps> = ({ info, onClick }) => {
+export const ParseSchemaData: React.FC<ParseSchemaDataProps> = ({
+  info,
+  onClick,
+}) => {
   const { name, arguments: argumentTypes, return: returnTypes } = info;
 
   return (

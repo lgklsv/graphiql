@@ -7,9 +7,10 @@ import { graphql } from 'shared/api';
 import DocsHeader from '../docs-header/DocsHeader';
 import styles from './DocsExplorer.module.scss';
 import { useRedoSnapshot } from './hook/use-redo-snapshot';
-import { Types } from './ui/Types';
+import { ParseSchemaData } from './ui/ParseSchemaData';
 import { getJsonSchema, handlingSchema, removeCharacters } from './utils';
 import { SectionTitle } from './ui/SectionTitle';
+import { AllSchemaTypes } from './ui/AllSchemaTypes';
 
 const DocsExplorer = () => {
   const { data } = graphql.useGetSchemaQuery('{}');
@@ -87,11 +88,11 @@ const DocsExplorer = () => {
       )}
 
       <h3>{title}</h3>
-      <div>{!snapshot.title && <SectionTitle title={title} />}</div>
+      <div>{!snapshot.title && <SectionTitle isTitle={!title} />}</div>
 
       <div className={styles.docs__section_content}>
         {handlingSchema(snapshot, title).map((dataTypes) => (
-          <Types
+          <ParseSchemaData
             info={dataTypes}
             key={dataTypes.name?.title}
             onClick={
@@ -104,6 +105,14 @@ const DocsExplorer = () => {
             }
           />
         ))}
+      </div>
+      <div>
+        {!title && (
+          <AllSchemaTypes
+            onClick={handlePropertyClick}
+            definitions={definitions}
+          />
+        )}
       </div>
     </div>
   );
