@@ -1,6 +1,6 @@
 import React, { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { PrivateRoute } from 'shared/hoc/PrivateRoute';
+import { PrivateRoute } from 'shared/hoc';
 
 import { ROUTES } from './config';
 import { LayoutPage } from './layout';
