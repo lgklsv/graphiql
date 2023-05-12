@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { Button } from 'antd';
 import styles from './ErrorFallback.module.scss';
@@ -17,6 +17,8 @@ const ErrorPageNotification: React.FC<ErrorPageNotificationProps> = ({
   const { t } = useTranslation();
   const location = useLocation();
 
+  const reloadPage = () => window.location.reload();
+
   return (
     <>
       <Helmet>
@@ -26,7 +28,16 @@ const ErrorPageNotification: React.FC<ErrorPageNotificationProps> = ({
         <div className={styles['not-found__wrapper']}>
           <h3>{t('errorBoundary.errorTitle')}</h3>
           <h4>{errorMsg || t('errorBoundary.defaultMsg')}</h4>
-          <Link to={location}>{t('errorBoundary.errorReload')}</Link>
+          <Button
+            type="link"
+            href={location.pathname}
+            onClick={(event) => {
+              event?.preventDefault();
+              reloadPage();
+            }}
+          >
+            {t('errorBoundary.errorReload')}
+          </Button>
           {onReset && (
             <Button type="primary" onClick={onReset}>
               {' '}
