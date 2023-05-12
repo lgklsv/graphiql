@@ -79,6 +79,9 @@
     },
     "response": {
       "error": "{{fieldName}} has an invalid JSON format. Please fix the errors and try once again."
+    },
+    "schema": {
+      "failedFetch": "Failed to fetch the GraphQL Schema"
     }
   },
   "notFound": {

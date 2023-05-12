@@ -35,7 +35,7 @@ const ErrorNotification: React.FC<ErrorNotificationProps> = ({
         duration: 0,
       });
     },
-    [api, errorMsg, onReset, t]
+    [api, errorMsg]
   );
 
   useEffect(() => {
