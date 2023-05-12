@@ -8,10 +8,8 @@ import { settingsSelector } from 'store/selectors/settingsSelector';
 
 const Cache: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { isDisabledCache } = useAppSelector(settingsSelector);
-  const [cacheValue, setCacheValue] = React.useState<string | number>(
-    isDisabledCache
-  );
+  const { isCache } = useAppSelector(settingsSelector);
+  const [cacheValue, setCacheValue] = React.useState<string | number>(isCache);
 
   const selectCacheHandler = (value: SegmentedValue) => {
     const enteredValue = value as NumBoolean;

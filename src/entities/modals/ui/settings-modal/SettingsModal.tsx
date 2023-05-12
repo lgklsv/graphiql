@@ -21,8 +21,8 @@ const SettingsModal: React.FC<ModalProps> = ({ isOpen, toggle }) => {
     >
       <Space size={0} direction="vertical" style={{ width: '100%' }}>
         <SettingContainer
-          title="Disable cache"
-          subtitle="All GraphQL requests will run without cache"
+          title="Enable cache"
+          subtitle="All GraphQL requests will be cached. The same requests will not execute twice."
         >
           <Settings.Cache />
         </SettingContainer>

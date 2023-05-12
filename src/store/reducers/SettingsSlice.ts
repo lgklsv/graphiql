@@ -3,12 +3,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 export type NumBoolean = 1 | 0;
 
 export type SettingsState = {
-  isDisabledCache: NumBoolean;
+  isCache: NumBoolean;
   isStats: NumBoolean;
 };
 
 const initialState: SettingsState = {
-  isDisabledCache: 0,
+  isCache: 0,
   isStats: 1,
 };
 
@@ -17,7 +17,7 @@ const settingsSlice = createSlice({
   initialState,
   reducers: {
     setCacheSetting(state, action: PayloadAction<NumBoolean>) {
-      state.isDisabledCache = action.payload;
+      state.isCache = action.payload;
     },
     setStatsSetting(state, action: PayloadAction<NumBoolean>) {
       state.isStats = action.payload;
