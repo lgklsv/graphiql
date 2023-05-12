@@ -73,6 +73,7 @@ const DocsExplorer = () => {
           size="large"
           icon={<LeftOutlined />}
           onClick={handleBack}
+          className={styles.docs__btn_prev_field}
         >
           {!prevTitle ? 'Doc' : prevTitle}
         </Button>
