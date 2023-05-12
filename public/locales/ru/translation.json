@@ -3,7 +3,8 @@
     "home": "Главная",
     "signup": "Регистрация",
     "login": "Вход",
-    "sandbox": "Песочница"
+    "sandbox": "Песочница",
+    "error": "Ошибка"
   },
   "button": {
     "signup": "Регистрация",
@@ -112,5 +113,11 @@
     "olegKolosov": "Олег Колосов",
     "mariaErmolaeva": "Мария Ермолаева"
   },
-  "loader": "Загрузка..."
+  "loader": "Загрузка...",
+  "errorBoundary": {
+    "errorTitle": "Произошла ошибка",
+    "defaultMsg": "Что-то пошло не так",
+    "errerReset": "Попробовать еще раз",
+    "errorReload": "Перезагрузить страницу"
+  }
 }

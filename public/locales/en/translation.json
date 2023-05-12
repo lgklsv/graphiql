@@ -3,7 +3,8 @@
     "home": "Home",
     "signup": "Sign Up",
     "login": "Log In",
-    "sandbox": "Sandbox"
+    "sandbox": "Sandbox",
+    "error": "Error"
   },
   "button": {
     "signup": "Sign Up",
@@ -112,5 +113,11 @@
     "olegKolosov": "Oleg Kolosov",
     "mariaErmolaeva": "Maria Ermolaeva"
   },
-  "loader": "Loading..."
+  "loader": "Loading...",
+  "errorBoundary": {
+    "errorTitle": "An error occurred",
+    "defaultMsg": "Something went wrong",
+    "errerReset": "Try again",
+    "errorReload": "Try to reload"
+  }
 }
