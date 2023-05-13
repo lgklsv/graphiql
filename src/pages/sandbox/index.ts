@@ -1,1 +1,3 @@
-export { default as Sandbox } from './Sandbox';
+import Sandbox from './Sandbox';
+
+export default Sandbox;

@@ -43,4 +43,8 @@ export const sandboxQueries = createApi({
   }),
 });
 
-export const { useGetSchemaQuery, useLazyGetEnteredQuery } = sandboxQueries;
+export const {
+  useGetSchemaQuery,
+  useLazyGetSchemaQuery,
+  useLazyGetEnteredQuery,
+} = sandboxQueries;

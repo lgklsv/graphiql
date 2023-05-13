@@ -3,7 +3,8 @@
     "home": "Home",
     "signup": "Sign Up",
     "login": "Log In",
-    "sandbox": "Sandbox"
+    "sandbox": "Sandbox",
+    "error": "Error"
   },
   "button": {
     "signup": "Sign Up",
@@ -78,6 +79,9 @@
     },
     "response": {
       "error": "{{fieldName}} has an invalid JSON format. Please fix the errors and try once again."
+    },
+    "schema": {
+      "failedFetch": "Failed to fetch the GraphQL Schema"
     }
   },
   "notFound": {
@@ -112,5 +116,11 @@
     "olegKolosov": "Oleg Kolosov",
     "mariaErmolaeva": "Maria Ermolaeva"
   },
-  "loader": "Loading..."
+  "loader": "Loading...",
+  "errorBoundary": {
+    "errorTitle": "An error occurred",
+    "defaultMsg": "Something went wrong",
+    "errerReset": "Try again",
+    "errorReload": "Try to reload"
+  }
 }

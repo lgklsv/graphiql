@@ -8,17 +8,23 @@ import { persistor, store } from 'store';
 import App from 'app';
 import { Spinner } from 'shared/ui';
 import './firebase';
+import { ErrorBoundary } from 'shared/hoc';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Suspense fallback={<Spinner size="large" />}>
-      <BrowserRouter>
-        <Provider store={store}>
-          <PersistGate loading={<Spinner size="large" />} persistor={persistor}>
-            <App />
-          </PersistGate>
-        </Provider>
-      </BrowserRouter>
-    </Suspense>
+    <ErrorBoundary type="app">
+      <Suspense fallback={<Spinner size="large" />}>
+        <BrowserRouter>
+          <Provider store={store}>
+            <PersistGate
+              loading={<Spinner size="large" />}
+              persistor={persistor}
+            >
+              <App />
+            </PersistGate>
+          </Provider>
+        </BrowserRouter>
+      </Suspense>
+    </ErrorBoundary>
   </React.StrictMode>
 );
