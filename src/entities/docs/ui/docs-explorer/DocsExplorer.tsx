@@ -2,13 +2,16 @@
 import React from 'react';
 import { JSONSchema6 } from 'json-schema';
 import { useTranslation } from 'react-i18next';
-import { Button } from 'antd';
+import { Button, Typography } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
+
 import { graphql } from 'shared/api';
 import { useRedoSnapshot } from './hook/use-redo-snapshot';
 import { getJsonSchema, handlingSchema, removeCharacters } from './utils';
 import { AllSchemaTypes, ParseSchemaData, SectionTitle } from './ui';
 import styles from './DocsExplorer.module.scss';
+
+const { Text, Title } = Typography;
 
 const DocsExplorer = () => {
   const { t } = useTranslation();
@@ -76,13 +79,13 @@ const DocsExplorer = () => {
         >
           {!prevTitle ? 'Doc' : prevTitle}
         </Button>
-        // TODO: edit button
       )}
 
-      {!title && <h3>{t('docs.explorer.title')}</h3>}
+      {!title && <Title level={5}>{t('docs.explorer.title')}</Title>}
 
-      <h3>{title}</h3>
-      <div>{!snapshot.title && <SectionTitle isTitle={!title} />}</div>
+      {title && <Title level={3}>{title}</Title>}
+
+      {!snapshot.title && <SectionTitle isRootType={!title} />}
 
       <div className={styles.docs__section_content}>
         {handlingSchema(snapshot, title).map((dataTypes) => (

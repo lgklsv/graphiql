@@ -100,8 +100,8 @@
     },
     "explorer": {
       "title": "A GraphQL schema provides a root type for each kind of operation.",
-      "sectionTitleField": "Field type",
-      "sectionTitleRoot": "Root type",
+      "sectionTitleField": "Fields",
+      "sectionTitleRoot": "Root Types",
       "sectionTitleAll": "All Schema Types"
     }
   },
