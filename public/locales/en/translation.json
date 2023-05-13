@@ -70,17 +70,22 @@
       "refetch": "Re-fetch GraphQL schema",
       "shortcuts": "Explore all shortcuts",
       "settings": "Open settings",
-      "editorToolsOpen": "Open editor tools",
-      "editorToolsClose": "Hide editor tools",
       "execute": "Execute query (ctrl + enter)",
-      "prettify": "Prettify (shift + ctrl + p)",
-      "copy": "Copy query (shift + ctrl + c)",
-      "copied": "Copied!"
+      "prettify": {
+        "default": "Prettify (shift + ctrl + p)",
+        "done": "Done!",
+        "error": "Not valid GraphQL, can't prettify"
+      },
+      "copy": {
+        "default": "Copy query (shift + ctrl + c)",
+        "done": "Copied!"
+      }
     },
     "response": {
       "error": "{{fieldName}} has an invalid JSON format. Please fix the errors and try once again."
     },
-    "schema": {
+    "errors": {
+      "execute": "The query has failed. Check your API or internet connection and try again.",
       "failedFetch": "Failed to fetch the GraphQL Schema"
     }
   },
@@ -109,6 +114,38 @@
         "refetch": "Re-fetch schema using introspection"
       },
       "message": "The editors use CodeMirror Key Maps that add more short keys."
+    },
+    "settings": {
+      "title": "Settings",
+      "cache": {
+        "title": "Enable cache",
+        "subtitle": "All GraphQL requests will be cached. The same requests will not execute twice.",
+        "toggler": {
+          "on": "On",
+          "off": "Off"
+        }
+      },
+      "stats": {
+        "title": "Show statistics",
+        "subtitle": "Enables response indicator to show some useful data (cache, timing).",
+        "toggler": {
+          "on": "On",
+          "off": "Off"
+        }
+      },
+      "clear": {
+        "title": "Clear storage",
+        "subtitle": "Remove all locally stored data and start fresh.",
+        "button": {
+          "text": "Clear data",
+          "popup": {
+            "title": "Clear locally stored data?",
+            "subtitle": "Are you sure to remove the data? Action cannot be undone.",
+            "confirm": "Yes",
+            "cancel": "No"
+          }
+        }
+      }
     }
   },
   "developersList": {
@@ -120,7 +157,7 @@
   "errorBoundary": {
     "errorTitle": "An error occurred",
     "defaultMsg": "Something went wrong",
-    "errerReset": "Try again",
+    "errorReset": "Try again",
     "errorReload": "Try to reload"
   }
 }

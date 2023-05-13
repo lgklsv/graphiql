@@ -10,6 +10,7 @@ import { graphql } from 'shared/api';
 import { tabsResponseTransform } from 'shared/lib/localStorage/local-storage';
 import userReducer from './reducers/UserSlice';
 import tabsReducer from './reducers/TabSlice';
+import settingsReducer from './reducers/SettingsSlice';
 
 const persistConfig = {
   key: 'graphiql',
@@ -22,6 +23,7 @@ const persistConfig = {
 const appReducer = combineReducers({
   userReducer,
   tabsReducer,
+  settingsReducer,
   [graphql.sandboxQueries.reducerPath]: graphql.sandboxQueries.reducer,
 });
 

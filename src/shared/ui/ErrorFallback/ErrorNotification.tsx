@@ -28,7 +28,7 @@ const ErrorNotification: React.FC<ErrorNotificationProps> = ({
             {onReset && (
               <Button type="primary" onClick={onReset}>
                 {' '}
-                {t('errorBoundary.errerReset')}
+                {t('errorBoundary.errorReset')}
               </Button>
             )}
           </Space>

@@ -35,7 +35,9 @@ const CopyButton: React.FC = () => {
   return (
     <AppTooltip
       title={
-        copiedQuery ? t('sandbox.tooltips.copied') : t('sandbox.tooltips.copy')
+        copiedQuery
+          ? t('sandbox.tooltips.copy.done')
+          : t('sandbox.tooltips.copy.default')
       }
     >
       <Button

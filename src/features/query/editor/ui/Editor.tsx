@@ -1,32 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import CodeMirror from '@uiw/react-codemirror';
 import { graphql as graphqlCodeMirror } from 'cm6-graphql';
+
 import { graphql, handleErrorMessage } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';
 import { updateTabContent, updateTabLabel } from 'store/reducers/TabSlice';
-
-import './Editor.scss';
+import { utils } from 'shared/lib';
 import { ErrorNotification } from 'shared/ui';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
+import './Editor.scss';
 
 const Editor: React.FC = () => {
   const { t } = useTranslation();
-  const [getSchema, { data: schema, error, isError }] =
-    graphql.useLazyGetSchemaQuery();
-  const [extensions, setExtensions] = useState([...BASIC_EXTENSIONS]);
+  const { data, error, refetch, isError } = graphql.useGetSchemaQuery('{}');
   const { activeTabKey, tabQuery } = useTabs();
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    getSchema('{}');
-    if (schema) {
-      setExtensions([...BASIC_EXTENSIONS, graphqlCodeMirror(schema)]);
-    }
-  }, [getSchema, schema]);
-
-  const onChange = (queryString: string) => {
+  const onChange = utils.debounce((queryString: string) => {
     dispatch(updateTabContent({ activeTabKey, query: { data: queryString } }));
 
     const regex = /(?<=query |mutation )\w+/;
@@ -37,16 +29,16 @@ const Editor: React.FC = () => {
       dispatch(
         updateTabLabel({ activeTabKey, label: `${t('sandbox.newTab')}` })
       );
-  };
+  });
 
   return (
     <div className="editor">
       {isError && (
         <ErrorNotification
           errorMsg={
-            handleErrorMessage(error) || `${t('sandbox.schema.failedFetch')}`
+            handleErrorMessage(error) || `${t('sandbox.errors.failedFetch')}`
           }
-          onReset={() => getSchema('{}')}
+          onReset={() => refetch()}
         />
       )}
       <CodeMirror
@@ -54,7 +46,11 @@ const Editor: React.FC = () => {
         value={tabQuery.data}
         height="100%"
         placeholder={`${t('sandbox.placeholder')}`}
-        extensions={extensions}
+        extensions={
+          data
+            ? [...BASIC_EXTENSIONS, graphqlCodeMirror(data)]
+            : [...BASIC_EXTENSIONS]
+        }
         basicSetup={BASIC_SETUP_OPTIONS}
         onChange={onChange}
       />

@@ -8,7 +8,7 @@ import {
   SettingOutlined,
 } from '@ant-design/icons';
 
-import { ShortcutsModal } from 'entities/modals';
+import { SettingsModal, ShortcutsModal } from 'entities/modals';
 import { AppTooltip, Spinner } from 'shared/ui';
 import styles from './Sidebar.module.scss';
 
@@ -20,6 +20,7 @@ const { useBreakpoint } = Grid;
 const Sidebar: React.FC = () => {
   const { t } = useTranslation();
   const [isDocs, setIsDocs] = React.useState(false);
+  const [isSettingsModal, setIsSettingsModal] = React.useState(false);
   const [isShortcutsModal, setIsShortcutsModal] = React.useState(false);
   const screens = useBreakpoint();
 
@@ -27,6 +28,10 @@ const Sidebar: React.FC = () => {
 
   const toggleShortcutsModal = () => {
     setIsShortcutsModal((prev) => !prev);
+  };
+
+  const toggleSettingsModal = () => {
+    setIsSettingsModal((prev) => !prev);
   };
 
   const toggleDocs = () => {
@@ -59,7 +64,12 @@ const Sidebar: React.FC = () => {
             </AppTooltip>
           )}
           <AppTooltip title={t('sandbox.tooltips.settings')}>
-            <Button type="text" size="large" icon={<SettingOutlined />} />
+            <Button
+              onClick={toggleSettingsModal}
+              type="text"
+              size="large"
+              icon={<SettingOutlined />}
+            />
           </AppTooltip>
         </Space>
       </div>
@@ -77,6 +87,7 @@ const Sidebar: React.FC = () => {
         </Suspense>
       </Drawer>
       <ShortcutsModal isOpen={isShortcutsModal} toggle={toggleShortcutsModal} />
+      <SettingsModal isOpen={isSettingsModal} toggle={toggleSettingsModal} />
     </>
   );
 };

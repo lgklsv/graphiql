@@ -57,6 +57,7 @@ const tabsSlice = createSlice({
         activeTab.label = action.payload.label;
       }
     },
+    resetTabsData: () => initialState,
   },
 });
 
@@ -68,6 +69,7 @@ export const {
   updateTabContent,
   updateResponse,
   updateTabLabel,
+  resetTabsData,
 } = actions;
 
 export default reducer;

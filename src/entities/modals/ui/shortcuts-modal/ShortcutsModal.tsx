@@ -12,12 +12,7 @@ interface DataType {
   function: string;
 }
 
-interface ShortcutsModalProps {
-  isOpen: boolean;
-  toggle: () => void;
-}
-
-const ShortcutsModal: React.FC<ShortcutsModalProps> = ({ isOpen, toggle }) => {
+const ShortcutsModal: React.FC<ModalProps> = ({ isOpen, toggle }) => {
   const { t } = useTranslation();
 
   const columns: ColumnsType<DataType> = [

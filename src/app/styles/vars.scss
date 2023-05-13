@@ -16,6 +16,7 @@
     0px 1.34018px 4.46726px rgba(59, 76, 106, 0.0774939),
     0px 0.399006px 1.33002px rgba(59, 76, 106, 0.0525061);
 
+  // Values
   --line-height: 1.5;
   --alpha-secondary: 0.76;
   --alpha-ternary: 0.5;
@@ -38,18 +39,7 @@
   --border-primary: 1px solid hsla(var(--color-neutral), 0.1);
   --border-active: hsla(var(--color-neutral), 0.15);
 
-  // For handling errors or success messages (kinda useless,  we already have a UI lib)
-  --green: #3bb33b;
-  --green-intense: #03e952;
-  --red: #ed352c;
-  --red-intense: #fc3f1d;
-  --orange: #f50;
-  --orange-light: #f99540;
-  --orange-intense: #f25900;
-  --blue: #4434ff;
-  --blue-intense: #3d2ae4;
   --dark-purple: #2d1f66;
-
   --apollo-gradient-purple: linear-gradient(to bottom, #1c153c 27%, #2d1f66);
   --apollo-purple: #7156d9b8;
   --apollo-purple-light: #9781efb8;

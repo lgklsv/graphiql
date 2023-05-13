@@ -2,8 +2,8 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
-
 import { Button } from 'antd';
+
 import styles from './ErrorFallback.module.scss';
 
 interface ErrorPageNotificationProps {
@@ -41,7 +41,7 @@ const ErrorPageNotification: React.FC<ErrorPageNotificationProps> = ({
           {onReset && (
             <Button type="primary" onClick={onReset}>
               {' '}
-              {t('errorBoundary.errerReset')}
+              {t('errorBoundary.errorReset')}
             </Button>
           )}
         </div>

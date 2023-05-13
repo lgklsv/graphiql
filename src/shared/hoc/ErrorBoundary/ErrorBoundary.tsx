@@ -48,8 +48,8 @@ class ErrorBoundary extends React.Component<
               margin: '1em auto',
             }}
           >
-            Oops, an unexpected error occured and the app does not work. Please,
-            try later once again.
+            Oops, an unexpected error occurred and the app does not work.
+            Please, try later once again.
           </h2>
         );
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { parse, print } from 'graphql';
-import { ClearOutlined } from '@ant-design/icons';
+import { CheckOutlined, ClearOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -14,7 +14,22 @@ import { AppTooltip } from 'shared/ui';
 const PrettifyButton: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const [isPrettified, setIsPrettified] = React.useState(false);
+  const [isError, setIsError] = React.useState(false);
   const { activeTabKey, tabQuery } = useTabs();
+
+  React.useEffect(() => {
+    let timer: NodeJS.Timeout;
+    if (isPrettified || isError) {
+      timer = setTimeout(() => {
+        setIsPrettified(false);
+        setIsError(false);
+      }, 800);
+    }
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isPrettified, isError]);
 
   const prettifyQueryHandler = () => {
     if (tabQuery.data) {
@@ -24,8 +39,10 @@ const PrettifyButton: React.FC = () => {
         dispatch(
           updateTabContent({ activeTabKey, query: { data: prettifiedQuery } })
         );
+        setIsPrettified(true);
       } catch (err) {
         // Parsing error, skip formatting
+        setIsError(true);
       }
     }
     // Prettify variables
@@ -68,13 +85,18 @@ const PrettifyButton: React.FC = () => {
 
   useHotkeys(SHORTCUTS.prettify, prettifyQueryHandler);
 
+  let title = t('sandbox.tooltips.prettify.default');
+  if (isPrettified) title = t('sandbox.tooltips.prettify.done');
+  if (isError) title = t('sandbox.tooltips.prettify.error');
+
   return (
-    <AppTooltip title={t('sandbox.tooltips.prettify')}>
+    <AppTooltip title={title}>
       <Button
+        style={isError ? { backgroundColor: '#FFECE8' } : undefined}
         onClick={prettifyQueryHandler}
         type="text"
         size="large"
-        icon={<ClearOutlined />}
+        icon={isPrettified ? <CheckOutlined /> : <ClearOutlined />}
       />
     </AppTooltip>
   );
