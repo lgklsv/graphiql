@@ -97,6 +97,12 @@
   "docs": {
     "header": {
       "title": "Docs"
+    },
+    "explorer": {
+      "title": "A GraphQL schema provides a root type for each kind of operation.",
+      "sectionTitleField": "Field type",
+      "sectionTitleRoot": "Root type",
+      "sectionTitleAll": "All Schema Types"
     }
   },
   "modals": {

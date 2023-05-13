@@ -1,3 +1,23 @@
 .docs {
   padding: 1rem;
+  left: var(--sidebar-width);
+  min-width: var(--docs-width);
+  height: var(--screen-height);
+  display: flex;
+  flex-direction: column;
+
+  .docs__btn_prev_field {
+    text-align: left;
+    padding: 0;
+  }
+}
+
+.docs__section_content {
+  margin-left: 0.6rem;
+  margin-bottom: 1.5rem;
+
+  div {
+    display: flex;
+    gap: 0.1rem;
+  }
 }

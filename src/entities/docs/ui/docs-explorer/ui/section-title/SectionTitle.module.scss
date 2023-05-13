@@ -1,0 +1,10 @@
+.doc_section_title {
+  margin-top: 1rem;
+  margin-bottom: 0.3rem;
+
+  span {
+    &:first-child {
+      margin-right: 0.3rem;
+    }
+  }
+}
