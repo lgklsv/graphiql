@@ -1,5 +1,8 @@
 import React from 'react';
+import { Button, Space, Typography } from 'antd';
 import styles from './ParseSchemaData.module.scss';
+
+const { Text, Title } = Typography;
 
 interface ParseSchemaDataProps {
   info: ParseSchemaData;
@@ -15,24 +18,40 @@ export const ParseSchemaData: React.FC<ParseSchemaDataProps> = ({
 
   return (
     <>
-      <div>
-        <span className={styles.doc__root_type}>{name?.title}</span> :
+      <Space size={5}>
+        <Button
+          type="link"
+          size="large"
+          style={{
+            paddingBottom: 0,
+            paddingTop: 0,
+            paddingRight: 0,
+            cursor: 'auto',
+            height: 'auto',
+          }}
+        >
+          {name?.title}:
+        </Button>
         {/* argument */}
-        {argumentTypes && `(`}
-        {argumentTypes &&
-          argumentTypes.map((item) => (
-            <React.Fragment key={item.name}>
-              <p className={styles.doc__arg_name}>{item.name}:</p>
-              <p className={styles.doc__arg_type} onClick={onClick}>
-                {item.type}
-              </p>
-            </React.Fragment>
-          ))}
-        {argumentTypes && `)`}
-        <p onClick={onClick} className={styles.doc__type_name}>
+        {argumentTypes && (
+          <Space size={3}>
+            (
+            {argumentTypes.map((item) => (
+              <React.Fragment key={item.name}>
+                <p className={styles.doc__arg_name}>{item.name}:</p>
+                <p className={styles.doc__arg_type} onClick={onClick}>
+                  {item.type}
+                </p>
+              </React.Fragment>
+            ))}
+            )
+          </Space>
+        )}
+
+        <Text onClick={onClick} className={styles.doc__type_name}>
           {returnTypes}
-        </p>
-      </div>
+        </Text>
+      </Space>
       <h4>
         {name?.description && (
           <span className={styles.doc__root_type}>{name?.description}</span>

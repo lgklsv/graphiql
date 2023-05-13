@@ -2,7 +2,7 @@
 import React from 'react';
 import { JSONSchema6 } from 'json-schema';
 import { useTranslation } from 'react-i18next';
-import { Button, Typography } from 'antd';
+import { Button, Space, Typography } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
 
 import { graphql } from 'shared/api';
@@ -67,7 +67,7 @@ const DocsExplorer = () => {
   };
 
   return (
-    <div className={styles.docs}>
+    <Space direction="vertical" className={styles.docs}>
       {title && (
         <Button
           type="link"
@@ -75,7 +75,8 @@ const DocsExplorer = () => {
           size="large"
           icon={<LeftOutlined />}
           onClick={handleBack}
-          className={styles.docs__btn_prev_field}
+          className={styles.docs__prev}
+          style={{ padding: 0 }}
         >
           {!prevTitle ? 'Doc' : prevTitle}
         </Button>
@@ -83,7 +84,11 @@ const DocsExplorer = () => {
 
       {!title && <Title level={5}>{t('docs.explorer.title')}</Title>}
 
-      {title && <Title level={3}>{title}</Title>}
+      {title && (
+        <Title style={{ margin: 0 }} level={3}>
+          {title}
+        </Title>
+      )}
 
       {!snapshot.title && <SectionTitle isRootType={!title} />}
 
@@ -111,7 +116,7 @@ const DocsExplorer = () => {
           />
         )}
       </div>
-    </div>
+    </Space>
   );
 };
 
