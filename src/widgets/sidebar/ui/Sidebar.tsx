@@ -78,7 +78,6 @@ const Sidebar: React.FC = () => {
         placement="left"
         open={isDocs}
         onClose={toggleDocs}
-        zIndex={1071}
         width={isMobile ? '90vw' : '550px'}
         style={{ borderRadius: '0 12px 12px 0' }}
       >

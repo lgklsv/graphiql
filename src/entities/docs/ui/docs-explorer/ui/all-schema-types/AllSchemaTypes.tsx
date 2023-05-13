@@ -1,5 +1,6 @@
-import { Button } from 'antd';
+import { Button, Space } from 'antd';
 import { useTranslation } from 'react-i18next';
+
 import { SectionTitle } from '../section-title/SectionTitle';
 import styles from './AllSchemaTypes.module.scss';
 
@@ -20,7 +21,7 @@ export const AllSchemaTypes: React.FC<AllSchemaTypesProps> = ({
   const arrayNameTypes = definitions && Object.keys(definitions);
 
   return (
-    <div className={styles.doc_schema__types}>
+    <Space direction="vertical" size={0}>
       <SectionTitle title={t('docs.explorer.sectionTitleAll')} />
 
       {arrayNameTypes.map((name) => (
@@ -30,11 +31,16 @@ export const AllSchemaTypes: React.FC<AllSchemaTypesProps> = ({
           htmlType="submit"
           size="large"
           onClick={(e) => onClick(e)}
-          className={styles.schema_types__item}
+          style={{
+            paddingBottom: 0,
+            paddingTop: 0,
+            height: 'auto',
+          }}
+          className={styles.item}
         >
           {name}
         </Button>
       ))}
-    </div>
+    </Space>
   );
 };
