@@ -6,7 +6,7 @@ interface IRequireAuth {
   children: JSX.Element;
 }
 
-export const PrivateRoute = ({ children }: IRequireAuth) => {
+const PrivateRoute = ({ children }: IRequireAuth) => {
   const location = useLocation();
   const { isAuth } = useAuthState();
 
@@ -16,3 +16,5 @@ export const PrivateRoute = ({ children }: IRequireAuth) => {
     children
   );
 };
+
+export default PrivateRoute;

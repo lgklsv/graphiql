@@ -1,1 +1,3 @@
-export * from './ui';
+import { DocsExplorer } from './ui';
+
+export default DocsExplorer;

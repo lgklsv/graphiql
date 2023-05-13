@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Layout } from 'antd';
 import { Header } from 'widgets/header';
 import { Footer } from 'widgets/footer';
+import { Spinner } from 'shared/ui';
 
 import styles from './Layout.module.scss';
 
@@ -13,7 +14,9 @@ const LayoutPage: React.FC = () => {
     <Layout>
       <Header />
       <Content className={styles.main}>
-        <Outlet />
+        <Suspense fallback={<Spinner size="large" />}>
+          <Outlet />
+        </Suspense>
       </Content>
       <Footer />
     </Layout>

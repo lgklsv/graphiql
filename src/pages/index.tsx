@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { PrivateRoute } from 'shared/hoc/PrivateRoute';
+import { PrivateRoute } from 'shared/hoc';
 
-import { Home } from './home';
-import { Login } from './login';
-import { Signup } from './signup';
-import { NotFound } from './notfound';
-import { Sandbox } from './sandbox';
 import { ROUTES } from './config';
 import { LayoutPage } from './layout';
+
+const Home = lazy(() => import('./home'));
+const Sandbox = lazy(() => import('./sandbox'));
+const NotFound = lazy(() => import('./notfound'));
+const Login = lazy(() => import('./login'));
+const Signup = lazy(() => import('./signup'));
 
 const Routing: React.FC = () => {
   return (

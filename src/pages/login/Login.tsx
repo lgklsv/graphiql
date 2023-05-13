@@ -12,6 +12,7 @@ import { FirebaseAuth } from 'features/firebase-button-auth';
 import { TitleForm } from 'shared/ui';
 import { useAuthState } from 'shared/hooks/use-auth';
 
+import { ErrorBoundary } from 'shared/hoc';
 import style from './Login.module.scss';
 
 const Login: React.FC = () => {
@@ -28,35 +29,36 @@ const Login: React.FC = () => {
       <Helmet>
         <title>{t('pageTitle.login')}</title>
       </Helmet>
-
-      <div className={style.login_container}>
-        <TitleForm
-          title={t('logIn.title')}
-          link={ROUTES.signup}
-          text={t('logIn.signUpRedirect')}
-          textLink={t('logIn.redirectLink')}
-        />
-        <div className={style.login_buttons}>
-          <FirebaseAuth.Button
-            text={t('button.signGithub')}
-            provider={gitProvider}
-            icon={<GithubOutlined />}
-            className={style.git_btn}
+      <ErrorBoundary type="page">
+        <div className={style.login_container}>
+          <TitleForm
+            title={t('logIn.title')}
+            link={ROUTES.signup}
+            text={t('logIn.signUpRedirect')}
+            textLink={t('logIn.redirectLink')}
           />
+          <div className={style.login_buttons}>
+            <FirebaseAuth.Button
+              text={t('button.signGithub')}
+              provider={gitProvider}
+              icon={<GithubOutlined />}
+              className={style.git_btn}
+            />
 
-          <FirebaseAuth.Button
-            text={t('button.signGoogle')}
-            provider={googleProvider}
-            icon={<GoogleOutlined />}
-            className={style.google_btn}
-          />
+            <FirebaseAuth.Button
+              text={t('button.signGoogle')}
+              provider={googleProvider}
+              icon={<GoogleOutlined />}
+              className={style.google_btn}
+            />
+          </div>
+
+          <Divider plain className={style.separator}>
+            {t('logIn.or')}
+          </Divider>
+          <Form.Login />
         </div>
-
-        <Divider plain className={style.separator}>
-          {t('logIn.or')}
-        </Divider>
-        <Form.Login />
-      </div>
+      </ErrorBoundary>
     </>
   );
 };

@@ -1,1 +1,3 @@
-export { default as Home } from './ui/Home';
+import Home from './ui/Home';
+
+export default Home;
