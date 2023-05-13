@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { Button } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
 import { graphql } from 'shared/api';
-import DocsHeader from '../docs-header/DocsHeader';
 import { useRedoSnapshot } from './hook/use-redo-snapshot';
 import { getJsonSchema, handlingSchema, removeCharacters } from './utils';
 import { AllSchemaTypes, ParseSchemaData, SectionTitle } from './ui';
@@ -79,8 +78,6 @@ const DocsExplorer = () => {
         </Button>
         // TODO: edit button
       )}
-
-      {!title && <DocsHeader />}
 
       {!title && <h3>{t('docs.explorer.title')}</h3>}
 
