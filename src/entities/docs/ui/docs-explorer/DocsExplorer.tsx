@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Space, Typography } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
 
-import { graphql } from 'shared/api';
+import { GraphQLSchema } from 'graphql';
 import { useRedoSnapshot } from './hook/use-redo-snapshot';
 import { getJsonSchema, handlingSchema, removeCharacters } from './utils';
 import { AllSchemaTypes, ParseSchemaData, SectionTitle } from './ui';
@@ -14,11 +14,14 @@ import styles from './DocsExplorer.module.scss';
 
 const { Title } = Typography;
 
-const DocsExplorer = () => {
-  const { t } = useTranslation();
-  const { data } = graphql.useGetSchemaQuery('{}');
+interface DocsExplorerProps {
+  schema: GraphQLSchema | undefined;
+}
 
-  const jsonSchema = getJsonSchema(data);
+const DocsExplorer: React.FC<DocsExplorerProps> = ({ schema }) => {
+  const { t } = useTranslation();
+
+  const jsonSchema = getJsonSchema(schema);
 
   const { addSnapshot, getSnapshot, undoSnapshot, getPrevSnapshot } =
     useRedoSnapshot({
@@ -47,7 +50,7 @@ const DocsExplorer = () => {
     return null;
   };
 
-  const handlePropertyClick = (event: React.MouseEvent<HTMLElement>) => {
+  const propertyClickHandler = (event: React.MouseEvent<HTMLElement>) => {
     const value: string = removeCharacters(
       (event.target as HTMLElement).innerText
     );
@@ -98,7 +101,7 @@ const DocsExplorer = () => {
               // check the last field or not, so as not to call the function!
               !dataTypes.isLastType
                 ? (event) => {
-                    handlePropertyClick(event);
+                    propertyClickHandler(event);
                   }
                 : undefined
             }
@@ -108,7 +111,7 @@ const DocsExplorer = () => {
       <div>
         {!title && (
           <AllSchemaTypes
-            onPropClick={handlePropertyClick}
+            onPropClick={propertyClickHandler}
             definitions={definitions}
           />
         )}

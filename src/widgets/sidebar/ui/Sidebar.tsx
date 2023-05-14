@@ -10,6 +10,7 @@ import {
 
 import { SettingsModal, ShortcutsModal } from 'entities/modals';
 import { AppTooltip, Spinner } from 'shared/ui';
+import { graphql } from 'shared/api';
 import styles from './Sidebar.module.scss';
 
 const DocsExplorer = lazy(() => import('entities/docs'));
@@ -23,6 +24,7 @@ const Sidebar: React.FC = () => {
   const [isSettingsModal, setIsSettingsModal] = React.useState(false);
   const [isShortcutsModal, setIsShortcutsModal] = React.useState(false);
   const screens = useBreakpoint();
+  const { data, isFetching, isError } = graphql.useGetSchemaQuery('{}');
 
   const isMobile = (screens.sm || screens.xs) && !screens.md;
 
@@ -44,7 +46,9 @@ const Sidebar: React.FC = () => {
         <AppTooltip title={t('sandbox.tooltips.docsClose')}>
           <Button
             onClick={toggleDocs}
-            type="text"
+            type={isFetching ? 'ghost' : 'text'}
+            disabled={isFetching || isError}
+            loading={isFetching}
             size="large"
             icon={<BookOutlined />}
           />
@@ -82,7 +86,7 @@ const Sidebar: React.FC = () => {
         style={{ borderRadius: '0 12px 12px 0' }}
       >
         <Suspense fallback={<Spinner size="medium" />}>
-          <DocsExplorer />
+          <DocsExplorer schema={data} />
         </Suspense>
       </Drawer>
       <ShortcutsModal isOpen={isShortcutsModal} toggle={toggleShortcutsModal} />
