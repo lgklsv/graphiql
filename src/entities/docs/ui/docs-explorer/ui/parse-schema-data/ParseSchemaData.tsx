@@ -1,5 +1,7 @@
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import { Space, Typography } from 'antd';
+
 import DocsText from '../docs-text/DocsText';
 
 const { Text } = Typography;
@@ -17,11 +19,13 @@ export const ParseSchemaData: React.FC<ParseSchemaDataProps> = ({
   const { name, arguments: argumentTypes, return: returnTypes } = info;
 
   if (name && name.description) {
+    const { description } = name;
+
     return (
       <div>
         {name.description && (
           <Text style={{ color: '#6F7A8F', fontSize: '1rem' }} type="secondary">
-            {name.description}
+            <ReactMarkdown>{description}</ReactMarkdown>
           </Text>
         )}
       </div>
