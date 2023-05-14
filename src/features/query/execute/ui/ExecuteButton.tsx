@@ -58,11 +58,9 @@ const ExecuteButton: React.FC = () => {
     }
     if (error && !isTriggered) {
       if (typeCheckers.isFetchError(error) && error.status === 400) {
-        const fetchErrors = error.data as FetchErrors;
-        const errorMessage = fetchErrors.errors[0].message;
         dispatch(
           updateResponse({
-            data: JSON.stringify(errorMessage, null, '\t'),
+            data: JSON.stringify(error.data, null, '\t'),
             isLoading: isFetching,
           })
         );
