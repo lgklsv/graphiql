@@ -103,6 +103,9 @@
       "sectionTitleField": "Field type",
       "sectionTitleRoot": "Root type",
       "sectionTitleAll": "All Schema Types"
+    },
+    "search": {
+      "notFound": "No results found"
     }
   },
   "modals": {

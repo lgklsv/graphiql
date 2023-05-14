@@ -1,23 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { AutoComplete, Grid, Input, Typography } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import style from './SeachSchema.module.scss';
+import style from './SearchSchema.module.scss';
+import { searchResult } from './utils/search-result';
 
 const { Text } = Typography;
 const { useBreakpoint } = Grid;
-
-const searchResult = (query: string, schema: IJson) => {
-  const array = Object.keys(schema.definitions).filter((item) => {
-    return item.toLowerCase().includes(query.toLowerCase());
-  });
-
-  return array.map((name) => {
-    return {
-      value: name,
-      label: <Text>{name}</Text>,
-    };
-  });
-};
 
 interface SearchSchemaProps {
   definitions: IJson;
@@ -28,6 +17,7 @@ export const SearchSchema: React.FC<SearchSchemaProps> = ({
   definitions,
   onClick,
 }) => {
+  const { t } = useTranslation();
   const [options, setOptions] = React.useState<{ value: string }[]>([]);
   const [valueAutoComplete, setValue] = React.useState('');
   const [isChangeWidth, setWidth] = React.useState(false);
@@ -68,7 +58,7 @@ export const SearchSchema: React.FC<SearchSchemaProps> = ({
         options={options}
         onSelect={handleOnSelect}
         onSearch={handleSearch}
-        notFoundContent={<Text>No results found</Text>}
+        notFoundContent={<Text>{t('docs.search.notFound')}</Text>}
         onClick={() => {
           setWidth(true);
         }}
