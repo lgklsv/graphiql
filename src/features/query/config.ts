@@ -70,17 +70,12 @@ const APP_THEME = EditorView.theme({
     borderRadius: '4px',
     backgroundColor: colorBgBase,
     color: colorPrimary,
-    padding: '5px',
+    padding: '8px',
   },
   '.cm-tooltip-autocomplete ul li[aria-selected]': {
     backgroundColor: `hsla(293, 100%, 27%, 0.1);`,
     color: colorTextAccent,
-    padding: '5px',
-  },
-  '.cm-tooltip-autocomplete ul': {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.2rem',
+    padding: '8px',
   },
   '.cm-line .ͼe': {
     color: colorTextAccent,
