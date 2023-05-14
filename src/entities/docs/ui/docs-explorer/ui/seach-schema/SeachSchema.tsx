@@ -1,9 +1,10 @@
 import React from 'react';
-import { AutoComplete, Input, Typography } from 'antd';
+import { AutoComplete, Grid, Input, Typography } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import style from './SeachSchema.module.scss';
 
 const { Text } = Typography;
+const { useBreakpoint } = Grid;
 
 const searchResult = (query: string, schema: IJson) => {
   const array = Object.keys(schema.definitions).filter((item) => {
@@ -31,6 +32,9 @@ export const SearchSchema: React.FC<SearchSchemaProps> = ({
   const [valueAutoComplete, setValue] = React.useState('');
   const [isChangeWidth, setWidth] = React.useState(false);
   const [isOpen, setOpenDropDown] = React.useState(false);
+  const screens = useBreakpoint();
+
+  const isMobile = (screens.sm || screens.xs) && !screens.md;
 
   const handleSearch = (value: string) => {
     setOpenDropDown(true);
@@ -60,7 +64,7 @@ export const SearchSchema: React.FC<SearchSchemaProps> = ({
       <AutoComplete
         value={valueAutoComplete}
         dropdownMatchSelectWidth={252}
-        style={{ width: isChangeWidth ? '100%' : '25%' }}
+        style={{ width: isMobile || isChangeWidth ? '100%' : '25%' }}
         options={options}
         onSelect={handleOnSelect}
         onSearch={handleSearch}

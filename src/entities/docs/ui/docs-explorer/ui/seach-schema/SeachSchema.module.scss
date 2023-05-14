@@ -4,8 +4,10 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
-}
 
-#rc_select_1_list {
-  padding: 1rem;
+  @media (max-width: 500px) {
+    div {
+      width: 100%;
+    }
+  }
 }
