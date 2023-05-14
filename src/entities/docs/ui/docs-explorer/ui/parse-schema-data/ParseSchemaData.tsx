@@ -2,6 +2,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import { Space, Typography } from 'antd';
 
+import { string } from 'shared/lib';
 import DocsText from '../docs-text/DocsText';
 import styles from './ParseSchemaData.module.scss';
 
@@ -20,9 +21,6 @@ export const ParseSchemaData: React.FC<ParseSchemaDataProps> = ({
   const { name, arguments: argumentTypes, return: returnTypes } = info;
 
   if (!argumentTypes && name && name.description) {
-    const { description } = name;
-    const capitalizedDesc = description[0].toUpperCase() + description.slice(1);
-
     return (
       <div>
         {name.description && (
@@ -31,7 +29,7 @@ export const ParseSchemaData: React.FC<ParseSchemaDataProps> = ({
             type="secondary"
             className={styles.description}
           >
-            <ReactMarkdown>{capitalizedDesc}</ReactMarkdown>
+            <ReactMarkdown>{string.capitalize(name.description)}</ReactMarkdown>
           </Text>
         )}
       </div>
@@ -45,17 +43,21 @@ export const ParseSchemaData: React.FC<ParseSchemaDataProps> = ({
       {argumentTypes && (
         <Space size={0} style={{ flexWrap: 'wrap' }}>
           <DocsText>(</DocsText>
+
           {argumentTypes.map((item) => (
             <Space size={2} key={item.name}>
               <DocsText>{item.name}:</DocsText>
+
               <DocsText active onClick={onPropClick}>
                 {item.type}
               </DocsText>
+
               {item.default && (
                 <DocsText> = {JSON.stringify(item.default)}</DocsText>
               )}
             </Space>
           ))}
+
           <DocsText>)</DocsText>
         </Space>
       )}
