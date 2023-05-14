@@ -31,7 +31,7 @@ const DocsText: React.FC<DocsTextProps> = ({
       style={{
         padding: 0,
         cursor: 'auto',
-        height: 'auto',
+        height: '0',
         ...style,
       }}
     >

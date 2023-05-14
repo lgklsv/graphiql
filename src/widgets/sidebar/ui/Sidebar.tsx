@@ -4,7 +4,6 @@ import { Button, Drawer, Grid, Space, Typography } from 'antd';
 import {
   BookOutlined,
   MacCommandOutlined,
-  ReloadOutlined,
   SettingOutlined,
   SyncOutlined,
 } from '@ant-design/icons';
