@@ -18,8 +18,8 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({
   if (isRootType) {
     return (
       <Space>
-        <FolderTwoTone twoToneColor="#8C8C8C" style={{ scale: '1.2' }} />
-        <Text style={{ fontSize: '16px' }} type="secondary">
+        <FolderTwoTone twoToneColor="#6F7A8F" style={{ scale: '1.2' }} />
+        <Text style={{ fontSize: '16px', color: '#6F7A8F' }} type="secondary">
           {t('docs.explorer.sectionTitleRoot')}
         </Text>
       </Space>
@@ -28,8 +28,8 @@ export const SectionTitle: React.FC<SectionTitleProps> = ({
 
   return (
     <Space>
-      <FolderOpenTwoTone twoToneColor="#8C8C8C" style={{ scale: '1.2' }} />
-      <Text style={{ fontSize: '16px' }} type="secondary">
+      <FolderOpenTwoTone twoToneColor="#6F7A8F" style={{ scale: '1.2' }} />
+      <Text style={{ fontSize: '16px', color: '#6F7A8F' }} type="secondary">
         {title || t('docs.explorer.sectionTitleField')}
       </Text>
     </Space>

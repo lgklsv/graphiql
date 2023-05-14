@@ -4,11 +4,12 @@ import { ThemeConfig } from 'antd';
 export const customTheme: ThemeConfig = {
   token: {
     colorTextHeading: '#281E5B', // Dark blue
+    colorPrimary: '#281E5B',
     colorText: '#281E5B',
     // colorInfo: '#7156d9b8',
     colorInfo: '#281E5B',
     colorBgBase: '#ffffff',
-    colorPrimary: '#281E5B',
+    colorTextSecondary: '#6F7A8F',
   },
 };
 

@@ -1,17 +1,18 @@
-/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { JSONSchema6 } from 'json-schema';
 import { useTranslation } from 'react-i18next';
-import { Button, Space, Typography } from 'antd';
+import { Space, Typography } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
 
 import { graphql } from 'shared/api';
 import { useRedoSnapshot } from './hook/use-redo-snapshot';
 import { getJsonSchema, handlingSchema, removeCharacters } from './utils';
 import { AllSchemaTypes, ParseSchemaData, SectionTitle } from './ui';
+import DocsText from './ui/docs-text/DocsText';
+
 import styles from './DocsExplorer.module.scss';
 
-const { Text, Title } = Typography;
+const { Title } = Typography;
 
 const DocsExplorer = () => {
   const { t } = useTranslation();
@@ -68,36 +69,32 @@ const DocsExplorer = () => {
 
   return (
     <Space direction="vertical" className={styles.docs}>
-      {title && (
-        <Button
-          type="link"
-          htmlType="submit"
-          size="large"
-          icon={<LeftOutlined />}
-          onClick={handleBack}
-          className={styles.docs__prev}
-          style={{ padding: 0 }}
-        >
-          {!prevTitle ? 'Doc' : prevTitle}
-        </Button>
-      )}
-
-      {!title && <Title level={5}>{t('docs.explorer.title')}</Title>}
-
-      {title && (
-        <Title style={{ margin: 0 }} level={3}>
-          {title}
-        </Title>
+      {title ? (
+        <>
+          <DocsText
+            icon={<LeftOutlined />}
+            onClick={handleBack}
+            className={styles.docs__prev}
+            style={{ cursor: 'pointer' }}
+          >
+            {!prevTitle ? t('docs.header.title') : prevTitle}
+          </DocsText>
+          <Title style={{ margin: 0 }} level={3}>
+            {title}
+          </Title>
+        </>
+      ) : (
+        <Title level={5}>{t('docs.explorer.title')}</Title>
       )}
 
       {!snapshot.title && <SectionTitle isRootType={!title} />}
 
-      <div className={styles.docs__section_content}>
+      <Space direction="vertical" size={0}>
         {handlingSchema(snapshot, title).map((dataTypes) => (
           <ParseSchemaData
             info={dataTypes}
             key={dataTypes.name?.title}
-            onClick={
+            onPropClick={
               // check the last field or not, so as not to call the function!
               !dataTypes.isLastType
                 ? (event) => {
@@ -107,11 +104,11 @@ const DocsExplorer = () => {
             }
           />
         ))}
-      </div>
+      </Space>
       <div>
         {!title && (
           <AllSchemaTypes
-            onClick={handlePropertyClick}
+            onPropClick={handlePropertyClick}
             definitions={definitions}
           />
         )}
