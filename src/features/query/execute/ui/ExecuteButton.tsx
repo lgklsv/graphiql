@@ -121,13 +121,8 @@ const ExecuteButton: React.FC = () => {
           onClick={executeQueryHandler}
           type="primary"
           size="large"
-          icon={
-            isFetching ? (
-              <PauseOutlined style={{ transform: 'scale(1.5)' }} />
-            ) : (
-              <CaretRightOutlined style={{ transform: 'scale(1.7)' }} />
-            )
-          }
+          icon={<CaretRightOutlined style={{ transform: 'scale(1.7)' }} />}
+          loading={isFetching}
         />
       </AppTooltip>
       {contextHolder}

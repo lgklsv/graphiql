@@ -6,6 +6,7 @@ import {
   MacCommandOutlined,
   ReloadOutlined,
   SettingOutlined,
+  SyncOutlined,
 } from '@ant-design/icons';
 
 import { SettingsModal, ShortcutsModal } from 'entities/modals';
@@ -24,7 +25,9 @@ const Sidebar: React.FC = () => {
   const [isSettingsModal, setIsSettingsModal] = React.useState(false);
   const [isShortcutsModal, setIsShortcutsModal] = React.useState(false);
   const screens = useBreakpoint();
-  const { data, isFetching, isError } = graphql.useGetSchemaQuery('{}');
+
+  const { data, isFetching, isError, refetch } =
+    graphql.useGetSchemaQuery('{}');
 
   const isMobile = (screens.sm || screens.xs) && !screens.md;
 
@@ -38,6 +41,10 @@ const Sidebar: React.FC = () => {
 
   const toggleDocs = () => {
     setIsDocs((prev) => !prev);
+  };
+
+  const refetchSchemaHandler = () => {
+    refetch();
   };
 
   return (
@@ -55,7 +62,13 @@ const Sidebar: React.FC = () => {
         </AppTooltip>
         <Space direction={isMobile ? 'horizontal' : 'vertical'}>
           <AppTooltip title={t('sandbox.tooltips.refetch')}>
-            <Button type="text" size="large" icon={<ReloadOutlined />} />
+            <Button
+              onClick={refetchSchemaHandler}
+              type="text"
+              size="large"
+              icon={<SyncOutlined />}
+              loading={isFetching}
+            />
           </AppTooltip>
           {!isMobile && (
             <AppTooltip title={t('sandbox.tooltips.shortcuts')}>
