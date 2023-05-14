@@ -7,9 +7,13 @@ import { LeftOutlined } from '@ant-design/icons';
 import { graphql } from 'shared/api';
 import { useRedoSnapshot } from './hook/use-redo-snapshot';
 import { getJsonSchema, handlingSchema, removeCharacters } from './utils';
-import { AllSchemaTypes, ParseSchemaData, SectionTitle } from './ui';
+import {
+  AllSchemaTypes,
+  ParseSchemaData,
+  SearchSchema,
+  SectionTitle,
+} from './ui';
 import styles from './DocsExplorer.module.scss';
-import { SearchSchema } from './ui/seach-schema/SeachSchema';
 
 const DocsExplorer = () => {
   const { t } = useTranslation();
@@ -71,7 +75,7 @@ const DocsExplorer = () => {
   return (
     <div className={styles.docs}>
       <SearchSchema
-        definitions={definitions as IJson}
+        definitions={jsonSchema as IJson}
         onClick={handleSnapshotOnClick}
       />
 
@@ -86,7 +90,6 @@ const DocsExplorer = () => {
         >
           {!prevTitle ? 'Doc' : prevTitle}
         </Button>
-        // TODO: edit button
       )}
 
       {!title && <h3>{t('docs.explorer.title')}</h3>}

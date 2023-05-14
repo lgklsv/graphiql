@@ -1,27 +1,19 @@
-import React, { useState } from 'react';
-import { AutoComplete, Input } from 'antd';
-import type { SelectProps } from 'antd/es/select';
+import React from 'react';
+import { AutoComplete, Input, Typography } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
+import style from './SeachSchema.module.scss';
 
-const searchResult = (query: string, def: IJson) => {
-  const array = Object.keys(def).filter((item) => {
+const { Text } = Typography;
+
+const searchResult = (query: string, schema: IJson) => {
+  const array = Object.keys(schema.definitions).filter((item) => {
     return item.toLowerCase().includes(query.toLowerCase());
   });
 
   return array.map((name) => {
     return {
       value: name,
-      label: (
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-          }}
-        >
-          <span>
-            Found {query} on <p>{name}</p>
-          </span>
-        </div>
-      ),
+      label: <Text>{name}</Text>,
     };
   });
 };
@@ -35,27 +27,56 @@ export const SearchSchema: React.FC<SearchSchemaProps> = ({
   definitions,
   onClick,
 }) => {
-  const [options, setOptions] = useState<SelectProps<object>['options']>([]);
+  const [options, setOptions] = React.useState<{ value: string }[]>([]);
+  const [valueAutoComplete, setValue] = React.useState('');
+  const [isChangeWidth, setWidth] = React.useState(false);
+  const [isOpen, setOpenDropDown] = React.useState(false);
 
   const handleSearch = (value: string) => {
+    setOpenDropDown(true);
+    setValue(value);
     setOptions(value ? searchResult(value, definitions as IJson) : []);
   };
 
-  const onSelect = (value: string) => {
+  const handleOnBlur = () => {
+    setWidth(false);
+    setOpenDropDown(false);
+  };
+
+  const handleOnSelect = (value: string) => {
     onClick(value);
+    handleOnBlur();
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if ((e.target as HTMLInputElement).value === '') {
+      setValue('');
+      setOpenDropDown(false);
+    }
   };
 
   return (
-    <div className="style.search">
+    <div className={style.search}>
       <AutoComplete
+        value={valueAutoComplete}
         dropdownMatchSelectWidth={252}
-        style={{ width: 300 }}
+        style={{ width: isChangeWidth ? '100%' : '25%' }}
         options={options}
-        onSelect={onSelect}
+        onSelect={handleOnSelect}
         onSearch={handleSearch}
-        notFoundContent="не найдено"
+        notFoundContent={<Text>No results found</Text>}
+        onClick={() => {
+          setWidth(true);
+        }}
+        onBlur={handleOnBlur}
+        open={isOpen}
       >
-        <Input.Search placeholder="⌘ K" allowClear />
+        <Input
+          suffix={<SearchOutlined />}
+          placeholder="⌘ K"
+          allowClear
+          onChange={handleInputChange}
+        />
       </AutoComplete>
     </div>
   );
