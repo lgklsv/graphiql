@@ -3,8 +3,8 @@ import { JSONSchema6 } from 'json-schema';
 import { useTranslation } from 'react-i18next';
 import { Space, Typography } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
-
 import { GraphQLSchema } from 'graphql';
+
 import { useRedoSnapshot } from './hook/use-redo-snapshot';
 import { getJsonSchema, handlingSchema, removeCharacters } from './utils';
 import { AllSchemaTypes, ParseSchemaData, SectionTitle } from './ui';

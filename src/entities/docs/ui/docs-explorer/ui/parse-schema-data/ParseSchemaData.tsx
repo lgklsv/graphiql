@@ -33,7 +33,7 @@ export const ParseSchemaData: React.FC<ParseSchemaDataProps> = ({
   }
 
   return (
-    <Space size={3}>
+    <Space size={3} style={{ flexWrap: 'wrap' }}>
       <DocsText>{name?.title}:</DocsText>
       {/* argument */}
       {argumentTypes && (
