@@ -7,7 +7,6 @@ import {
   ReloadOutlined,
   SettingOutlined,
 } from '@ant-design/icons';
-
 import { SettingsModal, ShortcutsModal } from 'entities/modals';
 import { AppTooltip, Spinner } from 'shared/ui';
 import styles from './Sidebar.module.scss';
@@ -78,7 +77,6 @@ const Sidebar: React.FC = () => {
         placement="left"
         open={isDocs}
         onClose={toggleDocs}
-        zIndex={1071}
         width={isMobile ? '90vw' : '550px'}
         style={{ borderRadius: '0 12px 12px 0' }}
       >
