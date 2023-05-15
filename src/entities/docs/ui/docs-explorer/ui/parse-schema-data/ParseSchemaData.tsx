@@ -37,33 +37,53 @@ export const ParseSchemaData: React.FC<ParseSchemaDataProps> = ({
   }
 
   return (
-    <Space size={0} style={{ flexWrap: 'wrap' }}>
-      <DocsText>{name?.title}:</DocsText>
-      {/* argument */}
-      {argumentTypes && (
-        <Space size={0} style={{ flexWrap: 'wrap' }}>
-          <DocsText>(</DocsText>
+    <Space direction="vertical" size={0}>
+      <Space size={0} style={{ flexWrap: 'wrap' }}>
+        <DocsText noTabIndex>{name?.title}:</DocsText>
+        {/* argument */}
+        {argumentTypes && (
+          <Space size={0} style={{ flexWrap: 'wrap' }}>
+            <DocsText noTabIndex>(</DocsText>
 
-          {argumentTypes.map((item) => (
-            <Space size={2} key={item.name}>
-              <DocsText>{item.name}:</DocsText>
+            {argumentTypes.map((item) => (
+              <Space size={2} key={item.name}>
+                <DocsText noTabIndex>{item.name}:</DocsText>
 
-              <DocsText active onClick={onPropClick}>
-                {item.type}
-              </DocsText>
+                <DocsText active onClick={onPropClick}>
+                  {item.type}
+                </DocsText>
 
-              {item.default && (
-                <DocsText> = {JSON.stringify(item.default)}</DocsText>
-              )}
-            </Space>
-          ))}
+                {item.default && (
+                  <DocsText noTabIndex>
+                    {' '}
+                    = {JSON.stringify(item.default)}
+                  </DocsText>
+                )}
+              </Space>
+            ))}
 
-          <DocsText>)</DocsText>
-        </Space>
+            <DocsText noTabIndex>)</DocsText>
+          </Space>
+        )}
+        <DocsText active onClick={onPropClick}>
+          {returnTypes}
+        </DocsText>
+      </Space>
+      {name && name.description && (
+        <div>
+          {name.description && (
+            <Text
+              style={{ color: '#6F7A8F', fontSize: '1rem' }}
+              type="secondary"
+              className={styles.description}
+            >
+              <ReactMarkdown>
+                {string.capitalize(name.description)}
+              </ReactMarkdown>
+            </Text>
+          )}
+        </div>
       )}
-      <DocsText active onClick={onPropClick}>
-        {returnTypes}
-      </DocsText>
     </Space>
   );
 };

@@ -71,7 +71,7 @@ const DocsExplorer: React.FC<DocsExplorerProps> = ({ schema }) => {
   };
 
   return (
-    <Space direction="vertical" className={styles.docs} size={10}>
+    <Space direction="vertical" className={styles.docs} size={5}>
       {title ? (
         <>
           <DocsText
@@ -92,7 +92,7 @@ const DocsExplorer: React.FC<DocsExplorerProps> = ({ schema }) => {
 
       {!snapshot.title && <SectionTitle isRootType={!title} />}
 
-      <Space direction="vertical" size={10}>
+      <Space direction="vertical" size={5}>
         {handlingSchema(snapshot, title).map((dataTypes) => (
           <ParseSchemaData
             info={dataTypes}
