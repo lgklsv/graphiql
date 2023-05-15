@@ -1,12 +1,8 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
-import { Space, Typography } from 'antd';
+import { Space } from 'antd';
 
-import { string } from 'shared/lib';
 import DocsText from '../docs-text/DocsText';
-import styles from './ParseSchemaData.module.scss';
-
-const { Text } = Typography;
+import TypeDescription from '../type-description/TypeDescription';
 
 interface ParseSchemaDataProps {
   info: ParseSchemaData;
@@ -20,22 +16,13 @@ export const ParseSchemaData: React.FC<ParseSchemaDataProps> = ({
 }) => {
   const { name, arguments: argumentTypes, return: returnTypes } = info;
 
+  console.log(info);
+
   if (!argumentTypes && name && name.description) {
-    return (
-      <div>
-        {name.description && (
-          <Text
-            style={{ color: '#6F7A8F', fontSize: '1rem' }}
-            type="secondary"
-            className={styles.description}
-          >
-            <ReactMarkdown>{string.capitalize(name.description)}</ReactMarkdown>
-          </Text>
-        )}
-      </div>
-    );
+    return <TypeDescription description={name.description} />;
   }
 
+  console.log(returnTypes);
   return (
     <Space direction="vertical" size={0}>
       <Space size={0} style={{ flexWrap: 'wrap' }}>
@@ -66,23 +53,13 @@ export const ParseSchemaData: React.FC<ParseSchemaDataProps> = ({
           </Space>
         )}
         <DocsText active onClick={onPropClick}>
-          {returnTypes}
+          {typeof returnTypes === 'object' && returnTypes !== null
+            ? returnTypes.type
+            : returnTypes}
         </DocsText>
       </Space>
       {name && name.description && (
-        <div>
-          {name.description && (
-            <Text
-              style={{ color: '#6F7A8F', fontSize: '1rem' }}
-              type="secondary"
-              className={styles.description}
-            >
-              <ReactMarkdown>
-                {string.capitalize(name.description)}
-              </ReactMarkdown>
-            </Text>
-          )}
-        </div>
+        <TypeDescription description={name.description} />
       )}
     </Space>
   );

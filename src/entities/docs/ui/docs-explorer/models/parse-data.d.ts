@@ -4,7 +4,7 @@ interface ParseSchemaData {
     description?: string | null;
   } | null;
   arguments?: ParseSchemaArguments[] | null;
-  return?: null | string;
+  return?: null | string | { type: string };
   type?: TypeParseData | null;
   isLastType: boolean = false;
 }
