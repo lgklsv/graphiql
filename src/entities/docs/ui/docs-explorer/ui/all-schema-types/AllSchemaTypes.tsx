@@ -1,15 +1,18 @@
-import { Button } from 'antd';
+import { Space } from 'antd';
 import { useTranslation } from 'react-i18next';
+
 import { SectionTitle } from '../section-title/SectionTitle';
+import DocsText from '../docs-text/DocsText';
+
 import styles from './AllSchemaTypes.module.scss';
 
 interface AllSchemaTypesProps {
   definitions?: IJson;
-  onClick: (e: React.MouseEvent<HTMLElement>) => void;
+  onPropClick: (e: React.MouseEvent<HTMLElement>) => void;
 }
 export const AllSchemaTypes: React.FC<AllSchemaTypesProps> = ({
   definitions,
-  onClick,
+  onPropClick,
 }) => {
   const { t } = useTranslation();
 
@@ -20,21 +23,20 @@ export const AllSchemaTypes: React.FC<AllSchemaTypesProps> = ({
   const arrayNameTypes = definitions && Object.keys(definitions);
 
   return (
-    <div className={styles.doc_schema__types}>
+    <Space direction="vertical">
       <SectionTitle title={t('docs.explorer.sectionTitleAll')} />
 
-      {arrayNameTypes.map((name) => (
-        <Button
-          key={name}
-          type="link"
-          htmlType="submit"
-          size="large"
-          onClick={(e) => onClick(e)}
-          className={styles.schema_types__item}
-        >
-          {name}
-        </Button>
-      ))}
-    </div>
+      <Space direction="vertical" size={0} style={{ paddingLeft: '0.5rem' }}>
+        {arrayNameTypes.map((name) => (
+          <DocsText
+            key={name}
+            onClick={(e: React.MouseEvent<HTMLElement>) => onPropClick(e)}
+            className={styles.item}
+          >
+            {name}
+          </DocsText>
+        ))}
+      </Space>
+    </Space>
   );
 };

@@ -1,9 +1,8 @@
 .search {
-  padding-bottom: 1rem;
-  padding-right: 1rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  margin-bottom: 0.5rem;
 
   @media (max-width: 500px) {
     div {

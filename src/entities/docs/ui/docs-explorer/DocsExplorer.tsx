@@ -1,10 +1,10 @@
-/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import { JSONSchema6 } from 'json-schema';
 import { useTranslation } from 'react-i18next';
-import { Button } from 'antd';
+import { Space, Typography } from 'antd';
 import { LeftOutlined } from '@ant-design/icons';
-import { graphql } from 'shared/api';
+import { GraphQLSchema } from 'graphql';
+
 import { useRedoSnapshot } from './hook/use-redo-snapshot';
 import { getJsonSchema, handlingSchema, removeCharacters } from './utils';
 import {
@@ -13,13 +13,20 @@ import {
   SearchSchema,
   SectionTitle,
 } from './ui';
+import DocsText from './ui/docs-text/DocsText';
+
 import styles from './DocsExplorer.module.scss';
 
-const DocsExplorer = () => {
-  const { t } = useTranslation();
-  const { data } = graphql.useGetSchemaQuery('{}');
+const { Title } = Typography;
 
-  const jsonSchema = getJsonSchema(data);
+interface DocsExplorerProps {
+  schema: GraphQLSchema | undefined;
+}
+
+const DocsExplorer: React.FC<DocsExplorerProps> = ({ schema }) => {
+  const { t } = useTranslation();
+
+  const jsonSchema = getJsonSchema(schema);
 
   const { addSnapshot, getSnapshot, undoSnapshot, getPrevSnapshot } =
     useRedoSnapshot({
@@ -48,7 +55,7 @@ const DocsExplorer = () => {
     return null;
   };
 
-  const handleSnapshotOnClick = (value: string) => {
+  const snapshotClickHandler = (value: string) => {
     return snapshot?.properties?.[value]
       ? addSnapshot({
           snapshot: snapshot.properties[value] as JSONSchema6,
@@ -60,12 +67,12 @@ const DocsExplorer = () => {
         });
   };
 
-  const handlePropertyClick = (event: React.MouseEvent<HTMLElement>) => {
+  const propertyClickHandler = (event: React.MouseEvent<HTMLElement>) => {
     const value: string = removeCharacters(
       (event.target as HTMLElement).innerText
     );
 
-    return handleSnapshotOnClick(value);
+    return snapshotClickHandler(value);
   };
 
   const handleBack = () => {
@@ -73,55 +80,56 @@ const DocsExplorer = () => {
   };
 
   return (
-    <div className={styles.docs}>
+    <Space direction="vertical" className={styles.docs} size={5}>
       <SearchSchema
         definitions={jsonSchema as IJson}
-        onClick={handleSnapshotOnClick}
+        onClick={snapshotClickHandler}
       />
-
-      {title && (
-        <Button
-          type="link"
-          htmlType="submit"
-          size="large"
-          icon={<LeftOutlined />}
-          onClick={handleBack}
-          className={styles.docs__btn_prev_field}
-        >
-          {!prevTitle ? 'Doc' : prevTitle}
-        </Button>
+      {title ? (
+        <>
+          <DocsText
+            icon={<LeftOutlined />}
+            onClick={handleBack}
+            className={styles.docs__prev}
+            style={{ cursor: 'pointer' }}
+          >
+            {!prevTitle ? t('docs.header.title') : prevTitle}
+          </DocsText>
+          <Title style={{ margin: 0 }} level={3}>
+            {title}
+          </Title>
+        </>
+      ) : (
+        <Title level={5}>{t('docs.explorer.title')}</Title>
       )}
 
-      {!title && <h3>{t('docs.explorer.title')}</h3>}
+      {!snapshot.title && <SectionTitle isRootType={!title} />}
 
-      <h3>{title}</h3>
-      <div>{!snapshot.title && <SectionTitle isTitle={!title} />}</div>
-
-      <div className={styles.docs__section_content}>
+      <Space direction="vertical" size={10}>
         {handlingSchema(snapshot, title).map((dataTypes) => (
           <ParseSchemaData
             info={dataTypes}
             key={dataTypes.name?.title}
-            onClick={
+            onPropClick={
               // check the last field or not, so as not to call the function!
               !dataTypes.isLastType
                 ? (event) => {
-                    handlePropertyClick(event);
+                    propertyClickHandler(event);
                   }
                 : undefined
             }
           />
         ))}
-      </div>
+      </Space>
       <div>
         {!title && (
           <AllSchemaTypes
-            onClick={handlePropertyClick}
+            onPropClick={propertyClickHandler}
             definitions={definitions}
           />
         )}
       </div>
-    </div>
+    </Space>
   );
 };
 

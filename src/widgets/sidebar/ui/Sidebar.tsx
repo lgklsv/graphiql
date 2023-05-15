@@ -1,14 +1,18 @@
 import React, { Suspense, lazy } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Drawer, Grid, Space, Typography } from 'antd';
+import { useHotkeys } from 'react-hotkeys-hook';
 import {
   BookOutlined,
   MacCommandOutlined,
-  ReloadOutlined,
   SettingOutlined,
+  SyncOutlined,
 } from '@ant-design/icons';
+
+import { SHORTCUTS } from 'app/config';
 import { SettingsModal, ShortcutsModal } from 'entities/modals';
 import { AppTooltip, Spinner } from 'shared/ui';
+import { graphql } from 'shared/api';
 import styles from './Sidebar.module.scss';
 
 const DocsExplorer = lazy(() => import('entities/docs'));
@@ -22,6 +26,9 @@ const Sidebar: React.FC = () => {
   const [isSettingsModal, setIsSettingsModal] = React.useState(false);
   const [isShortcutsModal, setIsShortcutsModal] = React.useState(false);
   const screens = useBreakpoint();
+
+  const { data, isFetching, isError, refetch } =
+    graphql.useGetSchemaQuery('{}');
 
   const isMobile = (screens.sm || screens.xs) && !screens.md;
 
@@ -37,20 +44,34 @@ const Sidebar: React.FC = () => {
     setIsDocs((prev) => !prev);
   };
 
+  const refetchSchemaHandler = () => {
+    refetch();
+  };
+
+  useHotkeys(SHORTCUTS.refetch, refetchSchemaHandler);
+
   return (
     <>
       <div className={styles.sidebar}>
         <AppTooltip title={t('sandbox.tooltips.docsClose')}>
           <Button
             onClick={toggleDocs}
-            type="text"
+            type={isFetching ? 'ghost' : 'text'}
+            disabled={isFetching || isError}
+            loading={isFetching}
             size="large"
             icon={<BookOutlined />}
           />
         </AppTooltip>
         <Space direction={isMobile ? 'horizontal' : 'vertical'}>
           <AppTooltip title={t('sandbox.tooltips.refetch')}>
-            <Button type="text" size="large" icon={<ReloadOutlined />} />
+            <Button
+              onClick={refetchSchemaHandler}
+              type="text"
+              size="large"
+              icon={<SyncOutlined />}
+              loading={isFetching}
+            />
           </AppTooltip>
           {!isMobile && (
             <AppTooltip title={t('sandbox.tooltips.shortcuts')}>
@@ -81,7 +102,7 @@ const Sidebar: React.FC = () => {
         style={{ borderRadius: '0 12px 12px 0' }}
       >
         <Suspense fallback={<Spinner size="medium" />}>
-          <DocsExplorer />
+          <DocsExplorer schema={data} />
         </Suspense>
       </Drawer>
       <ShortcutsModal isOpen={isShortcutsModal} toggle={toggleShortcutsModal} />

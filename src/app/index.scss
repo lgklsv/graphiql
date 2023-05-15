@@ -31,6 +31,14 @@ button.ant-btn-primary {
   z-index: 2;
 }
 
+.ant-dropdown-menu-item-selected {
+  background-color: var(--bg-primary-dark) !important;
+  color: var(--white) !important;
+  &:hover {
+    background-color: #3e3369 !important;
+  }
+}
+
 .ant-tabs-tab-btn {
   white-space: nowrap;
   max-width: 100px;

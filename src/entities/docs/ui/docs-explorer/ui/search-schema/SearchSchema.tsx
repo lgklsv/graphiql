@@ -1,12 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { AutoComplete, Grid, Input, Typography } from 'antd';
+import { AutoComplete, Input, InputRef, Typography } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
-import style from './SearchSchema.module.scss';
+
+import { useHotkeys } from 'react-hotkeys-hook';
+import { SHORTCUTS } from 'app/config';
 import { searchResult } from './utils/search-result';
+import style from './SearchSchema.module.scss';
 
 const { Text } = Typography;
-const { useBreakpoint } = Grid;
 
 interface SearchSchemaProps {
   definitions: IJson;
@@ -20,11 +22,8 @@ export const SearchSchema: React.FC<SearchSchemaProps> = ({
   const { t } = useTranslation();
   const [options, setOptions] = React.useState<{ value: string }[]>([]);
   const [valueAutoComplete, setValue] = React.useState('');
-  const [isChangeWidth, setWidth] = React.useState(false);
   const [isOpen, setOpenDropDown] = React.useState(false);
-  const screens = useBreakpoint();
-
-  const isMobile = (screens.sm || screens.xs) && !screens.md;
+  const searchInputRef = React.useRef<InputRef>(null);
 
   const handleSearch = (value: string) => {
     setOpenDropDown(true);
@@ -33,7 +32,6 @@ export const SearchSchema: React.FC<SearchSchemaProps> = ({
   };
 
   const handleOnBlur = () => {
-    setWidth(false);
     setOpenDropDown(false);
   };
 
@@ -49,26 +47,35 @@ export const SearchSchema: React.FC<SearchSchemaProps> = ({
     }
   };
 
+  const focusOnSearchHandler = () => {
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  };
+
+  useHotkeys(SHORTCUTS.search, focusOnSearchHandler);
+
   return (
     <div className={style.search}>
       <AutoComplete
         value={valueAutoComplete}
         dropdownMatchSelectWidth={252}
-        style={{ width: isMobile || isChangeWidth ? '100%' : '25%' }}
+        style={{ width: '100%' }}
         options={options}
         onSelect={handleOnSelect}
         onSearch={handleSearch}
-        notFoundContent={<Text>{t('docs.search.notFound')}</Text>}
-        onClick={() => {
-          setWidth(true);
-        }}
+        notFoundContent={
+          <Text style={{ padding: '0.5rem' }}>{t('docs.search.notFound')}</Text>
+        }
         onBlur={handleOnBlur}
         open={isOpen}
       >
         <Input
+          ref={searchInputRef}
           suffix={<SearchOutlined />}
-          placeholder="⌘ K"
+          placeholder={t('docs.search.placeholder') || 'Search  ⌘ + K'}
           allowClear
+          size="large"
           onChange={handleInputChange}
         />
       </AutoComplete>

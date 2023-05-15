@@ -1,5 +1,5 @@
 import React from 'react';
-import { CaretRightOutlined, PauseOutlined } from '@ant-design/icons';
+import { CaretRightOutlined } from '@ant-design/icons';
 import { Button, message } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useHotkeys } from 'react-hotkeys-hook';
@@ -12,6 +12,7 @@ import { updateResponse } from 'store/reducers/TabSlice';
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { useLazyGetEnteredQuery } from 'shared/api/graphql';
 import { AppTooltip } from 'shared/ui';
+import { typeCheckers } from 'shared/lib';
 
 type ToolsErrors = {
   [key: string]: string;
@@ -56,7 +57,16 @@ const ExecuteButton: React.FC = () => {
       setIsTriggered(false);
     }
     if (error && !isTriggered) {
-      errorPopup({ type: 'error', content: t('sandbox.errors.execute') });
+      if (typeCheckers.isFetchError(error) && error.status === 400) {
+        dispatch(
+          updateResponse({
+            data: JSON.stringify(error.data, null, '\t'),
+            isLoading: isFetching,
+          })
+        );
+      } else {
+        errorPopup({ type: 'error', content: t('sandbox.errors.execute') });
+      }
     }
   }, [
     isTriggered,
@@ -121,13 +131,8 @@ const ExecuteButton: React.FC = () => {
           onClick={executeQueryHandler}
           type="primary"
           size="large"
-          icon={
-            isFetching ? (
-              <PauseOutlined style={{ transform: 'scale(1.5)' }} />
-            ) : (
-              <CaretRightOutlined style={{ transform: 'scale(1.7)' }} />
-            )
-          }
+          icon={<CaretRightOutlined style={{ transform: 'scale(1.7)' }} />}
+          loading={isFetching}
         />
       </AppTooltip>
       {contextHolder}

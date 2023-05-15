@@ -1,31 +1,37 @@
 import { useTranslation } from 'react-i18next';
-import { FolderOutlined, FolderOpenOutlined } from '@ant-design/icons';
-import styles from './SectionTitle.module.scss';
+import { FolderTwoTone, FolderOpenTwoTone } from '@ant-design/icons';
+import { Space, Typography } from 'antd';
+
+const { Text } = Typography;
 
 interface SectionTitleProps {
-  isTitle?: boolean;
+  isRootType?: boolean;
   title?: string | null;
 }
 
 export const SectionTitle: React.FC<SectionTitleProps> = ({
   title,
-  isTitle,
+  isRootType,
 }) => {
   const { t } = useTranslation();
 
+  if (isRootType) {
+    return (
+      <Space>
+        <FolderTwoTone twoToneColor="#6F7A8F" style={{ scale: '1.2' }} />
+        <Text style={{ fontSize: '16px', color: '#6F7A8F' }} type="secondary">
+          {t('docs.explorer.sectionTitleRoot')}
+        </Text>
+      </Space>
+    );
+  }
+
   return (
-    <div className={styles.doc_section_title}>
-      {isTitle ? (
-        <>
-          <FolderOutlined />
-          <span>{t('docs.explorer.sectionTitleRoot')}</span>
-        </>
-      ) : (
-        <>
-          <FolderOpenOutlined />
-          <span> {title || t('docs.explorer.sectionTitleField')}</span>
-        </>
-      )}
-    </div>
+    <Space>
+      <FolderOpenTwoTone twoToneColor="#6F7A8F" style={{ scale: '1.2' }} />
+      <Text style={{ fontSize: '16px', color: '#6F7A8F' }} type="secondary">
+        {title || t('docs.explorer.sectionTitleField')}
+      </Text>
+    </Space>
   );
 };

@@ -1,0 +1,1 @@
+export { isFetchError } from './isFetchError';

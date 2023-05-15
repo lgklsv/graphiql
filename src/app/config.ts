@@ -4,10 +4,12 @@ import { ThemeConfig } from 'antd';
 export const customTheme: ThemeConfig = {
   token: {
     colorTextHeading: '#281E5B', // Dark blue
-    colorText: '#281E5B',
-    colorInfo: '#7156d9b8',
-    colorBgBase: '#ffffff',
     colorPrimary: '#281E5B',
+    colorText: '#281E5B',
+    // colorInfo: '#7156d9b8',
+    colorInfo: '#281E5B',
+    colorBgBase: '#ffffff',
+    colorTextSecondary: '#6F7A8F',
   },
 };
 
@@ -24,11 +26,12 @@ export const DEFAULT_QUERY_FIELD_WIDTH =
     : QUERY_FIELD_MIN_WIDTH;
 
 export const BASE_URL = 'https://countries.trevorblades.com/';
+// export const BASE_URL = 'https://spacex-production.up.railway.app/';
 
 export const SHORTCUTS = {
-  search: 'ctrl+k',
-  execute: 'ctrl+enter',
-  prettify: 'shift+ctrl+p',
-  copy: 'shift+ctrl+c',
-  refetch: 'shift+ctrl+r',
+  search: ['ctrl+k', 'meta+k'],
+  execute: ['ctrl+enter', 'meta+enter'],
+  prettify: ['shift+ctrl+p', 'shift+meta+p'],
+  copy: ['shift+ctrl+c', 'shift+meta+c'],
+  refetch: ['shift+ctrl+r', 'shift+meta+r'],
 };

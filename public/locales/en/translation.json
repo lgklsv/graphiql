@@ -100,11 +100,12 @@
     },
     "explorer": {
       "title": "A GraphQL schema provides a root type for each kind of operation.",
-      "sectionTitleField": "Field type",
-      "sectionTitleRoot": "Root type",
+      "sectionTitleField": "Fields",
+      "sectionTitleRoot": "Root Types",
       "sectionTitleAll": "All Schema Types"
     },
     "search": {
+      "placeholder": "Search  ⌘ + K",
       "notFound": "No results found"
     }
   },
@@ -122,7 +123,7 @@
         "copy": "Copy query",
         "refetch": "Re-fetch schema using introspection"
       },
-      "message": "The editors use CodeMirror Key Maps that add more short keys."
+      "message": "The editors use CodeMirror Key Maps that add more shortcuts."
     },
     "settings": {
       "title": "Settings",

@@ -8,13 +8,14 @@ import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';
 import { updateTabContent, updateTabLabel } from 'store/reducers/TabSlice';
 import { utils } from 'shared/lib';
-import { ErrorNotification } from 'shared/ui';
+import { ErrorNotification, Spinner } from 'shared/ui';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import './Editor.scss';
 
 const Editor: React.FC = () => {
   const { t } = useTranslation();
-  const { data, error, refetch, isError } = graphql.useGetSchemaQuery('{}');
+  const { data, error, refetch, isError, isFetching } =
+    graphql.useGetSchemaQuery('{}');
   const { activeTabKey, tabQuery } = useTabs();
   const dispatch = useAppDispatch();
 
@@ -31,6 +32,13 @@ const Editor: React.FC = () => {
       );
   });
 
+  if (isFetching) {
+    return (
+      <div className="editor">
+        <Spinner size="medium" />
+      </div>
+    );
+  }
   return (
     <div className="editor">
       {isError && (

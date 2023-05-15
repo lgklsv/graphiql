@@ -1,43 +1,68 @@
 import React from 'react';
-import styles from './ParseSchemaData.module.scss';
+import { Space } from 'antd';
+
+import DocsText from '../docs-text/DocsText';
+import TypeDescription from '../type-description/TypeDescription';
+import EnumType from '../enum-type/EnumType';
 
 interface ParseSchemaDataProps {
   info: ParseSchemaData;
-  onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+  onPropClick?: (e: React.MouseEvent<HTMLElement>) => void;
   // this function must be broadcast to types, separately from extra characters, so that the function works further
 }
 
 export const ParseSchemaData: React.FC<ParseSchemaDataProps> = ({
   info,
-  onClick,
+  onPropClick,
 }) => {
   const { name, arguments: argumentTypes, return: returnTypes } = info;
 
+  if (name && name.title === 'enum') {
+    return <EnumType info={info} onPropClick={onPropClick} />;
+  }
+
+  if (name && name.description && name.title === 'scalar') {
+    return <TypeDescription description={name.description} />;
+  }
+
   return (
-    <>
-      <div>
-        <span className={styles.doc__root_type}>{name?.title}</span> :
+    <Space direction="vertical" size={0} style={{ paddingLeft: '0.5rem' }}>
+      <Space size={0} style={{ flexWrap: 'wrap' }}>
+        <DocsText noTabIndex>{name?.title}:</DocsText>
         {/* argument */}
-        {argumentTypes && `(`}
-        {argumentTypes &&
-          argumentTypes.map((item) => (
-            <React.Fragment key={item.name}>
-              <p className={styles.doc__arg_name}>{item.name}:</p>
-              <p className={styles.doc__arg_type} onClick={onClick}>
-                {item.type}
-              </p>
-            </React.Fragment>
-          ))}
-        {argumentTypes && `)`}
-        <p onClick={onClick} className={styles.doc__type_name}>
-          {returnTypes}
-        </p>
-      </div>
-      <h4>
-        {name?.description && (
-          <span className={styles.doc__root_type}>{name?.description}</span>
+        {argumentTypes && (
+          <Space size={0} style={{ flexWrap: 'wrap' }}>
+            <DocsText noTabIndex>(</DocsText>
+
+            {argumentTypes.map((item) => (
+              <Space size={2} key={item.name}>
+                <DocsText noTabIndex>{item.name}:</DocsText>
+
+                <DocsText active onClick={onPropClick}>
+                  {item.type}
+                </DocsText>
+
+                {item.default && (
+                  <DocsText noTabIndex>
+                    {' '}
+                    = {JSON.stringify(item.default)}
+                  </DocsText>
+                )}
+              </Space>
+            ))}
+
+            <DocsText noTabIndex>)</DocsText>
+          </Space>
         )}
-      </h4>
-    </>
+        <DocsText active onClick={onPropClick}>
+          {typeof returnTypes === 'object' && returnTypes !== null
+            ? returnTypes.type
+            : returnTypes}
+        </DocsText>
+      </Space>
+      {name && name.description && (
+        <TypeDescription description={name.description} />
+      )}
+    </Space>
   );
 };
