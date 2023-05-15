@@ -5,17 +5,19 @@ import { graphql as graphqlCodeMirror } from 'cm6-graphql';
 
 import { graphql, handleErrorMessage } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
-import { useAppDispatch } from 'shared/hooks/redux';
+import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { updateTabContent, updateTabLabel } from 'store/reducers/TabSlice';
 import { utils } from 'shared/lib';
 import { ErrorNotification, Spinner } from 'shared/ui';
+import { apiUrlSelector } from 'store/selectors/apiUrlSelector';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import './Editor.scss';
 
 const Editor: React.FC = () => {
   const { t } = useTranslation();
+  const currentUrl = useAppSelector(apiUrlSelector);
   const { data, error, refetch, isError, isFetching } =
-    graphql.useGetSchemaQuery('{}');
+    graphql.useGetSchemaQuery(currentUrl);
   const { activeTabKey, tabQuery } = useTabs();
   const dispatch = useAppDispatch();
 
@@ -40,7 +42,7 @@ const Editor: React.FC = () => {
     );
   }
   return (
-    <div className="editor">
+    <div className="editor" key={currentUrl}>
       {isError && (
         <ErrorNotification
           errorMsg={
