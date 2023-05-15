@@ -26,7 +26,7 @@ export const AllSchemaTypes: React.FC<AllSchemaTypesProps> = ({
     <Space direction="vertical">
       <SectionTitle title={t('docs.explorer.sectionTitleAll')} />
 
-      <Space direction="vertical" size={0}>
+      <Space direction="vertical" size={0} style={{ paddingLeft: '0.5rem' }}>
         {arrayNameTypes.map((name) => (
           <DocsText
             key={name}

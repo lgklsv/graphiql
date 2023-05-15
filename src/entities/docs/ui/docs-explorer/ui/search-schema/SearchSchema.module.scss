@@ -1,0 +1,12 @@
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+
+  @media (max-width: 500px) {
+    div {
+      width: 100%;
+    }
+  }
+}

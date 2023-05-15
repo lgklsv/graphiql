@@ -7,7 +7,12 @@ import { GraphQLSchema } from 'graphql';
 
 import { useRedoSnapshot } from './hook/use-redo-snapshot';
 import { getJsonSchema, handlingSchema, removeCharacters } from './utils';
-import { AllSchemaTypes, ParseSchemaData, SectionTitle } from './ui';
+import {
+  AllSchemaTypes,
+  ParseSchemaData,
+  SearchSchema,
+  SectionTitle,
+} from './ui';
 import DocsText from './ui/docs-text/DocsText';
 
 import styles from './DocsExplorer.module.scss';
@@ -50,11 +55,7 @@ const DocsExplorer: React.FC<DocsExplorerProps> = ({ schema }) => {
     return null;
   };
 
-  const propertyClickHandler = (event: React.MouseEvent<HTMLElement>) => {
-    const value: string = removeCharacters(
-      (event.target as HTMLElement).innerText
-    );
-
+  const snapshotClickHandler = (value: string) => {
     return snapshot?.properties?.[value]
       ? addSnapshot({
           snapshot: snapshot.properties[value] as JSONSchema6,
@@ -66,12 +67,24 @@ const DocsExplorer: React.FC<DocsExplorerProps> = ({ schema }) => {
         });
   };
 
+  const propertyClickHandler = (event: React.MouseEvent<HTMLElement>) => {
+    const value: string = removeCharacters(
+      (event.target as HTMLElement).innerText
+    );
+
+    return snapshotClickHandler(value);
+  };
+
   const handleBack = () => {
     undoSnapshot();
   };
 
   return (
     <Space direction="vertical" className={styles.docs} size={5}>
+      <SearchSchema
+        definitions={jsonSchema as IJson}
+        onClick={snapshotClickHandler}
+      />
       {title ? (
         <>
           <DocsText

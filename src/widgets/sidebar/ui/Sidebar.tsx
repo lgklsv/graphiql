@@ -7,7 +7,6 @@ import {
   SettingOutlined,
   SyncOutlined,
 } from '@ant-design/icons';
-
 import { SettingsModal, ShortcutsModal } from 'entities/modals';
 import { AppTooltip, Spinner } from 'shared/ui';
 import { graphql } from 'shared/api';

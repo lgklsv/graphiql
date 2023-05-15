@@ -26,7 +26,7 @@ export const ParseSchemaData: React.FC<ParseSchemaDataProps> = ({
   }
 
   return (
-    <Space direction="vertical" size={0}>
+    <Space direction="vertical" size={0} style={{ paddingLeft: '0.5rem' }}>
       <Space size={0} style={{ flexWrap: 'wrap' }}>
         <DocsText noTabIndex>{name?.title}:</DocsText>
         {/* argument */}
