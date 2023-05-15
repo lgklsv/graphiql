@@ -1,8 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { AutoComplete, Input, Typography } from 'antd';
+import { AutoComplete, Input, InputRef, Typography } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 
+import { useHotkeys } from 'react-hotkeys-hook';
+import { SHORTCUTS } from 'app/config';
 import { searchResult } from './utils/search-result';
 import style from './SearchSchema.module.scss';
 
@@ -21,6 +23,7 @@ export const SearchSchema: React.FC<SearchSchemaProps> = ({
   const [options, setOptions] = React.useState<{ value: string }[]>([]);
   const [valueAutoComplete, setValue] = React.useState('');
   const [isOpen, setOpenDropDown] = React.useState(false);
+  const searchInputRef = React.useRef<InputRef>(null);
 
   const handleSearch = (value: string) => {
     setOpenDropDown(true);
@@ -44,6 +47,14 @@ export const SearchSchema: React.FC<SearchSchemaProps> = ({
     }
   };
 
+  const focusOnSearchHandler = () => {
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  };
+
+  useHotkeys(SHORTCUTS.search, focusOnSearchHandler);
+
   return (
     <div className={style.search}>
       <AutoComplete
@@ -53,13 +64,16 @@ export const SearchSchema: React.FC<SearchSchemaProps> = ({
         options={options}
         onSelect={handleOnSelect}
         onSearch={handleSearch}
-        notFoundContent={<Text>{t('docs.search.notFound')}</Text>}
+        notFoundContent={
+          <Text style={{ padding: '0.5rem' }}>{t('docs.search.notFound')}</Text>
+        }
         onBlur={handleOnBlur}
         open={isOpen}
       >
         <Input
+          ref={searchInputRef}
           suffix={<SearchOutlined />}
-          placeholder="Search  ⌘ + K"
+          placeholder={t('docs.search.placeholder') || 'Search  ⌘ + K'}
           allowClear
           size="large"
           onChange={handleInputChange}

@@ -1,12 +1,15 @@
 import React, { Suspense, lazy } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Drawer, Grid, Space, Typography } from 'antd';
+import { useHotkeys } from 'react-hotkeys-hook';
 import {
   BookOutlined,
   MacCommandOutlined,
   SettingOutlined,
   SyncOutlined,
 } from '@ant-design/icons';
+
+import { SHORTCUTS } from 'app/config';
 import { SettingsModal, ShortcutsModal } from 'entities/modals';
 import { AppTooltip, Spinner } from 'shared/ui';
 import { graphql } from 'shared/api';
@@ -44,6 +47,8 @@ const Sidebar: React.FC = () => {
   const refetchSchemaHandler = () => {
     refetch();
   };
+
+  useHotkeys(SHORTCUTS.refetch, refetchSchemaHandler);
 
   return (
     <>
