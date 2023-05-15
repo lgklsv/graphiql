@@ -103,6 +103,9 @@
       "sectionTitleField": "Тип поля",
       "sectionTitleRoot": "Корневые типы",
       "sectionTitleAll": "Все типы схем"
+    },
+    "search": {
+      "notFound": "Ничего не найдено"
     }
   },
   "modals": {

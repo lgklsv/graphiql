@@ -7,7 +7,12 @@ import { LeftOutlined } from '@ant-design/icons';
 import { graphql } from 'shared/api';
 import { useRedoSnapshot } from './hook/use-redo-snapshot';
 import { getJsonSchema, handlingSchema, removeCharacters } from './utils';
-import { AllSchemaTypes, ParseSchemaData, SectionTitle } from './ui';
+import {
+  AllSchemaTypes,
+  ParseSchemaData,
+  SearchSchema,
+  SectionTitle,
+} from './ui';
 import styles from './DocsExplorer.module.scss';
 
 const DocsExplorer = () => {
@@ -43,11 +48,7 @@ const DocsExplorer = () => {
     return null;
   };
 
-  const handlePropertyClick = (event: React.MouseEvent<HTMLElement>) => {
-    const value: string = removeCharacters(
-      (event.target as HTMLElement).innerText
-    );
-
+  const handleSnapshotOnClick = (value: string) => {
     return snapshot?.properties?.[value]
       ? addSnapshot({
           snapshot: snapshot.properties[value] as JSONSchema6,
@@ -59,12 +60,25 @@ const DocsExplorer = () => {
         });
   };
 
+  const handlePropertyClick = (event: React.MouseEvent<HTMLElement>) => {
+    const value: string = removeCharacters(
+      (event.target as HTMLElement).innerText
+    );
+
+    return handleSnapshotOnClick(value);
+  };
+
   const handleBack = () => {
     undoSnapshot();
   };
 
   return (
     <div className={styles.docs}>
+      <SearchSchema
+        definitions={jsonSchema as IJson}
+        onClick={handleSnapshotOnClick}
+      />
+
       {title && (
         <Button
           type="link"
@@ -76,7 +90,6 @@ const DocsExplorer = () => {
         >
           {!prevTitle ? 'Doc' : prevTitle}
         </Button>
-        // TODO: edit button
       )}
 
       {!title && <h3>{t('docs.explorer.title')}</h3>}
