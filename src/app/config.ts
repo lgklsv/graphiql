@@ -25,8 +25,8 @@ export const DEFAULT_QUERY_FIELD_WIDTH =
     ? window.innerWidth * 0.33
     : QUERY_FIELD_MIN_WIDTH;
 
-// export const BASE_URL = 'https://countries.trevorblades.com/';
-export const BASE_URL = 'https://spacex-production.up.railway.app/';
+export const BASE_URL = 'https://countries.trevorblades.com/';
+// export const BASE_URL = 'https://spacex-production.up.railway.app/';
 
 export const SHORTCUTS = {
   search: 'ctrl+k',
