@@ -6,15 +6,16 @@ import {
 } from 'graphql';
 
 import { TabQueryContent } from 'features/tabs/types';
-import { BASE_URL } from 'app/config';
 
 export const sandboxQueries = createApi({
   reducerPath: 'sandboxQueries',
-  baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
+  baseQuery: fetchBaseQuery({
+    baseUrl: '',
+  }),
   endpoints: (builder) => ({
     getSchema: builder.query({
-      query: () => ({
-        url: '/',
+      query: (apiUrl) => ({
+        url: apiUrl,
         method: 'POST',
         body: JSON.stringify({
           query: `${getIntrospectionQuery()}`,
@@ -27,16 +28,16 @@ export const sandboxQueries = createApi({
         buildClientSchema(response.data),
     }),
     getEntered: builder.query({
-      query: (queryData: TabQueryContent) => ({
-        url: '/',
+      query: (arg: { queryData: TabQueryContent; apiUrl: string }) => ({
+        url: arg.apiUrl,
         method: 'POST',
         body: JSON.stringify({
-          query: `${queryData.data}`,
-          variables: JSON.parse(queryData.variables || '{}'),
+          query: `${arg.queryData.data}`,
+          variables: JSON.parse(arg.queryData.variables || '{}'),
         }),
         headers: {
           'Content-type': 'application/json',
-          ...JSON.parse(queryData.headers || '{}'),
+          ...JSON.parse(arg.queryData.headers || '{}'),
         },
       }),
     }),
