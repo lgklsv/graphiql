@@ -3,6 +3,7 @@ import { Space } from 'antd';
 
 import DocsText from '../docs-text/DocsText';
 import TypeDescription from '../type-description/TypeDescription';
+import EnumType from '../enum-type/EnumType';
 
 interface ParseSchemaDataProps {
   info: ParseSchemaData;
@@ -16,13 +17,14 @@ export const ParseSchemaData: React.FC<ParseSchemaDataProps> = ({
 }) => {
   const { name, arguments: argumentTypes, return: returnTypes } = info;
 
-  console.log(info);
+  if (name && name.title === 'enum') {
+    return <EnumType info={info} onPropClick={onPropClick} />;
+  }
 
-  if (!argumentTypes && name && name.description) {
+  if (name && name.description && name.title === 'scalar') {
     return <TypeDescription description={name.description} />;
   }
 
-  console.log(returnTypes);
   return (
     <Space direction="vertical" size={0}>
       <Space size={0} style={{ flexWrap: 'wrap' }}>
