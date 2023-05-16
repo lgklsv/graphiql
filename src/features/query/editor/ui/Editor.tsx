@@ -1,25 +1,35 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import CodeMirror from '@uiw/react-codemirror';
-import { graphql as graphqlCodeMirror } from 'cm6-graphql';
+import { graphql as graphqlCodeMirror, updateSchema } from 'cm6-graphql';
+import { EditorView } from 'codemirror';
 
 import { graphql, handleErrorMessage } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
-import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
+import { useAppDispatch } from 'shared/hooks/redux';
 import { updateTabContent, updateTabLabel } from 'store/reducers/TabSlice';
+
 import { utils } from 'shared/lib';
 import { ErrorNotification, Spinner } from 'shared/ui';
-import { apiUrlSelector } from 'store/selectors/apiUrlSelector';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import './Editor.scss';
 
 const Editor: React.FC = () => {
   const { t } = useTranslation();
-  const currentUrl = useAppSelector(apiUrlSelector);
-  const { data, error, refetch, isError, isFetching } =
-    graphql.useGetSchemaQuery(currentUrl);
   const { activeTabKey, tabQuery } = useTabs();
+  const viewRef = useRef<EditorView | null>(null);
+
   const dispatch = useAppDispatch();
+
+  const { data, error, refetch, isError, isFetching } =
+    graphql.useGetSchemaQuery('{}');
+
+  useEffect(() => {
+    if (viewRef.current) {
+      updateSchema(viewRef.current, data);
+    }
+  }, [data, viewRef]);
 
   const onChange = utils.debounce((queryString: string) => {
     dispatch(updateTabContent({ activeTabKey, query: { data: queryString } }));
@@ -42,7 +52,7 @@ const Editor: React.FC = () => {
     );
   }
   return (
-    <div className="editor" key={currentUrl}>
+    <div className="editor">
       {isError && (
         <ErrorNotification
           errorMsg={
@@ -63,6 +73,9 @@ const Editor: React.FC = () => {
         }
         basicSetup={BASIC_SETUP_OPTIONS}
         onChange={onChange}
+        onCreateEditor={(view) => {
+          viewRef.current = view;
+        }}
       />
     </div>
   );
