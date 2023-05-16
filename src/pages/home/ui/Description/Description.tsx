@@ -2,7 +2,7 @@ import { Col, Row, Typography, Grid } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
-import { EASING, TRANSITION } from 'app/config';
+import { TRANSITION } from 'app/config';
 import styles from './Description.module.scss';
 
 const { Paragraph } = Typography;
@@ -12,12 +12,7 @@ const Description: React.FC = () => {
   const { t } = useTranslation();
   const screens = useBreakpoint();
   return (
-    <motion.section
-      className={styles.description}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ ease: EASING }}
-    >
+    <section className={styles.description}>
       <Row gutter={[32, 32]}>
         <Col span={screens.xs ? 24 : 8}>
           <motion.div
@@ -44,7 +39,7 @@ const Description: React.FC = () => {
           </motion.div>
         </Col>
       </Row>
-    </motion.section>
+    </section>
   );
 };
 

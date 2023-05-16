@@ -22,7 +22,6 @@
   }
   &__text_full {
     @include adaptive-font(20, 18);
-    font-weight: 600;
     color: var(--text-secondary);
 
     @media (max-width: 575px) {

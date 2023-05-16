@@ -1,0 +1,19 @@
+@import '../Mixin';
+
+.showcase {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 1rem;
+
+  &__title {
+    color: var(--bg-primary-dark);
+    @include adaptive-font(32, 24);
+  }
+
+  &__description {
+    @include adaptive-font(22, 18);
+    color: var(--text-secondary);
+  }
+}

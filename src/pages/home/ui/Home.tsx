@@ -9,6 +9,7 @@ import styles from './Home.module.scss';
 import DevSection from './Developers/DevSection';
 import Description from './Description/Description';
 import Screenshot from './Screenshot/Screenshot';
+import FeatureShowcase from './FeatureShowcase/FeatureShowcase';
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
@@ -27,6 +28,7 @@ const Home: React.FC = () => {
           <Intro />
           <Screenshot />
           <Description />
+          <FeatureShowcase />
           <DevSection />
         </motion.div>
       </ErrorBoundary>
