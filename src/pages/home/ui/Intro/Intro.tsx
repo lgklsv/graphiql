@@ -3,10 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Space, Grid } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
 import { useTranslation, Trans } from 'react-i18next';
-import { motion } from 'framer-motion';
 
 import { ROUTES } from 'pages/config';
-import { EASING } from 'app/config';
 import styles from './Intro.module.scss';
 
 // TODO: add isAuthorized check and adjust redirect buttons: If authorized redirect to sandbox, of not => SignUP
@@ -19,13 +17,7 @@ const Intro: React.FC = () => {
   const screens = useBreakpoint();
 
   return (
-    <motion.section
-      className={styles.intro}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ ease: EASING }}
-    >
+    <section className={styles.intro}>
       <div className={styles.intro__text}>
         <h1 className={styles.intro__heading}>
           <Trans i18nKey="home.introTitle">
@@ -52,7 +44,7 @@ const Intro: React.FC = () => {
           <RightOutlined />
         </Button>
       </Space>
-    </motion.section>
+    </section>
   );
 };
 
