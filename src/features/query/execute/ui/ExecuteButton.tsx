@@ -12,7 +12,6 @@ import { updateResponse } from 'store/reducers/TabSlice';
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { useLazyGetEnteredQuery } from 'shared/api/graphql';
 import { AppTooltip } from 'shared/ui';
-import { apiUrlSelector } from 'store/selectors/apiUrlSelector';
 import { typeCheckers } from 'shared/lib';
 
 type ToolsErrors = {
@@ -26,7 +25,6 @@ const ExecuteButton: React.FC = () => {
   const { isCache } = useAppSelector(settingsSelector);
   const [isTriggered, setIsTriggered] = React.useState(false);
   const [messageApi, contextHolder] = message.useMessage();
-  const currentUrl = useAppSelector(apiUrlSelector);
 
   const [
     trigger,
@@ -119,7 +117,7 @@ const ExecuteButton: React.FC = () => {
       });
     } else {
       const cacheSetting = isCache === 1;
-      trigger({ queryData: tab.query, apiUrl: currentUrl }, cacheSetting);
+      trigger(tab.query, cacheSetting);
       setIsTriggered(true);
     }
   };
