@@ -1,7 +1,7 @@
 @import '../Mixin';
 
 .intro {
-  height: 50vh;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   gap: 2em;
@@ -13,12 +13,12 @@
   &__text {
     color: var(--bg-primary);
     text-align: center;
-    @include adaptiv-font(20, 18);
+    @include adaptive-font(24, 18);
     z-index: 2;
   }
 
   &__heading {
-    @include adaptiv-font(48, 40);
+    @include adaptive-font(65, 40);
     margin-bottom: 0.3em;
   }
 

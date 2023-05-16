@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
 import { ErrorBoundary } from 'shared/hoc';
-import { Col, Row } from 'antd';
 import Intro from './Intro/Intro';
 import styles from './Home.module.scss';
 import DevSection from './Developers/DevSection';
 import Description from './Description/Description';
+import Screenshot from './Screenshot/Screenshot';
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
@@ -25,6 +25,7 @@ const Home: React.FC = () => {
           exit={{ opacity: 0 }}
         >
           <Intro />
+          <Screenshot />
           <Description />
           <DevSection />
         </motion.div>

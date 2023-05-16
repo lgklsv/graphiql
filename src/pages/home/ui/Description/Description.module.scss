@@ -5,7 +5,7 @@
   overflow: hidden;
   color: var(--bg-primary-dark);
   &__title {
-    @include adaptiv-font(30, 24);
+    @include adaptive-font(30, 24);
     margin-bottom: 0.5em;
 
     @media (max-width: 575px) {
@@ -21,7 +21,7 @@
     }
   }
   &__text_full {
-    @include adaptiv-font(20, 18);
+    @include adaptive-font(20, 18);
     font-weight: 600;
     color: var(--text-secondary);
 
