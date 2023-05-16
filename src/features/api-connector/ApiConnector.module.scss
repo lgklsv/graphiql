@@ -1,0 +1,8 @@
+.apiConnector {
+  max-width: 400px;
+  padding: 10px 0;
+  @media all and (max-width: 767px) {
+    max-width: 300px;
+    padding-left: 10px;
+  }
+}

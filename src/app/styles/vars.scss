@@ -2,9 +2,11 @@
   // Vars
   --header: 80px;
   --footer: 65px;
+  --apiInput: 52px;
   --screen-height: calc(100vh - var(--header) - var(--footer));
   --ide-height: calc(
-    100vh - var(--header) - var(--footer) - var(--tabs-height) - 0.5rem
+    100vh - var(--header) - var(--footer) - var(--tabs-height) - var(--apiInput) -
+      0.5rem
   );
 
   // IDE
