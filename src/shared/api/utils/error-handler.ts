@@ -10,13 +10,11 @@ const HTTP_ERROR = new Map([
 const handleErrorMessage = (
   error: FetchBaseQueryError | SerializedError | undefined
 ) => {
-  if (error) {
-    if ('status' in error) {
-      return HTTP_ERROR.get(+error.status) || null;
-    }
-    return error.message || null;
+  if (!error) return null;
+  if ('status' in error) {
+    return HTTP_ERROR.get(+error.status) || null;
   }
-  return null;
+  return error.message || null;
 };
 
 export default handleErrorMessage;
