@@ -1,11 +1,14 @@
 .editor-tools {
   width: 100%;
+  height: 100%;
   padding: 0 1rem;
+  overflow: auto;
 }
 
 .editor__tab {
   visibility: visible;
   position: relative;
+
   &_hidden {
     visibility: hidden;
     opacity: 0;

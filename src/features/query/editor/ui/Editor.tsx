@@ -40,7 +40,7 @@ const Editor: React.FC = () => {
     );
   }
   return (
-    <div className="editor">
+    <div className="editor" id="custom-scroll">
       {isError && (
         <ErrorNotification
           errorMsg={
