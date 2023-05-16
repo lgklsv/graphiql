@@ -16,11 +16,12 @@ const apiUrlSlice = createSlice({
     setApiUrl(state, action: PayloadAction<ApiUrlState>) {
       state.url = action.payload.url;
     },
+    resetApiUrl: () => initialState,
   },
 });
 
 const { actions, reducer } = apiUrlSlice;
 
-export const { setApiUrl } = actions;
+export const { setApiUrl, resetApiUrl } = actions;
 
 export default reducer;

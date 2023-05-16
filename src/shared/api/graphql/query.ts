@@ -1,4 +1,10 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import {
+  BaseQueryFn,
+  FetchArgs,
+  FetchBaseQueryError,
+  createApi,
+  fetchBaseQuery,
+} from '@reduxjs/toolkit/query/react';
 import {
   IntrospectionQuery,
   buildClientSchema,
@@ -6,16 +12,48 @@ import {
 } from 'graphql';
 
 import { TabQueryContent } from 'features/tabs/types';
+import { apiUrlSelector } from 'store/selectors/apiUrlSelector';
+import { RootState } from 'store';
+
+const rawBaseQuery = fetchBaseQuery({
+  baseUrl: '',
+});
+
+const dynamicBaseQuery: BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError
+> = async (args, api, extraOptions) => {
+  const currentUrl = apiUrlSelector(api.getState() as RootState);
+
+  if (!currentUrl) {
+    return {
+      error: {
+        status: 400,
+        statusText: 'Bad Request',
+        data: 'No API is available',
+      },
+    };
+  }
+
+  // check the end of entered URL (some api does not work with '/' at the end and throw an error)
+  const adjustedCurrentUrl = currentUrl.endsWith('/')
+    ? currentUrl.slice(0, -1)
+    : currentUrl;
+  const urlEnd = typeof args === 'string' ? args : args.url;
+  const adjustedUrl = `${adjustedCurrentUrl}${urlEnd}`;
+  const adjustedArgs =
+    typeof args === 'string' ? adjustedUrl : { ...args, url: adjustedUrl };
+  return rawBaseQuery(adjustedArgs, api, extraOptions);
+};
 
 export const sandboxQueries = createApi({
   reducerPath: 'sandboxQueries',
-  baseQuery: fetchBaseQuery({
-    baseUrl: '',
-  }),
+  baseQuery: dynamicBaseQuery,
   endpoints: (builder) => ({
     getSchema: builder.query({
-      query: (apiUrl) => ({
-        url: apiUrl,
+      query: () => ({
+        url: '',
         method: 'POST',
         body: JSON.stringify({
           query: `${getIntrospectionQuery()}`,
@@ -28,16 +66,16 @@ export const sandboxQueries = createApi({
         buildClientSchema(response.data),
     }),
     getEntered: builder.query({
-      query: (arg: { queryData: TabQueryContent; apiUrl: string }) => ({
-        url: arg.apiUrl,
+      query: (queryData: TabQueryContent) => ({
+        url: '',
         method: 'POST',
         body: JSON.stringify({
-          query: `${arg.queryData.data}`,
-          variables: JSON.parse(arg.queryData.variables || '{}'),
+          query: `${queryData.data}`,
+          variables: JSON.parse(queryData.variables || '{}'),
         }),
         headers: {
           'Content-type': 'application/json',
-          ...JSON.parse(arg.queryData.headers || '{}'),
+          ...JSON.parse(queryData.headers || '{}'),
         },
       }),
     }),
