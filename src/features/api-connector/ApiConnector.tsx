@@ -42,14 +42,16 @@ const ApiConnector: React.FC = () => {
         status={isError ? 'error' : ''}
         onChange={handleChange}
         onPressEnter={handleConnect}
+        size="large"
       />
       <AppTooltip title={t('sandbox.tooltips.apiConnection')}>
         <Button
-          icon={<ApiOutlined style={{ fontSize: 18 }} />}
+          icon={<ApiOutlined style={{ fontSize: 20 }} />}
           loading={isLoading || isFetching}
           onClick={handleConnect}
           disabled={!inputValue}
-          style={{ borderColor: `${isError ? 'red' : ''}` }}
+          style={{ borderColor: `${isError ? 'red' : ''}`, width: 40 }}
+          className={styles.apiConnector__btn}
         />
       </AppTooltip>
     </Space.Compact>

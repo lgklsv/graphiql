@@ -20,6 +20,21 @@
     }
   }
 
+  &__main_tabs {
+    display: flex;
+    align-items: flex-start;
+    margin: 0 1rem 0rem 0rem;
+    gap: 1.25rem;
+    width: calc(100vw - var(--sidebar-width) - 1rem);
+
+    @media (max-width: 767px) {
+      width: 100%;
+      flex-direction: column;
+      gap: 0.75rem;
+      padding-left: 10px;
+    }
+  }
+
   &__field {
     padding: 0.5rem;
     height: var(--ide-height);
