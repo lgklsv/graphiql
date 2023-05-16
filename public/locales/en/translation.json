@@ -79,14 +79,15 @@
       "copy": {
         "default": "Copy query (shift + ctrl + c)",
         "done": "Copied!"
-      }
+      },
+      "apiConnection": "Connect your API"
     },
     "response": {
       "error": "{{fieldName}} has an invalid JSON format. Please fix the errors and try once again."
     },
     "errors": {
       "execute": "The query has failed. Check your API or internet connection and try again.",
-      "failedFetch": "Failed to fetch the GraphQL Schema"
+      "failedFetch": "Failed to fetch the GraphQL Schema. Check your API."
     }
   },
   "notFound": {
