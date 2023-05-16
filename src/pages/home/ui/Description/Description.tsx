@@ -1,5 +1,8 @@
 import { Col, Row, Typography, Grid } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
+
+import { EASING } from 'app/config';
 import styles from './Description.module.scss';
 
 const { Paragraph } = Typography;
@@ -9,7 +12,12 @@ const Description: React.FC = () => {
   const { t } = useTranslation();
   const screens = useBreakpoint();
   return (
-    <section className={styles.description}>
+    <motion.section
+      className={styles.description}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ ease: EASING }}
+    >
       <Row gutter={[32, 32]}>
         <Col span={screens.xs ? 24 : 8}>
           <div className={styles.description__backgroundImage} />
@@ -25,7 +33,7 @@ const Description: React.FC = () => {
           </div>
         </Col>
       </Row>
-    </section>
+    </motion.section>
   );
 };
 

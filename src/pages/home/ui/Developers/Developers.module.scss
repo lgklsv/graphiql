@@ -5,6 +5,11 @@
   margin-bottom: 2rem;
   text-align: center;
   color: var(--bg-primary-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+
   &__title {
     @include adaptiv-font(30, 22);
     margin-bottom: 0.5em;
