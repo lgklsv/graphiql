@@ -11,7 +11,7 @@
   gap: 0.5rem;
 
   &__title {
-    @include adaptiv-font(30, 22);
+    @include adaptiv-font(30, 24);
     margin-bottom: 0.5em;
   }
   &__list {

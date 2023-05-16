@@ -31,10 +31,7 @@
   --bg-ternary: 188, 100%, 36%;
   --bg-primary-dark: #281e5b; // dark-bg header/footer etc.
   --text-primary: hsla(var(--color-neutral), 1); // contrast text / active
-  --text-secondary: hsla(
-    var(--color-neutral),
-    var(--alpha-secondary)
-  ); // light text / regular
+  --text-secondary: #6f7a8f; // light text / regular
   --text-ternary: rgba(255, 255, 255, 0.4); // light text for dark bg
   --border-primary: 1px solid hsla(var(--color-neutral), 0.1);
   --border-active: hsla(var(--color-neutral), 0.15);

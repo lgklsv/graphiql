@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
 import { ErrorBoundary } from 'shared/hoc';
+import { Col, Row } from 'antd';
 import Intro from './Intro/Intro';
 import styles from './Home.module.scss';
 import DevSection from './Developers/DevSection';

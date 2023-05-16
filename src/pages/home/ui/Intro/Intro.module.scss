@@ -13,12 +13,12 @@
   &__text {
     color: var(--bg-primary);
     text-align: center;
-    @include adaptiv-font(20, 16);
+    @include adaptiv-font(20, 18);
     z-index: 2;
   }
 
   &__heading {
-    @include adaptiv-font(48, 24);
+    @include adaptiv-font(48, 40);
     margin-bottom: 0.3em;
   }
 

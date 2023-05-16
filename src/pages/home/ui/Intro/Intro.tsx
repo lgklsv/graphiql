@@ -29,7 +29,7 @@ const Intro: React.FC = () => {
       <Space size={screens.xs ? 'middle' : 'large'}>
         <Button
           style={{ borderColor: 'white', color: 'white' }}
-          size={screens.xs ? 'middle' : 'large'}
+          size="large"
           type="primary"
           href="https://github.com/lgklsv/graphiql"
         >
@@ -37,7 +37,7 @@ const Intro: React.FC = () => {
         </Button>
         <Button
           style={{ borderColor: 'white' }}
-          size={screens.xs ? 'middle' : 'large'}
+          size="large"
           onClick={() => navigate(ROUTES.sandbox)}
         >
           {t('button.start')}
