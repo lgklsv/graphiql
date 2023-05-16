@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from 'shared/hooks/redux';
 import { resetSettings } from 'store/reducers/SettingsSlice';
 import { resetTabsData } from 'store/reducers/TabSlice';
+import { resetApiUrl } from 'store/reducers/ApiSlice';
 
 const Clear: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -14,6 +15,7 @@ const Clear: React.FC = () => {
   const clearDataHandler = async () => {
     dispatch(resetTabsData());
     dispatch(resetSettings());
+    dispatch(resetApiUrl());
   };
 
   return (
