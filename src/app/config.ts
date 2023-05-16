@@ -17,6 +17,7 @@ export const appTitle = 'GraphiQL';
 
 export const DEBOUNCE_DELAY = 250;
 export const EASING = [0.6, -0.05, 0.01, 0.99];
+export const TRANSITION = { delay: 0.05, ease: EASING };
 
 export const DEFAULT_VARIABLES_EDITOR_HEIGHT_CLOSED = 56;
 export const DEFAULT_VARIABLES_EDITOR_HEIGHT_OPEN = 300;

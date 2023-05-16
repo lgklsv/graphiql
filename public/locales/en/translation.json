@@ -20,7 +20,7 @@
     "introTitle": "The <0>GraphQL</0> developer platform",
     "introText": "GraphiQL is the all-purpose IDE for your GraphQL API, empowering developers across your stack to ship early, ship often, and ship safely.",
     "descriptionTitle": "Your graph`s command center",
-    "descriptionText": "GraphiQL is end-to-end cloud platform for building, observing, and evolving your graph. Validate schema changes, monitor field usage, and route queries across any number of your backend services.",
+    "descriptionText": "GraphiQL is end-to-end cloud platform for building, observing, and evolving your graph. Validate schema changes, monitor field usage, and route queries across any of your backend services.",
     "developerTitle": "Developers"
   },
   "footer": {
