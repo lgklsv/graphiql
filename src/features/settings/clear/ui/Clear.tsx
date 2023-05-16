@@ -7,15 +7,19 @@ import { useAppDispatch } from 'shared/hooks/redux';
 import { resetSettings } from 'store/reducers/SettingsSlice';
 import { resetTabsData } from 'store/reducers/TabSlice';
 import { resetApiUrl } from 'store/reducers/ApiSlice';
+import { graphql } from 'shared/api';
 
 const Clear: React.FC = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
+  const { refetch } = graphql.useGetSchemaQuery('{}');
+
   const clearDataHandler = async () => {
     dispatch(resetTabsData());
     dispatch(resetSettings());
     dispatch(resetApiUrl());
+    refetch();
   };
 
   return (
