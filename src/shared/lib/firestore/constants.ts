@@ -6,18 +6,26 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { db } from 'firebase';
-import { useAuthState } from 'shared/hooks/use-auth';
+
+export const initialValue = {
+  commonSet: {
+    isCache: 0,
+    isStats: 1,
+  },
+  tabSet: {
+    activeKey: '1',
+    tab: [
+      '{"label":"Tab 1","query":{"data":"","variables":"","headers":""},"response":{"data":"","isLoading":false},"key":"1","closable":false}',
+    ],
+  },
+};
 
 interface IFirestoreData {
-  id: string;
-  commonSet: {
-    isCache: number;
-    isStats: number;
-  };
-  tabSet: {
-    activeKey: string;
-    tab: string[];
-  };
+  id?: string;
+  isCache: number;
+  isStats: number;
+  activeKey: string;
+  tab: string[];
 }
 
 export const getFirestoreUserData = async (uid: string) => {
@@ -34,7 +42,7 @@ export const getFirestoreUserData = async (uid: string) => {
 
   if (initValue) {
     // TODO: оптимизировать и измменить названия
-    const newArray = (initValue as IFirestoreData).tabSet.tab;
+    const newArray = (initValue as IFirestoreData).tab as string[];
     const arr = newArray.map((elem) => {
       return JSON.parse(elem);
     });
@@ -52,12 +60,16 @@ export const getFirestoreUserData = async (uid: string) => {
 
 // получаем сохранненые в базу данных настройки юзера
 
-export const updateFirestoreUserData = async (id: string) => {
+export const updateFirestoreUserData = async (
+  id: string,
+  data: { [x: string]: string | number | string[] }
+) => {
   const userSettingsRef = doc(db, 'settings', id);
-  await updateDoc(userSettingsRef, {
-    name: 'sf',
+  await updateDoc(
+    userSettingsRef,
+    data
     // TODO: в каком формате передавать инишиал валуе
-  });
+  );
 };
 
 export const createFirestoreUserData = async (uid: string) => {
