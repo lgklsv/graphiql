@@ -2,10 +2,12 @@ import { Form, Input, message } from 'antd';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from 'firebase';
-
+import { auth, db } from 'firebase';
 import { ButtonForm } from 'shared/ui';
 import { useUser } from 'shared/hooks/use-user';
+import { getFirestoreUserData } from 'shared/lib/firestore/constants';
+import { collection } from 'firebase/firestore';
+
 import style from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
@@ -24,9 +26,14 @@ const LoginForm: React.FC = () => {
     const { email: emailValues, password } = values;
 
     signInWithEmailAndPassword(auth, emailValues, password)
-      .then(({ user }) => {
+      .then(async ({ user }) => {
         const { email, uid, accessToken } = user as unknown as UserFirebase;
         dispatchUser({ email, id: uid, token: accessToken });
+
+        // TODO: задиспачить значения
+        const userSettings = await getFirestoreUserData(uid);
+
+        console.log(userSettings, 'in LOGIN');
       })
       .catch((error) => {
         messageApi.open({

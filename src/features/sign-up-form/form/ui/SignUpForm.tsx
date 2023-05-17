@@ -2,11 +2,30 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Input, message } from 'antd';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from 'firebase';
-
 import { ButtonForm } from 'shared/ui';
 import { useUser } from 'shared/hooks/use-user';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from 'firebase';
 import style from './SignUpForm.module.scss';
+
+export const defaultData = {
+  tabSet: {
+    activeKey: '1',
+    tabs: [
+      {
+        label: 'Tab 1',
+        query: { data: '', variables: '', headers: '' },
+        response: { data: '', isLoading: false, error: undefined },
+        key: '1',
+        closable: false,
+      },
+    ],
+  },
+  commonSet: {
+    isCache: 0,
+    isStats: 1,
+  },
+};
 
 const SignUpForm: React.FC = () => {
   const { t } = useTranslation();
@@ -47,9 +66,14 @@ const SignUpForm: React.FC = () => {
     });
 
     createUserWithEmailAndPassword(auth, emailValues, password)
-      .then(({ user }) => {
+      .then(async ({ user }) => {
         const { email, uid, accessToken } = user as unknown as UserFirebase;
         dispatchUser({ email, id: uid, token: accessToken });
+
+        // TODO: вынести в отдельную функцию
+        await setDoc(doc(db, 'settings', uid), {
+          name: 'sf',
+        });
       })
       .catch((error) => {
         messageApi.open({
