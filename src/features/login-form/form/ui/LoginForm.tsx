@@ -6,7 +6,6 @@ import { auth, db } from 'firebase';
 import { ButtonForm } from 'shared/ui';
 import { useUser } from 'shared/hooks/use-user';
 import { getFirestoreUserData } from 'shared/lib/firestore/constants';
-import { collection } from 'firebase/firestore';
 
 import style from './LoginForm.module.scss';
 

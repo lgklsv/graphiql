@@ -72,7 +72,16 @@ const SignUpForm: React.FC = () => {
 
         // TODO: вынести в отдельную функцию
         await setDoc(doc(db, 'settings', uid), {
-          name: 'sf',
+          commonSet: {
+            isCache: 0,
+            isStats: 1,
+          },
+          tabSet: {
+            activeKey: '1',
+            tab: [
+              '{"label":"Tab 1","query":{"data":"","variables":"","headers":""},"response":{"data":"","isLoading":false},"key":"1","closable":false}',
+            ],
+          },
         });
       })
       .catch((error) => {

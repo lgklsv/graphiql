@@ -6,13 +6,11 @@ import { Navigate, useLocation } from 'react-router-dom';
 import { GoogleOutlined, GithubOutlined } from '@ant-design/icons';
 import { motion } from 'framer-motion';
 import { googleProvider, gitProvider } from 'firebase';
-
 import { SButton } from 'features/smart-buttons';
 import { ROUTES } from 'pages/config';
 import { Form } from 'features/login-form';
 import { TitleForm } from 'shared/ui';
 import { useAuthState } from 'shared/hooks/use-auth';
-
 import { ErrorBoundary } from 'shared/hoc';
 import styles from './Login.module.scss';
 
