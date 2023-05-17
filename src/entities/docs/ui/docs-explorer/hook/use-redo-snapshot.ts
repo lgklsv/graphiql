@@ -1,10 +1,20 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
+import { GraphQLSchema } from 'graphql';
 
-export const useRedoSnapshot = <T>(object: T | null) => {
+export const useRedoSnapshot = <T>(
+  object: T | null,
+  schema: GraphQLSchema | undefined
+) => {
   const cursorRef = React.useRef(0);
   const [snapshots, setSnapshots] = React.useState<T[]>(
     object ? [{ ...object }] : []
   );
+
+  React.useEffect(() => {
+    setSnapshots(object ? [{ ...object }] : []);
+    cursorRef.current = 0;
+  }, [schema]);
 
   return {
     addSnapshot: (value?: T | null) => {

@@ -28,10 +28,13 @@ const DocsExplorer: React.FC<DocsExplorerProps> = ({ schema }) => {
   const jsonSchema = getJsonSchema(schema);
 
   const { addSnapshot, getSnapshot, undoSnapshot, getPrevSnapshot } =
-    useRedoSnapshot({
-      title: '',
-      snapshot: jsonSchema,
-    });
+    useRedoSnapshot(
+      {
+        title: '',
+        snapshot: jsonSchema,
+      },
+      schema
+    );
 
   const { snapshot, title } = getSnapshot();
   const prevTitle = getPrevSnapshot()?.title;
