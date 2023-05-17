@@ -3,7 +3,6 @@ import React from 'react';
 import { Tabs } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
-
 import { useAppDispatch } from 'shared/hooks/redux';
 import { useTabs } from 'shared/hooks/use-tab';
 import { setActiveTabKey, updateTabs } from 'store/reducers/TabSlice';

@@ -4,9 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { ButtonForm } from 'shared/ui';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useUser } from 'shared/hooks/use-user';
-import { auth, db } from 'firebase';
+import { auth } from 'firebase';
 import { getFirestoreUserData } from 'shared/lib/firestore/constants';
-import { collection } from 'firebase/firestore';
 
 import style from './LoginForm.module.scss';
 

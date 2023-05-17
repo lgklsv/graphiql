@@ -4,14 +4,12 @@ import { Divider } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Navigate, useLocation } from 'react-router-dom';
 import { GoogleOutlined, GithubOutlined } from '@ant-design/icons';
-
 import { googleProvider, gitProvider } from 'firebase';
 import { ROUTES } from 'pages/config';
 import { Form } from 'features/login-form';
 import { FirebaseAuth } from 'features/firebase-button-auth';
 import { TitleForm } from 'shared/ui';
 import { useAuthState } from 'shared/hooks/use-auth';
-
 import { ErrorBoundary } from 'shared/hoc';
 import style from './Login.module.scss';
 
