@@ -11,9 +11,10 @@ const DevSection: React.FC = () => {
   return (
     <motion.section
       className={styles.developers}
-      initial={{ opacity: 0 }}
+      initial={{ opacity: 0, y: 100 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       transition={TRANSITION}
-      whileInView={{ opacity: 1 }}
     >
       <h2 className={styles.developers__title}>{t('home.developerTitle')}</h2>
       <DevCardList devCardList={DEVELOPERS} />

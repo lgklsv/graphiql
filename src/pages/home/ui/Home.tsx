@@ -9,10 +9,11 @@ import Intro from './Intro/Intro';
 import styles from './Home.module.scss';
 import DevSection from './Developers/DevSection';
 import Description from './Description/Description';
-import Screenshot from './Screenshot/Screenshot';
 import FeatureShowcase from './FeatureShowcase/FeatureShowcase';
+
 import docsScreenshot from './assets/schema.png';
 import headersScreenshot from './assets/headers.png';
+import appScreenshot from './assets/screenshot.png';
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
@@ -29,8 +30,18 @@ const Home: React.FC = () => {
           exit={{ opacity: 0 }}
         >
           <Intro />
-          <Screenshot />
-          <Description />
+          <Description
+            text="The main goal of our GraphiQL Sandbox is to provide an easy way to explore and test your GraphQL API."
+            imgUrl={appScreenshot}
+          />
+          <Description
+            text="GraphiQL Sandbox is a GraphQL IDE created and maintained by students
+          of RS School React course. Sandbox ships with basic features such as
+          syntax highlighting, intelligent type ahead of fields, real-time error
+          highlighting and reporting for queries and variables, documentation
+          explorer, search, markdown support, the ability to configure HTTP
+          headers, and so much more."
+          />
           <FeatureShowcase
             title="Docs and schema"
             icon={<BookOutlined />}

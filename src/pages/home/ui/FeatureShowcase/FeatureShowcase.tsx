@@ -3,7 +3,6 @@ import { Image, Space, Typography } from 'antd';
 import { motion } from 'framer-motion';
 
 import { TRANSITION } from 'app/config';
-
 import styles from './FeatureShowcase.module.scss';
 
 const { Paragraph } = Typography;

@@ -4,57 +4,12 @@
   width: 100%;
 
   &__title {
+    color: var(--bg-primary-dark);
+    @include adaptive-font(48, 24);
   }
 
   &__text {
+    @include adaptive-font(32, 18);
+    color: var(--text-secondary);
   }
 }
-
-// .description {
-//   width: 100%;
-//   overflow: hidden;
-//   color: var(--bg-primary-dark);
-//   &__title {
-//     @include adaptive-font(30, 24);
-//     margin-bottom: 0.5em;
-
-//     @media (max-width: 575px) {
-//       text-align: center;
-//     }
-//   }
-//   &__text {
-//     max-width: 80%;
-//     text-align: left;
-
-//     @media all and (max-width: 1199px) {
-//       max-width: 100%;
-//     }
-//   }
-//   &__text_full {
-//     @include adaptive-font(20, 18);
-//     color: var(--text-secondary);
-
-//     @media (max-width: 575px) {
-//       text-align: center;
-//     }
-//   }
-//   &__backgroundImage {
-//     width: 250px;
-//     height: 340px;
-//     margin-left: auto;
-//     background: url('./assets/graphqlList.png') no-repeat center;
-//     background-size: contain;
-//     border: 1px var(--apollo-purple-light) solid;
-//     border-radius: 10px;
-//     box-shadow: var(--popover-box-shadow);
-
-//     @media all and (max-width: 1199px) {
-//       max-width: 150px;
-//       max-height: 200px;
-//     }
-
-//     @media all and (max-width: 767px) {
-//       margin: 0 auto;
-//     }
-//   }
-// }
