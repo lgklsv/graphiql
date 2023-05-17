@@ -23,6 +23,10 @@ const QueryField: React.FC = () => {
     setQueryFieldWidth(data.size.width);
   };
 
+  React.useEffect(() => {
+    // TODO: запихнуть данные
+  }, []);
+
   if ((screens.sm || screens.xs) && !screens.md) {
     return (
       <div className={styles.query}>

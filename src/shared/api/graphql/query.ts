@@ -5,7 +5,6 @@ import {
   getIntrospectionQuery,
 } from 'graphql';
 
-import { TabQueryContent } from 'features/tabs/types';
 import { BASE_URL } from 'app/config';
 
 export const sandboxQueries = createApi({

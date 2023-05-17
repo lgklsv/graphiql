@@ -9,8 +9,6 @@ import { useAuthState } from 'shared/hooks/use-auth';
 import { setActiveTabKey, updateTabs } from 'store/reducers/TabSlice';
 import { updateFirestoreUserData } from 'shared/lib/firestore/constants';
 
-import { Tab } from '../types';
-
 import styles from './SessionTabs.module.scss';
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
