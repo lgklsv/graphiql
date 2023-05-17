@@ -6,6 +6,19 @@
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: 1rem;
+  grid-template-areas: 'column-1 column-2';
+
+  &_reverse {
+    grid-template-areas: 'column-2 column-1';
+  }
+
+  &__item:nth-child(1) {
+    grid-area: column-1;
+  }
+
+  &__item:nth-child(2) {
+    grid-area: column-2;
+  }
 
   &__title {
     color: var(--bg-primary-dark);

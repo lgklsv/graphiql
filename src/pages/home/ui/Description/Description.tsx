@@ -13,7 +13,7 @@ const Description: React.FC = () => {
   const screens = useBreakpoint();
   return (
     <section className={styles.description}>
-      <Row gutter={[32, 32]}>
+      {/* <Row gutter={[32, 32]}>
         <Col span={screens.xs ? 24 : 8}>
           <motion.div
             initial={{ opacity: 0, scale: 0.75, x: -100, y: 100 }}
@@ -38,7 +38,7 @@ const Description: React.FC = () => {
             </Paragraph>
           </motion.div>
         </Col>
-      </Row>
+      </Row> */}
     </section>
   );
 };
