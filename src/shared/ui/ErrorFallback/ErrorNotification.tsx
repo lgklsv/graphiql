@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useCallback, useEffect } from 'react';
+import React from 'react';
 import { Button, Space, notification } from 'antd';
 import { useTranslation } from 'react-i18next';
 
@@ -17,7 +17,7 @@ const ErrorNotification: React.FC<ErrorNotificationProps> = ({
   const { t } = useTranslation();
   const [api, contextHolder] = notification.useNotification();
 
-  const openNotificationWithIcon = useCallback(
+  const openNotificationWithIcon = React.useCallback(
     (type: NotificationType) => {
       api[type]({
         key: 'error-message',
@@ -39,7 +39,7 @@ const ErrorNotification: React.FC<ErrorNotificationProps> = ({
     [api, errorMsg]
   );
 
-  useEffect(() => {
+  React.useEffect(() => {
     openNotificationWithIcon('error');
     return () => notification.destroy('error-message');
   }, [openNotificationWithIcon]);
