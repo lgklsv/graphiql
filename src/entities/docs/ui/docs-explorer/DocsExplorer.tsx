@@ -25,16 +25,25 @@ interface DocsExplorerProps {
 const DocsExplorer: React.FC<DocsExplorerProps> = ({ schema }) => {
   const { t } = useTranslation();
 
-  const jsonSchema = getJsonSchema(schema);
+  const jsonSchema = React.useMemo(() => getJsonSchema(schema), [schema]);
 
-  const { addSnapshot, getSnapshot, undoSnapshot, getPrevSnapshot } =
-    useRedoSnapshot(
-      {
-        title: '',
-        snapshot: jsonSchema,
-      },
-      schema
-    );
+  const {
+    addSnapshot,
+    getSnapshot,
+    undoSnapshot,
+    getPrevSnapshot,
+    resetSnapshot,
+  } = useRedoSnapshot({
+    title: '',
+    snapshot: jsonSchema,
+  });
+
+  React.useEffect(() => {
+    resetSnapshot({
+      title: '',
+      snapshot: jsonSchema,
+    });
+  }, [jsonSchema, resetSnapshot]);
 
   const { snapshot, title } = getSnapshot();
   const prevTitle = getPrevSnapshot()?.title;

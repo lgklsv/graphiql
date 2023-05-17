@@ -1,59 +1,62 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
-import { GraphQLSchema } from 'graphql';
 
-export const useRedoSnapshot = <T>(
-  object: T | null,
-  schema: GraphQLSchema | undefined
-) => {
+export const useRedoSnapshot = <T>(object: T | null) => {
   const cursorRef = React.useRef(0);
   const [snapshots, setSnapshots] = React.useState<T[]>(
     object ? [{ ...object }] : []
   );
 
-  React.useEffect(() => {
-    setSnapshots(object ? [{ ...object }] : []);
+  const addSnapshot = React.useCallback((value?: T | null) => {
+    if (!value) {
+      return null;
+    }
+
+    setSnapshots((prevSnapshots) => [...prevSnapshots, value]);
+
+    cursorRef.current += 1;
+
+    return null;
+  }, []);
+
+  const getSnapshot = React.useCallback(() => {
+    return snapshots[cursorRef.current];
+  }, [snapshots]);
+
+  const getPrevSnapshot = React.useCallback(() => {
+    if (cursorRef.current - 1 < 0) {
+      return null;
+    }
+    return snapshots[cursorRef.current - 1];
+  }, [snapshots]);
+
+  const undoSnapshot = React.useCallback(() => {
+    if (cursorRef.current - 1 < 0) {
+      return null;
+    }
+
+    setSnapshots((prevSnapshots) => {
+      const undoSnapshots = [...prevSnapshots];
+      undoSnapshots.pop();
+
+      return undoSnapshots;
+    });
+
+    cursorRef.current -= 1;
+
+    return null;
+  }, []);
+
+  const resetSnapshot = React.useCallback((newObject: T | null) => {
+    setSnapshots(newObject ? [{ ...newObject }] : []);
     cursorRef.current = 0;
-  }, [schema]);
+  }, []);
 
   return {
-    addSnapshot: (value?: T | null) => {
-      if (!value) {
-        return null;
-      }
-
-      setSnapshots((prevSnapshots) => [...prevSnapshots, value]);
-
-      cursorRef.current += 1;
-
-      return null;
-    },
-    getSnapshot: () => {
-      return snapshots[cursorRef.current];
-    },
-
-    getPrevSnapshot: () => {
-      if (cursorRef.current - 1 < 0) {
-        return null;
-      }
-      return snapshots[cursorRef.current - 1];
-    },
-
-    undoSnapshot: () => {
-      if (cursorRef.current - 1 < 0) {
-        return null;
-      }
-
-      setSnapshots((prevSnapshots) => {
-        const undoSnapshots = [...prevSnapshots];
-        undoSnapshots.pop();
-
-        return undoSnapshots;
-      });
-
-      cursorRef.current -= 1;
-
-      return null;
-    },
+    addSnapshot,
+    getSnapshot,
+    getPrevSnapshot,
+    undoSnapshot,
+    resetSnapshot,
   };
 };
