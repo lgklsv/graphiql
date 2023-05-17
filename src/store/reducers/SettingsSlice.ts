@@ -23,11 +23,24 @@ const settingsSlice = createSlice({
       state.isStats = action.payload;
     },
     resetSettings: () => initialState,
+
+    updateSetStore: (
+      state,
+      action: PayloadAction<{ isCache: NumBoolean; isStats: NumBoolean }>
+    ) => {
+      state.isCache = action.payload.isCache;
+      state.isStats = action.payload.isStats;
+    },
   },
 });
 
 const { actions, reducer } = settingsSlice;
 
-export const { setCacheSetting, setStatsSetting, resetSettings } = actions;
+export const {
+  setCacheSetting,
+  setStatsSetting,
+  resetSettings,
+  updateSetStore,
+} = actions;
 
 export default reducer;

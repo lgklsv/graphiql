@@ -5,11 +5,11 @@ import { ButtonForm } from 'shared/ui';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useUser } from 'shared/hooks/use-user';
 import { useAppDispatch } from 'shared/hooks/redux';
-import { updateDataStore } from 'store/reducers/TabSlice';
+import { updateTabStore } from 'store/reducers/TabSlice';
 import {
   NumBoolean,
   setCacheSetting,
-  setStatsSetting,
+  updateSetStore,
 } from 'store/reducers/SettingsSlice';
 
 import { auth } from 'firebase';
@@ -45,11 +45,13 @@ const LoginForm: React.FC = () => {
         // TODO: вынести в хук?
         if (userSettings) {
           const { tab, activeKey, isCache, isStats } = userSettings;
-          dispatch(updateDataStore({ activeKey, tabs: tab as Tab[] }));
-          // setActiveTabKey(activeKey));
-          // dispatch(updateTabs(tab as Tab[]));
-          dispatch(setStatsSetting(isStats as NumBoolean));
-          dispatch(setCacheSetting(isCache as NumBoolean));
+          dispatch(updateTabStore({ activeKey, tabs: tab as Tab[] }));
+          dispatch(
+            updateSetStore({
+              isCache: isCache as NumBoolean,
+              isStats: isStats as NumBoolean,
+            })
+          );
         }
 
         console.log(userSettings, 'in LOGIN');
