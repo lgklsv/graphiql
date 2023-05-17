@@ -6,15 +6,20 @@ import { useTranslation } from 'react-i18next';
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { settingsSelector } from 'store/selectors/settingsSelector';
 import { NumBoolean, setStatsSetting } from 'store/reducers/SettingsSlice';
+import { useAuthState } from 'shared/hooks/use-auth';
+import { updateFirestoreUserData } from 'shared/lib/firestore/constants';
 
 const Stats: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isStats } = useAppSelector(settingsSelector);
+  // TODO: добавить инитиал значения сюда
+  const { id } = useAuthState();
 
   const selectStatsHandler = (value: SegmentedValue) => {
     const enteredValue = value as NumBoolean;
     dispatch(setStatsSetting(enteredValue));
+    updateFirestoreUserData(id as string, { isStats: value });
   };
 
   return (
