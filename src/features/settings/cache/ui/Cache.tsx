@@ -13,7 +13,7 @@ const Cache: React.FC = () => {
   const dispatch = useAppDispatch();
   const { isCache } = useAppSelector(settingsSelector);
   const { id } = useAuthState();
-
+  // TODO: добавить инитиал значения сюда
   const selectCacheHandler = (value: SegmentedValue) => {
     const enteredValue = value as NumBoolean;
     dispatch(setCacheSetting(enteredValue));
