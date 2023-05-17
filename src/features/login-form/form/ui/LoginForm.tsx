@@ -13,13 +13,14 @@ import {
   updateSetStore,
 } from 'store/reducers/SettingsSlice';
 import { getFirestoreUserData } from 'shared/lib/firestore/constants';
+import { useSetFirestore } from 'shared/lib/firestore/hook/use-set-firestore';
 
 import style from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation();
   const dispatchUser = useUser();
-  const dispatch = useAppDispatch();
+  const firestoreDispatch = useSetFirestore();
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -36,24 +37,9 @@ const LoginForm: React.FC = () => {
       .then(async ({ user }) => {
         const { email, uid, accessToken } = user as unknown as UserFirebase;
         dispatchUser({ email, id: uid, token: accessToken });
-
-        // TODO: задиспачить значения
-        const userSettings = await getFirestoreUserData(uid);
-
-        // TODO: вынести в хук?
-        if (userSettings) {
-          const { tab, activeKey, isCache, isStats } = userSettings;
-          dispatch(updateTabStore({ activeKey, tabs: tab as Tab[] }));
-          dispatch(
-            updateSetStore({
-              isCache: isCache as NumBoolean,
-              isStats: isStats as NumBoolean,
-            })
-          );
-        }
-
-        console.log(userSettings, 'in LOGIN');
+        await firestoreDispatch(uid);
       })
+
       .catch((error) => {
         messageApi.open({
           key: 'updatable',
