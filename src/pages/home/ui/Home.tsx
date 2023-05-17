@@ -14,6 +14,7 @@ import FeatureShowcase from './FeatureShowcase/FeatureShowcase';
 import docsScreenshot from './assets/schema.png';
 import headersScreenshot from './assets/headers.png';
 import appScreenshot from './assets/screenshot.png';
+import StackList from './StackList/StackList';
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
@@ -58,6 +59,7 @@ const Home: React.FC = () => {
             text="GraphiQL Sandbox allows you to send requests with HTTP headers, such as a token needed to authenticate a user or some other kind of authorization. Make sure to first switch the tab to “Headers,” and then add your headers as a JSON object. By the way, you can add more than one field."
             imgUrl={headersScreenshot}
           />
+          <StackList />
           <DevSection />
         </motion.div>
       </ErrorBoundary>
