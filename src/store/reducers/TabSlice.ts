@@ -61,7 +61,7 @@ const tabsSlice = createSlice({
     },
     resetTabsData: () => initialState,
 
-    updateDataStore: (
+    updateTabStore: (
       state,
       action: PayloadAction<{ activeKey: string; tabs: Tab[] }>
     ) => {
@@ -80,7 +80,7 @@ export const {
   updateResponse,
   updateTabLabel,
   resetTabsData,
-  updateDataStore,
+  updateTabStore,
 } = actions;
 
 export default reducer;
