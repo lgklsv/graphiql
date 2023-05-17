@@ -6,6 +6,7 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { db } from 'firebase';
+import { NumBoolean } from 'store/reducers/SettingsSlice';
 
 export const initialValue = {
   commonSet: {
@@ -20,12 +21,12 @@ export const initialValue = {
   },
 };
 
-interface IFirestoreData {
+export interface IFirestoreData {
   id?: string;
-  isCache: number;
-  isStats: number;
+  isCache: number | NumBoolean;
+  isStats: number | NumBoolean;
   activeKey: string;
-  tab: string[];
+  tab: string[] | Tab[];
 }
 
 export const getFirestoreUserData = async (uid: string) => {
@@ -45,12 +46,17 @@ export const getFirestoreUserData = async (uid: string) => {
     const newArray = (initValue as IFirestoreData).tab as string[];
     const arr = newArray.map((elem) => {
       return JSON.parse(elem);
-    });
+    }) as Tab[];
+
+    const clearTabs = arr.map((item) => ({
+      ...item,
+      response: { data: '', isLoading: false, error: undefined },
+    }));
 
     return {
       ...initValue,
-      tab: arr,
-    };
+      tab: clearTabs,
+    } as IFirestoreData;
   }
 
   //   TODO: здесь же можно и диспачить, есть вернуть все данные
@@ -65,11 +71,7 @@ export const updateFirestoreUserData = async (
   data: { [x: string]: string | number | string[] }
 ) => {
   const userSettingsRef = doc(db, 'settings', id);
-  await updateDoc(
-    userSettingsRef,
-    data
-    // TODO: в каком формате передавать инишиал валуе
-  );
+  await updateDoc(userSettingsRef, data);
 };
 
 export const createFirestoreUserData = async (uid: string) => {

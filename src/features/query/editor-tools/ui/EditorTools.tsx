@@ -2,8 +2,6 @@ import React from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { linter } from '@codemirror/lint';
 import { jsonParseLinter, json } from '@codemirror/lang-json';
-
-import { TabQueryContent } from 'features/tabs/types';
 import { updateTabContent } from 'store/reducers/TabSlice';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';

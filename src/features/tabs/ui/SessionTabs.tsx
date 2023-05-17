@@ -21,8 +21,6 @@ import { updateFirestoreUserData } from 'shared/lib/firestore/constants';
 import { setActiveTabKey, updateTabs } from 'store/reducers/TabSlice';
 import DraggableTabNode from './DraggableTabs';
 
-import { Tab } from '../types';
-
 import styles from './SessionTabs.module.scss';
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
