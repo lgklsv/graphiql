@@ -1,7 +1,7 @@
 import { Typography } from 'antd';
 import { ROUTES } from 'pages/config';
 import { Link } from 'react-router-dom';
-import style from './TitleForm.module.scss';
+import styles from './TitleForm.module.scss';
 
 const { Title, Text } = Typography;
 
@@ -19,10 +19,13 @@ const TitleForm: React.FC<TitleFormProps> = ({
   link,
 }) => {
   return (
-    <Title className={style.form_title}>
+    <Title className={styles.title}>
       {title}
-      <Text className={style.form_link}>
-        {text} <Link to={link}> {textLink}</Link>
+      <Text className={styles.title__link}>
+        {text}{' '}
+        <Link className={styles.title__link_redirect} to={link}>
+          {textLink}
+        </Link>
       </Text>
     </Title>
   );
