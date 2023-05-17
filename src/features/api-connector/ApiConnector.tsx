@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Input, Space } from 'antd';
 import { ApiOutlined } from '@ant-design/icons';
@@ -17,12 +17,12 @@ const ApiConnector: React.FC = () => {
   const dispatch = useAppDispatch();
   const currentUrl = useAppSelector(apiUrlSelector);
 
-  const [inputValue, setInputValue] = useState(currentUrl);
+  const [inputValue, setInputValue] = React.useState(currentUrl);
 
   const { isLoading, isFetching, isError, refetch } =
     graphql.useGetSchemaQuery('{}');
 
-  useEffect(() => {
+  React.useEffect(() => {
     setInputValue(currentUrl);
   }, [currentUrl]);
 

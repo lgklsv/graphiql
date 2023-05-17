@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import CodeMirror from '@uiw/react-codemirror';
@@ -18,14 +18,14 @@ import './Editor.scss';
 const Editor: React.FC = () => {
   const { t } = useTranslation();
   const { activeTabKey, tabQuery } = useTabs();
-  const viewRef = useRef<EditorView | null>(null);
+  const viewRef = React.useRef<EditorView | null>(null);
 
   const dispatch = useAppDispatch();
 
   const { data, error, refetch, isError, isFetching } =
     graphql.useGetSchemaQuery('{}');
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (viewRef.current) {
       updateSchema(viewRef.current, data);
     }
