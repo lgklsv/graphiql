@@ -34,7 +34,10 @@ const Intro: React.FC = () => {
         >
           {t('button.docs')}
         </Button>
-        <motion.div whileHover={{ scale: 1.1 }}>
+        <motion.div
+          whileHover={{ scale: 1.1 }}
+          transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+        >
           <Button
             style={{ borderColor: 'white', scale: '1.1' }}
             size={screens.xs ? 'middle' : 'large'}

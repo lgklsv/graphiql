@@ -18,6 +18,7 @@ import schemaImg from './assets/schema.png';
 import headersImg from './assets/headers.png';
 import appImg from './assets/app.png';
 import StackList from './StackList/StackList';
+import CardsGrid from './FeartureCardsGrid/FeatureCardsGrid';
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
@@ -55,6 +56,7 @@ const Home: React.FC = () => {
             imgUrl={headersImg}
             imgPlaceholder={headersImgPlaceholder}
           />
+          <CardsGrid />
           <StackList />
           <DevSection />
         </motion.div>
