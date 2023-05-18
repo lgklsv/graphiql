@@ -31,6 +31,33 @@
         "text": "GraphiQL Sandbox allows you to send requests with HTTP headers, such as a token needed to authenticate a user or some other kind of authorization. Make sure to first switch the tab to “Headers,” and then add your headers as a JSON object. By the way, you can add more than one field."
       }
     },
+    "featureGrid": {
+      "title": "More features",
+      "codemirror": {
+        "title": "Codemirror editor",
+        "text": "All our editors are made with codemirror and support syntax highlighting, autocomplete and more."
+      },
+      "firebase": {
+        "title": "Firebase integration",
+        "text": "We login with Firebase to help you save all your queries, tabs and settings."
+      },
+      "prettify": {
+        "title": "Prettify, copy, download",
+        "text": "Simple tools that are nice to have. Prettify, copy query and download response in JSON format."
+      },
+      "tabs": {
+        "title": "Tabs",
+        "text": "Create new tabs to work with different queries at the same time. You can easily reorder them with drag-n-drop."
+      },
+      "shortcuts": {
+        "title": "Shortcuts",
+        "text": "We provide some useful shortcuts in our IDE. The editors use CodeMirror Key Maps that add more shortcuts."
+      },
+      "translation": {
+        "title": "Two languages support",
+        "text": "IDE and the whole service is translated in Russian and English."
+      }
+    },
     "developerTitle": "Developers"
   },
   "footer": {

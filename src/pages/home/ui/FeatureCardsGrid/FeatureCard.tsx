@@ -29,6 +29,7 @@ const FeatureCard: React.FC<FeatureCardProps> = ({ title, icon, text }) => {
             direction="vertical"
             style={{
               width: '100%',
+              minHeight: '100px',
               alignItems: 'center',
               paddingTop: '1rem',
             }}

@@ -18,7 +18,7 @@ import schemaImg from './assets/schema.png';
 import headersImg from './assets/headers.png';
 import appImg from './assets/app.png';
 import StackList from './StackList/StackList';
-import CardsGrid from './FeartureCardsGrid/FeatureCardsGrid';
+import CardsGrid from './FeatureCardsGrid/FeatureCardsGrid';
 
 const Home: React.FC = () => {
   const { t } = useTranslation();
