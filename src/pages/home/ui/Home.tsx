@@ -35,33 +35,23 @@ const Home: React.FC = () => {
         >
           <Intro />
           <Description
-            text="The main goal of our GraphiQL Sandbox is to provide an easy way to explore and test your GraphQL API."
+            text={t('home.descriptionGoal')}
             imgUrl={appImg}
             imgPlaceholder={appImgPlaceholder}
           />
-          <Description
-            text="GraphiQL Sandbox is a GraphQL IDE created and maintained by students
-          of RS School React course. Sandbox ships with basic features such as
-          syntax highlighting, intelligent type ahead of fields, real-time error
-          highlighting and reporting for queries and variables, documentation
-          explorer, search, markdown support, the ability to configure HTTP
-          headers, and so much more."
-          />
+          <Description text={t('home.descriptionText')} />
           <FeatureShowcase
-            title="Docs and schema"
+            title={t('home.featureShowcase.docs.title')}
             icon={<BookOutlined />}
-            text="The API documentation board is one of the most exciting features of
-            GraphiQl Sandbox. It enables you to preview GraphQL queries, GraphQL
-            type details, and a single field of a given schema. You can also use
-            search bar to look up for some fields."
+            text={t('home.featureShowcase.docs.text')}
             imgUrl={schemaImg}
             imgPlaceholder={schemaImgPlaceholder}
           />
           <FeatureShowcase
             reverse
-            title="Send HTTP headers"
+            title={t('home.featureShowcase.headers.title')}
             icon="{ } "
-            text="GraphiQL Sandbox allows you to send requests with HTTP headers, such as a token needed to authenticate a user or some other kind of authorization. Make sure to first switch the tab to “Headers,” and then add your headers as a JSON object. By the way, you can add more than one field."
+            text={t('home.featureShowcase.headers.text')}
             imgUrl={headersImg}
             imgPlaceholder={headersImgPlaceholder}
           />
