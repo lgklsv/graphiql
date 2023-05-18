@@ -22,6 +22,10 @@
     "descriptionGoal": "The main goal of our GraphiQL Sandbox is to provide an easy way to explore and test your GraphQL API.",
     "descriptionText": "GraphiQL Sandbox is a GraphQL IDE created and maintained by students of RS School React course. Sandbox ships with basic features such as syntax highlighting, intelligent type ahead of fields, real-time error highlighting and reporting for queries and variables, documentation explorer, search, markdown support, the ability to configure HTTP headers, and so much more.",
     "featureShowcase": {
+      "query": {
+        "title": "Run a GraphQL query",
+        "text": "You can send a GraphQL query or mutation using GraphiQL Sandbox. Code editor has an autocompletion feature and helps you ride through your schema. Our IDE helps in sending requests to the GraphQL server and facilitates the retrieval of data as well."
+      },
       "docs": {
         "title": "Docs and schema",
         "text": "The API documentation board is one of the most exciting features of GraphiQl Sandbox. It enables you to preview GraphQL queries, GraphQL type details, and a single field of a given schema. You can also use search bar to look up for some fields."

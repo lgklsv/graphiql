@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 
 import { ErrorBoundary } from 'shared/hoc';
-import { BookOutlined } from '@ant-design/icons';
+import { BookOutlined, RadarChartOutlined } from '@ant-design/icons';
 import Intro from './Intro/Intro';
 import styles from './Home.module.scss';
 import DevSection from './Developers/DevSection';
@@ -14,8 +14,10 @@ import FeatureShowcase from './FeatureShowcase/FeatureShowcase';
 import schemaImgPlaceholder from './assets/placeholders/blurred-schema.png';
 import headersImgPlaceholder from './assets/placeholders/blurred-headers.png';
 import appImgPlaceholder from './assets/placeholders/blurred-app.png';
+import queryImgPlaceholder from './assets/placeholders/blurred-query.png';
 import schemaImg from './assets/schema.png';
 import headersImg from './assets/headers.png';
+import queryImg from './assets/query.png';
 import appImg from './assets/app.png';
 import StackList from './StackList/StackList';
 import CardsGrid from './FeatureCardsGrid/FeatureCardsGrid';
@@ -41,6 +43,14 @@ const Home: React.FC = () => {
             imgPlaceholder={appImgPlaceholder}
           />
           <Description text={t('home.descriptionText')} />
+          <FeatureShowcase
+            reverse
+            title={t('home.featureShowcase.query.title')}
+            icon={<RadarChartOutlined />}
+            text={t('home.featureShowcase.query.text')}
+            imgUrl={queryImg}
+            imgPlaceholder={queryImgPlaceholder}
+          />
           <FeatureShowcase
             title={t('home.featureShowcase.docs.title')}
             icon={<BookOutlined />}

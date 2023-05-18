@@ -40,8 +40,7 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
       >
         <Space direction="vertical">
           <h2 className={styles.showcase__title}>
-            {icon}
-            {title}
+            {icon} {title}
           </h2>
           <Paragraph className={styles.showcase__description}>{text}</Paragraph>
         </Space>
