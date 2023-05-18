@@ -8,6 +8,10 @@
   align-items: center;
   position: relative;
 
+  @media (max-width: 767px) {
+    height: 300px;
+  }
+
   &::before {
     content: '';
     background: var(--apollo-gradient-purple);
@@ -16,6 +20,10 @@
     position: absolute;
     top: 0;
     left: -50vw;
+
+    @media (max-width: 767px) {
+      height: 300px;
+    }
   }
 
   &__item {

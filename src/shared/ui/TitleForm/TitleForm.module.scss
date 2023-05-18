@@ -4,6 +4,10 @@
   line-height: 2.25rem !important;
   margin-bottom: 2rem !important;
 
+  @media (max-width: 460px) {
+    text-align: center;
+  }
+
   &__link {
     text-align: right;
     display: block;
@@ -19,6 +23,7 @@
     @media (max-width: 460px) {
       position: relative;
       margin-top: 0;
+      text-align: center;
     }
   }
 }

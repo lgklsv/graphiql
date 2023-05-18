@@ -1,13 +1,16 @@
 import React from 'react';
-import { Space } from 'antd';
+import { Grid, Space } from 'antd';
 import { motion } from 'framer-motion';
 
 import { TRANSITION } from 'app/config';
 import styles from './StackList.module.scss';
 
+const { useBreakpoint } = Grid;
+
 const TECH_STACK = ['typescript', 'react', 'firebase', 'graphql'];
 
 const StackList: React.FC = () => {
+  const screens = useBreakpoint();
   return (
     <motion.section
       initial={{ opacity: 0, y: 100 }}
@@ -16,7 +19,7 @@ const StackList: React.FC = () => {
       transition={TRANSITION}
       className={styles.stackList}
     >
-      <Space direction="vertical" size={40}>
+      <Space direction="vertical" size={screens.xs ? 25 : 40}>
         {TECH_STACK.map((item) => (
           <h2 key={item} className={styles.stackList__item}>
             {item}

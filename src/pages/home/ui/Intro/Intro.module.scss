@@ -10,6 +10,10 @@
   position: relative;
   z-index: 2;
 
+  @media (max-width: 767px) {
+    height: 60vh;
+  }
+
   &__text {
     color: var(--bg-primary);
     text-align: center;

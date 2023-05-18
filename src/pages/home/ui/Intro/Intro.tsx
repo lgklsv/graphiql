@@ -25,10 +25,10 @@ const Intro: React.FC = () => {
         </h1>
         <p className={styles.intro__text_full}>{t('home.introText')}</p>
       </div>
-      <Space size={screens.xs ? 'middle' : 40}>
+      <Space size={screens.xs ? 25 : 40}>
         <Button
           style={{ borderColor: 'white', color: 'white', scale: '1.1' }}
-          size="large"
+          size={screens.xs ? 'middle' : 'large'}
           type="primary"
           href="https://github.com/lgklsv/graphiql"
         >
@@ -37,7 +37,7 @@ const Intro: React.FC = () => {
         <motion.div whileHover={{ scale: 1.1 }}>
           <Button
             style={{ borderColor: 'white', scale: '1.1' }}
-            size="large"
+            size={screens.xs ? 'middle' : 'large'}
             onClick={() => navigate(ROUTES.sandbox)}
           >
             {t('button.start')}

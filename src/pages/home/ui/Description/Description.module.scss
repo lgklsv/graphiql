@@ -9,7 +9,7 @@
   }
 
   &__text {
-    @include adaptive-font(32, 18);
+    @include adaptive-font(30, 18);
     color: var(--text-secondary);
   }
 }

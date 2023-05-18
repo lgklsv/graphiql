@@ -1,9 +1,9 @@
-import { Typography, Grid, Space, Image } from 'antd';
+import React from 'react';
+import { Typography, Space, Image } from 'antd';
 
 import styles from './Description.module.scss';
 
 const { Paragraph } = Typography;
-const { useBreakpoint } = Grid;
 
 interface DescriptionProps {
   title?: string;
@@ -18,7 +18,6 @@ const Description: React.FC<DescriptionProps> = ({
   imgUrl,
   imgPlaceholder,
 }) => {
-  const screens = useBreakpoint();
   return (
     <section className={styles.description}>
       <Space direction="vertical" size="large">
