@@ -52,7 +52,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <>
-      <div className={styles.sidebar}>
+      <aside className={styles.sidebar}>
         <AppTooltip title={t('sandbox.tooltips.docsClose')}>
           <Button
             onClick={toggleDocs}
@@ -92,7 +92,7 @@ const Sidebar: React.FC = () => {
             />
           </AppTooltip>
         </Space>
-      </div>
+      </aside>
       <Drawer
         title={<Title style={{ margin: 0 }}>{t('docs.header.title')}</Title>}
         placement="left"
