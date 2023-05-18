@@ -3,11 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import { Button, Space, Grid } from 'antd';
 import { RightOutlined } from '@ant-design/icons';
 import { useTranslation, Trans } from 'react-i18next';
+import { motion } from 'framer-motion';
 
 import { ROUTES } from 'pages/config';
 import styles from './Intro.module.scss';
-
-// TODO: add isAuthorized check and adjust redirect buttons: If authorized redirect to sandbox, of not => SignUP
 
 const { useBreakpoint } = Grid;
 
@@ -26,7 +25,7 @@ const Intro: React.FC = () => {
         </h1>
         <p className={styles.intro__text_full}>{t('home.introText')}</p>
       </div>
-      <Space size={screens.xs ? 'middle' : 30}>
+      <Space size={screens.xs ? 'middle' : 40}>
         <Button
           style={{ borderColor: 'white', color: 'white', scale: '1.1' }}
           size="large"
@@ -35,14 +34,16 @@ const Intro: React.FC = () => {
         >
           {t('button.docs')}
         </Button>
-        <Button
-          style={{ borderColor: 'white', scale: '1.1' }}
-          size="large"
-          onClick={() => navigate(ROUTES.sandbox)}
-        >
-          {t('button.start')}
-          <RightOutlined />
-        </Button>
+        <motion.div whileHover={{ scale: 1.1 }}>
+          <Button
+            style={{ borderColor: 'white', scale: '1.1' }}
+            size="large"
+            onClick={() => navigate(ROUTES.sandbox)}
+          >
+            {t('button.start')}
+            <RightOutlined />
+          </Button>
+        </motion.div>
       </Space>
     </section>
   );
