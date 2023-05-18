@@ -50,8 +50,11 @@ const ApiConnector: React.FC = () => {
           loading={isLoading || isFetching}
           onClick={handleConnect}
           disabled={!inputValue}
-          style={{ borderColor: `${isError ? 'red' : ''}`, width: 40 }}
-          className={styles.apiConnector__btn}
+          style={{
+            borderColor: `${isError ? 'red' : ''}`,
+            width: 40,
+            height: 42,
+          }}
         />
       </AppTooltip>
     </Space.Compact>
