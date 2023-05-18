@@ -16,6 +16,7 @@ interface FeatureShowcaseProps {
   icon?: React.ReactNode;
   text: string;
   imgUrl: string;
+  imgPlaceholder: string;
 }
 
 const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
@@ -24,6 +25,7 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
   icon,
   text,
   imgUrl,
+  imgPlaceholder,
 }) => {
   return (
     <section
@@ -51,7 +53,12 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
         transition={TRANSITION}
         className={styles.showcase__item}
       >
-        <Image width="100%" src={imgUrl} preview={false} />
+        <Image
+          width="100%"
+          src={imgUrl}
+          preview={false}
+          placeholder={<Image preview={false} src={imgPlaceholder} />}
+        />
       </motion.div>
     </section>
   );

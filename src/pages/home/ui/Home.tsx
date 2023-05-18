@@ -11,9 +11,12 @@ import DevSection from './Developers/DevSection';
 import Description from './Description/Description';
 import FeatureShowcase from './FeatureShowcase/FeatureShowcase';
 
-import docsScreenshot from './assets/schema.png';
-import headersScreenshot from './assets/headers.png';
-import appScreenshot from './assets/screenshot.png';
+import schemaImgPlaceholder from './assets/placeholders/blurred-schema.png';
+import headersImgPlaceholder from './assets/placeholders/blurred-headers.png';
+import appImgPlaceholder from './assets/placeholders/blurred-app.png';
+import schemaImg from './assets/schema.png';
+import headersImg from './assets/headers.png';
+import appImg from './assets/app.png';
 import StackList from './StackList/StackList';
 
 const Home: React.FC = () => {
@@ -33,7 +36,8 @@ const Home: React.FC = () => {
           <Intro />
           <Description
             text="The main goal of our GraphiQL Sandbox is to provide an easy way to explore and test your GraphQL API."
-            imgUrl={appScreenshot}
+            imgUrl={appImg}
+            imgPlaceholder={appImgPlaceholder}
           />
           <Description
             text="GraphiQL Sandbox is a GraphQL IDE created and maintained by students
@@ -50,14 +54,16 @@ const Home: React.FC = () => {
             GraphiQl Sandbox. It enables you to preview GraphQL queries, GraphQL
             type details, and a single field of a given schema. You can also use
             search bar to look up for some fields."
-            imgUrl={docsScreenshot}
+            imgUrl={schemaImg}
+            imgPlaceholder={schemaImgPlaceholder}
           />
           <FeatureShowcase
             reverse
             title="Send HTTP headers"
             icon="{ } "
             text="GraphiQL Sandbox allows you to send requests with HTTP headers, such as a token needed to authenticate a user or some other kind of authorization. Make sure to first switch the tab to “Headers,” and then add your headers as a JSON object. By the way, you can add more than one field."
-            imgUrl={headersScreenshot}
+            imgUrl={headersImg}
+            imgPlaceholder={headersImgPlaceholder}
           />
           <StackList />
           <DevSection />
