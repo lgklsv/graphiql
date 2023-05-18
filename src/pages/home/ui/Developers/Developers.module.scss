@@ -14,22 +14,28 @@
     @include adaptive-font(32, 24);
     margin-bottom: 0.5em;
   }
+
   &__list {
     flex-direction: row;
+
     @media (max-width: 767px) {
       flex-direction: column;
     }
   }
+
   &__cardItem {
     max-width: 300px;
+
     @media (max-width: 767px) {
       width: 280px;
     }
   }
+
   &__cardAvatar {
     border: 1px var(--apollo-purple-light) solid;
     width: 200px;
     height: 200px;
+
     @media (max-width: 767px) {
       width: 125px;
       height: 125px;

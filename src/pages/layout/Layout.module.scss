@@ -1,8 +1,5 @@
-@import '/src/shared/styles/mixins.scss';
-
 .main {
   margin-top: var(--header);
   min-height: calc(100vh - var(--header) - var(--footer));
-  @include flex-center;
   overflow: hidden;
 }
