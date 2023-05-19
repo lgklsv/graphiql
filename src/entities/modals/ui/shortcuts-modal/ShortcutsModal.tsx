@@ -59,17 +59,22 @@ const ShortcutsModal: React.FC<ModalProps> = ({ isOpen, toggle }) => {
     },
     {
       key: '3',
-      shortcut: ['Shift', 'Ctrl', 'P'],
+      shortcut: ['Shift', 'P'],
       function: t('modals.shortcuts.function.prettify'),
     },
     {
       key: '4',
-      shortcut: ['Shift', 'Ctrl', 'C'],
+      shortcut: ['Shift', 'C'],
       function: t('modals.shortcuts.function.copy'),
     },
     {
       key: '5',
-      shortcut: ['Shift', 'Ctrl', 'R'],
+      shortcut: ['Shift', 'D'],
+      function: t('modals.shortcuts.function.download'),
+    },
+    {
+      key: '6',
+      shortcut: ['Shift', 'R'],
       function: t('modals.shortcuts.function.refetch'),
     },
   ];

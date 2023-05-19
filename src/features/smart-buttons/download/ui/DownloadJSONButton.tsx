@@ -2,7 +2,9 @@ import React from 'react';
 import { DownloadOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useHotkeys } from 'react-hotkeys-hook';
 
+import { SHORTCUTS } from 'app/config';
 import { AppTooltip } from 'shared/ui';
 
 interface DownloadJSONButtonProps {
@@ -21,6 +23,8 @@ const DownloadJSONButton: React.FC<DownloadJSONButtonProps> = ({ data }) => {
 
     link.click();
   };
+
+  useHotkeys(SHORTCUTS.download, downloadHandler);
 
   return (
     <AppTooltip title={t('sandbox.tooltips.download')}>

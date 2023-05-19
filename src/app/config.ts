@@ -37,9 +37,10 @@ export const BASE_URL = 'https://countries.trevorblades.com/';
 
 export const SHORTCUTS = {
   search: ['ctrl+k', 'meta+k'],
-  execute: ['ctrl+enter', 'meta+enter'],
-  prettify: ['shift+ctrl+p', 'shift+meta+p'],
-  copy_query: ['shift+ctrl+c', 'shift+meta+c'],
+  execute: ['ctrl+enter'],
+  prettify: ['shift+p'],
+  copy_query: ['shift+c'],
   copy_response: ['shift+alt+c'],
-  refetch: ['shift+ctrl+r', 'shift+meta+r'],
+  download: ['shift+d'],
+  refetch: ['shift+r'],
 };

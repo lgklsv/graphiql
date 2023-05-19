@@ -108,21 +108,21 @@
     "placeholder": "Enter your query",
     "tooltips": {
       "docsClose": "Show documentation",
-      "refetch": "Re-fetch GraphQL schema",
+      "refetch": "Re-fetch schema (shift + r)",
       "shortcuts": "Explore all shortcuts",
       "settings": "Open settings",
       "execute": "Execute query (ctrl + enter)",
       "prettify": {
-        "default": "Prettify (shift + ctrl + p)",
+        "default": "Prettify (shift + p)",
         "done": "Done!",
         "error": "Not valid GraphQL, can't prettify"
       },
       "copy": {
-        "query": "Copy query (shift + ctrl + c)",
+        "query": "Copy query (shift + c)",
         "response": "Copy response (shift + alt + c)",
         "done": "Copied!"
       },
-      "download": "Download response (JSON)"
+      "download": "Download response (JSON) (shift + d)"
     },
     "response": {
       "error": "{{fieldName}} has an invalid JSON format. Please fix the errors and try once again."
@@ -164,7 +164,8 @@
         "query": "Execute query",
         "prettify": "Prettify editors",
         "copy": "Copy query",
-        "refetch": "Re-fetch schema using introspection"
+        "refetch": "Re-fetch schema using introspection",
+        "download": "Download response in JSON format"
       },
       "message": "The editors use CodeMirror Key Maps that add more shortcuts."
     },
