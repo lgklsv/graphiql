@@ -42,7 +42,7 @@ const QueryField: React.FC = () => {
       resize={onResize}
     >
       <div className={styles.query}>
-        <div className={styles.query__editor}>
+        <div className={styles.query__editor} id="hidden-scroll">
           <Query.Editor />
           <Toolbar />
         </div>
