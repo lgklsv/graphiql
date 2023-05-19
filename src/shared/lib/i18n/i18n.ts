@@ -18,7 +18,7 @@ i18n
     backend: {
       loadPath: '/locales/{{lng}}/translation.json',
     },
-    debug: true, // disable for production
+    debug: false,
   });
 
 export default i18n;

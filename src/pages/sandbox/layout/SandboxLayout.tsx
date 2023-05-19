@@ -2,6 +2,7 @@ import React from 'react';
 
 import { SessionTabs } from 'features/tabs';
 import { Sidebar } from 'widgets/sidebar';
+import { ApiConnector } from 'features/api-connector';
 import { QueryField } from 'entities/query';
 import { ResponseField } from 'entities/response';
 import { ErrorBoundary } from 'shared/hoc';
@@ -15,9 +16,12 @@ const SandboxLayout: React.FC = () => {
         <Sidebar />
       </ErrorBoundary>
       <div className={styles.layout__main}>
-        <ErrorBoundary type="notification">
-          <SessionTabs />
-        </ErrorBoundary>
+        <div className={styles.layout__main_tabs}>
+          <ErrorBoundary type="notification">
+            <ApiConnector />
+            <SessionTabs />
+          </ErrorBoundary>
+        </div>
         <div className={styles.layout__field}>
           <ErrorBoundary type="notification">
             <QueryField />

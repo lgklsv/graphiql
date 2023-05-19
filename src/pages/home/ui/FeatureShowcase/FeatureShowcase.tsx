@@ -57,6 +57,7 @@ const FeatureShowcase: React.FC<FeatureShowcaseProps> = ({
           src={imgUrl}
           preview={false}
           placeholder={<Image preview={false} src={imgPlaceholder} />}
+          alt={title}
         />
       </motion.div>
     </section>

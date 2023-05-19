@@ -36,7 +36,7 @@ const Intro: React.FC = () => {
         </Button>
         <motion.div
           whileHover={{ scale: 1.1 }}
-          transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+          transition={{ type: 'spring', stiffness: 200, damping: 10 }}
         >
           <Button
             style={{ borderColor: 'white', scale: '1.1' }}
