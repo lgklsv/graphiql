@@ -56,21 +56,39 @@ button.ant-btn-primary {
 }
 
 /* Works on Firefox */
-* {
+#custom-scroll {
   scrollbar-width: thin;
   scrollbar-color: var(--bg-secondary) transparent;
 }
 /* Works on Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
+#custom-scroll::-webkit-scrollbar {
   width: 20px;
 }
-*::-webkit-scrollbar-track {
+#custom-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
-*::-webkit-scrollbar-thumb {
+#custom-scroll::-webkit-scrollbar-thumb {
   background-color: var(--bg-secondary);
   border-radius: 20px;
   border: 7px solid transparent;
   background-clip: content-box;
   transition: all 0.15s ease-in-out;
+}
+
+#hidden-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-secondary) transparent;
+}
+
+/* Works on Chrome, Edge, and Safari */
+#hidden-scroll::-webkit-scrollbar {
+  width: 0px;
+}
+#hidden-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+#hidden-scroll::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border: none;
+  background-clip: content-box;
 }

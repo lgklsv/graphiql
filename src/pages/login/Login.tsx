@@ -4,8 +4,9 @@ import { Divider } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { Navigate, useLocation } from 'react-router-dom';
 import { GoogleOutlined, GithubOutlined } from '@ant-design/icons';
-
+import { motion } from 'framer-motion';
 import { googleProvider, gitProvider } from 'firebase';
+
 import { ROUTES } from 'pages/config';
 import { Form } from 'features/login-form';
 import { FirebaseAuth } from 'features/firebase-button-auth';
@@ -30,7 +31,12 @@ const Login: React.FC = () => {
         <title>{t('pageTitle.login')}</title>
       </Helmet>
       <ErrorBoundary type="page">
-        <div className={style.login_container}>
+        <motion.div
+          className={style.login_container}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
           <TitleForm
             title={t('logIn.title')}
             link={ROUTES.signup}
@@ -57,7 +63,7 @@ const Login: React.FC = () => {
             {t('logIn.or')}
           </Divider>
           <Form.Login />
-        </div>
+        </motion.div>
       </ErrorBoundary>
     </>
   );

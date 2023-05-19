@@ -33,7 +33,7 @@ const EditorTools: React.FC<EditorToolsProps> = ({
   });
 
   return (
-    <div className={styles['editor-tools']}>
+    <div className={styles['editor-tools']} id="custom-scroll">
       {EDITOR_TABS.map((tabName, ind) => (
         <div
           key={tabName}

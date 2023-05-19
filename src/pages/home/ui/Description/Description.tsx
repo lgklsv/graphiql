@@ -1,30 +1,47 @@
-import { Col, Row, Typography, Grid } from 'antd';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
+import { Typography, Space, Image } from 'antd';
+
 import styles from './Description.module.scss';
 
 const { Paragraph } = Typography;
-const { useBreakpoint } = Grid;
 
-const Description: React.FC = () => {
-  const { t } = useTranslation();
-  const screens = useBreakpoint();
+interface DescriptionProps {
+  title?: string;
+  text: string;
+  imgUrl?: string;
+  imgPlaceholder?: string;
+  imgAlt?: string;
+}
+
+const Description: React.FC<DescriptionProps> = ({
+  title,
+  text,
+  imgUrl,
+  imgPlaceholder,
+  imgAlt,
+}) => {
   return (
     <section className={styles.description}>
-      <Row gutter={[32, 32]}>
-        <Col span={screens.xs ? 24 : 8}>
-          <div className={styles.description__backgroundImage} />
-        </Col>
-        <Col span={screens.xs ? 24 : 16}>
-          <div className={styles.description__text}>
-            <h2 className={styles.description__title}>
-              {t('home.descriptionTitle')}
-            </h2>
-            <Paragraph className={styles.description__text_full}>
-              {t('home.descriptionText')}
-            </Paragraph>
-          </div>
-        </Col>
-      </Row>
+      <Space direction="vertical" size="large">
+        {title && <h2 className={styles.description__title}>{title}</h2>}
+        <Paragraph className={styles.description__text}>{text}</Paragraph>
+        {imgUrl && (
+          <Image
+            width="100%"
+            src={imgUrl}
+            preview={false}
+            alt={imgAlt}
+            placeholder={
+              <Image
+                width="100%"
+                preview={false}
+                src={imgPlaceholder}
+                alt={imgAlt}
+              />
+            }
+          />
+        )}
+      </Space>
     </section>
   );
 };

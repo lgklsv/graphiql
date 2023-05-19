@@ -1,5 +1,5 @@
 $maxWidth: 1200;
-@mixin adaptiv-font($pcFnSize, $mobFnSize) {
+@mixin adaptive-font($pcFnSize, $mobFnSize) {
   $addSize: $pcFnSize - $mobFnSize;
   $addMobSize: $addSize + $addSize * 0.7;
   @media (max-width: 767px) {

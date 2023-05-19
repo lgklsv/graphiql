@@ -3,7 +3,7 @@
 @mixin adaptiveContentWidth {
   max-width: 1200px;
   @media (max-width: 1199px) {
-    max-width: 800px;
+    max-width: 85vw;
   }
   @media (max-width: 767px) {
     max-width: 90vw;

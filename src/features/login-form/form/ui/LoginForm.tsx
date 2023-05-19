@@ -1,15 +1,15 @@
 import { Form, Input, message } from 'antd';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
-import { ButtonForm } from 'shared/ui';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { useUser } from 'shared/hooks/use-user';
 import { auth } from 'firebase';
+
+import { ButtonForm } from 'shared/ui';
+import { useUser } from 'shared/hooks/use-user';
 import style from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation();
-
   const dispatchUser = useUser();
 
   const [messageApi, contextHolder] = message.useMessage();
@@ -40,9 +40,8 @@ const LoginForm: React.FC = () => {
   return (
     <>
       {contextHolder}
-
       <Form
-        name="normal_login"
+        name="login"
         className={style.login_form}
         initialValues={{ remember: true }}
         onFinish={onFinish}

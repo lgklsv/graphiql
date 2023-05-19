@@ -1,6 +1,7 @@
 import { Avatar, Card, Space, theme } from 'antd';
 import { GithubOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
+
 import styles from './Developers.module.scss';
 
 const { Meta } = Card;

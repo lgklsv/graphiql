@@ -38,7 +38,7 @@ const ResponseField: React.FC = () => {
 
   return (
     <div className={styles.response}>
-      <div className={styles.response__editor}>
+      <div className={styles.response__editor} id="custom-scroll">
         {data && (
           <CodeMirror
             value={data}

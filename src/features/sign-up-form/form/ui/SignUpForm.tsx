@@ -1,9 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Input, message } from 'antd';
-import { ButtonForm } from 'shared/ui';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from 'firebase';
+
+import { ButtonForm } from 'shared/ui';
 import { useUser } from 'shared/hooks/use-user';
 import style from './SignUpForm.module.scss';
 
@@ -12,9 +13,23 @@ const SignUpForm: React.FC = () => {
   const dispatchUser = useUser();
 
   const [messageApi, contextHolder] = message.useMessage();
-
   const [form] = Form.useForm();
-  const [, forceUpdate] = React.useState({});
+  const [submittable, setSubmittable] = React.useState(false);
+
+  const enteredValues = Form.useWatch([], form);
+
+  React.useEffect(() => {
+    if (form.isFieldsTouched(true)) {
+      form.validateFields(['email', 'password', 'confirm']).then(
+        () => {
+          setSubmittable(true);
+        },
+        () => {
+          setSubmittable(false);
+        }
+      );
+    }
+  }, [form, enteredValues]);
 
   const isConfirm = (value: string, password: string) => {
     if (!value || password === value) {
@@ -22,11 +37,6 @@ const SignUpForm: React.FC = () => {
     }
     return Promise.reject(new Error(`${t('form.error.notMatchingPsw')}`));
   };
-
-  // To disable submit button at the beginning.
-  React.useEffect(() => {
-    forceUpdate({});
-  }, []);
 
   const onFinish = (values: ILoginData) => {
     const { email: emailValues, password } = values;
@@ -54,7 +64,7 @@ const SignUpForm: React.FC = () => {
     <>
       {contextHolder}
       <Form
-        name="normal_login"
+        name="signup"
         initialValues={{ remember: true }}
         onFinish={onFinish}
         layout="vertical"
@@ -119,11 +129,7 @@ const SignUpForm: React.FC = () => {
             <ButtonForm
               text={t('button.access')}
               className={style.button}
-              isDisabled={
-                !form.isFieldsTouched(true) ||
-                !!form.getFieldsError().filter(({ errors }) => errors.length)
-                  .length
-              }
+              isDisabled={!submittable}
             />
           )}
         </Form.Item>

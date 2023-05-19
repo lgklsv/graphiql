@@ -1,0 +1,37 @@
+@import '../Mixin';
+
+.stackList {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  @media (max-width: 767px) {
+    height: 300px;
+  }
+
+  &::before {
+    content: '';
+    background: var(--apollo-gradient-purple);
+    width: 150vw;
+    height: 400px;
+    position: absolute;
+    top: 0;
+    left: -50vw;
+
+    @media (max-width: 767px) {
+      height: 300px;
+    }
+  }
+
+  &__item {
+    color: var(--white);
+    text-transform: uppercase;
+    text-align: center;
+    position: relative;
+    @include adaptive-font(40, 24);
+    z-index: 1;
+  }
+}

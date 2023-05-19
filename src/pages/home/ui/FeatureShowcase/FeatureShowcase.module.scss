@@ -1,0 +1,48 @@
+@import '../Mixin';
+
+.showcase {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  gap: 1rem;
+  grid-template-areas: 'column-1 column-2';
+
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    grid-template-areas: none;
+  }
+
+  &_reverse {
+    grid-template-areas: 'column-2 column-1';
+
+    @media (max-width: 767px) {
+      grid-template-areas: none;
+    }
+  }
+
+  &__item:nth-child(1) {
+    grid-area: column-1;
+
+    @media (max-width: 767px) {
+      grid-area: auto;
+    }
+  }
+
+  &__item:nth-child(2) {
+    grid-area: column-2;
+    @media (max-width: 767px) {
+      grid-area: auto;
+    }
+  }
+
+  &__title {
+    color: var(--bg-primary-dark);
+    @include adaptive-font(32, 24);
+  }
+
+  &__description {
+    @include adaptive-font(22, 18);
+    color: var(--text-secondary);
+  }
+}
