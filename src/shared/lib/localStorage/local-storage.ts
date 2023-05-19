@@ -5,7 +5,7 @@ export const setLocalStorage = (value: string, key: string) => {
   localStorage.setItem(key, JSON.stringify(value));
 };
 
-// TODO: удалить так как не используется
+// TODO: delete this
 export const getLocalStorage = (key: string) => {
   const storageItem = localStorage.getItem(key);
   if (!storageItem) {

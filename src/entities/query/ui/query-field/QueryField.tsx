@@ -1,7 +1,6 @@
 import React, { SyntheticEvent } from 'react';
 import { ResizeCallbackData } from 'react-resizable';
 import { Grid } from 'antd';
-
 import { DEFAULT_QUERY_FIELD_WIDTH } from 'app/config';
 import { Query } from 'features/query';
 import { Resizable } from 'shared/ui';
@@ -22,10 +21,6 @@ const QueryField: React.FC = () => {
   const onResize = (_: SyntheticEvent, data: ResizeCallbackData) => {
     setQueryFieldWidth(data.size.width);
   };
-
-  React.useEffect(() => {
-    // TODO: запихнуть данные
-  }, []);
 
   if ((screens.sm || screens.xs) && !screens.md) {
     return (

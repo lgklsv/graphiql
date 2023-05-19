@@ -29,6 +29,7 @@ const LoginForm: React.FC = () => {
     signInWithEmailAndPassword(auth, emailValues, password)
       .then(async ({ user }) => {
         const { email, uid, accessToken } = user as unknown as UserFirebase;
+
         dispatchUser({ email, id: uid, token: accessToken });
         await firestoreDispatch(uid);
       })

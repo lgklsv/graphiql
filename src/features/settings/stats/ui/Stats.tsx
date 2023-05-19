@@ -15,10 +15,10 @@ const Stats: React.FC = () => {
   const { isStats } = useAppSelector(settingsSelector);
   const { id } = useAuthState();
 
-  const selectStatsHandler = (value: SegmentedValue) => {
+  const selectStatsHandler = async (value: SegmentedValue) => {
     const enteredValue = value as NumBoolean;
     dispatch(setStatsSetting(enteredValue));
-    updateFirestoreUserData(id as string, { isStats: value });
+    await updateFirestoreUserData(id as string, { isStats: value });
   };
 
   return (

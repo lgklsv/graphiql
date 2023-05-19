@@ -10,8 +10,8 @@ export const useSetFirestore = () => {
     const userSettings = await getFirestoreUserData(uid);
 
     if (userSettings) {
-      const { tab, activeKey, isCache, isStats } = userSettings;
-      dispatch(updateTabStore({ activeKey, tabs: tab as Tab[] }));
+      const { tabs, activeKey, isCache, isStats } = userSettings;
+      dispatch(updateTabStore({ activeKey, tabs: tabs as Tab[] }));
       dispatch(
         updateSetStore({
           isCache: isCache as NumBoolean,

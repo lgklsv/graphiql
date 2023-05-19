@@ -14,7 +14,7 @@ export interface IFirestoreData {
   isCache: number | NumBoolean;
   isStats: number | NumBoolean;
   activeKey: string;
-  tab: string[] | Tab[];
+  tabs: string[] | Tab[];
 }
 
 export const getFirestoreUserData = async (uid: string) => {
@@ -31,7 +31,7 @@ export const getFirestoreUserData = async (uid: string) => {
     const initValue = !filteredData.length ? null : filteredData[0];
 
     if (initValue) {
-      const stringTabsArray = (initValue as IFirestoreData).tab as string[];
+      const stringTabsArray = (initValue as IFirestoreData).tabs as string[];
 
       const tabsArr = parseArray(stringTabsArray).map((item) => ({
         ...item,
@@ -40,7 +40,7 @@ export const getFirestoreUserData = async (uid: string) => {
 
       return {
         ...initValue,
-        tab: tabsArr,
+        tabs: tabsArr,
       } as IFirestoreData;
     }
 
@@ -68,7 +68,7 @@ export const createFirestoreUserData = async (uid: string) => {
       isCache: 0,
       isStats: 1,
       activeKey: '1',
-      tab: [
+      tabs: [
         '{"label":"Tab 1","query":{"data":"","variables":"","headers":""},"response":{"data":"","isLoading":false},"key":"1","closable":false}',
       ],
     });

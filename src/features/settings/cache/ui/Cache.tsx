@@ -14,10 +14,10 @@ const Cache: React.FC = () => {
   const { isCache } = useAppSelector(settingsSelector);
   const { id } = useAuthState();
 
-  const selectCacheHandler = (value: SegmentedValue) => {
+  const selectCacheHandler = async (value: SegmentedValue) => {
     const enteredValue = value as NumBoolean;
     dispatch(setCacheSetting(enteredValue));
-    updateFirestoreUserData(id as string, { isCache: value });
+    await updateFirestoreUserData(id as string, { isCache: value });
   };
 
   return (
