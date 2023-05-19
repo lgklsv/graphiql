@@ -7,8 +7,8 @@ import {
 } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import {
-  createFirestoreUserData,
-  getFirestoreUserData,
+  createFirestoreData,
+  getFirestoreData,
 } from 'shared/lib/firestore/constants';
 
 interface IHandleAuth {
@@ -30,9 +30,9 @@ export const authProvider = async ({
       const isHaveData = doc(db, 'settings', uid);
       const docSnap = await getDoc(isHaveData);
       if (docSnap.exists()) {
-        await getFirestoreUserData(uid);
+        await getFirestoreData(uid);
       } else {
-        await createFirestoreUserData(uid);
+        await createFirestoreData(uid);
       }
     })
     .catch((error) => {

@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import CodeMirror from '@uiw/react-codemirror';
 import { graphql as graphqlCodeMirror } from 'cm6-graphql';
 import { useAuthState } from 'shared/hooks/use-auth';
+<<<<<<< HEAD
 import { updateFirestoreUserData } from 'shared/lib/firestore/constants';
 <<<<<<< HEAD
 import { graphql as graphqlCodeMirror, updateSchema } from 'cm6-graphql';
@@ -10,6 +11,9 @@ import { EditorView } from 'codemirror';
 import { updateFirestore } from 'store/actions/FirestoreActions';
 =======
 >>>>>>> 3f498a3 (reafactor: change back editor tab change)
+=======
+import { updateFirestoreData } from 'shared/lib/firestore/constants';
+>>>>>>> 586c41e (feat: add update firestore on change label)
 import { graphql, handleErrorMessage } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';
@@ -20,8 +24,12 @@ import { ErrorNotification, Spinner } from 'shared/ui';
 import { isFetchError } from 'shared/lib/type-checkers';
 =======
 import { ErrorNotification } from 'shared/ui';
+<<<<<<< HEAD
 import { updateData } from 'shared/lib/firestore/utils';
 >>>>>>> 3f498a3 (reafactor: change back editor tab change)
+=======
+import { updateData, updateDataLabel } from 'shared/lib/firestore/utils';
+>>>>>>> 586c41e (feat: add update firestore on change label)
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import './Editor.scss';
 
@@ -65,7 +73,7 @@ const Editor: React.FC = () => {
         })
       );
 
-      await updateFirestoreUserData(id as string, {
+      await updateFirestoreData(id as string, {
         activeKey: newActiveKey,
         tabs: stringifyTabs,
       });
@@ -75,10 +83,26 @@ const Editor: React.FC = () => {
     if (regex.exec(queryString)) {
       const newTitle = regex.exec(queryString)![0];
       dispatch(updateTabLabel({ activeTabKey, label: newTitle }));
+      const newTabs = updateDataLabel({ tabs, activeTabKey, label: newTitle });
+      if (newTabs) {
+        await updateFirestoreData(id as string, {
+          tabs: newTabs,
+        });
+      }
     } else {
       dispatch(
         updateTabLabel({ activeTabKey, label: `${t('sandbox.newTab')}` })
       );
+      const newTabs = updateDataLabel({
+        tabs,
+        activeTabKey,
+        label: `${t('sandbox.newTab')}`,
+      });
+      if (newTabs) {
+        await updateFirestoreData(id as string, {
+          tabs: newTabs,
+        });
+      }
     }
   });
 

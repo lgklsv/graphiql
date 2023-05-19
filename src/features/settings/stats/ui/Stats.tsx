@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { settingsSelector } from 'store/selectors/settingsSelector';
 import { NumBoolean, setStatsSetting } from 'store/reducers/SettingsSlice';
 import { useAuthState } from 'shared/hooks/use-auth';
-import { updateFirestoreUserData } from 'shared/lib/firestore/constants';
+import { updateFirestoreData } from 'shared/lib/firestore/constants';
 
 const Stats: React.FC = () => {
   const { t } = useTranslation();
@@ -18,7 +18,7 @@ const Stats: React.FC = () => {
   const selectStatsHandler = async (value: SegmentedValue) => {
     const enteredValue = value as NumBoolean;
     dispatch(setStatsSetting(enteredValue));
-    await updateFirestoreUserData(id as string, { isStats: value });
+    await updateFirestoreData(id as string, { isStats: value });
   };
 
   return (

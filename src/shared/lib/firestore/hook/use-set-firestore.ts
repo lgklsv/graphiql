@@ -1,13 +1,13 @@
 import { useAppDispatch } from 'shared/hooks/redux';
 import { NumBoolean, updateSetStore } from 'store/reducers/SettingsSlice';
 import { updateTabStore } from 'store/reducers/TabSlice';
-import { getFirestoreUserData } from '../constants';
+import { getFirestoreData } from '../constants';
 
 export const useSetFirestore = () => {
   const dispatch = useAppDispatch();
 
   const firestoreDispatch = async (uid: string) => {
-    const userSettings = await getFirestoreUserData(uid);
+    const userSettings = await getFirestoreData(uid);
 
     if (userSettings) {
       const { tabs, activeKey, isCache, isStats } = userSettings;

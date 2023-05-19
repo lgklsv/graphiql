@@ -118,7 +118,7 @@ export const updateFirestore = createAsyncThunk<
   return data;
 });
 
-export const createFirestore = createAsyncThunk(
+const createFirestore = createAsyncThunk(
   'user8s/fetch',
   async (uid: string) => {
     await setDoc(doc(db, 'settings', uid), {
