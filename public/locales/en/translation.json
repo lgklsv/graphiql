@@ -118,9 +118,11 @@
         "error": "Not valid GraphQL, can't prettify"
       },
       "copy": {
-        "default": "Copy query (shift + ctrl + c)",
+        "query": "Copy query (shift + ctrl + c)",
+        "response": "Copy response (shift + alt + c)",
         "done": "Copied!"
-      }
+      },
+      "download": "Download response (JSON)"
     },
     "response": {
       "error": "{{fieldName}} has an invalid JSON format. Please fix the errors and try once again."

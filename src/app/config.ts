@@ -39,6 +39,7 @@ export const SHORTCUTS = {
   search: ['ctrl+k', 'meta+k'],
   execute: ['ctrl+enter', 'meta+enter'],
   prettify: ['shift+ctrl+p', 'shift+meta+p'],
-  copy: ['shift+ctrl+c', 'shift+meta+c'],
+  copy_query: ['shift+ctrl+c', 'shift+meta+c'],
+  copy_response: ['shift+alt+c'],
   refetch: ['shift+ctrl+r', 'shift+meta+r'],
 };

@@ -15,8 +15,8 @@ const Toolbar: React.FC = () => {
       <SButton.Prettify />
       <SButton.Copy
         data={tabQuery.data}
-        defaultTooltip={t('sandbox.tooltips.copy.default')}
-        shortcut={SHORTCUTS.copy}
+        defaultTooltip={t('sandbox.tooltips.copy.query')}
+        shortcut={SHORTCUTS.copy_query}
       />
     </div>
   );

@@ -18,36 +18,36 @@ const CopyButton: React.FC<CopyButtonProps> = ({
   shortcut,
 }) => {
   const { t } = useTranslation();
-  const [copiedQuery, setCopiedQuery] = React.useState<string | null>(null);
+  const [copiedData, setCopiedData] = React.useState<string | null>(null);
 
-  const copyQueryHandler = () => {
-    if (data) setCopiedQuery(data);
+  const copyDataHandler = () => {
+    if (data) setCopiedData(data);
   };
 
   React.useEffect(() => {
     let timer: NodeJS.Timeout;
-    if (copiedQuery) {
-      navigator.clipboard.writeText(copiedQuery);
+    if (copiedData) {
+      navigator.clipboard.writeText(copiedData);
       timer = setTimeout(() => {
-        setCopiedQuery(null);
+        setCopiedData(null);
       }, 800);
     }
     return () => {
       clearTimeout(timer);
     };
-  }, [copiedQuery]);
+  }, [copiedData]);
 
-  useHotkeys(shortcut || 'shift+ctrl+c', copyQueryHandler);
+  useHotkeys(shortcut || 'shift+ctrl+c', copyDataHandler);
 
   return (
     <AppTooltip
-      title={copiedQuery ? t('sandbox.tooltips.copy.done') : defaultTooltip}
+      title={copiedData ? t('sandbox.tooltips.copy.done') : defaultTooltip}
     >
       <Button
-        onClick={copyQueryHandler}
+        onClick={copyDataHandler}
         type="text"
         size="large"
-        icon={copiedQuery ? <CheckOutlined /> : <CopyOutlined />}
+        icon={copiedData ? <CheckOutlined /> : <CopyOutlined />}
       />
     </AppTooltip>
   );
