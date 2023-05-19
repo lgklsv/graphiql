@@ -22,9 +22,7 @@ export const authProvider = ({
     .then(async ({ user }) => {
       const { email, uid, accessToken } = user as unknown as UserFirebase;
       dispatchFn({ email, id: uid, token: accessToken });
-
-      // TODO: при логине мы получаем данные из базы данных
-      const userSettings = await getFirestoreUserData(uid);
+      await getFirestoreUserData(uid);
     })
     .catch((error) => {
       messageApi.open({

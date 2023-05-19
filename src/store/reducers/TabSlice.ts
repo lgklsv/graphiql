@@ -74,6 +74,7 @@ const tabsSlice = createSlice({
       state.activeKey = action.payload.activeKey;
     },
   },
+  // TODO: delete this
   extraReducers: (builder) => {
     builder.addCase(updateFirestore.pending, (state, action) => {
       state.isLoading = true;

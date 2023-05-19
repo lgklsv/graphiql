@@ -42,7 +42,7 @@ const Editor: React.FC = () => {
   }, [data, viewRef]);
 
   // TODO: change time debounce
-  const onChange = utils.debounce((queryString: string) => {
+  const onChange = utils.debounce(async (queryString: string) => {
     // dispatch(
     //   updateFirestore({
     //     id: id as string,
@@ -65,9 +65,9 @@ const Editor: React.FC = () => {
         })
       );
 
-      updateFirestoreUserData(id as string, {
+      await updateFirestoreUserData(id as string, {
         activeKey: newActiveKey,
-        tab: stringifyTabs,
+        tabs: stringifyTabs,
       });
     }
 

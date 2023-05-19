@@ -4,8 +4,8 @@ import { Form, Input, message } from 'antd';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { ButtonForm } from 'shared/ui';
 import { useUser } from 'shared/hooks/use-user';
-import { doc, setDoc } from 'firebase/firestore';
-import { auth, db } from 'firebase';
+import { createFirestoreUserData } from 'shared/lib/firestore/constants';
+import { auth } from 'firebase';
 import style from './SignUpForm.module.scss';
 
 export const defaultData = {
@@ -69,16 +69,7 @@ const SignUpForm: React.FC = () => {
       .then(async ({ user }) => {
         const { email, uid, accessToken } = user as unknown as UserFirebase;
         dispatchUser({ email, id: uid, token: accessToken });
-
-        // TODO: вынести в отдельную функцию!
-        await setDoc(doc(db, 'settings', uid), {
-          isCache: 0,
-          isStats: 1,
-          activeKey: '1',
-          tab: [
-            '{"label":"Tab 1","query":{"data":"","variables":"","headers":""},"response":{"data":"","isLoading":false},"key":"1","closable":false}',
-          ],
-        });
+        await createFirestoreUserData(uid);
       })
       .catch((error) => {
         messageApi.open({

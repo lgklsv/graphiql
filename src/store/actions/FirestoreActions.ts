@@ -1,3 +1,4 @@
+// TODO: delete this
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import {
   collection,
@@ -79,30 +80,11 @@ export const updateFirestore = createAsyncThunk<
   IUpdateFirestore
 >('users/fetch', async ({ id, data }) => {
   const userSettingsRef = doc(db, 'settings', id);
-  if (data.label) {
-    console.log('LABEL');
-
-    const { tabs, activeKey, label } = data as IUpdateTabs;
-    const activeTab = { ...tabs?.find(({ key }) => key === activeKey) };
-
-    console.log(activeTab);
-
-    // activeTab.label = { ...activeTab.label, ...label };
-
-    // const updateTabs = tabs?.map((t) =>
-    //   t.key === activeTab.key ? activeTab : t
-    // ) as Tab[];
-
-    // if (activeTab) {
-    //   activeTab.label = action.payload.label;
-    // }
-  }
 
   if (data.query) {
-    console.log('UPDATE QUERY');
     const { tabs, activeKey, query } = data as IUpdateTabs;
     const activeTab = { ...tabs?.find(({ key }) => key === activeKey) };
-
+    // TODO: now update label too
     activeTab.query = { ...activeTab.query, ...query };
     const updateTabs = tabs?.map((t) =>
       t.key === activeTab.key ? activeTab : t
@@ -121,7 +103,6 @@ export const updateFirestore = createAsyncThunk<
   }
 
   if (data.tabs) {
-    // console.log('UPDATE tabs');
     const stringifyTabs = stringifyArray(data.tabs as Tab[]);
 
     await updateDoc(userSettingsRef, {
