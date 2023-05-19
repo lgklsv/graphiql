@@ -10,7 +10,7 @@ import { TitleForm } from 'shared/ui';
 import { useAuthState } from 'shared/hooks/use-auth';
 import { ErrorBoundary } from 'shared/hoc';
 
-import style from './Signup.module.scss';
+import styles from './Signup.module.scss';
 
 const Signup: React.FC = () => {
   const { t } = useTranslation();
@@ -28,18 +28,20 @@ const Signup: React.FC = () => {
       </Helmet>
       <ErrorBoundary type="page">
         <motion.div
-          className={style.signup_container}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          className={styles.signup}
         >
-          <TitleForm
-            title={t('signUp.title')}
-            link={ROUTES.login}
-            text={t('signUp.loginRedirect')}
-            textLink={t('signUp.redirectLink')}
-          />
-          <Form.SignUp />
+          <div className={styles.signup__container}>
+            <TitleForm
+              title={t('signUp.title')}
+              link={ROUTES.login}
+              text={t('signUp.loginRedirect')}
+              textLink={t('signUp.redirectLink')}
+            />
+            <Form.SignUp />
+          </div>
         </motion.div>
       </ErrorBoundary>
     </>

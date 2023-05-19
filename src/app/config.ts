@@ -36,9 +36,11 @@ export const BASE_URL = 'https://countries.trevorblades.com/';
 // export const BASE_URL = 'https://spacex-production.up.railway.app/';
 
 export const SHORTCUTS = {
-  search: ['ctrl+k', 'meta+k'],
-  execute: ['ctrl+enter', 'meta+enter'],
-  prettify: ['shift+ctrl+p', 'shift+meta+p'],
-  copy: ['shift+ctrl+c', 'shift+meta+c'],
-  refetch: ['shift+ctrl+r', 'shift+meta+r'],
+  search: ['shift+ctrl+k', 'shift+meta+k'],
+  execute: ['shift+enter'],
+  prettify: ['shift+p'],
+  copy_query: ['shift+c'],
+  copy_response: ['shift+alt+c'],
+  download: ['shift+d'],
+  refetch: ['shift+r'],
 };

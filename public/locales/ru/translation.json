@@ -108,19 +108,21 @@
     "placeholder": "Введите ваш запрос",
     "tooltips": {
       "docsClose": "Показать документацию",
-      "refetch": "Запросить GraphQL схему",
+      "refetch": "Запросить схему (shift + r)",
       "shortcuts": "Все горячие клавиши",
       "settings": "Открыть настройки",
-      "execute": "Выполнить запрос (ctrl + enter)",
+      "execute": "Выполнить запрос (shift + enter)",
       "prettify": {
-        "default": "Форматировать (shift + ctrl + p)",
+        "default": "Форматировать (shift + p)",
         "done": "Готово!",
         "error": "Возможно невалидный GraphQL, не получилось форматировать"
       },
       "copy": {
-        "default": "Скопировать (shift + ctrl + c)",
+        "query": "Скопировать (shift + c)",
+        "response": "Скопировать (shift + alt + c)",
         "done": "Скопировано!"
       },
+      "download": "Скачать (JSON) (shift + d)"
       "apiConnection": "Подключить API"
     },
     "response": {
@@ -147,7 +149,7 @@
       "sectionTitleAll": "Все типы схем"
     },
     "search": {
-      "placeholder": "Поиск  ⌘ + K",
+      "placeholder": "Поиск  Shift + ⌘ + K",
       "notFound": "Ничего не найдено"
     }
   },
@@ -163,7 +165,8 @@
         "query": "Выполнить запрос",
         "prettify": "Форматировать редактор",
         "copy": "Скопировать запрос",
-        "refetch": "Запросить GraphQL схему"
+        "refetch": "Запросить GraphQL схему",
+        "download": "Скачать ответ в формате JSON"
       },
       "message": "Редакторы кода также поддерживают горячие клавиши CodeMirror."
     },

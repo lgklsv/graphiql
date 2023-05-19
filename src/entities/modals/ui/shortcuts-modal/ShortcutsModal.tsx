@@ -49,27 +49,32 @@ const ShortcutsModal: React.FC<ModalProps> = ({ isOpen, toggle }) => {
   const data: DataType[] = [
     {
       key: '1',
-      shortcut: ['Ctrl', 'K'],
+      shortcut: ['Shift', 'Ctrl', 'K'],
       function: t('modals.shortcuts.function.search'),
     },
     {
       key: '2',
-      shortcut: ['Ctrl', 'Enter'],
+      shortcut: ['Shift', 'Enter'],
       function: t('modals.shortcuts.function.query'),
     },
     {
       key: '3',
-      shortcut: ['Shift', 'Ctrl', 'P'],
+      shortcut: ['Shift', 'P'],
       function: t('modals.shortcuts.function.prettify'),
     },
     {
       key: '4',
-      shortcut: ['Shift', 'Ctrl', 'C'],
+      shortcut: ['Shift', 'C'],
       function: t('modals.shortcuts.function.copy'),
     },
     {
       key: '5',
-      shortcut: ['Shift', 'Ctrl', 'R'],
+      shortcut: ['Shift', 'D'],
+      function: t('modals.shortcuts.function.download'),
+    },
+    {
+      key: '6',
+      shortcut: ['Shift', 'R'],
       function: t('modals.shortcuts.function.refetch'),
     },
   ];
