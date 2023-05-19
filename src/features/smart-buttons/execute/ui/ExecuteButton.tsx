@@ -102,7 +102,14 @@ const ExecuteButton: React.FC = () => {
         acc[name] = '';
       } else if (value) {
         try {
-          JSON.parse(value);
+          const parsedObject = JSON.parse(value);
+          if (parsedObject && name === 'headers') {
+            const keys = Object.keys(parsedObject);
+            const hasSpaces = keys.some(
+              (key) => key.startsWith(' ') || key.endsWith(' ')
+            );
+            if (hasSpaces) throw new Error();
+          }
           acc[name] = '';
         } catch (err) {
           const errorMessage = `${t('sandbox.response.error', {
