@@ -8,7 +8,7 @@ import {
 } from 'firebase/firestore';
 import { db } from 'firebase';
 import { NumBoolean } from 'store/reducers/SettingsSlice';
-import { parseArray, stringifyArray } from 'features/query/editor/ui/Editor';
+import { parseArray, stringifyArray } from 'shared/lib/firestore/utils';
 
 export interface IFirestoreData {
   id?: string;
@@ -79,9 +79,27 @@ export const updateFirestore = createAsyncThunk<
   IUpdateFirestore
 >('users/fetch', async ({ id, data }) => {
   const userSettingsRef = doc(db, 'settings', id);
+  if (data.label) {
+    console.log('LABEL');
+
+    const { tabs, activeKey, label } = data as IUpdateTabs;
+    const activeTab = { ...tabs?.find(({ key }) => key === activeKey) };
+
+    console.log(activeTab);
+
+    // activeTab.label = { ...activeTab.label, ...label };
+
+    // const updateTabs = tabs?.map((t) =>
+    //   t.key === activeTab.key ? activeTab : t
+    // ) as Tab[];
+
+    // if (activeTab) {
+    //   activeTab.label = action.payload.label;
+    // }
+  }
 
   if (data.query) {
-    // console.log('UPDATE QUERY');
+    console.log('UPDATE QUERY');
     const { tabs, activeKey, query } = data as IUpdateTabs;
     const activeTab = { ...tabs?.find(({ key }) => key === activeKey) };
 
