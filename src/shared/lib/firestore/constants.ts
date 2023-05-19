@@ -9,19 +9,6 @@ import { db } from 'firebase';
 import { NumBoolean } from 'store/reducers/SettingsSlice';
 import { parseArray } from './utils';
 
-export const initialValue = {
-  commonSet: {
-    isCache: 0,
-    isStats: 1,
-  },
-  tabSet: {
-    activeKey: '1',
-    tab: [
-      '{"label":"Tab 1","query":{"data":"","variables":"","headers":""},"response":{"data":"","isLoading":false},"key":"1","closable":false}',
-    ],
-  },
-};
-
 export interface IFirestoreData {
   id?: string;
   isCache: number | NumBoolean;
@@ -63,23 +50,29 @@ export const getFirestoreUserData = async (uid: string) => {
   }
 };
 
-// получаем сохранненые в базу данных настройки юзера
-
 export const updateFirestoreUserData = async (
   id: string,
   data: { [x: string]: string | number | string[] | Tab[] }
 ) => {
-  const userSettingsRef = doc(db, 'settings', id);
-  await updateDoc(userSettingsRef, data);
+  try {
+    const userSettingsRef = doc(db, 'settings', id);
+    await updateDoc(userSettingsRef, data);
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const createFirestoreUserData = async (uid: string) => {
-  await setDoc(doc(db, 'settings', uid), {
-    isCache: 0,
-    isStats: 1,
-    activeKey: '1',
-    tab: [
-      '{"label":"Tab 1","query":{"data":"","variables":"","headers":""},"response":{"data":"","isLoading":false},"key":"1","closable":false}',
-    ],
-  });
+  try {
+    await setDoc(doc(db, 'settings', uid), {
+      isCache: 0,
+      isStats: 1,
+      activeKey: '1',
+      tab: [
+        '{"label":"Tab 1","query":{"data":"","variables":"","headers":""},"response":{"data":"","isLoading":false},"key":"1","closable":false}',
+      ],
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };
