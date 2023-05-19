@@ -1,12 +1,24 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { Tabs } from 'antd';
+import {
+  useSensor,
+  PointerSensor,
+  DragEndEvent,
+  DndContext,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  horizontalListSortingStrategy,
+} from '@dnd-kit/sortable';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
 
 import { useAppDispatch } from 'shared/hooks/redux';
 import { useTabs } from 'shared/hooks/use-tab';
 import { setActiveTabKey, updateTabs } from 'store/reducers/TabSlice';
+import DraggableTabNode from './DraggableTabs';
 import { Tab } from '../types';
 
 import styles from './SessionTabs.module.scss';
@@ -17,6 +29,7 @@ const SessionTabs: React.FC = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const { tabs: items, activeTabKey: activeKey } = useTabs();
+  const [className, setClassName] = React.useState('');
 
   const onChange = (newActiveKey: string) => {
     dispatch(setActiveTabKey(newActiveKey));
@@ -72,6 +85,20 @@ const SessionTabs: React.FC = () => {
     }
   };
 
+  const sensor = useSensor(PointerSensor, {
+    activationConstraint: { distance: 10 },
+  });
+
+  const onDragEnd = ({ active, over }: DragEndEvent) => {
+    if (active.id !== over?.id) {
+      const activeIndex = items.findIndex((i) => i.key === active.id);
+      const overIndex = items.findIndex((i) => i.key === over?.id);
+      const newTabItems = arrayMove(items, activeIndex, overIndex);
+      const activeTabKeyEnd = newTabItems[overIndex]?.key || newTabItems[0].key;
+      updateTabsStore(activeTabKeyEnd, newTabItems);
+    }
+  };
+
   return (
     <div className={styles.tabs}>
       <Tabs
@@ -80,6 +107,27 @@ const SessionTabs: React.FC = () => {
         activeKey={activeKey}
         onEdit={onEdit}
         items={items}
+        className={className}
+        renderTabBar={(tabBarProps, DefaultTabBar) => (
+          <DndContext sensors={[sensor]} onDragEnd={onDragEnd}>
+            <SortableContext
+              items={items.map((i) => i.key)}
+              strategy={horizontalListSortingStrategy}
+            >
+              <DefaultTabBar {...tabBarProps}>
+                {(node) => (
+                  <DraggableTabNode
+                    {...node.props}
+                    key={node.key}
+                    onActiveBarTransform={setClassName}
+                  >
+                    {node}
+                  </DraggableTabNode>
+                )}
+              </DefaultTabBar>
+            </SortableContext>
+          </DndContext>
+        )}
       />
     </div>
   );
