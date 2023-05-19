@@ -67,7 +67,7 @@ const Editor: React.FC = () => {
         height="100%"
         placeholder={`${t('sandbox.placeholder')}`}
         extensions={
-          data
+          data && !isError
             ? [...BASIC_EXTENSIONS, graphqlCodeMirror(data)]
             : [...BASIC_EXTENSIONS]
         }
