@@ -10,7 +10,7 @@ import { activeTabSelector } from 'store/selectors/tabSelector';
 import { settingsSelector } from 'store/selectors/settingsSelector';
 import { updateResponse } from 'store/reducers/TabSlice';
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
-import { useLazyGetEnteredQuery } from 'shared/api/graphql';
+import { useLazyGetEnteredQuery, sandboxQueries } from 'shared/api/graphql';
 import { AppTooltip } from 'shared/ui';
 import { typeCheckers } from 'shared/lib';
 
@@ -30,6 +30,10 @@ const ExecuteButton: React.FC = () => {
     trigger,
     { data, isFetching, error, startedTimeStamp, fulfilledTimeStamp },
   ] = useLazyGetEnteredQuery();
+
+  const { isError } = useAppSelector(
+    sandboxQueries.endpoints.getSchema.select('{}')
+  );
 
   const errorPopup = React.useCallback(
     ({ type, content }: { type: NoticeType; content: string }) => {
@@ -133,6 +137,7 @@ const ExecuteButton: React.FC = () => {
           size="large"
           icon={<CaretRightOutlined style={{ transform: 'scale(1.7)' }} />}
           loading={isFetching}
+          disabled={isError}
         />
       </AppTooltip>
       {contextHolder}
