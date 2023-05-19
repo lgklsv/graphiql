@@ -1,8 +1,15 @@
+/* eslint-disable  @typescript-eslint/no-unused-expressions */
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { FirestoreError } from 'firebase/firestore';
+import { updateFirestore } from 'store/actions/FirestoreActions';
 
 export type TabsState = {
   activeKey: string;
   tabs: Tab[];
+  isLoading: boolean;
+  error?: null | FirestoreError;
+  // TODO: error handing?
 };
 
 const initialState: TabsState = {
@@ -16,6 +23,7 @@ const initialState: TabsState = {
       closable: false,
     },
   ],
+  isLoading: false,
 };
 
 const tabsSlice = createSlice({
@@ -68,6 +76,22 @@ const tabsSlice = createSlice({
       state.tabs = action.payload.tabs;
       state.activeKey = action.payload.activeKey;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(updateFirestore.pending, (state, action) => {
+      state.isLoading = true;
+      action.meta.arg.data.tabs &&
+        (state.tabs = action.meta.arg.data.tabs as Tab[]);
+
+      action.meta.arg.data.activeKey &&
+        (state.activeKey = action.meta.arg.data.activeKey as string);
+    });
+    builder.addCase(updateFirestore.fulfilled, (state) => {
+      state.isLoading = false;
+    });
+    builder.addCase(updateFirestore.rejected, (state) => {
+      state.isLoading = false;
+    });
   },
 });
 

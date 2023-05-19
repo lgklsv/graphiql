@@ -68,7 +68,7 @@ export const getFirestoreUserData = async (uid: string) => {
 
 export const updateFirestoreUserData = async (
   id: string,
-  data: { [x: string]: string | number | string[] }
+  data: { [x: string]: string | number | string[] | Tab[] }
 ) => {
   const userSettingsRef = doc(db, 'settings', id);
   await updateDoc(userSettingsRef, data);

@@ -70,7 +70,7 @@ const SignUpForm: React.FC = () => {
         const { email, uid, accessToken } = user as unknown as UserFirebase;
         dispatchUser({ email, id: uid, token: accessToken });
 
-        // TODO: вынести в отдельную функцию
+        // TODO: вынести в отдельную функцию!
         await setDoc(doc(db, 'settings', uid), {
           isCache: 0,
           isStats: 1,
