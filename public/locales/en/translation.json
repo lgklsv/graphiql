@@ -126,7 +126,7 @@
       "apiConnection": "Connect your API"
     },
     "response": {
-      "error": "{{fieldName}} has an invalid JSON format. Please fix the errors and try once again."
+      "error": "{{fieldName}} have an invalid JSON format. Please fix the errors and try once again."
     },
     "errors": {
       "execute": "The query has failed. Check your API or internet connection and try again.",

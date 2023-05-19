@@ -13,10 +13,7 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { useLazyGetEnteredQuery, sandboxQueries } from 'shared/api/graphql';
 import { AppTooltip } from 'shared/ui';
 import { typeCheckers } from 'shared/lib';
-
-type ToolsErrors = {
-  [key: string]: string;
-};
+import { checkHeadersVariables } from '../utils';
 
 const ExecuteButton: React.FC = () => {
   const { t } = useTranslation();
@@ -87,7 +84,7 @@ const ExecuteButton: React.FC = () => {
   const executeQueryHandler = () => {
     if (!tab) return;
     const { variables, headers } = tab.query;
-    let hasErrors = false;
+
     const fields = [
       {
         value: variables,
@@ -96,31 +93,8 @@ const ExecuteButton: React.FC = () => {
       },
       { value: headers, name: 'headers', type: t('sandbox.buttons.headers') },
     ];
-    const errors = fields.reduce((acc, field) => {
-      const { value, name, type } = field;
-      if (value === '') {
-        acc[name] = '';
-      } else if (value) {
-        try {
-          const parsedObject = JSON.parse(value);
-          if (parsedObject && name === 'headers') {
-            const keys = Object.keys(parsedObject);
-            const hasSpaces = keys.some(
-              (key) => key.startsWith(' ') || key.endsWith(' ')
-            );
-            if (hasSpaces) throw new Error();
-          }
-          acc[name] = '';
-        } catch (err) {
-          const errorMessage = `${t('sandbox.response.error', {
-            fieldName: type,
-          })}`;
-          acc[name] = errorMessage;
-          hasErrors = true;
-        }
-      }
-      return acc;
-    }, {} as ToolsErrors);
+    const { hasErrors, errors } = checkHeadersVariables(fields);
+
     if (hasErrors) {
       errorPopup({
         type: 'error',
