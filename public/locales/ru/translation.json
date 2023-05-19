@@ -111,7 +111,7 @@
       "refetch": "Запросить схему (shift + r)",
       "shortcuts": "Все горячие клавиши",
       "settings": "Открыть настройки",
-      "execute": "Выполнить запрос (ctrl + enter)",
+      "execute": "Выполнить запрос (shift + enter)",
       "prettify": {
         "default": "Форматировать (shift + p)",
         "done": "Готово!",
@@ -148,7 +148,7 @@
       "sectionTitleAll": "Все типы схем"
     },
     "search": {
-      "placeholder": "Поиск  ⌘ + K",
+      "placeholder": "Поиск  Shift + ⌘ + K",
       "notFound": "Ничего не найдено"
     }
   },

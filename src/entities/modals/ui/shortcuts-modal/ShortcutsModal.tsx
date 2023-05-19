@@ -49,12 +49,12 @@ const ShortcutsModal: React.FC<ModalProps> = ({ isOpen, toggle }) => {
   const data: DataType[] = [
     {
       key: '1',
-      shortcut: ['Ctrl', 'K'],
+      shortcut: ['Shift', 'Ctrl', 'K'],
       function: t('modals.shortcuts.function.search'),
     },
     {
       key: '2',
-      shortcut: ['Ctrl', 'Enter'],
+      shortcut: ['Shift', 'Enter'],
       function: t('modals.shortcuts.function.query'),
     },
     {

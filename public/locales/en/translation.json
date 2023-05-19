@@ -111,7 +111,7 @@
       "refetch": "Re-fetch schema (shift + r)",
       "shortcuts": "Explore all shortcuts",
       "settings": "Open settings",
-      "execute": "Execute query (ctrl + enter)",
+      "execute": "Execute query (shift + enter)",
       "prettify": {
         "default": "Prettify (shift + p)",
         "done": "Done!",
@@ -148,7 +148,7 @@
       "sectionTitleAll": "All Schema Types"
     },
     "search": {
-      "placeholder": "Search  ⌘ + K",
+      "placeholder": "Search  Shift + ⌘ + K",
       "notFound": "No results found"
     }
   },
