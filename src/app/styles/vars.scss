@@ -1,16 +1,18 @@
 :root {
   // Vars
-  --header: 80px;
+  --header: 75px;
   --footer: 65px;
   --screen-height: calc(100vh - var(--header) - var(--footer));
   --ide-height: calc(
-    100vh - var(--header) - var(--footer) - var(--tabs-height) - 0.5rem
+    100vh - var(--header) - var(--footer) - var(--tabs-height) - 0.5rem -
+      var(--tabs-padding)
   );
 
   // IDE
   --sidebar-width: 60px;
   --toolbar-width: 40px;
   --tabs-height: 50px;
+  --tabs-padding: 5px;
   --apiInput-height: 42px;
   --apiInput-width: 435px;
 

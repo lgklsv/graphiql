@@ -122,7 +122,7 @@
         "response": "Copy response (shift + alt + c)",
         "done": "Copied!"
       },
-      "download": "Download response (JSON) (shift + d)"
+      "download": "Download (JSON) (shift + d)",
       "apiConnection": "Connect your API"
     },
     "response": {

@@ -26,6 +26,7 @@
     margin: 0 1rem 0rem 0rem;
     gap: 1.25rem;
     width: calc(100vw - var(--sidebar-width) - 1rem);
+    padding-top: var(--tabs-padding);
 
     @media (max-width: 767px) {
       width: 100%;
