@@ -1,7 +1,8 @@
 import { Button, message } from 'antd';
 import { GoogleAuthProvider } from 'firebase/auth';
+
 import { useUser } from 'shared/hooks/use-user';
-import { authProvider } from '../const/handle-auth';
+import { authProvider } from '../model/handle-auth';
 
 interface IProviderButton {
   provider: GoogleAuthProvider;

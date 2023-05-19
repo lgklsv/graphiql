@@ -4,17 +4,24 @@ import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useHotkeys } from 'react-hotkeys-hook';
 
-import { SHORTCUTS } from 'app/config';
-import { useTabs } from 'shared/hooks/use-tab';
 import { AppTooltip } from 'shared/ui';
 
-const CopyButton: React.FC = () => {
+interface CopyButtonProps {
+  data: string | undefined;
+  defaultTooltip: string;
+  shortcut?: string[] | string;
+}
+
+const CopyButton: React.FC<CopyButtonProps> = ({
+  data,
+  defaultTooltip,
+  shortcut,
+}) => {
   const { t } = useTranslation();
-  const { tabQuery } = useTabs();
   const [copiedQuery, setCopiedQuery] = React.useState<string | null>(null);
 
   const copyQueryHandler = () => {
-    if (tabQuery.data) setCopiedQuery(tabQuery.data);
+    if (data) setCopiedQuery(data);
   };
 
   React.useEffect(() => {
@@ -30,15 +37,11 @@ const CopyButton: React.FC = () => {
     };
   }, [copiedQuery]);
 
-  useHotkeys(SHORTCUTS.copy, copyQueryHandler);
+  useHotkeys(shortcut || 'shift+ctrl+c', copyQueryHandler);
 
   return (
     <AppTooltip
-      title={
-        copiedQuery
-          ? t('sandbox.tooltips.copy.done')
-          : t('sandbox.tooltips.copy.default')
-      }
+      title={copiedQuery ? t('sandbox.tooltips.copy.done') : defaultTooltip}
     >
       <Button
         onClick={copyQueryHandler}

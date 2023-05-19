@@ -11,6 +11,7 @@ import { Spinner } from 'shared/ui';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAppSelector } from 'shared/hooks/redux';
 
+import { SButton } from 'features/smart-buttons';
 import styles from './ResponseField.module.scss';
 
 const { Text } = Typography;
@@ -59,6 +60,20 @@ const ResponseField: React.FC = () => {
         <div className={styles.response__stats}>
           <Tag color="default">{isCache ? 'CACHE' : 'NO CACHE'}</Tag>
           <Tag color={getTimingColor(timing)}>{timing} ms</Tag>
+        </div>
+      )}
+      {data && (
+        <div className={styles.response__actions}>
+          <SButton.Copy
+            data={data}
+            defaultTooltip="Copy response (shift+alt+c)"
+            shortcut="shift+alt+c"
+          />
+          <SButton.Copy
+            data={data}
+            defaultTooltip="Copy response (shift+alt+c)"
+            shortcut="shift+alt+c"
+          />
         </div>
       )}
     </div>

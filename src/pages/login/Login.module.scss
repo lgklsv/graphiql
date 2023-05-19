@@ -1,26 +1,32 @@
 @import '/src/shared/styles/extends';
 @import '/src/shared/styles/mixins.scss';
 
-.login_container {
-  @extend %form_container;
-}
-
-.login_buttons {
+.login {
+  width: 100%;
+  min-height: calc(100vh - var(--header) - var(--footer));
   @include flex-center;
-  flex-direction: column;
-  gap: 1rem;
 
-  .git_btn {
-    background-color: var(--black);
-
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.88);
-    }
+  &__container {
+    @extend %form_container;
   }
 
-  .google_btn {
-    background-color: var(--bg-primary);
-    color: var(--bg-primary-dark);
+  &__buttons {
+    @include flex-center;
+    flex-direction: column;
+    gap: 1rem;
+
+    .git_btn {
+      background-color: var(--black);
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.88);
+      }
+    }
+
+    .google_btn {
+      background-color: var(--bg-primary);
+      color: var(--bg-primary-dark);
+    }
   }
 }
 

@@ -7,14 +7,14 @@ import { GoogleOutlined, GithubOutlined } from '@ant-design/icons';
 import { motion } from 'framer-motion';
 import { googleProvider, gitProvider } from 'firebase';
 
+import { SButton } from 'features/smart-buttons';
 import { ROUTES } from 'pages/config';
 import { Form } from 'features/login-form';
-import { FirebaseAuth } from 'features/firebase-button-auth';
 import { TitleForm } from 'shared/ui';
 import { useAuthState } from 'shared/hooks/use-auth';
 
 import { ErrorBoundary } from 'shared/hoc';
-import style from './Login.module.scss';
+import styles from './Login.module.scss';
 
 const Login: React.FC = () => {
   const { t } = useTranslation();
@@ -32,37 +32,38 @@ const Login: React.FC = () => {
       </Helmet>
       <ErrorBoundary type="page">
         <motion.div
-          className={style.login_container}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
+          className={styles.login}
         >
-          <TitleForm
-            title={t('logIn.title')}
-            link={ROUTES.signup}
-            text={t('logIn.signUpRedirect')}
-            textLink={t('logIn.redirectLink')}
-          />
-          <div className={style.login_buttons}>
-            <FirebaseAuth.Button
-              text={t('button.signGithub')}
-              provider={gitProvider}
-              icon={<GithubOutlined />}
-              className={style.git_btn}
+          <div className={styles.login__container}>
+            <TitleForm
+              title={t('logIn.title')}
+              link={ROUTES.signup}
+              text={t('logIn.signUpRedirect')}
+              textLink={t('logIn.redirectLink')}
             />
+            <div className={styles.login__buttons}>
+              <SButton.FirebaseAuth
+                text={t('button.signGithub')}
+                provider={gitProvider}
+                icon={<GithubOutlined />}
+                className={styles.git_btn}
+              />
+              <SButton.FirebaseAuth
+                text={t('button.signGoogle')}
+                provider={googleProvider}
+                icon={<GoogleOutlined />}
+                className={styles.google_btn}
+              />
+            </div>
 
-            <FirebaseAuth.Button
-              text={t('button.signGoogle')}
-              provider={googleProvider}
-              icon={<GoogleOutlined />}
-              className={style.google_btn}
-            />
+            <Divider plain className={styles.separator}>
+              {t('logIn.or')}
+            </Divider>
+            <Form.Login />
           </div>
-
-          <Divider plain className={style.separator}>
-            {t('logIn.or')}
-          </Divider>
-          <Form.Login />
         </motion.div>
       </ErrorBoundary>
     </>
