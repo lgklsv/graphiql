@@ -17,7 +17,7 @@ export interface IFirestoreData {
   tabs: string[] | Tab[];
 }
 
-export const getFirestoreUserData = async (uid: string) => {
+export const getFirestoreData = async (uid: string) => {
   try {
     const tabCollectionsRef = collection(db, 'settings');
 
@@ -50,7 +50,7 @@ export const getFirestoreUserData = async (uid: string) => {
   }
 };
 
-export const updateFirestoreUserData = async (
+export const updateFirestoreData = async (
   id: string,
   data: { [x: string]: string | number | string[] | Tab[] }
 ) => {
@@ -62,7 +62,7 @@ export const updateFirestoreUserData = async (
   }
 };
 
-export const createFirestoreUserData = async (uid: string) => {
+export const createFirestoreData = async (uid: string) => {
   try {
     await setDoc(doc(db, 'settings', uid), {
       isCache: 0,

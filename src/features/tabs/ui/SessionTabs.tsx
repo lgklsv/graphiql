@@ -2,7 +2,7 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import { setActiveTabKey, updateTabs } from 'store/reducers/TabSlice';
-import { updateFirestoreUserData } from 'shared/lib/firestore/constants';
+import { updateFirestoreData } from 'shared/lib/firestore/constants';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
 import { useAppDispatch } from 'shared/hooks/redux';
@@ -28,14 +28,14 @@ const SessionTabs: React.FC = () => {
     //   })
     // );
     dispatch(setActiveTabKey(newActiveKey));
-    await updateFirestoreUserData(id as string, { activeKey: newActiveKey });
+    await updateFirestoreData(id as string, { activeKey: newActiveKey });
   };
 
   const updateTabsStore = async (newActiveKey: string, tabs: Tab[]) => {
     dispatch(setActiveTabKey(newActiveKey));
     dispatch(updateTabs(tabs));
 
-    await updateFirestoreUserData(id as string, {
+    await updateFirestoreData(id as string, {
       activeKey: newActiveKey,
       tabs: stringifyArray(tabs),
     });

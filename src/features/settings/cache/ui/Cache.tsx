@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { NumBoolean, setCacheSetting } from 'store/reducers/SettingsSlice';
 import { settingsSelector } from 'store/selectors/settingsSelector';
 import { useAuthState } from 'shared/hooks/use-auth';
-import { updateFirestoreUserData } from 'shared/lib/firestore/constants';
+import { updateFirestoreData } from 'shared/lib/firestore/constants';
 
 const Cache: React.FC = () => {
   const { t } = useTranslation();
@@ -17,7 +17,7 @@ const Cache: React.FC = () => {
   const selectCacheHandler = async (value: SegmentedValue) => {
     const enteredValue = value as NumBoolean;
     dispatch(setCacheSetting(enteredValue));
-    await updateFirestoreUserData(id as string, { isCache: value });
+    await updateFirestoreData(id as string, { isCache: value });
   };
 
   return (
