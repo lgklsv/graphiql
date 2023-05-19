@@ -4,11 +4,12 @@ import CodeMirror from '@uiw/react-codemirror';
 import { graphql as graphqlCodeMirror } from 'cm6-graphql';
 import { useAuthState } from 'shared/hooks/use-auth';
 import { updateFirestoreUserData } from 'shared/lib/firestore/constants';
+import { updateFirestore } from 'store/actions/FirestoreActions';
 
 import { graphql, handleErrorMessage } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';
-import { updateTabContent, updateTabLabel } from 'store/reducers/TabSlice';
+import { updateTabLabel, updateTabStore } from 'store/reducers/TabSlice';
 import { utils } from 'shared/lib';
 import { ErrorNotification } from 'shared/ui';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
@@ -18,22 +19,30 @@ interface Update {
   tabs: Tab[];
   activeTabKey: string;
   query: TabQueryContent;
-  id: string;
 }
 
-export const update = (props: Update) => {
-  const { tabs, activeTabKey, query, id } = props;
-  const activeTab = { ...tabs.find(({ key }) => key === activeTabKey) };
+export const stringifyArray = (array: Tab[]) =>
+  array.map((elem) => JSON.stringify(elem));
 
-  if (activeTab) {
-    console.log(activeTab.query);
-    console.log(query);
-    activeTab.query = { ...activeTab.query, ...query };
-  }
+export const parseArray = (array: string[]) =>
+  array.map((elem) => JSON.parse(elem)) as Tab[];
 
-  console.log(activeTab, 'THIS IS IT', tabs);
-  return activeTab;
-};
+// export const update = (props: Update) => {
+//   const { tabs, activeTabKey, query } = props;
+//   const activeTab = { ...tabs.find(({ key }) => key === activeTabKey) };
+
+//   if (!activeTab) {
+//     return null;
+//   }
+
+//   activeTab.query = { ...activeTab.query, ...query };
+//   const updateTabs = tabs.map((t) =>
+//     t.key === activeTab.key ? activeTab : t
+//   ) as Tab[];
+
+//   const stringifyTabs = stringifyArray(updateTabs);
+//   return { newActiveKey: activeTab.key, updateTabs, stringifyTabs };
+// };
 
 const Editor: React.FC = () => {
   const { t } = useTranslation();
@@ -42,22 +51,38 @@ const Editor: React.FC = () => {
   const { id } = useAuthState();
   const dispatch = useAppDispatch();
 
+  // TODO: change time debounce
   const onChange = utils.debounce((queryString: string) => {
-    dispatch(updateTabContent({ activeTabKey, query: { data: queryString } }));
+    // console.log('EDITOR onChange');
+    // dispatch(updateTabContent({ activeTabKey, query: { data: queryString } }));
 
-    update({
-      tabs,
-      activeTabKey,
-      query: { data: queryString },
-      id: id as string,
-    });
-    // console.log(activeTabKey, tabQuery, tabs);
-    // TODO:
-
-    // updateFirestoreUserData(id as string, {
-    //   activeKey: activeTabKey,
-    //   tab: tabQuery,
+    // const data1 = update({
+    //   tabs,
+    //   activeTabKey,
+    //   query: { data: queryString },
     // });
+
+    dispatch(
+      updateFirestore({
+        id: id as string,
+        data: { tabs, activeKey: activeTabKey, query: { data: queryString } },
+      })
+    );
+
+    // if (data1) {
+    //   const { newActiveKey, updateTabs, stringifyTabs } = data1;
+    //   dispatch(
+    //     updateTabStore({
+    //       activeKey: newActiveKey as string,
+    //       tabs: updateTabs as Tab[],
+    //     })
+    //   );
+
+    //   updateFirestoreUserData(id as string, {
+    //     activeKey: newActiveKey as string,
+    //     tab: stringifyTabs,
+    //   });
+    // }
 
     const regex = /(?<=query |mutation )\w+/;
     if (regex.exec(queryString)) {

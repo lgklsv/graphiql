@@ -1,13 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import { Tabs } from 'antd';
+import { updateFirestore } from 'store/actions/FirestoreActions';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
 import { useAppDispatch } from 'shared/hooks/redux';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAuthState } from 'shared/hooks/use-auth';
-import { setActiveTabKey, updateTabs } from 'store/reducers/TabSlice';
-import { updateFirestoreUserData } from 'shared/lib/firestore/constants';
+// import { setActiveTabKey, updateTabs } from 'store/reducers/TabSlice';
+// import { updateFirestoreUserData } from 'shared/lib/firestore/constants';
 
 import styles from './SessionTabs.module.scss';
 
@@ -20,20 +21,24 @@ const SessionTabs: React.FC = () => {
   const { id } = useAuthState();
 
   const onChange = (newActiveKey: string) => {
-    dispatch(setActiveTabKey(newActiveKey));
-    updateFirestoreUserData(id as string, { activeKey: newActiveKey });
+    dispatch(
+      updateFirestore({
+        id: id as string,
+        data: { activeKey: newActiveKey },
+      })
+    );
+
+    // dispatch(setActiveTabKey(newActiveKey));
+    // updateFirestoreUserData(id as string, { activeKey: newActiveKey });
   };
 
   const updateTabsStore = (newActiveKey: string, tabs: Tab[]) => {
-    dispatch(setActiveTabKey(newActiveKey));
-    dispatch(updateTabs(tabs));
-
-    const jsonArray = tabs.map((item) => JSON.stringify(item));
-    // TODO:
-    updateFirestoreUserData(id as string, {
-      activeKey: newActiveKey,
-      tab: jsonArray,
-    });
+    dispatch(
+      updateFirestore({
+        id: id as string,
+        data: { tabs, activeKey: newActiveKey },
+      })
+    );
   };
 
   const add = () => {
