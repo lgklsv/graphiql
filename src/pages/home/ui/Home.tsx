@@ -41,6 +41,7 @@ const Home: React.FC = () => {
             text={t('home.descriptionGoal')}
             imgUrl={appImg}
             imgPlaceholder={appImgPlaceholder}
+            imgAlt="GraphiQL IDE screenshot"
           />
           <Description text={t('home.descriptionText')} />
           <FeatureShowcase

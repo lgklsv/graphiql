@@ -10,6 +10,7 @@ interface DescriptionProps {
   text: string;
   imgUrl?: string;
   imgPlaceholder?: string;
+  imgAlt?: string;
 }
 
 const Description: React.FC<DescriptionProps> = ({
@@ -17,6 +18,7 @@ const Description: React.FC<DescriptionProps> = ({
   text,
   imgUrl,
   imgPlaceholder,
+  imgAlt,
 }) => {
   return (
     <section className={styles.description}>
@@ -28,8 +30,14 @@ const Description: React.FC<DescriptionProps> = ({
             width="100%"
             src={imgUrl}
             preview={false}
+            alt={imgAlt}
             placeholder={
-              <Image width="100%" preview={false} src={imgPlaceholder} />
+              <Image
+                width="100%"
+                preview={false}
+                src={imgPlaceholder}
+                alt={imgAlt}
+              />
             }
           />
         )}
