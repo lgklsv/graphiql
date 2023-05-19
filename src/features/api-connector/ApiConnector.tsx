@@ -37,8 +37,14 @@ const ApiConnector: React.FC = () => {
     dispatch(updateTabs(tabsWithClearResponse));
     refetch();
   };
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
+    if (!e.target.value) {
+      dispatch(setApiUrl({ url: '' }));
+      refetch();
+    }
+  };
 
   return (
     <Space.Compact className={styles.apiConnector}>
@@ -55,7 +61,6 @@ const ApiConnector: React.FC = () => {
           icon={<ApiOutlined style={{ fontSize: 20 }} />}
           loading={isLoading || isFetching}
           onClick={handleConnect}
-          disabled={!inputValue}
           style={{
             borderColor: `${isError ? 'red' : ''}`,
             width: 40,
