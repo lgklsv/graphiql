@@ -1,11 +1,15 @@
 import { MessageInstance } from 'antd/es/message/interface';
-import { auth } from 'firebase';
+import { auth, db } from 'firebase';
 import {
   GithubAuthProvider,
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
-import { getFirestoreUserData } from 'shared/lib/firestore/constants';
+import { doc, getDoc } from 'firebase/firestore';
+import {
+  createFirestoreUserData,
+  getFirestoreUserData,
+} from 'shared/lib/firestore/constants';
 
 interface IHandleAuth {
   provider: GoogleAuthProvider | GithubAuthProvider;
@@ -13,7 +17,7 @@ interface IHandleAuth {
   messageApi: MessageInstance;
 }
 
-export const authProvider = ({
+export const authProvider = async ({
   provider,
   dispatchFn,
   messageApi,
@@ -22,7 +26,14 @@ export const authProvider = ({
     .then(async ({ user }) => {
       const { email, uid, accessToken } = user as unknown as UserFirebase;
       dispatchFn({ email, id: uid, token: accessToken });
-      await getFirestoreUserData(uid);
+
+      const isHaveData = doc(db, 'settings', uid);
+      const docSnap = await getDoc(isHaveData);
+      if (docSnap.exists()) {
+        await getFirestoreUserData(uid);
+      } else {
+        await createFirestoreUserData(uid);
+      }
     })
     .catch((error) => {
       messageApi.open({
