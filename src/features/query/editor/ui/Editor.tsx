@@ -4,47 +4,26 @@ import CodeMirror from '@uiw/react-codemirror';
 import { graphql as graphqlCodeMirror } from 'cm6-graphql';
 import { useAuthState } from 'shared/hooks/use-auth';
 import { updateFirestoreUserData } from 'shared/lib/firestore/constants';
+<<<<<<< HEAD
 import { graphql as graphqlCodeMirror, updateSchema } from 'cm6-graphql';
 import { EditorView } from 'codemirror';
 import { updateFirestore } from 'store/actions/FirestoreActions';
+=======
+>>>>>>> 3f498a3 (reafactor: change back editor tab change)
 import { graphql, handleErrorMessage } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';
 import { updateTabLabel, updateTabStore } from 'store/reducers/TabSlice';
 import { utils } from 'shared/lib';
+<<<<<<< HEAD
 import { ErrorNotification, Spinner } from 'shared/ui';
 import { isFetchError } from 'shared/lib/type-checkers';
+=======
+import { ErrorNotification } from 'shared/ui';
+import { updateData } from 'shared/lib/firestore/utils';
+>>>>>>> 3f498a3 (reafactor: change back editor tab change)
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import './Editor.scss';
-
-interface Update {
-  tabs: Tab[];
-  activeTabKey: string;
-  query: TabQueryContent;
-}
-
-export const stringifyArray = (array: Tab[]) =>
-  array.map((elem) => JSON.stringify(elem));
-
-export const parseArray = (array: string[]) =>
-  array.map((elem) => JSON.parse(elem)) as Tab[];
-
-// export const update = (props: Update) => {
-//   const { tabs, activeTabKey, query } = props;
-//   const activeTab = { ...tabs.find(({ key }) => key === activeTabKey) };
-
-//   if (!activeTab) {
-//     return null;
-//   }
-
-//   activeTab.query = { ...activeTab.query, ...query };
-//   const updateTabs = tabs.map((t) =>
-//     t.key === activeTab.key ? activeTab : t
-//   ) as Tab[];
-
-//   const stringifyTabs = stringifyArray(updateTabs);
-//   return { newActiveKey: activeTab.key, updateTabs, stringifyTabs };
-// };
 
 const Editor: React.FC = () => {
   const { t } = useTranslation();
@@ -64,45 +43,43 @@ const Editor: React.FC = () => {
 
   // TODO: change time debounce
   const onChange = utils.debounce((queryString: string) => {
-    // console.log('EDITOR onChange');
-    // dispatch(updateTabContent({ activeTabKey, query: { data: queryString } }));
+    // dispatch(
+    //   updateFirestore({
+    //     id: id as string,
+    //     data: { tabs, activeKey: activeTabKey, query: { data: queryString } },
+    //   })
+    // );
 
-    // const data1 = update({
-    //   tabs,
-    //   activeTabKey,
-    //   query: { data: queryString },
-    // });
+    const updateTabsData = updateData({
+      tabs,
+      activeTabKey,
+      query: { data: queryString },
+    });
 
-    dispatch(
-      updateFirestore({
-        id: id as string,
-        data: { tabs, activeKey: activeTabKey, query: { data: queryString } },
-      })
-    );
+    if (updateTabsData) {
+      const { newActiveKey, updateTabs, stringifyTabs } = updateTabsData;
+      dispatch(
+        updateTabStore({
+          activeKey: newActiveKey,
+          tabs: updateTabs,
+        })
+      );
 
-    // if (data1) {
-    //   const { newActiveKey, updateTabs, stringifyTabs } = data1;
-    //   dispatch(
-    //     updateTabStore({
-    //       activeKey: newActiveKey as string,
-    //       tabs: updateTabs as Tab[],
-    //     })
-    //   );
-
-    //   updateFirestoreUserData(id as string, {
-    //     activeKey: newActiveKey as string,
-    //     tab: stringifyTabs,
-    //   });
-    // }
+      updateFirestoreUserData(id as string, {
+        activeKey: newActiveKey,
+        tab: stringifyTabs,
+      });
+    }
 
     const regex = /(?<=query |mutation )\w+/;
     if (regex.exec(queryString)) {
       const newTitle = regex.exec(queryString)![0];
       dispatch(updateTabLabel({ activeTabKey, label: newTitle }));
-    } else
+    } else {
       dispatch(
         updateTabLabel({ activeTabKey, label: `${t('sandbox.newTab')}` })
       );
+    }
   });
 
   if (isFetching) {

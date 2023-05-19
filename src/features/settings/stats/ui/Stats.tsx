@@ -13,7 +13,6 @@ const Stats: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { isStats } = useAppSelector(settingsSelector);
-  // TODO: добавить инитиал значения сюда
   const { id } = useAuthState();
 
   const selectStatsHandler = (value: SegmentedValue) => {

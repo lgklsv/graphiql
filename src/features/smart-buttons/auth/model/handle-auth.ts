@@ -25,7 +25,6 @@ export const authProvider = ({
 
       // TODO: при логине мы получаем данные из базы данных
       const userSettings = await getFirestoreUserData(uid);
-      console.log(userSettings, 'in LOGIN');
     })
     .catch((error) => {
       messageApi.open({
