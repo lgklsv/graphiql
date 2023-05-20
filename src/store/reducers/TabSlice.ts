@@ -1,7 +1,4 @@
-/* eslint-disable  @typescript-eslint/no-unused-expressions */
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { updateFirestore } from 'store/actions/FirestoreActions';
 
 export type TabsState = {
   activeKey: string;
@@ -73,24 +70,6 @@ const tabsSlice = createSlice({
       state.tabs = action.payload.tabs;
       state.activeKey = action.payload.activeKey;
     },
-  },
-  // TODO: delete this
-  extraReducers: (builder) => {
-    builder.addCase(updateFirestore.pending, (state, action) => {
-      state.isLoading = true;
-
-      action.meta.arg.data.tabs &&
-        (state.tabs = action.meta.arg.data.tabs as Tab[]);
-
-      action.meta.arg.data.activeKey &&
-        (state.activeKey = action.meta.arg.data.activeKey as string);
-    });
-    builder.addCase(updateFirestore.fulfilled, (state) => {
-      state.isLoading = false;
-    });
-    builder.addCase(updateFirestore.rejected, (state) => {
-      state.isLoading = false;
-    });
   },
 });
 

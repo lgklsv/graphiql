@@ -1,7 +1,7 @@
 import { useAppDispatch } from 'shared/hooks/redux';
 import { useAuthState } from 'shared/hooks/use-auth';
 import { updateTabStore } from 'store/reducers/TabSlice';
-import { updateFirestoreData } from '../constants';
+import { updateFirestoreData } from '../rest-firestore';
 import { updateData } from '../utils';
 
 export const useUpdateTabs = () => {

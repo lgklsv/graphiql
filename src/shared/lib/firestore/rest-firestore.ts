@@ -6,16 +6,7 @@ import {
   updateDoc,
 } from 'firebase/firestore';
 import { db } from 'firebase';
-import { NumBoolean } from 'store/reducers/SettingsSlice';
 import { parseArray } from './utils';
-
-export interface IFirestoreData {
-  id?: string;
-  isCache: number | NumBoolean;
-  isStats: number | NumBoolean;
-  activeKey: string;
-  tabs: string[] | Tab[];
-}
 
 export const getFirestoreData = async (uid: string) => {
   try {
