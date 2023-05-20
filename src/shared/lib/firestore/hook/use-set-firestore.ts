@@ -1,7 +1,7 @@
 import { useAppDispatch } from 'shared/hooks/redux';
 import { NumBoolean, updateSetStore } from 'store/reducers/SettingsSlice';
 import { updateTabStore } from 'store/reducers/TabSlice';
-import { getFirestoreData } from '../constants';
+import { getFirestoreData } from '../rest-firestore';
 
 export const useSetFirestore = () => {
   const dispatch = useAppDispatch();

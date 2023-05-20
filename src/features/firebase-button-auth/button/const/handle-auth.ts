@@ -9,7 +9,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import {
   createFirestoreData,
   getFirestoreData,
-} from 'shared/lib/firestore/constants';
+} from 'shared/lib/firestore/rest-firestore';
 
 interface IHandleAuth {
   provider: GoogleAuthProvider | GithubAuthProvider;

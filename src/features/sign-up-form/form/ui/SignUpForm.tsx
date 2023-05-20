@@ -4,7 +4,7 @@ import { Form, Input, message } from 'antd';
 import { ButtonForm } from 'shared/ui';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { useUser } from 'shared/hooks/use-user';
-import { createFirestoreData } from 'shared/lib/firestore/constants';
+import { createFirestoreData } from 'shared/lib/firestore/rest-firestore';
 import { auth } from 'firebase';
 import style from './SignUpForm.module.scss';
 

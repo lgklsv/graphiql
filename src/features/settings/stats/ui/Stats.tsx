@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { settingsSelector } from 'store/selectors/settingsSelector';
 import { NumBoolean, setStatsSetting } from 'store/reducers/SettingsSlice';
 import { useAuthState } from 'shared/hooks/use-auth';
-import { updateFirestoreData } from 'shared/lib/firestore/constants';
+import { updateFirestoreData } from 'shared/lib/firestore/rest-firestore';
 
 const Stats: React.FC = () => {
   const { t } = useTranslation();

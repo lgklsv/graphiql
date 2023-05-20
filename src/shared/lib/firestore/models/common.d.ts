@@ -5,10 +5,10 @@ interface IUpdateQuery {
   label?: string;
 }
 
-interface IUpdateLabel {
-  label: string;
-  tabs: Tab[];
-  activeTabKey: string;
+interface IFirestoreData {
+  id?: string;
+  isCache: number | NumBoolean;
+  isStats: number | NumBoolean;
+  activeKey: string;
+  tabs: string[] | Tab[];
 }
-
-// interface IUseUpdateQuery extends IUpdateQuery {}

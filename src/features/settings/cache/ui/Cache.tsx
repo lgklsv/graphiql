@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { NumBoolean, setCacheSetting } from 'store/reducers/SettingsSlice';
 import { settingsSelector } from 'store/selectors/settingsSelector';
 import { useAuthState } from 'shared/hooks/use-auth';
-import { updateFirestoreData } from 'shared/lib/firestore/constants';
+import { updateFirestoreData } from 'shared/lib/firestore/rest-firestore';
 
 const Cache: React.FC = () => {
   const { t } = useTranslation();
