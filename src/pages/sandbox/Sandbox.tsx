@@ -17,8 +17,7 @@ const Sandbox: React.FC = () => {
   React.useEffect(() => {
     firestoreDispatch(id as string, setLoading);
   }, []);
-
-  // TODO: add loader on respons firestore
+  // TODO: add loader on respons firestore, delay in updating url and tabs
 
   return (
     <>

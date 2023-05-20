@@ -22,6 +22,7 @@ const persistConfig = {
     graphql.sandboxQueries.reducerPath,
     'tabsReducer',
     'settingsReducer',
+    'apiUrlReducer',
   ],
 };
 
