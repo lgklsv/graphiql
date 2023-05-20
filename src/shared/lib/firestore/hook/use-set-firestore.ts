@@ -16,7 +16,6 @@ export const useDataFromFirestore = () => {
       const userSettings = await getFirestoreData(uid);
 
       if (userSettings) {
-        setLoading(false);
         const { tabs, activeKey, isCache, isStats, url } = userSettings;
         dispatch(updateTabStore({ activeKey, tabs: tabs as Tab[] }));
         dispatch(
@@ -26,6 +25,7 @@ export const useDataFromFirestore = () => {
           })
         );
         dispatch(setApiUrl({ url }));
+        setLoading(false);
       }
     } catch (error) {
       console.error(error);
