@@ -4,19 +4,17 @@ import { CheckOutlined, ClearOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { useHotkeys } from 'react-hotkeys-hook';
-
 import { SHORTCUTS } from 'app/config';
 import { useTabs } from 'shared/hooks/use-tab';
-import { useAppDispatch } from 'shared/hooks/redux';
-import { updateTabContent } from 'store/reducers/TabSlice';
 import { AppTooltip } from 'shared/ui';
+import { useUpdateTabs } from 'shared/lib/firestore/hook/use-update-tabs';
 
 const PrettifyButton: React.FC = () => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
   const [isPrettified, setIsPrettified] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
-  const { activeTabKey, tabQuery } = useTabs();
+  const { activeTabKey, tabQuery, tabs } = useTabs();
+  const updateStoreWithFirebase = useUpdateTabs();
 
   React.useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -36,9 +34,13 @@ const PrettifyButton: React.FC = () => {
       // Prettify query
       try {
         const prettifiedQuery = print(parse(tabQuery.data));
-        dispatch(
-          updateTabContent({ activeTabKey, query: { data: prettifiedQuery } })
-        );
+
+        updateStoreWithFirebase({
+          tabs,
+          activeTabKey,
+          query: { data: prettifiedQuery },
+        });
+
         setIsPrettified(true);
       } catch (err) {
         // Parsing error, skip formatting
@@ -53,12 +55,12 @@ const PrettifyButton: React.FC = () => {
           null,
           2
         );
-        dispatch(
-          updateTabContent({
-            activeTabKey,
-            query: { variables: prettifiedVariables },
-          })
-        );
+
+        updateStoreWithFirebase({
+          tabs,
+          activeTabKey,
+          query: { variables: prettifiedVariables },
+        });
       } catch (err) {
         // Parsing error, skip formatting
       }
@@ -71,12 +73,12 @@ const PrettifyButton: React.FC = () => {
           null,
           2
         );
-        dispatch(
-          updateTabContent({
-            activeTabKey,
-            query: { headers: prettifiedHeaders },
-          })
-        );
+
+        updateStoreWithFirebase({
+          tabs,
+          activeTabKey,
+          query: { data: prettifiedHeaders },
+        });
       } catch (err) {
         // Parsing error, skip formatting
       }

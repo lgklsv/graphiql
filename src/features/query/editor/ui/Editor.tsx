@@ -7,10 +7,11 @@ import { updateFirestoreData } from 'shared/lib/firestore/constants';
 import { graphql, handleErrorMessage } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';
-import { updateTabLabel, updateTabStore } from 'store/reducers/TabSlice';
+import { useUpdateTabs } from 'shared/lib/firestore/hook/use-update-tabs';
+import { updateTabLabel } from 'store/reducers/TabSlice';
 import { utils } from 'shared/lib';
 import { ErrorNotification } from 'shared/ui';
-import { updateData, updateDataLabel } from 'shared/lib/firestore/utils';
+import { updateDataLabel } from 'shared/lib/firestore/utils';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import './Editor.scss';
 
@@ -20,43 +21,29 @@ const Editor: React.FC = () => {
   const { activeTabKey, tabQuery, tabs } = useTabs();
   const { id } = useAuthState();
   const dispatch = useAppDispatch();
+  const updateStoreWithFirebase = useUpdateTabs();
 
   // TODO: change time debounce
   const onChange = utils.debounce(async (queryString: string) => {
-    // dispatch(
-    //   updateFirestore({
-    //     id: id as string,
-    //     data: { tabs, activeKey: activeTabKey, query: { data: queryString } },
-    //   })
-    // );
-
-    const updateTabsData = updateData({
+    await updateStoreWithFirebase({
       tabs,
       activeTabKey,
       query: { data: queryString },
     });
 
-    if (updateTabsData) {
-      const { newActiveKey, updateTabs, stringifyTabs } = updateTabsData;
-      dispatch(
-        updateTabStore({
-          activeKey: newActiveKey,
-          tabs: updateTabs,
-        })
-      );
-
-      await updateFirestoreData(id as string, {
-        activeKey: newActiveKey,
-        tabs: stringifyTabs,
-      });
-    }
+    // TODO: эти диспачи перебивают вверхние - объединить
 
     const regex = /(?<=query |mutation )\w+/;
     if (regex.exec(queryString)) {
+      console.log('1203', activeTabKey, tabQuery);
+
       const newTitle = regex.exec(queryString)![0];
       dispatch(updateTabLabel({ activeTabKey, label: newTitle }));
+
       const newTabs = updateDataLabel({ tabs, activeTabKey, label: newTitle });
       if (newTabs) {
+        console.log('1203');
+
         await updateFirestoreData(id as string, {
           tabs: newTabs,
         });
@@ -71,6 +58,7 @@ const Editor: React.FC = () => {
         label: `${t('sandbox.newTab')}`,
       });
       if (newTabs) {
+        console.log('1204');
         await updateFirestoreData(id as string, {
           tabs: newTabs,
         });
