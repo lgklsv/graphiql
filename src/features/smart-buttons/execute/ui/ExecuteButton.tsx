@@ -10,13 +10,10 @@ import { activeTabSelector } from 'store/selectors/tabSelector';
 import { settingsSelector } from 'store/selectors/settingsSelector';
 import { updateResponse } from 'store/reducers/TabSlice';
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
-import { useLazyGetEnteredQuery } from 'shared/api/graphql';
+import { useLazyGetEnteredQuery, sandboxQueries } from 'shared/api/graphql';
 import { AppTooltip } from 'shared/ui';
 import { typeCheckers } from 'shared/lib';
-
-type ToolsErrors = {
-  [key: string]: string;
-};
+import { checkHeadersVariables } from '../utils';
 
 const ExecuteButton: React.FC = () => {
   const { t } = useTranslation();
@@ -30,6 +27,10 @@ const ExecuteButton: React.FC = () => {
     trigger,
     { data, isFetching, error, startedTimeStamp, fulfilledTimeStamp },
   ] = useLazyGetEnteredQuery();
+
+  const { isError } = useAppSelector(
+    sandboxQueries.endpoints.getSchema.select('{}')
+  );
 
   const errorPopup = React.useCallback(
     ({ type, content }: { type: NoticeType; content: string }) => {
@@ -83,7 +84,7 @@ const ExecuteButton: React.FC = () => {
   const executeQueryHandler = () => {
     if (!tab) return;
     const { variables, headers } = tab.query;
-    let hasErrors = false;
+
     const fields = [
       {
         value: variables,
@@ -92,24 +93,8 @@ const ExecuteButton: React.FC = () => {
       },
       { value: headers, name: 'headers', type: t('sandbox.buttons.headers') },
     ];
-    const errors = fields.reduce((acc, field) => {
-      const { value, name, type } = field;
-      if (value === '') {
-        acc[name] = '';
-      } else if (value) {
-        try {
-          JSON.parse(value);
-          acc[name] = '';
-        } catch (err) {
-          const errorMessage = `${t('sandbox.response.error', {
-            fieldName: type,
-          })}`;
-          acc[name] = errorMessage;
-          hasErrors = true;
-        }
-      }
-      return acc;
-    }, {} as ToolsErrors);
+    const { hasErrors, errors } = checkHeadersVariables(fields);
+
     if (hasErrors) {
       errorPopup({
         type: 'error',
@@ -133,6 +118,7 @@ const ExecuteButton: React.FC = () => {
           size="large"
           icon={<CaretRightOutlined style={{ transform: 'scale(1.7)' }} />}
           loading={isFetching}
+          disabled={isError}
         />
       </AppTooltip>
       {contextHolder}

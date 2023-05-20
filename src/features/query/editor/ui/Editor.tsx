@@ -5,13 +5,14 @@ import CodeMirror from '@uiw/react-codemirror';
 import { graphql as graphqlCodeMirror, updateSchema } from 'cm6-graphql';
 import { EditorView } from 'codemirror';
 
-import { graphql, handleErrorMessage } from 'shared/api';
+import { graphql } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';
 import { updateTabContent, updateTabLabel } from 'store/reducers/TabSlice';
 
 import { utils } from 'shared/lib';
 import { ErrorNotification, Spinner } from 'shared/ui';
+import { isFetchError } from 'shared/lib/type-checkers';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import './Editor.scss';
 
@@ -56,7 +57,9 @@ const Editor: React.FC = () => {
       {isError && (
         <ErrorNotification
           errorMsg={
-            handleErrorMessage(error) || `${t('sandbox.errors.failedFetch')}`
+            isFetchError(error)
+              ? `${t('sandbox.errors.failedFetch')}`
+              : `${error.message}`
           }
           onReset={() => refetch()}
         />
@@ -67,7 +70,7 @@ const Editor: React.FC = () => {
         height="100%"
         placeholder={`${t('sandbox.placeholder')}`}
         extensions={
-          data
+          data && !isError
             ? [...BASIC_EXTENSIONS, graphqlCodeMirror(data)]
             : [...BASIC_EXTENSIONS]
         }

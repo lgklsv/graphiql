@@ -5,14 +5,16 @@ import { ApiOutlined } from '@ant-design/icons';
 
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { setApiUrl } from 'store/reducers/ApiSlice';
-import { updateResponse } from 'store/reducers/TabSlice';
+import { updateTabs } from 'store/reducers/TabSlice';
 import { graphql } from 'shared/api';
 import { apiUrlSelector } from 'store/selectors/apiUrlSelector';
+import { useTabs } from 'shared/hooks/use-tab';
 import { AppTooltip } from 'shared/ui';
 import styles from './ApiConnector.module.scss';
 
 const ApiConnector: React.FC = () => {
   const { t } = useTranslation();
+  const { tabs } = useTabs();
 
   const dispatch = useAppDispatch();
   const currentUrl = useAppSelector(apiUrlSelector);
@@ -28,11 +30,21 @@ const ApiConnector: React.FC = () => {
 
   const handleConnect = () => {
     dispatch(setApiUrl({ url: inputValue }));
-    dispatch(updateResponse({ data: '', isLoading: false, error: undefined }));
+    const tabsWithClearResponse = tabs.map((tab) => ({
+      ...tab,
+      response: { data: '', isLoading: false, error: undefined },
+    }));
+    dispatch(updateTabs(tabsWithClearResponse));
     refetch();
   };
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
+    if (!e.target.value) {
+      dispatch(setApiUrl({ url: '' }));
+      refetch();
+    }
+  };
 
   return (
     <Space.Compact className={styles.apiConnector}>
@@ -49,7 +61,6 @@ const ApiConnector: React.FC = () => {
           icon={<ApiOutlined style={{ fontSize: 20 }} />}
           loading={isLoading || isFetching}
           onClick={handleConnect}
-          disabled={!inputValue}
           style={{
             borderColor: `${isError ? 'red' : ''}`,
             width: 40,
