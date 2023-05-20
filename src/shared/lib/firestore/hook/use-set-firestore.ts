@@ -7,19 +7,28 @@ import { getFirestoreData } from '../rest-firestore';
 export const useDataFromFirestore = () => {
   const dispatch = useAppDispatch();
 
-  const firestoreData = async (uid: string) => {
-    const userSettings = await getFirestoreData(uid);
+  const firestoreData = async (
+    uid: string,
+    setLoading: (load: boolean) => void
+  ) => {
+    try {
+      setLoading(true);
+      const userSettings = await getFirestoreData(uid);
 
-    if (userSettings) {
-      const { tabs, activeKey, isCache, isStats, url } = userSettings;
-      dispatch(updateTabStore({ activeKey, tabs: tabs as Tab[] }));
-      dispatch(
-        updateSetStore({
-          isCache: isCache as NumBoolean,
-          isStats: isStats as NumBoolean,
-        })
-      );
-      dispatch(setApiUrl({ url }));
+      if (userSettings) {
+        setLoading(false);
+        const { tabs, activeKey, isCache, isStats, url } = userSettings;
+        dispatch(updateTabStore({ activeKey, tabs: tabs as Tab[] }));
+        dispatch(
+          updateSetStore({
+            isCache: isCache as NumBoolean,
+            isStats: isStats as NumBoolean,
+          })
+        );
+        dispatch(setApiUrl({ url }));
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 

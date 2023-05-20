@@ -1,3 +1,4 @@
+import React from 'react';
 import { Form, Input, message } from 'antd';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
@@ -12,6 +13,8 @@ const LoginForm: React.FC = () => {
   const { t } = useTranslation();
   const dispatchUser = useUser();
   const dispachFirestoreData = useDataFromFirestore();
+  const [isLoading, setLoading] = React.useState(false);
+  // TODO: check state loading data from firestore
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -29,7 +32,7 @@ const LoginForm: React.FC = () => {
         const { email, uid, accessToken } = user as unknown as UserFirebase;
 
         dispatchUser({ email, id: uid, token: accessToken });
-        await dispachFirestoreData(uid);
+        await dispachFirestoreData(uid, setLoading);
       })
 
       .catch((error) => {
