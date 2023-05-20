@@ -8,25 +8,6 @@ import { createFirestoreData } from 'shared/lib/firestore/rest-firestore';
 import { auth } from 'firebase';
 import style from './SignUpForm.module.scss';
 
-export const defaultData = {
-  tabSet: {
-    activeKey: '1',
-    tabs: [
-      {
-        label: 'Tab 1',
-        query: { data: '', variables: '', headers: '' },
-        response: { data: '', isLoading: false, error: undefined },
-        key: '1',
-        closable: false,
-      },
-    ],
-  },
-  commonSet: {
-    isCache: 0,
-    isStats: 1,
-  },
-};
-
 const SignUpForm: React.FC = () => {
   const { t } = useTranslation();
   const dispatchUser = useUser();
