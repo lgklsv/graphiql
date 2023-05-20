@@ -2,7 +2,6 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Input, Space } from 'antd';
 import { ApiOutlined } from '@ant-design/icons';
-
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { setApiUrl } from 'store/reducers/ApiSlice';
 import { updateTabs } from 'store/reducers/TabSlice';
@@ -10,12 +9,15 @@ import { graphql } from 'shared/api';
 import { apiUrlSelector } from 'store/selectors/apiUrlSelector';
 import { useTabs } from 'shared/hooks/use-tab';
 import { AppTooltip } from 'shared/ui';
+import { updateFirestoreData } from 'shared/lib/firestore/rest-firestore';
+import { useAuthState } from 'shared/hooks/use-auth';
+import { stringifyArray } from 'shared/lib/firestore/utils';
 import styles from './ApiConnector.module.scss';
 
 const ApiConnector: React.FC = () => {
   const { t } = useTranslation();
   const { tabs } = useTabs();
-
+  const { id } = useAuthState();
   const dispatch = useAppDispatch();
   const currentUrl = useAppSelector(apiUrlSelector);
 
@@ -28,20 +30,28 @@ const ApiConnector: React.FC = () => {
     setInputValue(currentUrl);
   }, [currentUrl]);
 
-  const handleConnect = () => {
+  const handleConnect = async () => {
     dispatch(setApiUrl({ url: inputValue }));
     const tabsWithClearResponse = tabs.map((tab) => ({
       ...tab,
       response: { data: '', isLoading: false, error: undefined },
     }));
     dispatch(updateTabs(tabsWithClearResponse));
+
+    await updateFirestoreData(id as string, {
+      url: inputValue,
+      tabs: stringifyArray(tabsWithClearResponse),
+    });
     refetch();
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
     if (!e.target.value) {
       dispatch(setApiUrl({ url: '' }));
+      await updateFirestoreData(id as string, {
+        url: '',
+      });
       refetch();
     }
   };

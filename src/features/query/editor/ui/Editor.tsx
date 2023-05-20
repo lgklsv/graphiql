@@ -5,7 +5,7 @@ import { graphql as graphqlCodeMirror, updateSchema } from 'cm6-graphql';
 import { EditorView } from 'codemirror';
 import { graphql } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
-import { useUpdateTabs } from 'shared/lib/firestore/hook/use-update-tabs';
+import { useUpdateTabs } from 'shared/lib/firestore/hook';
 import { utils } from 'shared/lib';
 import { ErrorNotification, Spinner } from 'shared/ui';
 import { isFetchError } from 'shared/lib/type-checkers';

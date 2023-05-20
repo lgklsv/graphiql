@@ -2,14 +2,14 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
-import { useSetFirestore } from 'shared/lib/firestore/hook/use-set-firestore';
+import { useDataFromFirestore } from 'shared/lib/firestore/hook';
 import { useAuthState } from 'shared/hooks/use-auth';
 import { ErrorBoundary } from 'shared/hoc';
 import { SandboxLayout } from './layout';
 
 const Sandbox: React.FC = () => {
   const { t } = useTranslation();
-  const firestoreDispatch = useSetFirestore();
+  const firestoreDispatch = useDataFromFirestore();
   const { id } = useAuthState();
 
   React.useEffect(() => {

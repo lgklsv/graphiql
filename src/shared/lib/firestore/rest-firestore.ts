@@ -7,6 +7,7 @@ import {
 } from 'firebase/firestore';
 import { db } from 'firebase';
 import { parseArray } from './utils';
+import { INIT_FIRESTORE } from './constant';
 
 export const getFirestoreData = async (uid: string) => {
   try {
@@ -56,14 +57,7 @@ export const updateFirestoreData = async (
 
 export const createFirestoreData = async (uid: string) => {
   try {
-    await setDoc(doc(db, 'settings', uid), {
-      isCache: 0,
-      isStats: 1,
-      activeKey: '1',
-      tabs: [
-        '{"label":"Tab 1","query":{"data":"","variables":"","headers":""},"response":{"data":"","isLoading":false},"key":"1","closable":false}',
-      ],
-    });
+    await setDoc(doc(db, 'settings', uid), INIT_FIRESTORE);
   } catch (error) {
     console.error(error);
   }

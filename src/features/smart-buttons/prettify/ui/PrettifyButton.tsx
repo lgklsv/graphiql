@@ -7,7 +7,7 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { SHORTCUTS } from 'app/config';
 import { useTabs } from 'shared/hooks/use-tab';
 import { AppTooltip } from 'shared/ui';
-import { useUpdateTabs } from 'shared/lib/firestore/hook/use-update-tabs';
+import { useUpdateTabs } from 'shared/lib/firestore/hook';
 
 const PrettifyButton: React.FC = () => {
   const { t } = useTranslation();

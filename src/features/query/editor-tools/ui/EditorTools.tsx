@@ -3,7 +3,7 @@ import CodeMirror from '@uiw/react-codemirror';
 import { linter } from '@codemirror/lint';
 import { jsonParseLinter, json } from '@codemirror/lang-json';
 import { useTabs } from 'shared/hooks/use-tab';
-import { useUpdateTabs } from 'shared/lib/firestore/hook/use-update-tabs';
+import { useUpdateTabs } from 'shared/lib/firestore/hook';
 import { utils } from 'shared/lib';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import styles from './EditorTools.module.scss';

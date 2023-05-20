@@ -11,4 +11,5 @@ interface IFirestoreData {
   isStats: number | NumBoolean;
   activeKey: string;
   tabs: string[] | Tab[];
+  url: string;
 }

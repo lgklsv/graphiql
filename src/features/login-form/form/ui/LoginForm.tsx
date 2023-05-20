@@ -5,14 +5,13 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from 'firebase';
 import { ButtonForm } from 'shared/ui';
 import { useUser } from 'shared/hooks/use-user';
-import { useSetFirestore } from 'shared/lib/firestore/hook/use-set-firestore';
-
+import { useDataFromFirestore } from 'shared/lib/firestore/hook';
 import style from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation();
   const dispatchUser = useUser();
-  const firestoreDispatch = useSetFirestore();
+  const dispachFirestoreData = useDataFromFirestore();
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -30,7 +29,7 @@ const LoginForm: React.FC = () => {
         const { email, uid, accessToken } = user as unknown as UserFirebase;
 
         dispatchUser({ email, id: uid, token: accessToken });
-        await firestoreDispatch(uid);
+        await dispachFirestoreData(uid);
       })
 
       .catch((error) => {
