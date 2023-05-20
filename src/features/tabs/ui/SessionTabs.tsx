@@ -114,7 +114,7 @@ const SessionTabs: React.FC = () => {
               items={items.map((i) => i.key)}
               strategy={horizontalListSortingStrategy}
             >
-              <DefaultTabBar {...tabBarProps}>
+              <DefaultTabBar {...tabBarProps} mobile={false}>
                 {(node) => (
                   <DraggableTabNode
                     {...node.props}
