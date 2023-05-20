@@ -10,8 +10,6 @@ import {
   buildClientSchema,
   getIntrospectionQuery,
 } from 'graphql';
-
-import { TabQueryContent } from 'features/tabs/types';
 import { apiUrlSelector } from 'store/selectors/apiUrlSelector';
 import { RootState } from 'store';
 

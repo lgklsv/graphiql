@@ -2,17 +2,9 @@ import { Form, Input, message } from 'antd';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { auth, db } from 'firebase';
+import { auth } from 'firebase';
 import { ButtonForm } from 'shared/ui';
 import { useUser } from 'shared/hooks/use-user';
-import { useAppDispatch } from 'shared/hooks/redux';
-import { updateTabStore } from 'store/reducers/TabSlice';
-import {
-  NumBoolean,
-  setCacheSetting,
-  updateSetStore,
-} from 'store/reducers/SettingsSlice';
-import { getFirestoreUserData } from 'shared/lib/firestore/constants';
 import { useSetFirestore } from 'shared/lib/firestore/hook/use-set-firestore';
 
 import style from './LoginForm.module.scss';

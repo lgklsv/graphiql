@@ -21,7 +21,6 @@ import { useAppDispatch } from 'shared/hooks/redux';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAuthState } from 'shared/hooks/use-auth';
 import DraggableTabNode from './DraggableTabs';
-
 import styles from './SessionTabs.module.scss';
 
 type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
