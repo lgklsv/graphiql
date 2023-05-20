@@ -59,6 +59,7 @@ export const updateFirestoreData = async (
     await updateDoc(userSettingsRef, data);
   } catch (error) {
     console.error(error);
+    // TODO: throw error?
   }
 };
 
