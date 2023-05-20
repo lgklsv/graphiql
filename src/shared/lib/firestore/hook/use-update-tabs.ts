@@ -9,8 +9,8 @@ export const useUpdateTabs = () => {
   const { id } = useAuthState();
 
   const updateWithFirebase = async (props: IUpdateQuery) => {
-    const { tabs, activeTabKey, query } = props;
-    const updateTabsData = updateData({ tabs, activeTabKey, query });
+    const { tabs, activeTabKey, query, label } = props;
+    const updateTabsData = updateData({ tabs, activeTabKey, query, label });
 
     if (!updateTabsData) {
       return;

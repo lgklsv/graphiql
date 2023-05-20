@@ -1,7 +1,7 @@
 import { stringifyArray } from './parse-data';
 
 export const updateData = (props: IUpdateQuery) => {
-  const { tabs, activeTabKey, query } = props;
+  const { tabs, activeTabKey, query, label } = props;
   const activeTab = { ...tabs.find(({ key }) => key === activeTabKey) };
 
   if (!activeTab) {
@@ -9,6 +9,10 @@ export const updateData = (props: IUpdateQuery) => {
   }
 
   activeTab.query = { ...activeTab.query, ...query };
+
+  if (label) {
+    activeTab.label = label;
+  }
 
   const updateTabs = tabs.map((t) =>
     t.key === activeTab.key ? activeTab : t
@@ -18,20 +22,4 @@ export const updateData = (props: IUpdateQuery) => {
 
   const stringifyTabs = stringifyArray(updateTabs);
   return { newActiveKey, updateTabs, stringifyTabs };
-};
-
-export const updateDataLabel = (props: IUpdateLabel) => {
-  const { tabs, activeTabKey, label } = props;
-  const activeTab = { ...tabs.find(({ key }) => key === activeTabKey) };
-
-  if (!activeTab) {
-    return null;
-  }
-
-  activeTab.label = label;
-  const updateTabs = stringifyArray(
-    tabs.map((t) => (t.key === activeTab.key ? activeTab : t)) as Tab[]
-  );
-
-  return updateTabs;
 };

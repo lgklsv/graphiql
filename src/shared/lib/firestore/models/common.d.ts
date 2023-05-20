@@ -2,6 +2,7 @@ interface IUpdateQuery {
   tabs: Tab[];
   activeTabKey: string;
   query: TabQueryContent;
+  label?: string;
 }
 
 interface IUpdateLabel {
