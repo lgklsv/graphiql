@@ -10,6 +10,8 @@
     "signup": "Sign Up",
     "login": "Log In",
     "logout": "Log Out",
+    "home": "Home",
+    "sandbox": "Sandbox",
     "access": "Get access",
     "docs": "Read the Docs",
     "start": "Get Started",
