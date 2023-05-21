@@ -2,10 +2,12 @@ import { useAppDispatch } from 'shared/hooks/redux';
 import { setApiUrl } from 'store/reducers/ApiSlice';
 import { NumBoolean, updateSetStore } from 'store/reducers/SettingsSlice';
 import { updateTabStore } from 'store/reducers/TabSlice';
+import { graphql } from 'shared/api';
 import { getFirestoreData } from '../rest-firestore';
 
 export const useDataFromFirestore = () => {
   const dispatch = useAppDispatch();
+  const [trigger] = graphql.useLazyGetSchemaQuery();
 
   const firestoreData = async (
     uid: string,
@@ -25,6 +27,7 @@ export const useDataFromFirestore = () => {
           })
         );
         dispatch(setApiUrl({ url }));
+        trigger('{}');
         setLoading(false);
       }
     } catch (error) {
