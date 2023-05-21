@@ -27,7 +27,7 @@ type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
 const SessionTabs: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const updateFirestore = useUpdateFirestore();
   const { tabs: items, activeTabKey: activeKey } = useTabs();
   const [className, setClassName] = React.useState('');
@@ -107,7 +107,11 @@ const SessionTabs: React.FC = () => {
   };
 
   return (
-    <div className={styles.tabs}>
+    <div
+      className={`${styles.tabs} ${
+        i18n.language === 'ru' ? styles.tabs_narrow : ''
+      }`}
+    >
       <Tabs
         type="editable-card"
         onChange={onChange}

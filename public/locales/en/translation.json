@@ -210,6 +210,20 @@
     "olegKolosov": "Oleg Kolosov",
     "mariaErmolaeva": "Maria Ermolaeva"
   },
+  "firebaseIndicator": {
+    "success": {
+      "text": "Saved",
+      "tooltip": "All changes saved to Firestore"
+    },
+    "processing": {
+      "text": "Saving...",
+      "tooltip": "Syncing data with Firestore"
+    },
+    "error": {
+      "text": "Error",
+      "tooltip": "Firestore update failed"
+    }
+  },
   "loader": "Loading...",
   "errorBoundary": {
     "errorTitle": "An error occurred",

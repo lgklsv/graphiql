@@ -7,6 +7,10 @@
   padding-bottom: 8px;
   padding-left: 0.7rem;
 
+  &_wide {
+    width: var(--indicator_wide-width);
+  }
+
   & span {
     width: 100%;
   }

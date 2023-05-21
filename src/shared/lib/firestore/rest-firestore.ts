@@ -37,8 +37,8 @@ export const getFirestoreData = async (uid: string) => {
     }
 
     return initValue;
-  } catch (error) {
-    return console.error(error);
+  } catch {
+    throw new Error('Getting data from Firestore failed');
   }
 };
 

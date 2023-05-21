@@ -1,8 +1,9 @@
-import { Badge } from 'antd';
 import React from 'react';
+import { Badge } from 'antd';
+import { useTranslation } from 'react-i18next';
+
 import { useAppSelector } from 'shared/hooks/redux';
 import { firestoreSelector } from 'store/selectors/firestoreSelector';
-
 import { AppTooltip } from 'shared/ui';
 import styles from './FirestoreIndicator.module.scss';
 
@@ -15,18 +16,34 @@ type StatusTypes =
   | undefined;
 
 const FirestoreIndicator: React.FC = () => {
-  const { isUpdating } = useAppSelector(firestoreSelector);
+  const { t, i18n } = useTranslation();
+  const { isUpdating, isError } = useAppSelector(firestoreSelector);
+  let status: StatusTypes = 'success';
+  let text = t('firebaseIndicator.success.text');
+  let tooltipText = t('firebaseIndicator.success.tooltip');
 
-  const status: StatusTypes = isUpdating ? 'processing' : 'success';
-  const text = isUpdating ? 'Saving...' : 'Saved';
-  const tooltipText = isUpdating
-    ? 'Syncing data with Firestore'
-    : 'All changes saved to Firestore';
+  if (isError) {
+    status = 'error';
+    text = t('firebaseIndicator.error.text');
+    tooltipText = t('firebaseIndicator.error.tooltip');
+  }
+
+  if (isUpdating) {
+    status = 'processing';
+    text = t('firebaseIndicator.processing.text');
+    tooltipText = t('firebaseIndicator.processing.tooltip');
+  }
 
   return (
-    <div className={styles.indicator}>
+    <div
+      className={`${styles.indicator} ${
+        i18n.language === 'ru' ? styles.indicator_wide : ''
+      }`}
+    >
       <AppTooltip title={tooltipText}>
-        <Badge status={status} text={text} />
+        <span>
+          <Badge status={status} text={text} />
+        </span>
       </AppTooltip>
     </div>
   );

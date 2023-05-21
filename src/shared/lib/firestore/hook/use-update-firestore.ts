@@ -9,12 +9,11 @@ export const useUpdateFirestore = () => {
 
   const updateFirestore = async (fields: FirestoreUpdateKeys) => {
     try {
-      dispatch(setFirestoreState(true));
+      dispatch(setFirestoreState({ isUpdating: true, isError: false }));
       await updateFirestoreData(id as string, fields);
-    } catch (err) {
-      console.log(err);
-    } finally {
-      dispatch(setFirestoreState(false));
+      dispatch(setFirestoreState({ isUpdating: false, isError: false }));
+    } catch {
+      dispatch(setFirestoreState({ isUpdating: false, isError: true }));
     }
   };
 
