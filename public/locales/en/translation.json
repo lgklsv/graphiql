@@ -192,11 +192,11 @@
       },
       "clear": {
         "title": "Clear storage",
-        "subtitle": "Remove all locally stored data and start fresh.",
+        "subtitle": "Remove all cloud-synced data and start fresh. It will not delete your account.",
         "button": {
           "text": "Clear data",
           "popup": {
-            "title": "Clear locally stored data?",
+            "title": "Clear cloud-synced data?",
             "subtitle": "Are you sure to remove the data? Action cannot be undone.",
             "confirm": "Yes",
             "cancel": "No"
