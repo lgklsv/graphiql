@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { LOCAL_STORAGE_KEYS } from 'shared/lib/localStorage/constants';
+import { getLocalStorage } from 'shared/lib/localStorage/local-storage';
 
 export type InitialState = {
   email: null | string;
@@ -6,7 +8,7 @@ export type InitialState = {
   id: null | string;
 };
 
-const initialState: InitialState = {
+const initialState: InitialState = getLocalStorage(LOCAL_STORAGE_KEYS.USER) || {
   email: null,
   token: null,
   id: null,
