@@ -49,6 +49,15 @@ const Nav: React.FC<NavProps> = ({ mobile, toggle }) => {
           {t('button.home')}
         </Button>
       )}
+      {isAuth && location.pathname === ROUTES.home && (
+        <Button
+          size="large"
+          onClick={() => buttonClickHandler(ROUTES.sandbox)}
+          className={styles.nav__btn}
+        >
+          {t('button.sandbox')}
+        </Button>
+      )}
       <LangSwitcher />
       {isAuth ? (
         <Button type="primary" size="large" onClick={handleLogOut}>
