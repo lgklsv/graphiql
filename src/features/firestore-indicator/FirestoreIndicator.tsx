@@ -3,6 +3,7 @@ import React from 'react';
 import { useAppSelector } from 'shared/hooks/redux';
 import { firestoreSelector } from 'store/selectors/firestoreSelector';
 
+import { AppTooltip } from 'shared/ui';
 import styles from './FirestoreIndicator.module.scss';
 
 type StatusTypes =
@@ -18,10 +19,15 @@ const FirestoreIndicator: React.FC = () => {
 
   const status: StatusTypes = isUpdating ? 'processing' : 'success';
   const text = isUpdating ? 'Saving...' : 'Saved';
+  const tooltipText = isUpdating
+    ? 'Syncing data with Firestore'
+    : 'All changes saved to Firestore';
 
   return (
     <div className={styles.indicator}>
-      <Badge status={status} text={text} />
+      <AppTooltip title={tooltipText}>
+        <Badge status={status} text={text} />
+      </AppTooltip>
     </div>
   );
 };
