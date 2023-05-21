@@ -3,9 +3,10 @@ import { useTranslation } from 'react-i18next';
 import CodeMirror from '@uiw/react-codemirror';
 import { graphql as graphqlCodeMirror, updateSchema } from 'cm6-graphql';
 import { EditorView } from 'codemirror';
+
 import { graphql } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
-import { useUpdateTabs } from 'shared/lib/firestore/hook';
+import { useUpdateFirestore, useUpdateTabs } from 'shared/lib/firestore/hook';
 import { utils } from 'shared/lib';
 import { ErrorNotification, Spinner } from 'shared/ui';
 import { isFetchError } from 'shared/lib/type-checkers';
@@ -14,9 +15,10 @@ import './Editor.scss';
 
 const Editor: React.FC = () => {
   const { t } = useTranslation();
+  const updateTabsForFirebase = useUpdateTabs();
+  const updateFirestore = useUpdateFirestore();
   const { activeTabKey, tabQuery, tabs } = useTabs();
   const viewRef = React.useRef<EditorView | null>(null);
-  const updateStoreWithFirebase = useUpdateTabs();
   const { data, error, refetch, isError, isFetching } =
     graphql.useGetSchemaQuery('{}');
 
@@ -30,7 +32,7 @@ const Editor: React.FC = () => {
   const onChange = utils.debounce(async (queryString: string) => {
     const regex = /(?<=query |mutation )\w+/;
 
-    await updateStoreWithFirebase({
+    const updatedData = updateTabsForFirebase({
       tabs,
       activeTabKey,
       query: { data: queryString },
@@ -38,6 +40,10 @@ const Editor: React.FC = () => {
         ? regex.exec(queryString)![0]
         : `${t('sandbox.newTab')}`,
     });
+
+    if (updatedData) {
+      await updateFirestore(updatedData);
+    }
   });
 
   if (isFetching) {

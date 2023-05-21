@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { settingsSelector } from 'store/selectors/settingsSelector';
 import { NumBoolean, setStatsSetting } from 'store/reducers/SettingsSlice';
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
-import { useUpdateFirestore } from 'shared/lib/firestore/hook/use-update-firestore';
+import { useUpdateFirestore } from 'shared/lib/firestore/hook';
 
 const Stats: React.FC = () => {
   const { t } = useTranslation();

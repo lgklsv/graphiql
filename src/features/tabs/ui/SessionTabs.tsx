@@ -12,14 +12,14 @@ import {
   SortableContext,
   horizontalListSortingStrategy,
 } from '@dnd-kit/sortable';
-import { setActiveTabKey, updateTabs } from 'store/reducers/TabSlice';
-import { stringifyArray } from 'shared/lib/firestore/utils';
-import { updateFirestoreData } from 'shared/lib/firestore/rest-firestore';
 import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
+
+import { setActiveTabKey, updateTabs } from 'store/reducers/TabSlice';
+import { stringifyArray } from 'shared/lib/firestore/utils';
 import { useAppDispatch } from 'shared/hooks/redux';
 import { useTabs } from 'shared/hooks/use-tab';
-import { useAuthState } from 'shared/hooks/use-auth';
+import { useUpdateFirestore } from 'shared/lib/firestore/hook';
 import DraggableTabNode from './DraggableTabs';
 import styles from './SessionTabs.module.scss';
 
@@ -28,20 +28,20 @@ type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 const SessionTabs: React.FC = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
+  const updateFirestore = useUpdateFirestore();
   const { tabs: items, activeTabKey: activeKey } = useTabs();
   const [className, setClassName] = React.useState('');
-  const { id } = useAuthState();
 
   const onChange = async (newActiveKey: string) => {
     dispatch(setActiveTabKey(newActiveKey));
-    await updateFirestoreData(id as string, { activeKey: newActiveKey });
+    await updateFirestore({ activeKey: newActiveKey });
   };
 
   const updateTabsStore = async (newActiveKey: string, tabs: Tab[]) => {
     dispatch(setActiveTabKey(newActiveKey));
     dispatch(updateTabs(tabs));
 
-    await updateFirestoreData(id as string, {
+    await updateFirestore({
       activeKey: newActiveKey,
       tabs: stringifyArray(tabs),
     });

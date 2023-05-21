@@ -2,8 +2,9 @@ import React from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { linter } from '@codemirror/lint';
 import { jsonParseLinter, json } from '@codemirror/lang-json';
+
 import { useTabs } from 'shared/hooks/use-tab';
-import { useUpdateTabs } from 'shared/lib/firestore/hook';
+import { useUpdateFirestore, useUpdateTabs } from 'shared/lib/firestore/hook';
 import { utils } from 'shared/lib';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import styles from './EditorTools.module.scss';
@@ -16,16 +17,21 @@ const EditorTools: React.FC<EditorToolsProps> = ({
   activeToolTab,
 }: EditorToolsProps) => {
   const { activeTabKey, tabQuery, tabs } = useTabs();
-  const updateStoreWithFirebase = useUpdateTabs();
+  const updateTabsForFirebase = useUpdateTabs();
+  const updateFirestore = useUpdateFirestore();
 
   const EDITOR_TABS = ['variables', 'headers'];
 
   const handleChange = utils.debounce(async (text: string, tabName: string) => {
-    await updateStoreWithFirebase({
+    const updatedData = updateTabsForFirebase({
       tabs,
       activeTabKey,
       query: { [tabName]: text },
     });
+
+    if (updatedData) {
+      await updateFirestore(updatedData);
+    }
   });
 
   return (
