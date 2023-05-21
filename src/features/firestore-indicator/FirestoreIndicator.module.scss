@@ -1,0 +1,17 @@
+.indicator {
+  width: var(--indicator-width);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 8px;
+  padding-left: 0.7rem;
+
+  & span {
+    width: 100%;
+  }
+
+  @media (max-width: 767px) {
+    padding-bottom: 0;
+  }
+}

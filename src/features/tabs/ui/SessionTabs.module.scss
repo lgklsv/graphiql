@@ -1,6 +1,9 @@
 .tabs {
   background-color: transparent;
-  width: calc(100vw - var(--sidebar-width) - var(--apiInput-width) - 1.25rem);
+  width: calc(
+    100vw - var(--sidebar-width) - var(--apiInput-width) - 1rem -
+      var(--indicator-width) - 1rem
+  );
   height: var(--tabs-height);
 
   @media (max-width: 767px) {

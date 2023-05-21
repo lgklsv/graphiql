@@ -13,6 +13,7 @@ import { SHORTCUTS } from 'app/config';
 import { SettingsModal, ShortcutsModal } from 'entities/modals';
 import { AppTooltip, Spinner } from 'shared/ui';
 import { graphql } from 'shared/api';
+import { FirestoreIndicator } from 'features/firestore-indicator';
 import styles from './Sidebar.module.scss';
 
 const DocsExplorer = lazy(() => import('entities/docs'));
@@ -64,6 +65,7 @@ const Sidebar: React.FC = () => {
           />
         </AppTooltip>
         <Space direction={isMobile ? 'horizontal' : 'vertical'}>
+          {isMobile && <FirestoreIndicator />}
           <AppTooltip title={t('sandbox.tooltips.refetch')}>
             <Button
               onClick={refetchSchemaHandler}
