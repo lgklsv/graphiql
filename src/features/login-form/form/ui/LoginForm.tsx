@@ -1,16 +1,20 @@
+import React from 'react';
 import { Form, Input, message } from 'antd';
 import { LockOutlined, MailOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from 'firebase';
-
 import { ButtonForm } from 'shared/ui';
 import { useUser } from 'shared/hooks/use-user';
+import { useDataFromFirestore } from 'shared/lib/firestore/hook';
 import style from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation();
   const dispatchUser = useUser();
+  const dispachFirestoreData = useDataFromFirestore();
+  const [isLoading, setLoading] = React.useState(false);
+  // TODO: check state loading data from firestore
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -24,10 +28,13 @@ const LoginForm: React.FC = () => {
     const { email: emailValues, password } = values;
 
     signInWithEmailAndPassword(auth, emailValues, password)
-      .then(({ user }) => {
+      .then(async ({ user }) => {
         const { email, uid, accessToken } = user as unknown as UserFirebase;
+
         dispatchUser({ email, id: uid, token: accessToken });
+        await dispachFirestoreData(uid, setLoading);
       })
+
       .catch((error) => {
         messageApi.open({
           key: 'updatable',

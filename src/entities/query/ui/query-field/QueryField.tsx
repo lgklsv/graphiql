@@ -1,7 +1,6 @@
 import React, { SyntheticEvent } from 'react';
 import { ResizeCallbackData } from 'react-resizable';
 import { Grid } from 'antd';
-
 import { DEFAULT_QUERY_FIELD_WIDTH } from 'app/config';
 import { Query } from 'features/query';
 import { Resizable } from 'shared/ui';

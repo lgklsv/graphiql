@@ -2,11 +2,8 @@ import React from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { linter } from '@codemirror/lint';
 import { jsonParseLinter, json } from '@codemirror/lang-json';
-
-import { TabQueryContent } from 'features/tabs/types';
-import { updateTabContent } from 'store/reducers/TabSlice';
 import { useTabs } from 'shared/hooks/use-tab';
-import { useAppDispatch } from 'shared/hooks/redux';
+import { useUpdateTabs } from 'shared/lib/firestore/hook';
 import { utils } from 'shared/lib';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import styles from './EditorTools.module.scss';
@@ -18,18 +15,17 @@ interface EditorToolsProps {
 const EditorTools: React.FC<EditorToolsProps> = ({
   activeToolTab,
 }: EditorToolsProps) => {
-  const { activeTabKey, tabQuery } = useTabs();
-  const dispatch = useAppDispatch();
+  const { activeTabKey, tabQuery, tabs } = useTabs();
+  const updateStoreWithFirebase = useUpdateTabs();
 
   const EDITOR_TABS = ['variables', 'headers'];
 
-  const handleChange = utils.debounce((text: string, tabName: string) => {
-    dispatch(
-      updateTabContent({
-        activeTabKey,
-        query: { [tabName]: text },
-      })
-    );
+  const handleChange = utils.debounce(async (text: string, tabName: string) => {
+    await updateStoreWithFirebase({
+      tabs,
+      activeTabKey,
+      query: { [tabName]: text },
+    });
   });
 
   return (

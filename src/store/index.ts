@@ -18,7 +18,12 @@ const persistConfig = {
   storage,
   throttle: 400,
   transforms: [tabsResponseTransform],
-  blacklist: [graphql.sandboxQueries.reducerPath],
+  blacklist: [
+    graphql.sandboxQueries.reducerPath,
+    'tabsReducer',
+    'settingsReducer',
+    'apiUrlReducer',
+  ],
 };
 
 const appReducer = combineReducers({

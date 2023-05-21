@@ -1,15 +1,11 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-
 import CodeMirror from '@uiw/react-codemirror';
 import { graphql as graphqlCodeMirror, updateSchema } from 'cm6-graphql';
 import { EditorView } from 'codemirror';
-
 import { graphql } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
-import { useAppDispatch } from 'shared/hooks/redux';
-import { updateTabContent, updateTabLabel } from 'store/reducers/TabSlice';
-
+import { useUpdateTabs } from 'shared/lib/firestore/hook';
 import { utils } from 'shared/lib';
 import { ErrorNotification, Spinner } from 'shared/ui';
 import { isFetchError } from 'shared/lib/type-checkers';
@@ -18,11 +14,9 @@ import './Editor.scss';
 
 const Editor: React.FC = () => {
   const { t } = useTranslation();
-  const { activeTabKey, tabQuery } = useTabs();
+  const { activeTabKey, tabQuery, tabs } = useTabs();
   const viewRef = React.useRef<EditorView | null>(null);
-
-  const dispatch = useAppDispatch();
-
+  const updateStoreWithFirebase = useUpdateTabs();
   const { data, error, refetch, isError, isFetching } =
     graphql.useGetSchemaQuery('{}');
 
@@ -32,17 +26,18 @@ const Editor: React.FC = () => {
     }
   }, [data, viewRef]);
 
-  const onChange = utils.debounce((queryString: string) => {
-    dispatch(updateTabContent({ activeTabKey, query: { data: queryString } }));
-
+  // TODO: change time debounce
+  const onChange = utils.debounce(async (queryString: string) => {
     const regex = /(?<=query |mutation )\w+/;
-    if (regex.exec(queryString)) {
-      const newTitle = regex.exec(queryString)![0];
-      dispatch(updateTabLabel({ activeTabKey, label: newTitle }));
-    } else
-      dispatch(
-        updateTabLabel({ activeTabKey, label: `${t('sandbox.newTab')}` })
-      );
+
+    await updateStoreWithFirebase({
+      tabs,
+      activeTabKey,
+      query: { data: queryString },
+      label: regex.exec(queryString)
+        ? regex.exec(queryString)![0]
+        : `${t('sandbox.newTab')}`,
+    });
   });
 
   if (isFetching) {

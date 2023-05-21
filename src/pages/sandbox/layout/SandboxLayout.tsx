@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { SessionTabs } from 'features/tabs';
 import { Sidebar } from 'widgets/sidebar';
 import { ApiConnector } from 'features/api-connector';

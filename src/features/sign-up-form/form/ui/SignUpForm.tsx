@@ -2,10 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Input, message } from 'antd';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from 'firebase';
-
 import { ButtonForm } from 'shared/ui';
 import { useUser } from 'shared/hooks/use-user';
+import { createFirestoreData } from 'shared/lib/firestore/rest-firestore';
+import { auth } from 'firebase';
 import style from './SignUpForm.module.scss';
 
 const SignUpForm: React.FC = () => {
@@ -47,9 +47,10 @@ const SignUpForm: React.FC = () => {
     });
 
     createUserWithEmailAndPassword(auth, emailValues, password)
-      .then(({ user }) => {
+      .then(async ({ user }) => {
         const { email, uid, accessToken } = user as unknown as UserFirebase;
         dispatchUser({ email, id: uid, token: accessToken });
+        await createFirestoreData(uid);
       })
       .catch((error) => {
         messageApi.open({
