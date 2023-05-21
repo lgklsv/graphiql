@@ -50,8 +50,7 @@ export const updateFirestoreData = async (
     const userSettingsRef = doc(db, 'settings', id);
     await updateDoc(userSettingsRef, data);
   } catch (error) {
-    console.error(error);
-    // TODO: throw error?
+    throw new Error('Firebase updating failed');
   }
 };
 
