@@ -44,7 +44,7 @@ export const getFirestoreData = async (uid: string) => {
 
 export const updateFirestoreData = async (
   id: string,
-  data: { [x: string]: string | number | string[] | Tab[] }
+  data: FirestoreUpdateKeys
 ) => {
   try {
     const userSettingsRef = doc(db, 'settings', id);
