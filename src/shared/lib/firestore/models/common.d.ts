@@ -13,3 +13,5 @@ interface IFirestoreData {
   tabs: string[] | Tab[];
   url: string;
 }
+
+type FirestoreUpdateKeys = { [x: string]: string | number | string[] | Tab[] };

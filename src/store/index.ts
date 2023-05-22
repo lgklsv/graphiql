@@ -12,6 +12,7 @@ import userReducer from './reducers/UserSlice';
 import tabsReducer from './reducers/TabSlice';
 import settingsReducer from './reducers/SettingsSlice';
 import apiUrlReducer from './reducers/ApiSlice';
+import firestoreReducer from './reducers/FirestoreSlice';
 
 const persistConfig = {
   key: 'graphiql',
@@ -23,6 +24,7 @@ const persistConfig = {
     'tabsReducer',
     'settingsReducer',
     'apiUrlReducer',
+    'firestoreReducer',
   ],
 };
 
@@ -31,6 +33,7 @@ const appReducer = combineReducers({
   tabsReducer,
   settingsReducer,
   apiUrlReducer,
+  firestoreReducer,
   [graphql.sandboxQueries.reducerPath]: graphql.sandboxQueries.reducer,
 });
 

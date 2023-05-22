@@ -2,23 +2,23 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Input, Space } from 'antd';
 import { ApiOutlined } from '@ant-design/icons';
-import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
+
 import { setApiUrl } from 'store/reducers/ApiSlice';
 import { updateTabs } from 'store/reducers/TabSlice';
-import { graphql } from 'shared/api';
 import { apiUrlSelector } from 'store/selectors/apiUrlSelector';
+import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
+import { graphql } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
 import { AppTooltip } from 'shared/ui';
-import { updateFirestoreData } from 'shared/lib/firestore/rest-firestore';
-import { useAuthState } from 'shared/hooks/use-auth';
 import { stringifyArray } from 'shared/lib/firestore/utils';
+import { useUpdateFirestore } from 'shared/lib/firestore/hook';
 import styles from './ApiConnector.module.scss';
 
 const ApiConnector: React.FC = () => {
   const { t } = useTranslation();
   const { tabs } = useTabs();
-  const { id } = useAuthState();
   const dispatch = useAppDispatch();
+  const updateFirestore = useUpdateFirestore();
   const currentUrl = useAppSelector(apiUrlSelector);
 
   const [inputValue, setInputValue] = React.useState(currentUrl);
@@ -38,7 +38,7 @@ const ApiConnector: React.FC = () => {
     }));
     dispatch(updateTabs(tabsWithClearResponse));
 
-    await updateFirestoreData(id as string, {
+    await updateFirestore({
       url: inputValue,
       tabs: stringifyArray(tabsWithClearResponse),
     });
@@ -49,9 +49,7 @@ const ApiConnector: React.FC = () => {
     setInputValue(e.target.value);
     if (!e.target.value) {
       dispatch(setApiUrl({ url: '' }));
-      await updateFirestoreData(id as string, {
-        url: '',
-      });
+      await updateFirestore({ url: '' });
       refetch();
     }
   };
