@@ -8,11 +8,18 @@ import { FirestoreIndicator } from 'features/firestore-indicator';
 import { QueryField } from 'entities/query';
 import { ResponseField } from 'entities/response';
 import { ErrorBoundary } from 'shared/hoc';
+import { SkeletonComponent } from 'shared/ui';
 import styles from './SandboxLayout.module.scss';
+
+interface SandboxLayoutProps {
+  isLoading: boolean;
+}
 
 const { useBreakpoint } = Grid;
 
-const SandboxLayout: React.FC = () => {
+const SandboxLayout: React.FC<SandboxLayoutProps> = ({
+  isLoading,
+}: SandboxLayoutProps) => {
   const screens = useBreakpoint();
   const isMobile = (screens.sm || screens.xs) && !screens.md;
 
@@ -24,9 +31,19 @@ const SandboxLayout: React.FC = () => {
       <div className={styles.layout__main}>
         <div className={styles.layout__main_tabs}>
           <ErrorBoundary type="notification">
-            <ApiConnector />
-            {!isMobile && <FirestoreIndicator />}
-            <SessionTabs />
+            <SkeletonComponent
+              isLoading={isLoading}
+              className={styles.skeleton}
+            >
+              <ApiConnector />
+              {!isMobile && <FirestoreIndicator />}
+            </SkeletonComponent>
+            <SkeletonComponent
+              isLoading={isLoading}
+              className={styles.skeleton_tabs}
+            >
+              <SessionTabs />
+            </SkeletonComponent>
           </ErrorBoundary>
         </div>
         <div className={styles.layout__field}>

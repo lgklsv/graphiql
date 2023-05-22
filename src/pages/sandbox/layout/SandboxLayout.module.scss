@@ -58,3 +58,22 @@
     width: calc(100vw - var(--sidebar-width) - 1rem - var(--docs-width));
   }
 }
+
+.skeleton {
+  width: var(--apiInput-width);
+  flex-shrink: 0;
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+
+  &_tabs {
+    background-color: transparent;
+    width: calc(100vw - var(--sidebar-width) - var(--apiInput-width) - 1.25rem);
+    height: var(--tabs-height);
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+  }
+}
