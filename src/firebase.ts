@@ -1,6 +1,12 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth, GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import {
+  getAuth,
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  signOut,
+} from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
+import { handleUserDataInStorage } from 'shared/lib/firebase/utils';
 
 const API_KEY = import.meta.env.VITE_FB_API_KEY;
 const DOMAIN = import.meta.env.VITE_FB_AUTH_DOMAIN;
@@ -25,4 +31,8 @@ const googleProvider = new GoogleAuthProvider();
 const gitProvider = new GithubAuthProvider();
 const db = getFirestore(app);
 
-export { auth, googleProvider, gitProvider, db };
+auth.onAuthStateChanged((user) => {
+  handleUserDataInStorage(user);
+});
+
+export { auth, googleProvider, gitProvider, db, signOut };

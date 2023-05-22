@@ -1,34 +1,16 @@
 import {
-  AnyAction,
   combineReducers,
   configureStore,
   PreloadedState,
 } from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage';
-import { persistReducer, persistStore } from 'redux-persist';
 import { graphql } from 'shared/api';
-import { tabsResponseTransform } from 'shared/lib/localStorage/local-storage';
 import userReducer from './reducers/UserSlice';
 import tabsReducer from './reducers/TabSlice';
 import settingsReducer from './reducers/SettingsSlice';
 import apiUrlReducer from './reducers/ApiSlice';
 import firestoreReducer from './reducers/FirestoreSlice';
 
-const persistConfig = {
-  key: 'graphiql',
-  storage,
-  throttle: 400,
-  transforms: [tabsResponseTransform],
-  blacklist: [
-    graphql.sandboxQueries.reducerPath,
-    'tabsReducer',
-    'settingsReducer',
-    'apiUrlReducer',
-    'firestoreReducer',
-  ],
-};
-
-const appReducer = combineReducers({
+const rootReducer = combineReducers({
   userReducer,
   tabsReducer,
   settingsReducer,
@@ -37,22 +19,9 @@ const appReducer = combineReducers({
   [graphql.sandboxQueries.reducerPath]: graphql.sandboxQueries.reducer,
 });
 
-const rootReducer = (
-  state: ReturnType<typeof appReducer> | undefined,
-  action: AnyAction
-) => {
-  if (action.type === 'user/removeUser') {
-    storage.removeItem('persist:graphiql');
-    return appReducer(undefined, action);
-  }
-  return appReducer(state, action);
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
-    reducer: persistedReducer,
+    reducer: rootReducer,
     preloadedState,
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
@@ -62,7 +31,6 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
 };
 
 export const store = setupStore();
-export const persistor = persistStore(store);
 
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppState = ReturnType<typeof setupStore>;
