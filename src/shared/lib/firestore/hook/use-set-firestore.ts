@@ -27,11 +27,12 @@ export const useDataFromFirestore = () => {
           })
         );
         dispatch(setApiUrl({ url }));
-        trigger('{}');
-        setLoading(false);
+        await trigger('{}');
       }
     } catch (error) {
-      console.error(error);
+      throw new Error('Error during login process');
+    } finally {
+      setLoading(false);
     }
   };
 
