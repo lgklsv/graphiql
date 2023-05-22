@@ -8,12 +8,14 @@ import userReducer from './reducers/UserSlice';
 import tabsReducer from './reducers/TabSlice';
 import settingsReducer from './reducers/SettingsSlice';
 import apiUrlReducer from './reducers/ApiSlice';
+import firestoreReducer from './reducers/FirestoreSlice';
 
 const rootReducer = combineReducers({
   userReducer,
   tabsReducer,
   settingsReducer,
   apiUrlReducer,
+  firestoreReducer,
   [graphql.sandboxQueries.reducerPath]: graphql.sandboxQueries.reducer,
 });
 
