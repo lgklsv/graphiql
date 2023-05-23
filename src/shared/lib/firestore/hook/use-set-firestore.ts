@@ -4,7 +4,7 @@ import { NumBoolean, updateSetStore } from 'store/reducers/SettingsSlice';
 import { updateTabStore } from 'store/reducers/TabSlice';
 import { graphql } from 'shared/api';
 import { setFirestoreUserDataLoading } from 'store/reducers/FirestoreSlice';
-import { firestoreSelector } from '../../../../store/selectors/firestoreSelector';
+import { firestoreSelector } from 'store/selectors/firestoreSelector';
 import { getFirestoreData } from '../rest-firestore';
 
 export const useDataFromFirestore = () => {
