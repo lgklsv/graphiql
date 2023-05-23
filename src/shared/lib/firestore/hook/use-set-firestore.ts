@@ -1,3 +1,4 @@
+import { MessageInstance } from 'antd/es/message/interface';
 import { useAppDispatch } from 'shared/hooks/redux';
 import { setApiUrl } from 'store/reducers/ApiSlice';
 import { NumBoolean, updateSetStore } from 'store/reducers/SettingsSlice';
@@ -11,7 +12,8 @@ export const useDataFromFirestore = () => {
 
   const firestoreData = async (
     uid: string,
-    setLoading: (load: boolean) => void
+    setLoading: (load: boolean) => void,
+    messageApi: MessageInstance
   ) => {
     try {
       setLoading(true);
@@ -30,8 +32,12 @@ export const useDataFromFirestore = () => {
         trigger('{}');
         setLoading(false);
       }
-    } catch (error) {
-      console.error(error);
+    } catch {
+      messageApi.open({
+        key: 'getFireData',
+        type: 'error',
+        content: 'Getting data from Firebase failed',
+      });
     }
   };
 

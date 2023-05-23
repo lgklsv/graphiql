@@ -37,7 +37,7 @@ export const getFirestoreData = async (uid: string) => {
     }
 
     return initValue;
-  } catch {
+  } catch (err) {
     throw new Error('Getting data from Firestore failed');
   }
 };
@@ -49,7 +49,7 @@ export const updateFirestoreData = async (
   try {
     const userSettingsRef = doc(db, 'settings', id);
     await updateDoc(userSettingsRef, data);
-  } catch (error) {
+  } catch (err) {
     throw new Error('Firebase updating failed');
   }
 };
@@ -57,7 +57,7 @@ export const updateFirestoreData = async (
 export const createFirestoreData = async (uid: string) => {
   try {
     await setDoc(doc(db, 'settings', uid), INIT_FIRESTORE);
-  } catch (error) {
-    console.error(error);
+  } catch (err) {
+    throw new Error('Creating Firebase docs failed');
   }
 };
