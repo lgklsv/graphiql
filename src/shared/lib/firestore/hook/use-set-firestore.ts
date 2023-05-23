@@ -32,12 +32,14 @@ export const useDataFromFirestore = () => {
         trigger('{}');
         setLoading(false);
       }
-    } catch {
-      messageApi.open({
-        key: 'getFireData',
-        type: 'error',
-        content: 'Getting data from Firebase failed',
-      });
+    } catch (err) {
+      if (err instanceof Error) {
+        messageApi.open({
+          key: 'getFireData',
+          type: 'error',
+          content: err.message,
+        });
+      }
     }
   };
 

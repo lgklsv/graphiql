@@ -8,6 +8,7 @@ import { auth } from 'firebase';
 import { ButtonForm } from 'shared/ui';
 import { useUser } from 'shared/hooks/use-user';
 import { useDataFromFirestore } from 'shared/lib/firestore/hook';
+import { convertFirestoreError } from 'shared/lib/firebase/utils/convertFirestoreError';
 import style from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
@@ -38,7 +39,7 @@ const LoginForm: React.FC = () => {
         messageApi.open({
           key: 'updatable',
           type: 'error',
-          content: error.message,
+          content: convertFirestoreError(error.message),
         });
       });
   };

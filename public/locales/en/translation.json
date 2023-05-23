@@ -225,6 +225,13 @@
     }
   },
   "loader": "Loading...",
+  "firestoreErrors": {
+    "getData": "Getting data from Firestore failed",
+    "updateData": "Firestore update failed",
+    "createData": "Creating Firestore docs failed",
+    "accountExists": "Account with this Email already exists",
+    "networkFailed": "Network request failed, check your Internet connection"
+  },
   "errorBoundary": {
     "errorTitle": "An error occurred",
     "defaultMsg": "Something went wrong",

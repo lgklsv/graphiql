@@ -225,6 +225,13 @@
     }
   },
   "loader": "Загрузка...",
+  "firestoreErrors": {
+    "getData": "Не удалось получить данные из Firestore ",
+    "updateData": "Не удалось обновить данные в Firestore",
+    "createData": "Произошла ошибка при создании записи в Firestore",
+    "accountExists": "Учетная запить с этим Email уже существует",
+    "networkFailed": "Не удалось сделать запрос, проверьте ваше Интернет соединение"
+  },
   "errorBoundary": {
     "errorTitle": "Произошла ошибка",
     "defaultMsg": "Что-то пошло не так",

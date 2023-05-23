@@ -17,15 +17,15 @@ type StatusTypes =
 
 const FirestoreIndicator: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const { isUpdating, isError } = useAppSelector(firestoreSelector);
+  const { isUpdating, error } = useAppSelector(firestoreSelector);
   let status: StatusTypes = 'success';
   let text = t('firebaseIndicator.success.text');
   let tooltipText = t('firebaseIndicator.success.tooltip');
 
-  if (isError) {
+  if (error) {
     status = 'error';
     text = t('firebaseIndicator.error.text');
-    tooltipText = t('firebaseIndicator.error.tooltip');
+    tooltipText = error;
   }
 
   if (isUpdating) {

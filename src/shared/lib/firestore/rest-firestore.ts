@@ -1,3 +1,4 @@
+import { t } from 'i18next';
 import {
   collection,
   getDocs,
@@ -37,8 +38,8 @@ export const getFirestoreData = async (uid: string) => {
     }
 
     return initValue;
-  } catch (err) {
-    throw new Error('Getting data from Firestore failed');
+  } catch {
+    throw new Error(`${t('firestoreErrors.getData')}`);
   }
 };
 
@@ -49,15 +50,15 @@ export const updateFirestoreData = async (
   try {
     const userSettingsRef = doc(db, 'settings', id);
     await updateDoc(userSettingsRef, data);
-  } catch (err) {
-    throw new Error('Firebase updating failed');
+  } catch {
+    throw new Error(`${t('firestoreErrors.updateData')}`);
   }
 };
 
 export const createFirestoreData = async (uid: string) => {
   try {
     await setDoc(doc(db, 'settings', uid), INIT_FIRESTORE);
-  } catch (err) {
-    throw new Error('Creating Firebase docs failed');
+  } catch {
+    throw new Error(`${t('firestoreErrors.createData')}`);
   }
 };

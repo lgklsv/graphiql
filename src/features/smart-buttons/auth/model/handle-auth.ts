@@ -6,6 +6,7 @@ import {
   signInWithPopup,
 } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
+import { convertFirestoreError } from 'shared/lib/firebase/utils/convertFirestoreError';
 import {
   createFirestoreData,
   getFirestoreData,
@@ -39,7 +40,7 @@ export const authProvider = async ({
       messageApi.open({
         key: 'updatable',
         type: 'error',
-        content: error.message,
+        content: convertFirestoreError(error.message),
       });
     });
 };

@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type FirestoreState = {
   isUpdating: boolean;
-  isError: boolean;
+  error: string | null;
 };
 
 const initialState: FirestoreState = {
   isUpdating: false,
-  isError: false,
+  error: null,
 };
 
 const FirestoreSlice = createSlice({
@@ -16,7 +16,7 @@ const FirestoreSlice = createSlice({
   reducers: {
     setFirestoreState(state, action: PayloadAction<FirestoreState>) {
       state.isUpdating = action.payload.isUpdating;
-      state.isError = action.payload.isError;
+      state.error = action.payload.error;
     },
   },
 });
