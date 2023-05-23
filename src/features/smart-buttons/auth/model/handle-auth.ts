@@ -10,6 +10,7 @@ import {
   createFirestoreData,
   getFirestoreData,
 } from 'shared/lib/firestore/rest-firestore';
+import { checkEntryDatabase } from 'shared/lib/firestore/utils';
 
 interface IHandleAuth {
   provider: GoogleAuthProvider | GithubAuthProvider;
@@ -27,13 +28,15 @@ export const authProvider = async ({
       const { email, uid, accessToken } = user as unknown as UserFirebase;
       dispatchFn({ email, id: uid, token: accessToken });
 
-      const isHaveData = doc(db, 'settings', uid);
-      const docSnap = await getDoc(isHaveData);
-      if (docSnap.exists()) {
-        await getFirestoreData(uid);
-      } else {
-        await createFirestoreData(uid);
-      }
+      await checkEntryDatabase(uid);
+
+      // const isHaveData = doc(db, 'settings', uid);
+      // const docSnap = await getDoc(isHaveData);
+      // if (docSnap.exists()) {
+      //   await getFirestoreData(uid);
+      // } else {
+      //   await createFirestoreData(uid);
+      // }
     })
     .catch((error) => {
       messageApi.open({
