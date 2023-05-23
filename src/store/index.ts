@@ -4,7 +4,9 @@ import {
   createListenerMiddleware,
   PreloadedState,
 } from '@reduxjs/toolkit';
+
 import { graphql } from 'shared/api';
+import { stringifyArray } from 'shared/lib/firestore/utils';
 import userReducer from './reducers/UserSlice';
 import tabsReducer from './reducers/TabSlice';
 import settingsReducer from './reducers/SettingsSlice';
@@ -21,8 +23,12 @@ listenerMiddleware.startListening({
     // Run whatever additional side-effect-y logic you want here
     console.log('update');
 
-    const state = listenerApi.getOriginalState();
-    console.log(state);
+    const state = listenerApi.getOriginalState() as RootState;
+    const { tabs, activeKey } = state.tabsReducer;
+
+    const stringifiedTabsArr = stringifyArray(tabs);
+    const dataToSend = { activeKey, tabs: stringifiedTabsArr };
+    console.log(dataToSend);
 
     // Can cancel other running instances
     listenerApi.cancelActiveListeners();

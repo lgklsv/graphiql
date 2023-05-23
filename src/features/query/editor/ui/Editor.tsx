@@ -43,11 +43,13 @@ const Editor: React.FC = () => {
     //     ? regex.exec(queryString)![0]
     //     : `${t('sandbox.newTab')}`,
     // });
+    console.log('editor queryString', queryString);
     // /////////
     dispatch(updateTabContent({ activeTabKey, query: { data: queryString } }));
     // const regex = /(?<=query | mutation )\w+/;
     if (regex.exec(queryString)) {
       const newTitle = regex.exec(queryString)![0];
+      console.log('editor newTitle', newTitle);
       dispatch(updateTabLabel({ activeTabKey, label: newTitle }));
     } else {
       dispatch(
