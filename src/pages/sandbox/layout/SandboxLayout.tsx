@@ -1,6 +1,8 @@
 import React from 'react';
 import { Grid } from 'antd';
 
+import { useAppSelector } from 'shared/hooks/redux';
+import { firestoreSelector } from 'store/selectors/firestoreSelector';
 import { Sidebar } from 'widgets/sidebar';
 import { SessionTabs } from 'features/tabs';
 import { ApiConnector } from 'features/api-connector';
@@ -11,15 +13,11 @@ import { ErrorBoundary } from 'shared/hoc';
 import { SkeletonApiConnector, SkeletonTabs } from './Skeleton';
 import styles from './SandboxLayout.module.scss';
 
-interface SandboxLayoutProps {
-  isLoading: boolean;
-}
-
 const { useBreakpoint } = Grid;
 
-const SandboxLayout: React.FC<SandboxLayoutProps> = ({
-  isLoading,
-}: SandboxLayoutProps) => {
+const SandboxLayout: React.FC = () => {
+  const { userDataLoading } = useAppSelector(firestoreSelector);
+
   const screens = useBreakpoint();
   const isMobile = (screens.sm || screens.xs) && !screens.md;
 
@@ -31,9 +29,9 @@ const SandboxLayout: React.FC<SandboxLayoutProps> = ({
       <div className={styles.layout__main}>
         <div className={styles.layout__main_tabs}>
           <ErrorBoundary type="notification">
-            {isLoading ? <SkeletonApiConnector /> : <ApiConnector />}
-            {!isMobile && !isLoading && <FirestoreIndicator />}
-            {isLoading ? <SkeletonTabs /> : <SessionTabs />}
+            {userDataLoading ? <SkeletonApiConnector /> : <ApiConnector />}
+            {!isMobile && !userDataLoading && <FirestoreIndicator />}
+            {userDataLoading ? <SkeletonTabs /> : <SessionTabs />}
           </ErrorBoundary>
         </div>
         <div className={styles.layout__field}>

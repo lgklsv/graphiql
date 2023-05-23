@@ -13,8 +13,6 @@ const LoginForm: React.FC = () => {
   const { t } = useTranslation();
   const dispatchUser = useUser();
   const dispachFirestoreData = useDataFromFirestore();
-  const [isLoading, setLoading] = React.useState(false);
-  // TODO: check state loading data from firestore
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -32,7 +30,7 @@ const LoginForm: React.FC = () => {
         const { email, uid, accessToken } = user as unknown as UserFirebase;
 
         dispatchUser({ email, id: uid, token: accessToken });
-        await dispachFirestoreData(uid, setLoading);
+        await dispachFirestoreData(uid);
       })
 
       .catch((error) => {

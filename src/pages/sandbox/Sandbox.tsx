@@ -11,10 +11,9 @@ const Sandbox: React.FC = () => {
   const { t } = useTranslation();
   const firestoreDispatch = useDataFromFirestore();
   const { id } = useAuthState();
-  const [isLoading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    firestoreDispatch(id as string, setLoading);
+    firestoreDispatch(id as string);
   }, [id]);
 
   return (
@@ -28,7 +27,7 @@ const Sandbox: React.FC = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
-          <SandboxLayout isLoading={isLoading} />
+          <SandboxLayout />
         </motion.div>
       </ErrorBoundary>
     </>
