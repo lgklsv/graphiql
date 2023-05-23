@@ -30,7 +30,7 @@ const SandboxLayout: React.FC = () => {
         <div className={styles.layout__main_tabs}>
           <ErrorBoundary type="notification">
             {userDataLoading ? <SkeletonApiConnector /> : <ApiConnector />}
-            {!isMobile && !userDataLoading && <FirestoreIndicator />}
+            {!isMobile && <FirestoreIndicator />}
             {userDataLoading ? <SkeletonTabs /> : <SessionTabs />}
           </ErrorBoundary>
         </div>
