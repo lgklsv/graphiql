@@ -23,11 +23,16 @@ const FirestoreSlice = createSlice({
     setFirestoreUserDataLoading(state, action: PayloadAction<FirestoreState>) {
       state.userDataLoading = action.payload.userDataLoading;
     },
+    triggerFirestoreUpdate() {},
   },
 });
 
 const { actions, reducer } = FirestoreSlice;
 
-export const { setFirestoreState, setFirestoreUserDataLoading } = actions;
+export const {
+  setFirestoreState,
+  setFirestoreUserDataLoading,
+  triggerFirestoreUpdate,
+} = actions;
 
 export default reducer;

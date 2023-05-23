@@ -14,12 +14,12 @@ export const useUpdateTabs = () => {
     }
 
     const { newActiveKey, updateTabs, stringifyTabs } = updateTabsData;
-    dispatch(
-      updateTabStore({
-        activeKey: newActiveKey,
-        tabs: updateTabs,
-      })
-    );
+    // dispatch(
+    //   updateTabStore({
+    //     activeKey: newActiveKey,
+    //     tabs: updateTabs,
+    //   })
+    // );
     return {
       activeKey: newActiveKey,
       tabs: stringifyTabs,

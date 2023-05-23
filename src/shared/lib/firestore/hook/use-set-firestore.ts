@@ -1,13 +1,14 @@
 import { MessageInstance } from 'antd/es/message/interface';
-import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from 'firebase';
+
 import { setApiUrl } from 'store/reducers/ApiSlice';
 import { NumBoolean, updateSetStore } from 'store/reducers/SettingsSlice';
-import { updateTabStore } from 'store/reducers/TabSlice';
-import { graphql } from 'shared/api';
-import { db } from 'firebase';
-import { doc, getDoc } from 'firebase/firestore';
 import { setFirestoreUserDataLoading } from 'store/reducers/FirestoreSlice';
 import { firestoreSelector } from 'store/selectors/firestoreSelector';
+import { updateTabStore } from 'store/reducers/TabSlice';
+import { graphql } from 'shared/api';
+import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { createFirestoreData, getFirestoreData } from '../rest-firestore';
 
 export const useDataFromFirestore = () => {

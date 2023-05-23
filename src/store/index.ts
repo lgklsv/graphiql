@@ -1,6 +1,7 @@
 import {
   combineReducers,
   configureStore,
+  createListenerMiddleware,
   PreloadedState,
 } from '@reduxjs/toolkit';
 import { graphql } from 'shared/api';
@@ -8,7 +9,28 @@ import userReducer from './reducers/UserSlice';
 import tabsReducer from './reducers/TabSlice';
 import settingsReducer from './reducers/SettingsSlice';
 import apiUrlReducer from './reducers/ApiSlice';
-import firestoreReducer from './reducers/FirestoreSlice';
+import firestoreReducer, {
+  triggerFirestoreUpdate,
+} from './reducers/FirestoreSlice';
+
+const listenerMiddleware = createListenerMiddleware();
+
+listenerMiddleware.startListening({
+  actionCreator: triggerFirestoreUpdate,
+  effect: async (action, listenerApi) => {
+    // Run whatever additional side-effect-y logic you want here
+    console.log('update');
+
+    const state = listenerApi.getOriginalState();
+    console.log(state);
+
+    // Can cancel other running instances
+    listenerApi.cancelActiveListeners();
+
+    // Run async logic
+    // const data = await fetchData();
+  },
+});
 
 const rootReducer = combineReducers({
   userReducer,
@@ -26,7 +48,9 @@ export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware({
         serializableCheck: false,
-      }).concat(graphql.sandboxQueries.middleware),
+      })
+        .concat(graphql.sandboxQueries.middleware)
+        .prepend(listenerMiddleware.middleware),
   });
 };
 
