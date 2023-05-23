@@ -8,7 +8,7 @@ import { FirestoreIndicator } from 'features/firestore-indicator';
 import { QueryField } from 'entities/query';
 import { ResponseField } from 'entities/response';
 import { ErrorBoundary } from 'shared/hoc';
-import { SkeletonComponent } from 'shared/ui';
+import { SkeletonApiConnector, SkeletonTabs } from './Skeleton';
 import styles from './SandboxLayout.module.scss';
 
 interface SandboxLayoutProps {
@@ -31,19 +31,9 @@ const SandboxLayout: React.FC<SandboxLayoutProps> = ({
       <div className={styles.layout__main}>
         <div className={styles.layout__main_tabs}>
           <ErrorBoundary type="notification">
-            <SkeletonComponent
-              isLoading={isLoading}
-              className={styles.skeleton}
-            >
-              <ApiConnector />
-              {!isMobile && <FirestoreIndicator />}
-            </SkeletonComponent>
-            <SkeletonComponent
-              isLoading={isLoading}
-              className={styles.skeleton_tabs}
-            >
-              <SessionTabs />
-            </SkeletonComponent>
+            {isLoading ? <SkeletonApiConnector /> : <ApiConnector />}
+            {!isMobile && !isLoading && <FirestoreIndicator />}
+            {isLoading ? <SkeletonTabs /> : <SessionTabs />}
           </ErrorBoundary>
         </div>
         <div className={styles.layout__field}>

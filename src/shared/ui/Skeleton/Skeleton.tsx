@@ -2,25 +2,20 @@ import React from 'react';
 import { Skeleton } from 'antd';
 
 interface SkeletonProps {
-  isLoading: boolean;
-  children: React.ReactNode;
-  className: string;
+  styleTitleProps: { [key: string]: string | number };
+  style?: { [key: string]: string | number };
 }
 const SkeletonComponent: React.FC<SkeletonProps> = ({
-  isLoading,
-  children,
-  className,
+  styleTitleProps,
+  style,
 }: SkeletonProps) => {
   return (
     <Skeleton
-      loading={isLoading}
       active
-      title={{ style: { height: 32, opacity: 0.2 } }}
+      title={{ style: styleTitleProps }}
       paragraph={false}
-      className={className}
-    >
-      {children}
-    </Skeleton>
+      style={style}
+    />
   );
 };
 
