@@ -92,3 +92,22 @@ button.ant-btn-primary {
   border: none;
   background-clip: content-box;
 }
+
+.ant-drawer-body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-secondary) transparent;
+
+  &::-webkit-scrollbar {
+    width: 20px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--bg-secondary);
+    border-radius: 20px;
+    border: 7px solid transparent;
+    background-clip: content-box;
+    transition: all 0.15s ease-in-out;
+  }
+}
