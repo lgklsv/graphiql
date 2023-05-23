@@ -230,7 +230,9 @@
     "updateData": "Firestore update failed",
     "createData": "Creating Firestore docs failed",
     "accountExists": "Account with this Email already exists",
-    "networkFailed": "Network request failed, check your Internet connection"
+    "networkFailed": "Network request failed, check your Internet connection",
+    "wrongPassword": "Wrong password, try again",
+    "noUser": "User not found, sign up first or use different account"
   },
   "errorBoundary": {
     "errorTitle": "An error occurred",
