@@ -11,13 +11,10 @@ const Sandbox: React.FC = () => {
   const { t } = useTranslation();
   const firestoreDispatch = useDataFromFirestore();
   const { id } = useAuthState();
-  const [isLoading, setLoading] = React.useState(false);
-  // TODO: check state loading data from firestore
 
   React.useEffect(() => {
-    firestoreDispatch(id as string, setLoading);
-  }, []);
-  // TODO: add loader on respons firestore, delay in updating url and tabs
+    firestoreDispatch(id as string);
+  }, [id]);
 
   return (
     <>
