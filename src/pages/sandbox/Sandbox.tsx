@@ -15,7 +15,7 @@ const Sandbox: React.FC = () => {
   // TODO: check state loading data from firestore
 
   React.useEffect(() => {
-    firestoreDispatch(id as string, setLoading);
+    firestoreDispatch(id as string);
   }, []);
   // TODO: add loader on respons firestore, delay in updating url and tabs
 

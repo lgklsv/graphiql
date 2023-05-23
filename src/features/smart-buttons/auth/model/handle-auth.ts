@@ -5,38 +5,28 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
-import {
-  createFirestoreData,
-  getFirestoreData,
-} from 'shared/lib/firestore/rest-firestore';
-import { checkEntryDatabase } from 'shared/lib/firestore/utils';
 
 interface IHandleAuth {
   provider: GoogleAuthProvider | GithubAuthProvider;
   dispatchFn: UseUser;
   messageApi: MessageInstance;
+  firestoreFn: (
+    uid: string,
+    setLoading?: (load: boolean) => void
+  ) => Promise<void>;
 }
 
 export const authProvider = async ({
   provider,
   dispatchFn,
   messageApi,
+  firestoreFn,
 }: IHandleAuth) => {
   signInWithPopup(auth, provider)
     .then(async ({ user }) => {
       const { email, uid, accessToken } = user as unknown as UserFirebase;
       dispatchFn({ email, id: uid, token: accessToken });
-
-      await checkEntryDatabase(uid);
-
-      // const isHaveData = doc(db, 'settings', uid);
-      // const docSnap = await getDoc(isHaveData);
-      // if (docSnap.exists()) {
-      //   await getFirestoreData(uid);
-      // } else {
-      //   await createFirestoreData(uid);
-      // }
+      await firestoreFn(uid);
     })
     .catch((error) => {
       messageApi.open({
