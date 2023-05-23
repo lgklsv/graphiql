@@ -222,6 +222,10 @@
     "error": {
       "text": "Error",
       "tooltip": "Firestore update failed"
+    },
+    "userDataLoading": {
+      "text": "Loading...",
+      "tooltip": "Syncing data with Firestore"
     }
   },
   "loader": "Loading...",

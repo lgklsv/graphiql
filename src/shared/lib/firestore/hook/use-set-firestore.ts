@@ -1,4 +1,4 @@
-import { useAppDispatch } from 'shared/hooks/redux';
+import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { setApiUrl } from 'store/reducers/ApiSlice';
 import { NumBoolean, updateSetStore } from 'store/reducers/SettingsSlice';
 import { updateTabStore } from 'store/reducers/TabSlice';
@@ -6,10 +6,14 @@ import { graphql } from 'shared/api';
 import { db } from 'firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { createFirestoreData, getFirestoreData } from '../rest-firestore';
+import { setFirestoreUserDataLoading } from 'store/reducers/FirestoreSlice';
+import { firestoreSelector } from 'store/selectors/firestoreSelector';
+
 
 export const useDataFromFirestore = () => {
   const dispatch = useAppDispatch();
   const [trigger] = graphql.useLazyGetSchemaQuery();
+  const { isUpdating, isError } = useAppSelector(firestoreSelector);
 
   const firestoreData = async (uid: string) => {
     try {
@@ -24,6 +28,14 @@ export const useDataFromFirestore = () => {
       }
 
       //  if there is - take the data from there
+      dispatch(
+        setFirestoreUserDataLoading({
+          isUpdating,
+          isError,
+          userDataLoading: true,
+        })
+      );
+
       const userSettings = await getFirestoreData(uid);
 
       if (userSettings) {
@@ -36,10 +48,19 @@ export const useDataFromFirestore = () => {
           })
         );
         dispatch(setApiUrl({ url }));
-        trigger('{}');
+        await trigger('{}');
+
       }
     } catch (error) {
-      console.error(error);
+      throw new Error('Error during login process');
+    } finally {
+      dispatch(
+        setFirestoreUserDataLoading({
+          isUpdating,
+          isError,
+          userDataLoading: false,
+        })
+      );
     }
   };
 

@@ -13,7 +13,6 @@ const LoginForm: React.FC = () => {
   const { t } = useTranslation();
   const dispatchUser = useUser();
   const dispachFirestoreData = useDataFromFirestore();
-  // TODO: check state loading data from firestore
 
   const [messageApi, contextHolder] = message.useMessage();
 

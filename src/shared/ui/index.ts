@@ -5,3 +5,4 @@ export { default as Spinner } from './Spinner/Spinner';
 export { default as AppTooltip } from './AppTooltip/AppTooltip';
 export { default as ErrorNotification } from './ErrorFallback/ErrorNotification';
 export { default as ErrorPageNotification } from './ErrorFallback/ErrorPageNotification';
+export { default as SkeletonComponent } from './Skeleton/Skeleton';
