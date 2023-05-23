@@ -222,6 +222,10 @@
     "error": {
       "text": "Ошибка",
       "tooltip": "Не получилось обновить Firestore"
+    },
+    "userDataLoading": {
+      "text": "Загрузка...",
+      "tooltip": "Синхронизируем данные с Firestore"
     }
   },
   "loader": "Загрузка...",

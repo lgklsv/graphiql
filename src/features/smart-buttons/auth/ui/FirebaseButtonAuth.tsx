@@ -2,6 +2,7 @@ import { Button, message } from 'antd';
 import { GoogleAuthProvider } from 'firebase/auth';
 
 import { useUser } from 'shared/hooks/use-user';
+import { useDataFromFirestore } from 'shared/lib/firestore/hook';
 import { authProvider } from '../model/handle-auth';
 
 interface IProviderButton {
@@ -18,6 +19,7 @@ const FirebaseAuthButton: React.FC<IProviderButton> = ({
   className,
 }) => {
   const dispatchUser = useUser();
+  const dispatchFirestoreData = useDataFromFirestore();
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -26,6 +28,7 @@ const FirebaseAuthButton: React.FC<IProviderButton> = ({
       provider,
       dispatchFn: dispatchUser,
       messageApi,
+      firestoreFn: dispatchFirestoreData,
     });
   };
 

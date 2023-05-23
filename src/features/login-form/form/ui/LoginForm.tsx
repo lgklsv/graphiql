@@ -16,8 +16,6 @@ const LoginForm: React.FC = () => {
   const dispatchUser = useUser();
   const dispatchFirestoreData = useDataFromFirestore();
   const [messageApi, contextHolder] = message.useMessage();
-  const [isLoading, setLoading] = React.useState(false);
-  // TODO: check state loading data from firestore
 
   const onFinish = (values: ILoginData) => {
     messageApi.open({
@@ -33,7 +31,7 @@ const LoginForm: React.FC = () => {
         const { email, uid, accessToken } = user as unknown as UserFirebase;
 
         dispatchUser({ email, id: uid, token: accessToken });
-        await dispatchFirestoreData(uid, setLoading, messageApi);
+        await dispatchFirestoreData(uid, messageApi);
       })
       .catch((error) => {
         messageApi.open({

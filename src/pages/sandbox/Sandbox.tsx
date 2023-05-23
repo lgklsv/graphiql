@@ -14,13 +14,10 @@ const Sandbox: React.FC = () => {
   const firestoreDispatch = useDataFromFirestore();
   const [messageApi, contextHolder] = message.useMessage();
   const { id } = useAuthState();
-  const [isLoading, setLoading] = React.useState(false);
-  // TODO: check state loading data from firestore
 
   React.useEffect(() => {
-    firestoreDispatch(id as string, setLoading, messageApi);
-  }, []);
-  // TODO: add loader on respons firestore, delay in updating url and tabs
+    firestoreDispatch(id as string, messageApi);
+  }, [id, messageApi]);
 
   return (
     <>

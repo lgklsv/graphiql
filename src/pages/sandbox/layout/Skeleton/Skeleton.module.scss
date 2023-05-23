@@ -1,0 +1,10 @@
+.skeleton {
+  &_api {
+    width: var(--apiInput-width);
+    flex-shrink: 0;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+  }
+}
