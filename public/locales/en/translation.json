@@ -151,7 +151,7 @@
       "sectionTitleAll": "All Schema Types"
     },
     "search": {
-      "placeholder": "Search  Shift + ⌘ + K",
+      "placeholder": "Search (Shift + ⌘ + K)",
       "notFound": "No results found"
     }
   },
