@@ -9,7 +9,6 @@ import { triggerFirestoreUpdate } from 'store/reducers/FirestoreSlice';
 import { graphql } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';
-import { useUpdateFirestore, useUpdateTabs } from 'shared/lib/firestore/hook';
 import { utils } from 'shared/lib';
 import { ErrorNotification, Spinner } from 'shared/ui';
 import { isFetchError } from 'shared/lib/type-checkers';
@@ -19,9 +18,7 @@ import './Editor.scss';
 const Editor: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const updateTabsForFirebase = useUpdateTabs();
-  const updateFirestore = useUpdateFirestore();
-  const { activeTabKey, tabQuery, tabs } = useTabs();
+  const { activeTabKey, tabQuery } = useTabs();
   const viewRef = React.useRef<EditorView | null>(null);
   const { data, error, refetch, isError, isFetching } =
     graphql.useGetSchemaQuery('{}');
@@ -32,37 +29,19 @@ const Editor: React.FC = () => {
     }
   }, [data, viewRef]);
 
-  // TODO: change time debounce
   const onChange = utils.debounce(async (queryString: string) => {
     const regex = /(?<=query | mutation )\w+/;
-    // const updatedData = updateTabsForFirebase({
-    //   tabs,
-    //   activeTabKey,
-    //   query: { data: queryString },
-    //   label: regex.exec(queryString)
-    //     ? regex.exec(queryString)![0]
-    //     : `${t('sandbox.newTab')}`,
-    // });
-    console.log('editor queryString', queryString);
-    // /////////
     dispatch(updateTabContent({ activeTabKey, query: { data: queryString } }));
-    // const regex = /(?<=query | mutation )\w+/;
     if (regex.exec(queryString)) {
       const newTitle = regex.exec(queryString)![0];
-      console.log('editor newTitle', newTitle);
       dispatch(updateTabLabel({ activeTabKey, label: newTitle }));
     } else {
       dispatch(
         updateTabLabel({ activeTabKey, label: `${t('sandbox.newTab')}` })
       );
     }
-    // /////////
     dispatch(triggerFirestoreUpdate());
-    // console.log(updatedData);
-    // if (updatedData) {
-    //   updateFirestore(updatedData);
-    // }
-  }, 1000);
+  });
 
   if (isFetching) {
     return (

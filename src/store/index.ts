@@ -7,11 +7,13 @@ import {
 
 import { graphql } from 'shared/api';
 import { stringifyArray } from 'shared/lib/firestore/utils';
+import { updateFirestoreData } from 'shared/lib/firestore/rest-firestore';
 import userReducer from './reducers/UserSlice';
 import tabsReducer from './reducers/TabSlice';
 import settingsReducer from './reducers/SettingsSlice';
 import apiUrlReducer from './reducers/ApiSlice';
 import firestoreReducer, {
+  setFirestoreState,
   triggerFirestoreUpdate,
 } from './reducers/FirestoreSlice';
 
@@ -25,16 +27,30 @@ listenerMiddleware.startListening({
 
     const state = listenerApi.getOriginalState() as RootState;
     const { tabs, activeKey } = state.tabsReducer;
+    const { id } = state.userReducer;
 
     const stringifiedTabsArr = stringifyArray(tabs);
     const dataToSend = { activeKey, tabs: stringifiedTabsArr };
     console.log(dataToSend);
 
+    try {
+      //   listenerApi.dispatch(
+      //     setFirestoreState({ isUpdating: true, error: null })
+      //   );
+      await updateFirestoreData(id as string, dataToSend);
+      //   listenerApi.dispatch(
+      //     setFirestoreState({ isUpdating: false, error: null })
+      //   );
+    } catch (err) {
+      //   if (err instanceof Error) {
+      //     listenerApi.dispatch(
+      //       setFirestoreState({ isUpdating: false, error: err.message })
+      //     );
+      //   }
+    }
+
     // Can cancel other running instances
     listenerApi.cancelActiveListeners();
-
-    // Run async logic
-    // const data = await fetchData();
   },
 });
 
