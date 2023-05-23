@@ -8,15 +8,16 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { SHORTCUTS } from 'app/config';
 import { useTabs } from 'shared/hooks/use-tab';
 import { AppTooltip } from 'shared/ui';
-import { useUpdateFirestore, useUpdateTabs } from 'shared/lib/firestore/hook';
+import { useAppDispatch } from 'shared/hooks/redux';
+import { updateTabContent } from 'store/reducers/TabSlice';
+import { triggerFirestoreUpdate } from 'store/reducers/FirestoreSlice';
 
 const PrettifyButton: React.FC = () => {
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const [isPrettified, setIsPrettified] = React.useState(false);
   const [isError, setIsError] = React.useState(false);
-  const { activeTabKey, tabQuery, tabs } = useTabs();
-  const updateTabsForFirebase = useUpdateTabs();
-  const updateFirestore = useUpdateFirestore();
+  const { activeTabKey, tabQuery } = useTabs();
 
   React.useEffect(() => {
     let timer: NodeJS.Timeout;
@@ -37,16 +38,12 @@ const PrettifyButton: React.FC = () => {
       try {
         const prettifiedQuery = print(parse(tabQuery.data));
 
-        const updatedData = updateTabsForFirebase({
-          tabs,
-          activeTabKey,
-          query: { data: prettifiedQuery },
-        });
-        setIsPrettified(true);
+        dispatch(
+          updateTabContent({ activeTabKey, query: { data: prettifiedQuery } })
+        );
 
-        if (updatedData) {
-          await updateFirestore(updatedData);
-        }
+        dispatch(triggerFirestoreUpdate());
+        setIsPrettified(true);
       } catch (err) {
         // Parsing error, skip formatting
         setIsError(true);
@@ -61,15 +58,14 @@ const PrettifyButton: React.FC = () => {
           2
         );
 
-        const updatedData = updateTabsForFirebase({
-          tabs,
-          activeTabKey,
-          query: { variables: prettifiedVariables },
-        });
+        dispatch(
+          updateTabContent({
+            activeTabKey,
+            query: { variables: prettifiedVariables },
+          })
+        );
 
-        if (updatedData) {
-          await updateFirestore(updatedData);
-        }
+        dispatch(triggerFirestoreUpdate());
       } catch (err) {
         // Parsing error, skip formatting
       }
@@ -83,15 +79,14 @@ const PrettifyButton: React.FC = () => {
           2
         );
 
-        const updatedData = updateTabsForFirebase({
-          tabs,
-          activeTabKey,
-          query: { headers: prettifiedHeaders },
-        });
+        dispatch(
+          updateTabContent({
+            activeTabKey,
+            query: { headers: prettifiedHeaders },
+          })
+        );
 
-        if (updatedData) {
-          await updateFirestore(updatedData);
-        }
+        dispatch(triggerFirestoreUpdate());
       } catch (err) {
         // Parsing error, skip formatting
       }
