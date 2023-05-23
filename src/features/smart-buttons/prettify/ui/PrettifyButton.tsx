@@ -86,7 +86,7 @@ const PrettifyButton: React.FC = () => {
         const updatedData = updateTabsForFirebase({
           tabs,
           activeTabKey,
-          query: { data: prettifiedHeaders },
+          query: { headers: prettifiedHeaders },
         });
 
         if (updatedData) {
