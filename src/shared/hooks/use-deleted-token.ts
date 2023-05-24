@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from 'pages/config';
 import { LOCAL_STORAGE_KEYS } from 'shared/lib/localStorage/constants';
+import { auth, signOut } from 'firebase';
 
 export const useDeletedToken = () => {
   const navigate = useNavigate();
@@ -9,8 +10,9 @@ export const useDeletedToken = () => {
   React.useEffect(() => {
     const deletedTokenHandler = () => {
       if (!window.localStorage.getItem(LOCAL_STORAGE_KEYS.USER)) {
-        navigate(ROUTES.home, { replace: true });
-        window.location.reload();
+        signOut(auth)
+          .catch(() => {})
+          .finally(() => navigate(ROUTES.home, { replace: true }));
       }
     };
 
