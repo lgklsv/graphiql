@@ -13,6 +13,7 @@
   align-items: start;
 
   &__editor {
+    width: 100%;
     height: calc(var(--ide-height) - 1rem);
     overflow: auto;
   }
