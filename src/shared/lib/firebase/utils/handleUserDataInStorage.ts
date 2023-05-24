@@ -4,6 +4,8 @@ import {
   removeLocalStorage,
   setLocalStorage,
 } from 'shared/lib/localStorage/local-storage';
+import { store } from 'store';
+import { removeUser } from 'store/reducers/UserSlice';
 
 type AuthUserData = {
   email: null | string;
@@ -21,6 +23,7 @@ const handleUserDataInStorage = (user: User | null) => {
     };
     setLocalStorage(userData, LOCAL_STORAGE_KEYS.USER);
   } else {
+    store.dispatch(removeUser());
     removeLocalStorage(LOCAL_STORAGE_KEYS.USER);
   }
 };

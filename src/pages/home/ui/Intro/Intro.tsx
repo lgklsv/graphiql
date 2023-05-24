@@ -5,6 +5,7 @@ import { RightOutlined } from '@ant-design/icons';
 import { useTranslation, Trans } from 'react-i18next';
 import { motion } from 'framer-motion';
 
+import { useAuthState } from 'shared/hooks/use-auth';
 import { ROUTES } from 'pages/config';
 import styles from './Intro.module.scss';
 
@@ -14,6 +15,7 @@ const Intro: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const screens = useBreakpoint();
+  const { isAuth } = useAuthState();
 
   return (
     <section className={styles.intro}>
@@ -41,7 +43,9 @@ const Intro: React.FC = () => {
           <Button
             style={{ borderColor: 'white', scale: '1.1' }}
             size={screens.xs ? 'middle' : 'large'}
-            onClick={() => navigate(ROUTES.sandbox)}
+            onClick={() =>
+              isAuth ? navigate(ROUTES.sandbox) : navigate(ROUTES.login)
+            }
           >
             {t('button.start')}
             <RightOutlined />
