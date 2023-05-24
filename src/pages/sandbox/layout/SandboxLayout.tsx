@@ -23,9 +23,7 @@ const SandboxLayout: React.FC = () => {
 
   return (
     <section className={styles.layout}>
-      <ErrorBoundary type="notification">
-        <Sidebar />
-      </ErrorBoundary>
+      <Sidebar />
       <div className={styles.layout__main}>
         <div className={styles.layout__main_tabs}>
           <ErrorBoundary type="notification">

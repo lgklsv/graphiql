@@ -14,6 +14,7 @@ import { SettingsModal, ShortcutsModal } from 'entities/modals';
 import { AppTooltip, Spinner } from 'shared/ui';
 import { graphql } from 'shared/api';
 import { FirestoreIndicator } from 'features/firestore-indicator';
+import { ErrorBoundary } from 'shared/hoc';
 import styles from './Sidebar.module.scss';
 
 const DocsExplorer = lazy(() => import('entities/docs'));
@@ -54,61 +55,68 @@ const Sidebar: React.FC = () => {
   return (
     <>
       <aside className={styles.sidebar}>
-        <AppTooltip title={t('sandbox.tooltips.docsClose')}>
-          <Button
-            onClick={toggleDocs}
-            type={isFetching ? 'ghost' : 'text'}
-            disabled={isFetching || isError}
-            loading={isFetching}
-            size="large"
-            icon={<BookOutlined />}
-          />
-        </AppTooltip>
-        <Space direction={isMobile ? 'horizontal' : 'vertical'}>
-          {isMobile && <FirestoreIndicator />}
-          <AppTooltip title={t('sandbox.tooltips.refetch')}>
+        <ErrorBoundary type="notification">
+          <AppTooltip title={t('sandbox.tooltips.docsClose')}>
             <Button
-              onClick={refetchSchemaHandler}
-              type="text"
-              size="large"
-              icon={<SyncOutlined />}
+              onClick={toggleDocs}
+              type={isFetching ? 'ghost' : 'text'}
+              disabled={isFetching || isError}
               loading={isFetching}
+              size="large"
+              icon={<BookOutlined />}
             />
           </AppTooltip>
-          {!isMobile && (
-            <AppTooltip title={t('sandbox.tooltips.shortcuts')}>
+          <Space direction={isMobile ? 'horizontal' : 'vertical'}>
+            {isMobile && <FirestoreIndicator />}
+            <AppTooltip title={t('sandbox.tooltips.refetch')}>
               <Button
-                onClick={toggleShortcutsModal}
+                onClick={refetchSchemaHandler}
                 type="text"
                 size="large"
-                icon={<MacCommandOutlined />}
+                icon={<SyncOutlined />}
+                loading={isFetching}
               />
             </AppTooltip>
-          )}
-          <AppTooltip title={t('sandbox.tooltips.settings')}>
-            <Button
-              onClick={toggleSettingsModal}
-              type="text"
-              size="large"
-              icon={<SettingOutlined />}
-            />
-          </AppTooltip>
-        </Space>
+            {!isMobile && (
+              <AppTooltip title={t('sandbox.tooltips.shortcuts')}>
+                <Button
+                  onClick={toggleShortcutsModal}
+                  type="text"
+                  size="large"
+                  icon={<MacCommandOutlined />}
+                />
+              </AppTooltip>
+            )}
+            <AppTooltip title={t('sandbox.tooltips.settings')}>
+              <Button
+                onClick={toggleSettingsModal}
+                type="text"
+                size="large"
+                icon={<SettingOutlined />}
+              />
+            </AppTooltip>
+          </Space>
+        </ErrorBoundary>
       </aside>
-      <Drawer
-        title={<Title style={{ margin: 0 }}>{t('docs.header.title')}</Title>}
-        placement="left"
-        open={isDocs}
-        onClose={toggleDocs}
-        width={isMobile ? '90vw' : '550px'}
-        style={{ borderRadius: '0 12px 12px 0' }}
-      >
-        <Suspense fallback={<Spinner size="medium" />}>
-          <DocsExplorer schema={data} />
-        </Suspense>
-      </Drawer>
-      <ShortcutsModal isOpen={isShortcutsModal} toggle={toggleShortcutsModal} />
-      <SettingsModal isOpen={isSettingsModal} toggle={toggleSettingsModal} />
+      <ErrorBoundary type="notification">
+        <Drawer
+          title={<Title style={{ margin: 0 }}>{t('docs.header.title')}</Title>}
+          placement="left"
+          open={isDocs}
+          onClose={toggleDocs}
+          width={isMobile ? '90vw' : '550px'}
+          style={{ borderRadius: '0 12px 12px 0' }}
+        >
+          <Suspense fallback={<Spinner size="medium" />}>
+            <DocsExplorer schema={data} />
+          </Suspense>
+        </Drawer>
+        <ShortcutsModal
+          isOpen={isShortcutsModal}
+          toggle={toggleShortcutsModal}
+        />
+        <SettingsModal isOpen={isSettingsModal} toggle={toggleSettingsModal} />
+      </ErrorBoundary>
     </>
   );
 };
