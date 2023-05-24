@@ -11,7 +11,7 @@ const PrivateRoute = ({ children }: IRequireAuth) => {
   const { isAuth } = useAuthState();
 
   return !isAuth ? (
-    <Navigate to={ROUTES.login} state={{ from: location }} />
+    <Navigate to={ROUTES.home} state={{ from: location }} />
   ) : (
     children
   );
