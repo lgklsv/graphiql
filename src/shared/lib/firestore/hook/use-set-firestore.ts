@@ -5,19 +5,20 @@ import { db } from 'firebase';
 import { setApiUrl } from 'store/reducers/ApiSlice';
 import { NumBoolean, updateSetStore } from 'store/reducers/SettingsSlice';
 import { setFirestoreUserDataLoading } from 'store/reducers/FirestoreSlice';
-import { firestoreSelector } from 'store/selectors/firestoreSelector';
 import { updateTabStore } from 'store/reducers/TabSlice';
 import { graphql } from 'shared/api';
-import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
+import { useAppDispatch } from 'shared/hooks/redux';
 import { createFirestoreData, getFirestoreData } from '../rest-firestore';
 
 export const useDataFromFirestore = () => {
   const dispatch = useAppDispatch();
   const [trigger] = graphql.useLazyGetSchemaQuery();
-  const { isUpdating, error } = useAppSelector(firestoreSelector);
 
   const firestoreData = async (uid: string, messageApi: MessageInstance) => {
     try {
+      //  if there is - take the data from there
+      dispatch(setFirestoreUserDataLoading(true));
+
       // check whether the user has data in the database
       const isHaveData = doc(db, 'settings', uid);
       const docSnap = await getDoc(isHaveData);
@@ -27,15 +28,6 @@ export const useDataFromFirestore = () => {
         await createFirestoreData(uid);
         return;
       }
-
-      //  if there is - take the data from there
-      dispatch(
-        setFirestoreUserDataLoading({
-          isUpdating,
-          error,
-          userDataLoading: true,
-        })
-      );
 
       const userSettings = await getFirestoreData(uid);
 
@@ -60,13 +52,7 @@ export const useDataFromFirestore = () => {
         });
       }
     } finally {
-      dispatch(
-        setFirestoreUserDataLoading({
-          isUpdating,
-          error,
-          userDataLoading: false,
-        })
-      );
+      dispatch(setFirestoreUserDataLoading(false));
     }
   };
 

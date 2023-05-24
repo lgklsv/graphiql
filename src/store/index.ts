@@ -21,9 +21,8 @@ const listenerMiddleware = createListenerMiddleware();
 
 listenerMiddleware.startListening({
   actionCreator: triggerFirestoreUpdate,
-  effect: async (action, listenerApi) => {
+  effect: async (_, listenerApi) => {
     // Run whatever additional side-effect-y logic you want here
-    console.log('update');
 
     const state = listenerApi.getOriginalState() as RootState;
     const { tabs, activeKey } = state.tabsReducer;
@@ -31,22 +30,21 @@ listenerMiddleware.startListening({
 
     const stringifiedTabsArr = stringifyArray(tabs);
     const dataToSend = { activeKey, tabs: stringifiedTabsArr };
-    console.log(dataToSend);
 
     try {
-      //   listenerApi.dispatch(
-      //     setFirestoreState({ isUpdating: true, error: null })
-      //   );
+      listenerApi.dispatch(
+        setFirestoreState({ isUpdating: true, error: null })
+      );
       await updateFirestoreData(id as string, dataToSend);
-      //   listenerApi.dispatch(
-      //     setFirestoreState({ isUpdating: false, error: null })
-      //   );
+      listenerApi.dispatch(
+        setFirestoreState({ isUpdating: false, error: null })
+      );
     } catch (err) {
-      //   if (err instanceof Error) {
-      //     listenerApi.dispatch(
-      //       setFirestoreState({ isUpdating: false, error: err.message })
-      //     );
-      //   }
+      if (err instanceof Error) {
+        listenerApi.dispatch(
+          setFirestoreState({ isUpdating: false, error: err.message })
+        );
+      }
     }
 
     // Can cancel other running instances

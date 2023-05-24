@@ -20,8 +20,8 @@ const FirestoreSlice = createSlice({
       state.isUpdating = action.payload.isUpdating;
       state.error = action.payload.error;
     },
-    setFirestoreUserDataLoading(state, action: PayloadAction<FirestoreState>) {
-      state.userDataLoading = action.payload.userDataLoading;
+    setFirestoreUserDataLoading(state, action: PayloadAction<boolean>) {
+      state.userDataLoading = action.payload;
     },
     triggerFirestoreUpdate() {},
   },

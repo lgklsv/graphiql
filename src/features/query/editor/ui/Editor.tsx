@@ -15,7 +15,7 @@ import { isFetchError } from 'shared/lib/type-checkers';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import './Editor.scss';
 
-const Editor: React.FC = () => {
+const Editor: React.FC = React.memo(() => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const { activeTabKey, tabQuery } = useTabs();
@@ -80,6 +80,6 @@ const Editor: React.FC = () => {
       />
     </div>
   );
-};
+});
 
 export default Editor;
