@@ -8,13 +8,11 @@ import { resetTabsData } from 'store/reducers/TabSlice';
 import { resetApiUrl } from 'store/reducers/ApiSlice';
 import { useAppDispatch } from 'shared/hooks/redux';
 import { graphql } from 'shared/api';
-import { INIT_FIRESTORE } from 'shared/lib/firestore/constant';
-import { useUpdateFirestore } from 'shared/lib/firestore/hook';
+import { triggerFirestoreUpdate } from 'store/reducers/FirestoreSlice';
 
 const Clear: React.FC = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
-  const updateFirestore = useUpdateFirestore();
   const { refetch } = graphql.useGetSchemaQuery('{}');
 
   const clearDataHandler = async () => {
@@ -22,7 +20,7 @@ const Clear: React.FC = () => {
     dispatch(resetSettings());
     dispatch(resetApiUrl());
 
-    await updateFirestore(INIT_FIRESTORE);
+    dispatch(triggerFirestoreUpdate());
     refetch();
   };
 

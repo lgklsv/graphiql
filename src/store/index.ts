@@ -24,13 +24,24 @@ listenerMiddleware.startListening({
   effect: async (_, listenerApi) => {
     // Run whatever additional side-effect-y logic you want here
 
+    // Get the latest state from redux
     const state = listenerApi.getOriginalState() as RootState;
     const { tabs, activeKey } = state.tabsReducer;
     const { id } = state.userReducer;
+    const { url } = state.apiUrlReducer;
+    const { isCache, isStats } = state.settingsReducer;
 
+    // Prepare data to send on firestore
     const stringifiedTabsArr = stringifyArray(tabs);
-    const dataToSend = { activeKey, tabs: stringifiedTabsArr };
+    const dataToSend = {
+      url,
+      isCache,
+      isStats,
+      activeKey,
+      tabs: stringifiedTabsArr,
+    };
 
+    // Update firestore and dispatch some actions to handle loading state
     try {
       listenerApi.dispatch(
         setFirestoreState({ isUpdating: true, error: null })

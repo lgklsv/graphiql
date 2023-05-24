@@ -6,18 +6,17 @@ import { useTranslation } from 'react-i18next';
 import { NumBoolean, setCacheSetting } from 'store/reducers/SettingsSlice';
 import { settingsSelector } from 'store/selectors/settingsSelector';
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
-import { useUpdateFirestore } from 'shared/lib/firestore/hook';
+import { triggerFirestoreUpdate } from 'store/reducers/FirestoreSlice';
 
 const Cache: React.FC = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const updateFirestore = useUpdateFirestore();
   const { isCache } = useAppSelector(settingsSelector);
 
   const selectCacheHandler = async (value: SegmentedValue) => {
     const enteredValue = value as NumBoolean;
     dispatch(setCacheSetting(enteredValue));
-    await updateFirestore({ isCache: value });
+    dispatch(triggerFirestoreUpdate());
   };
 
   return (
