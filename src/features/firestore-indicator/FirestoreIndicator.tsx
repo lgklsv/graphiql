@@ -17,16 +17,16 @@ type StatusTypes =
 
 const FirestoreIndicator: React.FC = () => {
   const { t, i18n } = useTranslation();
-  const { isUpdating, isError, userDataLoading } =
+  const { isUpdating, error, userDataLoading } =
     useAppSelector(firestoreSelector);
   let status: StatusTypes = 'success';
   let text = t('firebaseIndicator.success.text');
   let tooltipText = t('firebaseIndicator.success.tooltip');
 
-  if (isError) {
+  if (error) {
     status = 'error';
     text = t('firebaseIndicator.error.text');
-    tooltipText = t('firebaseIndicator.error.tooltip');
+    tooltipText = error;
   }
 
   if (isUpdating) {
@@ -44,7 +44,7 @@ const FirestoreIndicator: React.FC = () => {
   return (
     <div
       className={`${styles.indicator} ${
-        i18n.language === 'ru' ? styles.indicator_wide : ''
+        i18n.language === 'ru' || userDataLoading ? styles.indicator_wide : ''
       }`}
     >
       <AppTooltip title={tooltipText}>

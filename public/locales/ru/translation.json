@@ -151,7 +151,7 @@
       "sectionTitleAll": "Все типы схем"
     },
     "search": {
-      "placeholder": "Поиск  Shift + ⌘ + K",
+      "placeholder": "Поиск (Shift + ⌘ + K)",
       "notFound": "Ничего не найдено"
     }
   },
@@ -229,6 +229,15 @@
     }
   },
   "loader": "Загрузка...",
+  "firestoreErrors": {
+    "getData": "Не удалось получить данные из Firestore ",
+    "updateData": "Не удалось обновить данные в Firestore",
+    "createData": "Произошла ошибка при создании записи в Firestore",
+    "accountExists": "Учетная запить с этим Email уже существует",
+    "networkFailed": "Не удалось сделать запрос, проверьте ваше Интернет соединение",
+    "wrongPassword": "Неверный пароль, попробуйте снова",
+    "noUser": "Аккаунт не найден, зарегистрируйтесь или попробуйте другой аккаунт"
+  },
   "errorBoundary": {
     "errorTitle": "Произошла ошибка",
     "defaultMsg": "Что-то пошло не так",

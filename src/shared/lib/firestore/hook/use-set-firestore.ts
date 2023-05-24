@@ -1,22 +1,24 @@
-import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
+import { MessageInstance } from 'antd/es/message/interface';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from 'firebase';
+
 import { setApiUrl } from 'store/reducers/ApiSlice';
 import { NumBoolean, updateSetStore } from 'store/reducers/SettingsSlice';
+import { setFirestoreUserDataLoading } from 'store/reducers/FirestoreSlice';
 import { updateTabStore } from 'store/reducers/TabSlice';
 import { graphql } from 'shared/api';
-import { db } from 'firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { useAppDispatch } from 'shared/hooks/redux';
 import { createFirestoreData, getFirestoreData } from '../rest-firestore';
-import { setFirestoreUserDataLoading } from 'store/reducers/FirestoreSlice';
-import { firestoreSelector } from 'store/selectors/firestoreSelector';
-
 
 export const useDataFromFirestore = () => {
   const dispatch = useAppDispatch();
   const [trigger] = graphql.useLazyGetSchemaQuery();
-  const { isUpdating, isError } = useAppSelector(firestoreSelector);
 
-  const firestoreData = async (uid: string) => {
+  const firestoreData = async (uid: string, messageApi: MessageInstance) => {
     try {
+      //  if there is - take the data from there
+      dispatch(setFirestoreUserDataLoading(true));
+
       // check whether the user has data in the database
       const isHaveData = doc(db, 'settings', uid);
       const docSnap = await getDoc(isHaveData);
@@ -26,15 +28,6 @@ export const useDataFromFirestore = () => {
         await createFirestoreData(uid);
         return;
       }
-
-      //  if there is - take the data from there
-      dispatch(
-        setFirestoreUserDataLoading({
-          isUpdating,
-          isError,
-          userDataLoading: true,
-        })
-      );
 
       const userSettings = await getFirestoreData(uid);
 
@@ -49,18 +42,17 @@ export const useDataFromFirestore = () => {
         );
         dispatch(setApiUrl({ url }));
         await trigger('{}');
-
       }
-    } catch (error) {
-      throw new Error('Error during login process');
+    } catch (err) {
+      if (err instanceof Error) {
+        messageApi.open({
+          key: 'getFireData',
+          type: 'error',
+          content: err.message,
+        });
+      }
     } finally {
-      dispatch(
-        setFirestoreUserDataLoading({
-          isUpdating,
-          isError,
-          userDataLoading: false,
-        })
-      );
+      dispatch(setFirestoreUserDataLoading(false));
     }
   };
 

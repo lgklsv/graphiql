@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 
 export const useRedoSnapshot = <T>(object: T | null) => {

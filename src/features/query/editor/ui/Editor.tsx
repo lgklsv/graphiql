@@ -4,20 +4,20 @@ import CodeMirror from '@uiw/react-codemirror';
 import { graphql as graphqlCodeMirror, updateSchema } from 'cm6-graphql';
 import { EditorView } from 'codemirror';
 
+import { updateTabContent, updateTabLabel } from 'store/reducers/TabSlice';
+import { triggerFirestoreUpdate } from 'store/reducers/FirestoreSlice';
 import { graphql } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
-import { useUpdateFirestore, useUpdateTabs } from 'shared/lib/firestore/hook';
-import { utils } from 'shared/lib';
+import { useAppDispatch } from 'shared/hooks/redux';
 import { ErrorNotification, Spinner } from 'shared/ui';
 import { isFetchError } from 'shared/lib/type-checkers';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import './Editor.scss';
 
-const Editor: React.FC = () => {
+const Editor: React.FC = React.memo(() => {
   const { t } = useTranslation();
-  const updateTabsForFirebase = useUpdateTabs();
-  const updateFirestore = useUpdateFirestore();
-  const { activeTabKey, tabQuery, tabs } = useTabs();
+  const dispatch = useAppDispatch();
+  const { activeTabKey, tabQuery } = useTabs();
   const viewRef = React.useRef<EditorView | null>(null);
   const { data, error, refetch, isError, isFetching } =
     graphql.useGetSchemaQuery('{}');
@@ -28,23 +28,19 @@ const Editor: React.FC = () => {
     }
   }, [data, viewRef]);
 
-  // TODO: change time debounce
-  const onChange = utils.debounce(async (queryString: string) => {
-    const regex = /(?<=query |mutation )\w+/;
-
-    const updatedData = updateTabsForFirebase({
-      tabs,
-      activeTabKey,
-      query: { data: queryString },
-      label: regex.exec(queryString)
-        ? regex.exec(queryString)![0]
-        : `${t('sandbox.newTab')}`,
-    });
-
-    if (updatedData) {
-      await updateFirestore(updatedData);
+  const onChange = async (queryString: string) => {
+    const regex = /(?<=query | mutation )\w+/;
+    dispatch(updateTabContent({ activeTabKey, query: { data: queryString } }));
+    if (regex.exec(queryString)) {
+      const newTitle = regex.exec(queryString)![0];
+      dispatch(updateTabLabel({ activeTabKey, label: newTitle }));
+    } else {
+      dispatch(
+        updateTabLabel({ activeTabKey, label: `${t('sandbox.newTab')}` })
+      );
     }
-  });
+    dispatch(triggerFirestoreUpdate());
+  };
 
   if (isFetching) {
     return (
@@ -83,6 +79,6 @@ const Editor: React.FC = () => {
       />
     </div>
   );
-};
+});
 
 export default Editor;

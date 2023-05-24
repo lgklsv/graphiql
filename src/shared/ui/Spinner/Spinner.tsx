@@ -19,7 +19,6 @@ const Spinner: React.FC<SpinnerProps> = ({ size }) => {
         indicator={
           <LoadingOutlined style={{ fontSize: iconSize[size] }} spin />
         }
-        // tip="Loading..."
         className={styles[`spinner_${size}`]}
       />
     </div>

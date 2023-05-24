@@ -10,15 +10,13 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { graphql } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
 import { AppTooltip } from 'shared/ui';
-import { stringifyArray } from 'shared/lib/firestore/utils';
-import { useUpdateFirestore } from 'shared/lib/firestore/hook';
+import { triggerFirestoreUpdate } from 'store/reducers/FirestoreSlice';
 import styles from './ApiConnector.module.scss';
 
 const ApiConnector: React.FC = () => {
   const { t } = useTranslation();
   const { tabs } = useTabs();
   const dispatch = useAppDispatch();
-  const updateFirestore = useUpdateFirestore();
   const currentUrl = useAppSelector(apiUrlSelector);
 
   const [inputValue, setInputValue] = React.useState(currentUrl);
@@ -38,10 +36,7 @@ const ApiConnector: React.FC = () => {
     }));
     dispatch(updateTabs(tabsWithClearResponse));
 
-    await updateFirestore({
-      url: inputValue,
-      tabs: stringifyArray(tabsWithClearResponse),
-    });
+    dispatch(triggerFirestoreUpdate());
     refetch();
   };
 
@@ -49,7 +44,7 @@ const ApiConnector: React.FC = () => {
     setInputValue(e.target.value);
     if (!e.target.value) {
       dispatch(setApiUrl({ url: '' }));
-      await updateFirestore({ url: '' });
+      dispatch(triggerFirestoreUpdate());
       refetch();
     }
   };

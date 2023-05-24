@@ -2,10 +2,12 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Form, Input, message } from 'antd';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+
 import { ButtonForm } from 'shared/ui';
 import { useUser } from 'shared/hooks/use-user';
 import { createFirestoreData } from 'shared/lib/firestore/rest-firestore';
 import { auth } from 'firebase';
+import { convertFirestoreError } from 'shared/lib/firebase/utils/convertFirestoreError';
 import style from './SignUpForm.module.scss';
 
 const SignUpForm: React.FC = () => {
@@ -56,7 +58,7 @@ const SignUpForm: React.FC = () => {
         messageApi.open({
           key: 'updatable',
           type: 'error',
-          content: error.message,
+          content: convertFirestoreError(error.message),
         });
       });
   };

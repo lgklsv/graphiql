@@ -4,8 +4,9 @@ import { linter } from '@codemirror/lint';
 import { jsonParseLinter, json } from '@codemirror/lang-json';
 
 import { useTabs } from 'shared/hooks/use-tab';
-import { useUpdateFirestore, useUpdateTabs } from 'shared/lib/firestore/hook';
-import { utils } from 'shared/lib';
+import { useAppDispatch } from 'shared/hooks/redux';
+import { updateTabContent } from 'store/reducers/TabSlice';
+import { triggerFirestoreUpdate } from 'store/reducers/FirestoreSlice';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
 import styles from './EditorTools.module.scss';
 
@@ -16,23 +17,20 @@ interface EditorToolsProps {
 const EditorTools: React.FC<EditorToolsProps> = ({
   activeToolTab,
 }: EditorToolsProps) => {
-  const { activeTabKey, tabQuery, tabs } = useTabs();
-  const updateTabsForFirebase = useUpdateTabs();
-  const updateFirestore = useUpdateFirestore();
+  const { activeTabKey, tabQuery } = useTabs();
+  const dispatch = useAppDispatch();
 
   const EDITOR_TABS = ['variables', 'headers'];
 
-  const handleChange = utils.debounce(async (text: string, tabName: string) => {
-    const updatedData = updateTabsForFirebase({
-      tabs,
-      activeTabKey,
-      query: { [tabName]: text },
-    });
-
-    if (updatedData) {
-      await updateFirestore(updatedData);
-    }
-  });
+  const handleChange = async (text: string, tabName: string) => {
+    dispatch(
+      updateTabContent({
+        activeTabKey,
+        query: { [tabName]: text },
+      })
+    );
+    dispatch(triggerFirestoreUpdate());
+  };
 
   return (
     <div className={styles['editor-tools']} id="custom-scroll">

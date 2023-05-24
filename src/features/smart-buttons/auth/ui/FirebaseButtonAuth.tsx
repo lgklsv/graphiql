@@ -19,7 +19,7 @@ const FirebaseAuthButton: React.FC<IProviderButton> = ({
   className,
 }) => {
   const dispatchUser = useUser();
-  const dispachFirestoreData = useDataFromFirestore();
+  const dispatchFirestoreData = useDataFromFirestore();
 
   const [messageApi, contextHolder] = message.useMessage();
 
@@ -28,7 +28,7 @@ const FirebaseAuthButton: React.FC<IProviderButton> = ({
       provider,
       dispatchFn: dispatchUser,
       messageApi,
-      firestoreFn: dispachFirestoreData,
+      firestoreFn: dispatchFirestoreData,
     });
   };
 

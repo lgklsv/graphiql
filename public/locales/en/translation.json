@@ -151,7 +151,7 @@
       "sectionTitleAll": "All Schema Types"
     },
     "search": {
-      "placeholder": "Search  Shift + ⌘ + K",
+      "placeholder": "Search (Shift + ⌘ + K)",
       "notFound": "No results found"
     }
   },
@@ -229,6 +229,15 @@
     }
   },
   "loader": "Loading...",
+  "firestoreErrors": {
+    "getData": "Getting data from Firestore failed",
+    "updateData": "Firestore update failed",
+    "createData": "Creating Firestore docs failed",
+    "accountExists": "Account with this Email already exists",
+    "networkFailed": "Network request failed, check your Internet connection",
+    "wrongPassword": "Wrong password, try again",
+    "noUser": "User not found, sign up first or use different account"
+  },
   "errorBoundary": {
     "errorTitle": "An error occurred",
     "defaultMsg": "Something went wrong",
