@@ -9,7 +9,6 @@ import { triggerFirestoreUpdate } from 'store/reducers/FirestoreSlice';
 import { graphql } from 'shared/api';
 import { useTabs } from 'shared/hooks/use-tab';
 import { useAppDispatch } from 'shared/hooks/redux';
-import { utils } from 'shared/lib';
 import { ErrorNotification, Spinner } from 'shared/ui';
 import { isFetchError } from 'shared/lib/type-checkers';
 import { BASIC_EXTENSIONS, BASIC_SETUP_OPTIONS } from '../../config';
@@ -29,7 +28,7 @@ const Editor: React.FC = React.memo(() => {
     }
   }, [data, viewRef]);
 
-  const onChange = utils.debounce(async (queryString: string) => {
+  const onChange = async (queryString: string) => {
     const regex = /(?<=query | mutation )\w+/;
     dispatch(updateTabContent({ activeTabKey, query: { data: queryString } }));
     if (regex.exec(queryString)) {
@@ -41,7 +40,7 @@ const Editor: React.FC = React.memo(() => {
       );
     }
     dispatch(triggerFirestoreUpdate());
-  });
+  };
 
   if (isFetching) {
     return (

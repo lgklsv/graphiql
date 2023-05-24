@@ -16,9 +16,10 @@ import { useTranslation } from 'react-i18next';
 import { v4 as uuid } from 'uuid';
 
 import { setActiveTabKey, updateTabs } from 'store/reducers/TabSlice';
-import { useAppDispatch } from 'shared/hooks/redux';
+import { useAppDispatch, useAppSelector } from 'shared/hooks/redux';
 import { useTabs } from 'shared/hooks/use-tab';
 import { triggerFirestoreUpdate } from 'store/reducers/FirestoreSlice';
+import { firestoreSelector } from 'store/selectors/firestoreSelector';
 import DraggableTabNode from './DraggableTabs';
 import styles from './SessionTabs.module.scss';
 
@@ -26,6 +27,7 @@ type TargetKey = React.MouseEvent | React.KeyboardEvent | string;
 
 const SessionTabs: React.FC = () => {
   const dispatch = useAppDispatch();
+  const { userDataLoading } = useAppSelector(firestoreSelector);
   const { t, i18n } = useTranslation();
   const { tabs: items, activeTabKey: activeKey } = useTabs();
   const [className, setClassName] = React.useState('');
@@ -104,7 +106,7 @@ const SessionTabs: React.FC = () => {
   return (
     <div
       className={`${styles.tabs} ${
-        i18n.language === 'ru' ? styles.tabs_narrow : ''
+        i18n.language === 'ru' || userDataLoading ? styles.tabs_narrow : ''
       }`}
     >
       <Tabs

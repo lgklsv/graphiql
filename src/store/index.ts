@@ -22,14 +22,16 @@ const listenerMiddleware = createListenerMiddleware();
 listenerMiddleware.startListening({
   actionCreator: triggerFirestoreUpdate,
   effect: async (_, listenerApi) => {
-    // Run whatever additional side-effect-y logic you want here
-
     // Get the latest state from redux
     const state = listenerApi.getOriginalState() as RootState;
     const { tabs, activeKey } = state.tabsReducer;
     const { id } = state.userReducer;
     const { url } = state.apiUrlReducer;
     const { isCache, isStats } = state.settingsReducer;
+
+    // Cancel running instances and debounce 500ms
+    listenerApi.cancelActiveListeners();
+    await listenerApi.delay(500);
 
     // Prepare data to send on firestore
     const stringifiedTabsArr = stringifyArray(tabs);
@@ -57,9 +59,6 @@ listenerMiddleware.startListening({
         );
       }
     }
-
-    // Can cancel other running instances
-    listenerApi.cancelActiveListeners();
   },
 });
 

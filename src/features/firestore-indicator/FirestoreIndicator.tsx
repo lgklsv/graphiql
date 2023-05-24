@@ -44,7 +44,7 @@ const FirestoreIndicator: React.FC = () => {
   return (
     <div
       className={`${styles.indicator} ${
-        i18n.language === 'ru' ? styles.indicator_wide : ''
+        i18n.language === 'ru' || userDataLoading ? styles.indicator_wide : ''
       }`}
     >
       <AppTooltip title={tooltipText}>

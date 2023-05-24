@@ -10,7 +10,7 @@ import { Resizable } from 'shared/ui';
 
 import styles from './VariablesHeadersField.module.scss';
 
-const VariablesHeadersField: React.FC = () => {
+const VariablesHeadersField: React.FC = React.memo(() => {
   const [isToolsEditor, setIsToolsEditor] = React.useState(false);
   const [activeToolTab, setActiveToolTab] = React.useState(0);
   const [toolsEditorHeight, setToolsEditorHeight] = React.useState(
@@ -55,6 +55,6 @@ const VariablesHeadersField: React.FC = () => {
       </div>
     </Resizable>
   );
-};
+});
 
 export default VariablesHeadersField;
