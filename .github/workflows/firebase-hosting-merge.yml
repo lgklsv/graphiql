@@ -6,6 +6,13 @@ name: Deploy to Firebase Hosting on merge
   push:
     branches:
       - production
+env:
+  VITE_FB_API_KEY: ${{secrets.VITE_FB_API_KEY}}
+  VITE_FB_AUTH_DOMAIN: ${{secrets.VITE_FB_AUTH_DOMAIN}}
+  VITE_FB_PROJ_ID: ${{secrets.VITE_FB_PROJ_ID}}
+  VITE_FB_STORAGE: ${{secrets.VITE_FB_STORAGE}}
+  VITE_FB_MESSAGE_SENDER: ${{secrets.VITE_FB_MESSAGE_SENDER}}
+  VITE_FB_APP_ID: ${{secrets.VITE_FB_APP_ID}}
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
