@@ -13,5 +13,5 @@ jobs:
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GRAPHIQL_SANDBOX }}'
-          projectId: graphiql-sandbox
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GRAPHIQL_IDE }}'
+          projectId: graphiql-ide
