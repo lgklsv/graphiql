@@ -5,4 +5,8 @@
   align-items: center;
   border-top: 1px solid #eee;
   gap: 1rem;
+  @media (max-width: 405px) {
+    padding: 1rem;
+    flex-direction: column;
+  }
 }
