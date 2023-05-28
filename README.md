@@ -20,7 +20,7 @@ This project was created as a task on [RS School React course](https://rs.school
 
 ## Screenshot
 
-![app](https://github.com/lgklsv/graphiql/assets/101424508/68583f68-4768-458f-8486-7ba393264671)
+<img width="1552" alt="image" src="https://github.com/lgklsv/graphiql/assets/101424508/cf2ac821-a1f9-4339-8bdf-3f411090f795">
 
 ## Tech stack
 
