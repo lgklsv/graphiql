@@ -1,0 +1,29 @@
+.title {
+  position: relative;
+  font-size: 1.875rem !important;
+  line-height: 2.25rem !important;
+  margin-bottom: 2rem !important;
+
+  @media (max-width: 460px) {
+    text-align: center;
+  }
+
+  &__link {
+    text-align: right;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin-top: 1rem;
+
+    &_redirect {
+      text-decoration: underline !important;
+    }
+
+    @media (max-width: 460px) {
+      position: relative;
+      margin-top: 0;
+      text-align: center;
+    }
+  }
+}

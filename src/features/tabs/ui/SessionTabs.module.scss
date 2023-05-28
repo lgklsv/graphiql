@@ -1,0 +1,19 @@
+.tabs {
+  background-color: transparent;
+  width: calc(
+    100vw - var(--sidebar-width) - var(--apiInput-width) - 1rem -
+      var(--indicator-width) - 1rem
+  );
+  height: var(--tabs-height);
+
+  &_narrow {
+    width: calc(
+      100vw - var(--sidebar-width) - var(--apiInput-width) - 1rem -
+        var(--indicator_wide-width) - 1rem
+    );
+  }
+
+  @media (max-width: 767px) {
+    width: 100%;
+  }
+}

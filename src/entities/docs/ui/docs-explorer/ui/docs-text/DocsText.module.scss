@@ -1,0 +1,8 @@
+.active span {
+  color: #708;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+}

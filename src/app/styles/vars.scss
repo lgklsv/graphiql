@@ -1,0 +1,54 @@
+:root {
+  // Vars
+  --header: 75px;
+  --footer: 65px;
+  --screen-height: calc(100vh - var(--header) - var(--footer));
+  --ide-height: calc(
+    100vh - var(--header) - var(--footer) - var(--tabs-height) - 0.5rem -
+      var(--tabs-padding)
+  );
+
+  // IDE
+  --sidebar-width: 60px;
+  --toolbar-width: 40px;
+  --tabs-height: 50px;
+  --tabs-padding: 5px;
+  --apiInput-height: 42px;
+  --apiInput-width: 435px;
+  --indicator-width: 90px;
+  --indicator_wide-width: 130px;
+
+  --popover-box-shadow: 0px 6px 20px rgba(59, 76, 106, 0.13),
+    0px 1.34018px 4.46726px rgba(59, 76, 106, 0.0774939),
+    0px 0.399006px 1.33002px rgba(59, 76, 106, 0.0525061);
+
+  // Values
+  --line-height: 1.5;
+  --alpha-secondary: 0.76;
+  --alpha-ternary: 0.5;
+  --alpha-background-heavy: 0.15;
+  --alpha-background-medium: 0.1;
+  --alpha-background-light: 0.07;
+
+  // General colors
+  --color-neutral: 219, 28%, 32%; // text color to configure other colors
+  --bg-primary: #ffffff; // background and request field
+  --bg-secondary: #f1f2f4; // response field
+  --bg-ternary: 188, 100%, 36%;
+  --bg-primary-dark: #281e5b; // dark-bg header/footer etc.
+  --text-primary: hsla(var(--color-neutral), 1); // contrast text / active
+  --text-secondary: #6f7a8f; // light text / regular
+  --text-ternary: rgba(255, 255, 255, 0.4); // light text for dark bg
+  --border-primary: 1px solid hsla(var(--color-neutral), 0.1);
+  --border-active: hsla(var(--color-neutral), 0.15);
+
+  --light-purple: #708;
+  --dark-purple: #2d1f66;
+  --apollo-gradient-purple: linear-gradient(to bottom, #1c153c 27%, #2d1f66);
+  --apollo-purple: #7156d9b8;
+  --apollo-purple-dark: #7156d9;
+
+  --apollo-purple-light: #9781efb8;
+  --black: #000000;
+  --white: #ffffff;
+}

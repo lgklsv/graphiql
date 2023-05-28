@@ -1,0 +1,15 @@
+@import '../Mixin';
+
+.description {
+  width: 100%;
+
+  &__title {
+    color: var(--bg-primary-dark);
+    @include adaptive-font(48, 24);
+  }
+
+  &__text {
+    @include adaptive-font(30, 18);
+    color: var(--text-secondary);
+  }
+}

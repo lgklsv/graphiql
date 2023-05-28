@@ -1,0 +1,9 @@
+@media (max-width: 767px) {
+  .nav {
+    display: none;
+
+    &__btn {
+      min-width: 10rem;
+    }
+  }
+}

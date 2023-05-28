@@ -1,0 +1,71 @@
+@import '/src/shared/styles/mixins.scss';
+
+.footer-container {
+  & * {
+    color: var(--text-ternary);
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 130%;
+
+    @media (max-width: 450px) {
+      font-size: 0.65rem;
+    }
+
+    @media (max-width: 350px) {
+      font-size: 0.55rem;
+    }
+  }
+  @include flex-center;
+  text-transform: uppercase;
+  min-height: var(--footer);
+}
+
+.footer-logo {
+  width: 50px;
+  height: 20px;
+  background-image: url('./assets/rslogo.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: invert(84%) sepia(3%) saturate(10%) hue-rotate(314deg) brightness(92%)
+    contrast(100%) opacity(50%);
+  a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  &:hover {
+    filter: invert(99%) sepia(1%) saturate(3629%) hue-rotate(253deg)
+      brightness(75%) contrast(91%);
+  }
+}
+
+.sr-only {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.footer-list {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  gap: 0.8em;
+  a {
+    font-size: inherit;
+  }
+  a:hover {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  li:not(:last-child)::after {
+    content: '|';
+    position: relative;
+    left: 0.3em;
+  }
+}

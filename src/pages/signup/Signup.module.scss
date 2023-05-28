@@ -1,0 +1,19 @@
+@import '/src/shared/styles/extends';
+@import '/src/shared/styles/mixins.scss';
+
+.signup {
+  width: 100%;
+  min-height: calc(100vh - var(--header) - var(--footer));
+  @include flex-center;
+
+  &__container {
+    @extend %form_container;
+
+    h1 {
+      span {
+        bottom: 0;
+        top: auto;
+      }
+    }
+  }
+}

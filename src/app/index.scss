@@ -1,0 +1,113 @@
+@import './styles/index.scss';
+@import '/src/shared/styles/mixins.scss';
+
+* {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  font-family: Roboto, system-ui, Tahoma, sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--bg-primary);
+  overflow-x: hidden;
+}
+
+button.ant-btn-primary {
+  box-shadow: none;
+}
+
+.ant-tabs-content-holder {
+  display: none;
+}
+
+.ant-tabs-nav {
+  min-height: calc(var(--tabs-height) - 8px);
+}
+
+.ant-layout-footer {
+  position: relative;
+  z-index: 2;
+}
+
+.ant-dropdown-menu-item-selected {
+  background-color: var(--bg-primary-dark) !important;
+  color: var(--white) !important;
+  &:hover {
+    background-color: #3e3369 !important;
+  }
+}
+
+.ant-tabs-tab-btn {
+  white-space: nowrap;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  @media all and (max-width: 767px) {
+    max-width: 50px;
+  }
+}
+
+@media (max-width: 767px) {
+  .ant-tooltip {
+    display: none;
+  }
+}
+
+/* Works on Firefox */
+#custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-secondary) transparent;
+}
+/* Works on Chrome, Edge, and Safari */
+#custom-scroll::-webkit-scrollbar {
+  width: 20px;
+}
+#custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+#custom-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--bg-secondary);
+  border-radius: 20px;
+  border: 7px solid transparent;
+  background-clip: content-box;
+  transition: all 0.15s ease-in-out;
+}
+
+#hidden-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-secondary) transparent;
+}
+
+/* Works on Chrome, Edge, and Safari */
+#hidden-scroll::-webkit-scrollbar {
+  width: 0px;
+}
+#hidden-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+#hidden-scroll::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border: none;
+  background-clip: content-box;
+}
+
+.ant-drawer-body {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-secondary) transparent;
+
+  &::-webkit-scrollbar {
+    width: 20px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--bg-secondary);
+    border-radius: 20px;
+    border: 7px solid transparent;
+    background-clip: content-box;
+    transition: all 0.15s ease-in-out;
+  }
+}
